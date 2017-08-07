@@ -1,3 +1,8 @@
-# My Awesome Book
+# Activiti 7 Developer Guide
 
-This file file serves as your book's preface, a great place to describe your book's content and ideas.
+This GitBook introduces the new concepts and components added on Version 7. 
+
+This book will cover the basics on how to use Activiti 7 and how it compares to the previous versions of the project. 
+
+
+
