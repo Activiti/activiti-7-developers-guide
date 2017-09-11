@@ -73,8 +73,7 @@ The following components are currently being developed:
 We define a set of services that should be provided by the infrastructure, meaning that in different environments these components can be replaced by services provided by the underlaying infrastructure. 
 Other components will rely on these infrastructural services to work, meaning that a clear set of features must be provided for the Activiti Cloud Applications to work with all the designed features. 
 
-![](/assets/Screen Shot 2017-09-09 at 10.19.00.png)
-
+![](/assets/Screen Shot 2017-09-11 at 09.07.43.png)
 
 Activiti Cloud Applications are dynamic and they can be provisioned on runtime. We use runtime bundles to define application scopes. These Runtime Bundles encapsulates the Process Runtime and a fixed set of business processes (and versions) that we want to automate. 
 
