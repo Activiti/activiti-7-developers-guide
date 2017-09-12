@@ -6,3 +6,4 @@ This book will cover the basics on how to use Activiti 7 and how it compares to 
 
 
 
+Access the book: https://www.gitbook.com/book/activiti/activiti-7-developers-guide/
