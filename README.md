@@ -1,4 +1,4 @@
-# Activiti 7 & Activiti Cloud Developer Guide
+# Activiti & Activiti Cloud Developer Guide
 
 This GitBook introduces the new concepts and components added on Version 7.
 
@@ -8,13 +8,9 @@ Follow the project roadmap: [https://github.com/Activiti/Activiti/wiki/Activiti-
 
 Access the book: [https://www.gitbook.com/book/activiti/activiti-7-developers-guide/](https://www.gitbook.com/book/activiti/activiti-7-developers-guide/)
 
-
-
 # Personas
 
-It is important to understand which personas we are targeting with our different set of tools. For that reason the following chart shows the main Personas that we will target and which features they will be using to perform their work. 
+It is important to understand which personas we are targeting with our different set of tools. For that reason the following chart shows the main Personas that we will target and which features they will be using to perform their work.
 
 ![](/assets/Activiti-Cloud-Personas.png)
-
-
 
