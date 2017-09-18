@@ -2,7 +2,7 @@
 
 * [Introduction](README.md)
 
-  * [What is](/introduction.md) Activiti Cloud?
+  * [What is Activiti Cloud?](/introduction.md)
 
   * [Roadmap](roadmap.md)
 
