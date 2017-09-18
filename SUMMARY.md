@@ -8,7 +8,10 @@
 * [Getting Started](setting-up-the-environment.md)
 * [Components Architecture](/components.md)
   * [Overview](/components/Overview.md)
-  * [Runtime Bundle](/components/RuntimeBundle.md)
+  * Activiti Cloud Infrastructure
+    * [Gateway](/components/activiti-cloud-infra/gateway.md)
+  * Activiti Cloud Application
+    * [Runtime Bundle](/components/RuntimeBundle.md)
 
 
 
