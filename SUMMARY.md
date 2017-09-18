@@ -1,10 +1,12 @@
 # Summary
 
 * [Introduction](README.md)
+  * [What is Activiti Cloud?](https://www.gitbook.com/book/activiti/activiti-7-developers-guide/edit#)
+
   * [Roadmap](roadmap.md)
   * [Beyond the 12 Factor Applications](/12factor.md)
   * [Personas](personas.md)
-* [What is Activiti Cloud?](chapter1.md)
+
 * [Getting Started](setting-up-the-environment.md)
 * [Components Architecture](/components.md)
   * [Overview](/components/Overview.md)
