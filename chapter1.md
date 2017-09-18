@@ -1,5 +1,5 @@
 # What is Activiti Cloud?
-Activiti Cloud is the first Cloud Native BPM framework built to provide an scalable and transparent solution for BPM implementations in cloud environments.
+Activiti Cloud is the first Cloud Native BPM framework built to provide a scalable and transparent solution for BPM implementations in cloud environments.
 
 The BPM discipline was created to provide a better understanding of how organisations do their work and how this work can be improved in a iterative fashion. BPM Suites were created on the basis that a company will host a central BPM Server which will be in charge of automating and monitoring their business processes. This approach caused several frustrations in modern organisations, the following list highlights some of the pain points that adopting a BPM Suite represent for medium sized org:
 - BPM Suites are built on top of a technology stack that the IT Department (Software) inside the organization doesn’t need to know
