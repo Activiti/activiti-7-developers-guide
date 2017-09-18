@@ -2,7 +2,7 @@
 
 * [Introduction](README.md)
 
-  * What is Activiti Cloud?
+  * [What is Activiti Cloud?](/chapter1.md)
 
   * [Roadmap](roadmap.md)
 
