@@ -1,6 +1,6 @@
-# Beyond the 12 Factor Application
+# Beyond the 12 Factor Applications
 
-In order to build Cloud Native Applications and Services, it is not enough to just package the old monolith inside a Docker Image and run it inside Kubernetes. For that reason, based on what Heroku defined as 12 factor applications: [https://12factor.net](https://12factor.net), and what Spring Pivotal's engineer reviewed here: [https://content.pivotal.io/ebooks/beyond-the-12-factor-app](https://content.pivotal.io/ebooks/beyond-the-12-factor-app). We are building Activiti Cloud following these principles. Without these guidelines it becomes really difficult to scale in distributed environments. At its core, Activiti Cloud is pushing the BPM industry out of their confort zone, making  changes in how the process engine is designed to interact with other components in such distributed environments.  The measure of success for Activiti Cloud is to have a low impedance mismatch with other microservices and they way they are design, built and deployed. 
+In order to build Cloud Native Applications and Services, it is not enough to just package the old monolith inside a Docker Image and run it inside Kubernetes. For that reason, based on what Heroku defined as 12 factor applications: [https://12factor.net](https://12factor.net), and what Spring Pivotal's engineer reviewed here: [https://content.pivotal.io/ebooks/beyond-the-12-factor-app](https://content.pivotal.io/ebooks/beyond-the-12-factor-app). We are building Activiti Cloud following these principles. Without these guidelines it becomes really difficult to scale in distributed environments. At its core, Activiti Cloud is pushing the BPM industry out of their confort zone, making  changes in how the process engine is designed to interact with other components in such distributed environments.  The measure of success for Activiti Cloud is to have a low impedance mismatch with other microservices and they way they are design, built and deployed.
 
 ## \#1 - One codebase , one application
 
@@ -8,7 +8,7 @@ Our services are all under different repositories and each represent a single sp
 
 ## \#2 - API first
 
-Rest and Message Driven APIs are defined at each service and a specification of each of them can be found at the component documentation. 
+Rest and Message Driven APIs are defined at each service and a specification of each of them can be found at the component documentation.
 
 ## \#3 - Dependency management
 
@@ -37,13 +37,13 @@ Activiti Cloud services are designed to start fast, under 30 seconds so they can
 
 Activiti Cloud services use the concept of bounded resources for security, email, data sources, storage and other resources. It also uses the service registry to abstract where other services are and how they communicate to each other.
 
-## \#9 - Environment parity 
+## \#9 - Environment parity
 
 Activiti Cloud provides to our users and implementers a production like environment to produce their domain specific artefacts that can be published later on to production environments. Activiti cloud relies on industry standards to make sure that dealing with multiple environments for development, testing/QA and production is easy and as real as possible.
 
 ## \#10 - Administrative process
 
-In Activiti Cloud administrative processes originally bundled along with the process engine are going to be refactored outside to reuse services provided by the infrastructure. Administrative Processes are one of the main problems in most Open Source BPM projects, for this reason, we are working hard to get each of these process out of the Process Engine scope.  
+In Activiti Cloud administrative processes originally bundled along with the process engine are going to be refactored outside to reuse services provided by the infrastructure. Administrative Processes are one of the main problems in most Open Source BPM projects, for this reason, we are working hard to get each of these process out of the Process Engine scope.
 
 ## \#11 - Port bindings
 
@@ -61,9 +61,7 @@ Runtime bundles were design with the idea of scaling processes executions in min
 
 Activiti cloud services provides telemetry by standard spring boot actuators and health indicators, but it also provides more business level telemetry my emitting a standardised set of events that expose the engine operations. All this information in conjunction can be used for data warehousing and forecasting purposes.
 
-## \#15 - Authentication and Authorization 
+## \#15 - Authentication and Authorization
 
-Activiti cloud relies on SSO and IDM for all its services. RBAC \(role based access control\) is a native part of all our services. 
-
-
+Activiti cloud relies on SSO and IDM for all its services. RBAC \(role based access control\) is a native part of all our services.
 
