@@ -2,7 +2,7 @@
 
 * [Introduction](README.md)
 
-  * [What is Activiti Cloud?](https://www.gitbook.com/book/activiti/activiti-7-developers-guide/edit#)
+  * What is Activiti Cloud?
 
   * [Roadmap](roadmap.md)
 
@@ -13,6 +13,7 @@
 * [Getting Started](setting-up-the-environment.md)
 
 * [Components Architecture](/components.md)
+
   * [Overview](/components/Overview.md)
   * Activiti Cloud Infrastructure
     * [Gateway](/components/activiti-cloud-infra/gateway.md)
