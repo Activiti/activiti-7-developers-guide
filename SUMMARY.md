@@ -11,5 +11,14 @@
   * [Spring Cloud & Activiti Cloud](/components/spring-cloud.md)
   * Activiti Cloud Infrastructure
     * [Gateway](/components/activiti-cloud-infra/gateway.md)
+    * [Registry](/components/activiti-cloud-infra/registry.md)
+    * [Single Sign On (SSO)](/components/activiti-cloud-infra/sso.md)
+    * [Identity Management](/components/activiti-cloud-infra/idm.md)
+    * [Configuration Service](/components/activiti-cloud-infra/config.md)
+    * [Distributed Logging](/components/activiti-cloud-infra/logging.md)
   * Activiti Cloud Application
     * [Runtime Bundle](/components/RuntimeBundle.md)
+    * [Query Service](/components/Query.md)
+    * [Audit Service](/components/Audit.md)
+    * [Notification Service](/components/Notification.md)
+    * [Cloud Connectors](/components/CloudConnectors.md)
