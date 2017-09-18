@@ -8,7 +8,7 @@
 * [Getting Started](setting-up-the-environment.md)
 * [Components Architecture](/components.md)
   * [Overview](/components/Overview.md)
-* * [Runtime Bundle](/components/RuntimeBundle.md)
+  * [Runtime Bundle](/components/RuntimeBundle.md)
 
 
 
