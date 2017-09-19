@@ -3,18 +3,21 @@
 Activiti Cloud provides a set of basic building blocks part of them are infrastructural services that will enable the whole platform to work and part of them are BPM specific. All these components were designed to be scalable independently one from the other and you are free to re-arrange them or replace them with your existing infrastructural services.
 
 The following components are currently being developed:
-- Infrastructure
-	- Activiti Cloud Gateway
-	- Activiti Cloud Registry
-	- Activiti Cloud SSO / IDM (Based on BPM requirements)
+- Activiti Cloud Infrastructure
+	- [Activiti Cloud Gateway](activiti-cloud-infra/gateway.md)
+	- [Activiti Cloud Registry](activiti-cloud-infra/registry.md)
+	- [Activiti Cloud Single Sign On (SSO)](activiti-cloud-infra/sso.md)
+	- [Activiti Cloud Identity Management (IDM)](activiti-cloud-infra/idm.md)
+	- [Activiti Cloud Configuration Server](activiti-cloud-infra/config.md)
+	- [Activiti Cloud Logging](activiti-cloud-infra/logging.md)
 	- Storage / Databases
 	- Message Brokers
 - Activiti Cloud Applications
-	- Activiti Cloud Query Service (BPM Specific)
-	- Activiti Cloud Audit Service (BPM Specific)
-	- Activiti Cloud Notification Service
-	- Activiti Cloud Runtime Bundles (Domain Specific)
-	- Activiti Cloud Connectors (Domain Specific)
+	- [Activiti Cloud Query Service](activiti-cloud-app/QueryService.md)
+	- [Activiti Cloud Audit Service](activiti-cloud-app/AuditService.md)
+	- [Activiti Cloud Notification Service](activiti-cloud-app/NotificationService.md)
+	- [Activiti Cloud Runtime Bundles](activiti-cloud-app/RuntimeBundle.md)
+	- [Activiti Cloud Connectors](activiti-cloud-app/CloudConnectors.md) 
 
 We define a set of services that should be provided by the infrastructure, meaning that in different environments these components can be replaced by services provided by the underlaying infrastructure.
 Other components will rely on these infrastructural services to work, meaning that a clear set of features must be provided for the Activiti Cloud Applications to work with all the designed features.
