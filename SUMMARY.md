@@ -22,3 +22,4 @@
     * [Audit Service](/components/Audit.md)
     * [Notification Service](/components/Notification.md)
     * [Cloud Connectors](/components/CloudConnectors.md)
+* [How to contribute](contribute.md)
