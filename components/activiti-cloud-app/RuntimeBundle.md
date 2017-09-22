@@ -20,22 +20,25 @@ Runtime Bundles expose a REST API with the following endpoints:
 Commands are defined inside the *activiti-services-core-model* project
 and they represent different actions that can be executed by the process engine and they will return a Command Result. When these commands are executed by the Message Endpoints the results will be sent to a different queue.
 
-- *Commands* (implements org.activiti.services.core.model.commands.Command)
-  - StartProcessInstanceCmd
+- *Commands* (implements [Command](https://github.com/Activiti/Activiti/blob/master/activiti-services/activiti-services-api/src/main/java/org/activiti/services/api/commands/Command.java) and extends [AbstractCommand](https://github.com/Activiti/Activiti/blob/master/activiti-services/activiti-services-core-model/src/main/java/org/activiti/services/core/model/commands/AbstractCommand.java))
+  - [StartProcessInstanceCmd](https://github.com/Activiti/Activiti/blob/master/activiti-services/activiti-services-core-model/src/main/java/org/activiti/services/core/model/commands/StartProcessInstanceCmd.java)
     - processDefinitionId
     - variables
-  - SuspendProcessInstanceCmd
+  - [SuspendProcessInstanceCmd](https://github.com/Activiti/Activiti/blob/master/activiti-services/activiti-services-core-model/src/main/java/org/activiti/services/core/model/commands/SuspendProcessInstanceCmd.java)
     - processDefinitionId
-  - ActivateProcessInstanceCmd
+  - [ActivateProcessInstanceCmd](https://github.com/Activiti/Activiti/blob/master/activiti-services/activiti-services-core-model/src/main/java/org/activiti/services/core/model/commands/ActivateProcessInstanceCmd.java)
     - processDefinitionId
-  - SignalProcessInstancesCmd
+  - [SignalProcessInstancesCmd](https://github.com/Activiti/Activiti/blob/master/activiti-services/activiti-services-core-model/src/main/java/org/activiti/services/core/model/commands/SignalProcessInstancesCmd.java)
     - name
     - inputVariables
-  - ClaimTaskCmd
-  - ReleaseTaskCmd
-  - CompleteTaskCmd
+  - [ClaimTaskCmd](https://github.com/Activiti/Activiti/blob/master/activiti-services/activiti-services-core-model/src/main/java/org/activiti/services/core/model/commands/ClaimTaskCmd.java)
+  - [ReleaseTaskCmd](https://github.com/Activiti/Activiti/blob/master/activiti-services/activiti-services-core-model/src/main/java/org/activiti/services/core/model/commands/ReleaseTaskCmd.java)
+  - [CompleteTaskCmd](https://github.com/Activiti/Activiti/blob/master/activiti-services/activiti-services-core-model/src/main/java/org/activiti/services/core/model/commands/CompleteTaskCmd.java)
     - inputVariables
-- Command Results (implements org.activiti.services.core.model.commands.results.CommandResults)
+  - [SetTaskVariableCmd](https://github.com/Activiti/Activiti/blob/master/activiti-services/activiti-services-core-model/src/main/java/org/activiti/services/core/model/commands/SetTaskVariablesCmd.java)
+    - taskId
+    - variables
+- Command Results (implements [CommandResults](https://github.com/Activiti/Activiti/blob/master/activiti-services/activiti-services-api/src/main/java/org/activiti/services/api/commands/results/CommandResults.java))
   - StartProcessInstanceResults
     - processInstanceId
   - SuspendProcessInstanceResults
