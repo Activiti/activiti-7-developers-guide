@@ -18,8 +18,8 @@
     * [Distributed Logging](/components/activiti-cloud-infra/logging.md)
   * Activiti Cloud Application
     * [Runtime Bundle](/components/activiti-cloud-app/RuntimeBundle.md)
-    * [Query Service](/components/activiti-cloud-app/Query.md)
-    * [Audit Service](/components/activiti-cloud-app/Audit.md)
+    * [Query Service](/components/activiti-cloud-app/QueryService.md)
+    * [Audit Service](/components/activiti-cloud-app/AuditService.md)
     * [Notification Service](/components/activiti-cloud-app/Notification.md)
     * [Cloud Connectors](/components/activiti-cloud-app/CloudConnectors.md)
 * [How to contribute](contribute.md)
