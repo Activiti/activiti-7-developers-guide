@@ -12,7 +12,7 @@ Rest and Message Driven APIs are defined at each service and a specification of 
 
 ## \#3 - Dependency management
 
-Activiti and Activiti Cloud dependencies are managed in a central repository to have a clear understanding g of which underlying frameworks versions are used.
+Activiti and Activiti Cloud dependencies are managed in a central repository to have a clear understanding of which underlying frameworks versions are used.
 
 ## \#4 - Design, build, release, run
 
