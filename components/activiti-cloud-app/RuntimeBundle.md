@@ -8,7 +8,7 @@ But there are a couple of extra things that you need to know:
 - Runtime Bundles expose a (Sync) REST and (Async) Message Based API to interact with them.
 - Runtime Bundles emit events in a fire & forget fashion using a default EventListener (Listen to the internal Process Engine events and transform them into messages)
 
-![](../assets/RuntimeBundle.png)
+![](../../assets/RuntimeBundle.png)
 
 ## REST APIs (HAL)
 Runtime Bundles expose a REST API with the following endpoints:
