@@ -1,12 +1,13 @@
 # Runtime Bundle
 
 Runtime Bundle is the Cloud version of the Process Engine.
-If you ever exposed Activiti (the process engine) as a service, you were using a Runtime Bundle.
-But there are a couple of extra things that you need to know:
+If you ever exposed Activiti (the process engine) as a service, you were defining a Runtime Bundle.
+
+But there are some extra things that you need to know about Runtime Bundles:
 - Runtime Bundles in the context of Activiti Cloud represent a stateless instance of the process engine which is in charge of executing an immutable set of process definitions.
-- You cannot deploy new process definitions to a Runtime Bundle, instead you will create a new immutable Runtime Bundle if you  want to update your process definitions.
+- You cannot deploy new process definitions to a Runtime Bundle, instead you will create a new immutable version of your Runtime Bundle if you  want to update your process definitions.
 - Runtime Bundles expose a (Sync) REST and (Async) Message Based API to interact with them.
-- Runtime Bundles emit events in a fire & forget fashion using a default EventListener (Listen to the internal Process Engine events and transform them into messages)
+- Runtime Bundles emit events in a fire & forget fashion using a default [ActivitiEventListener](https://github.com/Activiti/Activiti/blob/master/activiti-services/activiti-services-events/src/main/java/org/activiti/services/events/MessageProducerActivitiEventListener.java) (Listen to the internal Process Engine events and transform them into messages)
 
 ![](../../../assets/RuntimeBundle.png)
 
@@ -17,7 +18,7 @@ Runtime Bundles expose a REST API with the following endpoints:
 - /vX/tasks
 
 ## (Async) Command Based Interactions
-Commands are defined inside the *activiti-services-core-model* project
+Commands are defined inside the [activiti-services-core-model](https://github.com/Activiti/Activiti/tree/master/activiti-services/activiti-services-core-model) project
 and they represent different actions that can be executed by the process engine and they will return a Command Result. When these commands are executed by the Message Endpoints the results will be sent to a different queue.
 
 - *Commands* (implements [Command](https://github.com/Activiti/Activiti/blob/master/activiti-services/activiti-services-api/src/main/java/org/activiti/services/api/commands/Command.java) and extends [AbstractCommand](https://github.com/Activiti/Activiti/blob/master/activiti-services/activiti-services-core-model/src/main/java/org/activiti/services/core/model/commands/AbstractCommand.java))
@@ -38,15 +39,16 @@ and they represent different actions that can be executed by the process engine 
   - [SetTaskVariableCmd](https://github.com/Activiti/Activiti/blob/master/activiti-services/activiti-services-core-model/src/main/java/org/activiti/services/core/model/commands/SetTaskVariablesCmd.java)
     - taskId
     - variables
-- Command Results (implements [CommandResults](https://github.com/Activiti/Activiti/blob/master/activiti-services/activiti-services-api/src/main/java/org/activiti/services/api/commands/results/CommandResults.java))
-  - StartProcessInstanceResults
+- Command Results (implements [CommandResults](https://github.com/Activiti/Activiti/blob/master/activiti-services/activiti-services-api/src/main/java/org/activiti/services/api/commands/results/CommandResults.java) and extends [AbstractCommandResult](https://github.com/Activiti/Activiti/blob/master/activiti-services/activiti-services-core-model/src/main/java/org/activiti/services/core/model/commands/results/AbstractCommandResults.java))
+  - [StartProcessInstanceResults](https://github.com/Activiti/Activiti/blob/master/activiti-services/activiti-services-core-model/src/main/java/org/activiti/services/core/model/commands/results/StartProcessInstanceResults.java)
     - processInstanceId
-  - SuspendProcessInstanceResults
-  - ActivateProcessInstanceResults
-  - SignalProcessInstancesResults
-  - ReleaseTaskResults
-  - ClaimTaskResults
-  - CompleteTaskResults
+  - [SuspendProcessInstanceResults](https://github.com/Activiti/Activiti/blob/master/activiti-services/activiti-services-core-model/src/main/java/org/activiti/services/core/model/commands/results/SuspendProcessInstanceResults.java)
+  - [ActivateProcessInstanceResults](https://github.com/Activiti/Activiti/blob/master/activiti-services/activiti-services-core-model/src/main/java/org/activiti/services/core/model/commands/results/ActivateProcessInstanceResults.java)
+  - [SignalProcessInstancesResults](https://github.com/Activiti/Activiti/blob/master/activiti-services/activiti-services-core-model/src/main/java/org/activiti/services/core/model/commands/results/SignalProcessInstancesResults.java)
+  - [ReleaseTaskResults](https://github.com/Activiti/Activiti/blob/master/activiti-services/activiti-services-core-model/src/main/java/org/activiti/services/core/model/commands/results/ReleaseTaskResults.java)
+  - [ClaimTaskResults](https://github.com/Activiti/Activiti/blob/master/activiti-services/activiti-services-core-model/src/main/java/org/activiti/services/core/model/commands/results/ClaimTaskResults.java)
+  - [CompleteTaskResults](https://github.com/Activiti/Activiti/blob/master/activiti-services/activiti-services-core-model/src/main/java/org/activiti/services/core/model/commands/results/CompleteTaskResults.java)
+  - [SetTaskVariablesResults](https://github.com/Activiti/Activiti/blob/master/activiti-services/activiti-services-core-model/src/main/java/org/activiti/services/core/model/commands/results/SetTaskVariablesResults.java)
 
 ## Message Enabled
 By design a Runtime Bundle is enabled to consume and produce (async) messages. This is achieved by
@@ -77,14 +79,14 @@ These events can be found in the [activiti-services-events](https://github.com/A
 * ActivityCompensateEvent
 * ProcessCompletedErrorEvent
 
-## Activiti Services Data Types
-- Core Types (org.activiti.services.core.model)
-  - ProcessDefinition
+## Runtime Bundle Data Types
+Runtime Bundles work and expose the following data types ([org.activiti.services.core.model](https://github.com/Activiti/Activiti/tree/master/activiti-services/activiti-services-core-model/src/main/java/org/activiti/services/core/model)):
+  - [ProcessDefinition](https://github.com/Activiti/Activiti/blob/master/activiti-services/activiti-services-core-model/src/main/java/org/activiti/services/core/model/ProcessDefinition.java)
     - id
     - name
     - description
     - version
-  - ProcessInstance
+  - [ProcessInstance](https://github.com/Activiti/Activiti/blob/master/activiti-services/activiti-services-core-model/src/main/java/org/activiti/services/core/model/ProcessInstance.java)
     - id
     - name
     - description
@@ -93,7 +95,7 @@ These events can be found in the [activiti-services-events](https://github.com/A
     - startDate
     - businessKey
     - status
-  - Task
+  - [Task](https://github.com/Activiti/Activiti/blob/master/activiti-services/activiti-services-core-model/src/main/java/org/activiti/services/core/model/Task.java)
     - id
     - owner
     - assignee
@@ -107,9 +109,16 @@ These events can be found in the [activiti-services-events](https://github.com/A
     - processInstanceId
     - parentTaskId
     - status
-  - ProcessInstanceVariables
+  - [ProcessInstanceVariables](https://github.com/Activiti/Activiti/blob/master/activiti-services/activiti-services-core-model/src/main/java/org/activiti/services/core/model/ProcessInstanceVariables.java)
     - processInstanceId
     - variables (Map)
+  - [TaskVariables](https://github.com/Activiti/Activiti/blob/master/activiti-services/activiti-services-core-model/src/main/java/org/activiti/services/core/model/TaskVariables.java)
+    - taskId
+    - variables (Map)
+    - scope
+  - [ProcessDefinitionMeta](https://github.com/Activiti/Activiti/blob/master/activiti-services/activiti-services-core-model/src/main/java/org/activiti/services/core/model/ProcessDefinitionMeta.java)
+  - [ProcessDefinitionUserTask](https://github.com/Activiti/Activiti/blob/master/activiti-services/activiti-services-core-model/src/main/java/org/activiti/services/core/model/ProcessDefinitionUserTask.java)
+  - [ProcessDefinitionServiceTask](https://github.com/Activiti/Activiti/blob/master/activiti-services/activiti-services-core-model/src/main/java/org/activiti/services/core/model/ProcessDefinitionServiceTask.java)
 
 
 ## Requirements
