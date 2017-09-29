@@ -23,3 +23,5 @@
     * [Notification Service](/components/activiti-cloud-app/Notification.md)
     * [Cloud Connectors](/components/activiti-cloud-app/CloudConnectors.md)
 * [How to contribute](contribute.md)
+* Releases
+    * [Early Access 201709](/releases/7-EA201709.md)
