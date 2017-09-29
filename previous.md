@@ -8,7 +8,9 @@ Users who are used to the spring-boot-starter-basic (see http://www.baeldung.com
 
 In order to separate identity management functions from the core engine, users and groups management is no longer provided by the engine in v7. A migration tool to port users and groups to keycloak is provided https://github.com/Activiti/activiti-compatibility/tree/master/activiti-db-users-to-keycloak-migrator
 
-Activiti v7 provides new REST APIs to make use of new possibilities such as HATEOS and more dynamic querying using DSLs. But the old API is not forgotten - https://github.com/Activiti/activiti-compatibility/tree/master/activiti-rest
+It is expected that other functions will continue to either be refactored out or deprecated in favour of cloud-appropriate alternatives (history and job-executor functions especially).
+
+Activiti v7 provides new REST APIs to make use of new possibilities such as HATEAOS and more dynamic querying using DSLs. But the old API is not forgotten - https://github.com/Activiti/activiti-compatibility/tree/master/activiti-rest
 
 ## Maintenance of Old Versions
 
