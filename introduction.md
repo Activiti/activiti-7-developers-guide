@@ -1,19 +1,19 @@
 # What is Activiti Cloud?
 Activiti Cloud is the first Cloud Native BPM framework built to provide a scalable and transparent solution for BPM implementations in cloud environments.
 
-The BPM discipline was created to provide a better understanding of how organisations do their work and how this work can be improved in a iterative fashion. BPM Suites were created on the basis that a company will host a central BPM Server which will be in charge of automating and monitoring their business processes. This approach caused several frustrations in modern organisations, the following list highlights some of the pain points that adopting a BPM Suite represent for medium sized org:
-- BPM Suites are built on top of a technology stack that the IT Department (Software) inside the organization doesn’t need to know
-- BPM Suites doesn’t integrate nicely with other ecosystems
-- Users needs to learn a whole new tool to do the work
+The BPM discipline was created to provide a better understanding of how organisations do their work and how this work can be improved in an iterative fashion. BPM Suites were created on the basis that a company will host a central BPM Server which will be in charge of automating and monitoring their business processes. This approach caused several frustrations in modern organisations, the following list highlights some of the pain points that adopting a BPM Suite represent for medium sized org:
+- BPM Suites are built on top of a technology stack that the IT Department (Software) inside the organization doesn’t otherwise need to know
+- BPM Suites often don’t integrate nicely with other ecosystems
+- Users needs to learn a whole new toolset to do the work
 - The department in charge of the infrastructure where the BPM Suite will run doesn’t know about its requirements. Same applies for DBAs that need to understand how the BPM Suite works in order to tune their Databases.
-- User Interfaces provided by BPM Suites are not flexible enough. Most of the time BPM implementations end ups causing multiple UIs reimplementations
-- BPM Suites adoptions are usually pushed from the business and not backed up by the internal software development teams inside the organization
+- User Interfaces provided by BPM Suites are often not flexible enough. Many BPM implementations end up needing multiple re-implementations of their UIs
+- BPM Suite adoptions are usually pushed from the business and not backed up by the internal software development teams inside the organization
 
-Most of these pain points are due because BPM Suites impose a whole set of technologies, pushing organisations to adapt to them. This, of course, cause rejections, pain and frustration.
+Most of these pain points arise because BPM Suites impose a whole set of technologies, pushing organisations to adapt to them. This, of course, causes rejection, pain and frustration.
 
-With the rise of cloud environments and tools that facilitates the adoption of such environments (such as microservices, containers and service orchestrators) BPM Suites are nowadays forced to redesign themselves to fit nicely in these environments.
+With the rise of cloud environments and tools that facilitates the adoption of such environments (such as microservices, containers and service orchestrators) BPM Suites are nowaday forced to redesign themselves to fit nicely in these environments.
 
-Containers helps to ease the pain on the technology side. We are now responsible for containers that hides whatever software that is running inside. But containers are not enough. The main problem of BPM Suites is that most of them were designed as monoliths, pushing the adopters to go for all or nothing. On the other side of the spectrum, you will find Open Source BPM Frameworks which aim to be as generic as possible to support a wide range of development and deployment scenarios. By doing this, these projects are troublesome to use, to maintain and to fit into different architectures. Because of this generic approach, Open Source BPM frameworks delegate too many decisions to the one implementing the solutions, pushing them to not only learn about the internals of the framework but also to make complicated decisions that only experts can make accurately.
+Containers help to ease the pain on the technology side. We are now responsible for containers that hide whatever software is running inside. But containers are not enough. The main problem of BPM Suites is that most of them were designed as monoliths, pushing the adopters to go for all or nothing. On the other side of the spectrum, you will find Open Source BPM Frameworks which aim to be as generic as possible to support a wide range of development and deployment scenarios. By doing this, these projects are troublesome to use, to maintain and to fit into different architectures. Because of this generic approach, Open Source BPM frameworks delegate too many decisions to the one implementing the solutions, pushing them to not only learn about the internals of the framework but also to make complicated decisions that only experts can make accurately.
 
 Activiti Cloud is an attempt to strip down the Activiti Process Engine to its bare minimum and to keep it as single focused as possible. At the same time Activiti Cloud provide a set of well defined and focused services required for most BPM implementations. Each of these services are ready to be used, but they are all independent from each other. You can choose what you need and what you don’t or even replace implementations if the one provided doesn’t fit your needs.
 
@@ -31,12 +31,12 @@ The Process Engine shouldn’t worry about:
 - Storing History / Audit information and providing a way to query this information
 - Performance of the clients consuming data generated by the engine
 
-Based on these list of things that the Process Engine shouldn’t do, we have created  different Activiti Cloud components and adopted 3rd party components that will interact with the process engine to provide all these functionalities that are required 90% of the time when we want to implement a BPM project.
+Based on this list of things that the Process Engine shouldn’t do, we have created  different Activiti Cloud components and adopted 3rd party components that will interact with the process engine to provide all these functionalities that are required 90% of the time when we want to implement a BPM project.
 
-Activiti Cloud provides an opinionated way of deploying these components to enable your implementation to scale using production ready components from the moment you start your implementation. In addition to provide a recommended way of deployments we are making sure that using our tools feel natural for different personas (developers / devops / end users):
-- Spring Boot / Spring Cloud: if you are application and developers are already using these technologies, adding Activiti Cloud to the mix should be straight forward
+Activiti Cloud provides an opinionated way of deploying these components to enable your implementation to scale using production ready components from the moment you start your implementation. In addition to providing a recommended method of deployment we are making sure that using our tools feel natural for different personas (developers / devops / end users):
+- Spring Boot / Spring Cloud: if you are already using these technologies, adding Activiti Cloud to the mix should be straight forward
 - If you are looking into technologies such as Kubernetes and Docker, all our components are ready to use and aligned with the requirements of these environments.
 - If you want to change/customize some of the components that are provided out of the box you can by using our * -cloud-starters.
-- If you want to change the underlaying technology stack, for example switch RabbitMQ to ActiveMQ or Kafka you can because we rely on Spring Cloud abstraction layers.
-- If you worry about process/application migration and updates, you can rely on industry standard ways of dealing with container versions and data migration, instead of dealing with complicated migration tools writing specifically for the Process Engine.
+- If you want to change the underlying technology stack, for example switch RabbitMQ to ActiveMQ or Kafka, you can because we rely on Spring Cloud abstraction layers.
+- If you worry about process/application migration and updates, you can rely on industry standard ways of dealing with container versions and data migration, instead of dealing with complicated migration tools written specifically for the Process Engine.
 - If you already have a Continuous Integration / Deployment pipeline you can integrate BPM specific builds with those tools. 
