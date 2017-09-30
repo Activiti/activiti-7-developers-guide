@@ -1,6 +1,6 @@
 # Activiti & Activiti Cloud Developer Guide
 
-This GitBook introduces the new concepts and components added on Version 7.
+This GitBook introduces the new concepts and components added in Version 7.
 
 This Git Book will cover the basics on how to use Activiti 7 & Activiti Cloud and how it compares to the previous versions of the project.
 
