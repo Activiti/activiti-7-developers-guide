@@ -13,9 +13,10 @@ But there are some extra things that you need to know about Runtime Bundles:
 
 ## REST APIs (HAL)
 Runtime Bundles expose a REST API with the following endpoints:
-- /vX/process-definitions/
-- /vX/process-instances/
-- /vX/tasks
+- /v1/process-definitions/
+- /v1/process-instances/
+- /v1/tasks
+  - GET /v1/tasks
 
 ## (Async) Command Based Interactions
 Commands are defined inside the [activiti-services-core-model](https://github.com/Activiti/Activiti/tree/master/activiti-services/activiti-services-core-model) project

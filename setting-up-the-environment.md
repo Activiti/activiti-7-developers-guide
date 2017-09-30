@@ -109,7 +109,7 @@ And that will give you the MiniKube entry point IP address that you need to my t
 
 For my case the minikube IP address is: 192.168.64.4, but you should replace it for yours.
 
-Once the cluster is ready you can start deploying services to it and you can do that by going to the /kubernetes/ directory inside the activiti-cloud-examples repository and run:
+Once the cluster is ready you can start deploying services to it and you can do that by going to the /kubernetes/kubectl/ directory inside the activiti-cloud-examples repository and run:
 
 > kubectl create -f infrastructure.yml
 
@@ -121,7 +121,7 @@ After running these commands you should see something like this in your Kubernet
 
 [![](https://salaboy.files.wordpress.com/2017/09/screen-shot-2017-09-10-at-11-51-53.png?w=960)](http://salaboy.com/2017/09/11/activiti-cloud-meets-kubernetes-and-they-like-each-other/screen-shot-2017-09-10-at-11-51-53/)
 
-Take a look at the runtime-bundle.yml \([https://github.com/Activiti/activiti-cloud-examples/blob/master/kubernetes/runtime-bundle.yml\#L17](https://github.com/Activiti/activiti-cloud-examples/blob/master/kubernetes/runtime-bundle.yml#L17)\) file for customizations regarding your Runtime Bundle image name and how to configure a Database for it. Notice that we are creating a Single Pod with both Runtime Bundle + PostgreSQL, but this is not a restriction, you can change your deployments to suit your needs.
+Take a look at the runtime-bundle.yml \([https://github.com/Activiti/activiti-cloud-examples/blob/master/kubernetes/kubectl/runtime-bundle.yml\#L17](https://github.com/Activiti/activiti-cloud-examples/blob/master/kubernetes/kubectl/runtime-bundle.yml#L17)\) file for customizations regarding your Runtime Bundle image name and how to configure a Database for it. Notice that we are creating a Single Pod with both Runtime Bundle + PostgreSQL, but this is not a restriction, you can change your deployments to suit your needs.
 
 A couple of caveats regarding this deployment:
 
@@ -179,8 +179,3 @@ This is Keycloak kicking in, asking you for your credentials. You can use **test
 Again, here you will need to replace to your environment IP depending what setup are you testing. If you are running with Docker Compose \(default URL to localhost\) you can go ahead and execute some requests.
 
 This should give you a high level idea about how to interact with these services and how to deploy new Runtime Bundles when you need them.
-
-
-
-
-
