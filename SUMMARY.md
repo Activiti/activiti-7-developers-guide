@@ -30,5 +30,4 @@
     * [Using Keycloak to Secure Endpoints](sso-and-idm/using-keycloak-to-secure-endpoints.md)
 * Releases
   * [Early Access 201709](/releases/7-EA201709.md)
-* Integrating with an IDM
 
