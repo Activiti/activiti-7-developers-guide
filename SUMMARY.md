@@ -17,6 +17,8 @@
     * [Identity Management](/components/activiti-cloud-infra/idm.md)
     * [Configuration Service](/components/activiti-cloud-infra/config.md)
     * [Distributed Logging](/components/activiti-cloud-infra/logging.md)
+  * Activiti Cloud Infrastructure
+    * [Forms](/components/activiti-cloud-platform/FormService.md)
   * Activiti Cloud Application
     * [Runtime Bundle](/components/activiti-cloud-app/RuntimeBundle.md)
     * [Query Service](/components/activiti-cloud-app/QueryService.md)
