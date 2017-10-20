@@ -26,10 +26,10 @@
     * [Notification Service](/components/activiti-cloud-app/Notification.md)
     * [Cloud Connectors](/components/activiti-cloud-app/CloudConnectors.md)
 * [How to contribute](contribute.md)
+* [Repositories Structure](repositories.md)
 * Working with Activiti v7
   * [SSO and IDM](sso-and-idm.md)
     * [Integrating with an IDM](sso-and-idm/integrating-with-an-idm.md)
     * [Using Keycloak to Secure Endpoints](sso-and-idm/using-keycloak-to-secure-endpoints.md)
 * Releases
   * [Early Access 201709](/releases/7-EA201709.md)
-
