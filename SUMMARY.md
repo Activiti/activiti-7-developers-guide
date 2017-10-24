@@ -17,8 +17,9 @@
     * [Identity Management](/components/activiti-cloud-infra/idm.md)
     * [Configuration Service](/components/activiti-cloud-infra/config.md)
     * [Distributed Logging](/components/activiti-cloud-infra/logging.md)
-  * Activiti Cloud Infrastructure
-    * [Forms](/components/activiti-cloud-platform/FormService.md)
+  * Activiti Cloud Platform
+    * [Process Model Service](/components/activiti-cloud-platform/ProcessModelService.md)
+    * [Forms Runtime](/components/activiti-cloud-platform/FormRuntimeService.md)
   * Activiti Cloud Application
     * [Runtime Bundle](/components/activiti-cloud-app/RuntimeBundle.md)
     * [Query Service](/components/activiti-cloud-app/QueryService.md)
@@ -31,5 +32,6 @@
   * [SSO and IDM](sso-and-idm.md)
     * [Integrating with an IDM](sso-and-idm/integrating-with-an-idm.md)
     * [Using Keycloak to Secure Endpoints](sso-and-idm/using-keycloak-to-secure-endpoints.md)
+* [Books & References](books/reference.md)
 * Releases
   * [Early Access 201709](/releases/7-EA201709.md)
