@@ -14,6 +14,7 @@ But there are some extra things that you need to know about Runtime Bundles:
 ## REST APIs (HAL)
 Runtime Bundles expose a REST API with the following endpoints:
 - /v1/process-definitions/
+  - GET /v1/process-definitions/
 - /v1/process-instances/
 - /v1/tasks
   - GET /v1/tasks
