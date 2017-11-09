@@ -17,10 +17,10 @@ The query component provides two different endpoints
 
 The GraphQL Query API provides single entry GraphQL query endpoint at `/graphql` URI with support for expressive process entity schema and type-safe query criteria expressions in order to execute flexible, fast and declarative data queries for consumer applications.
 
-### Supported HTTP Methods, Headers, and Body 
+### Supported HTTP Methods, Headers, and Body
 Activiti GraphQL Rest Controller handles both HTTP GET and POST method requests.
 
-#### GET requests 
+#### GET requests
 
 When receiving an HTTP GET request, the GraphQL query should be specified in the `query` parameter. For example, if we wanted to execute the following GraphQL query:
 ```
@@ -31,16 +31,16 @@ When receiving an HTTP GET request, the GraphQL query should be specified in the
       id
       name
     }
-  } 
+  }
 }
 ```
 This request could be sent via an HTTP GET like so:
 
 `http://server:port/graphql?query={ProcessInstance(processInstanceId:"1"){processInstanceId,tasks{id,name}}}`
 
-Query variables can be sent as a JSON-encoded string in an additional query parameter called `variables`. 
+Query variables can be sent as a JSON-encoded string in an additional query parameter called `variables`.
 
-#### POST requests 
+#### POST requests
 
 A standard GraphQL POST request uses the application/json content type, and includes a JSON-encoded body of the following form:
 ```
@@ -49,7 +49,7 @@ A standard GraphQL POST request uses the application/json content type, and incl
   "variables": { "processInstanceId": "value" }
 }
 ```
-The field `variables` is optional. 
+The field `variables` is optional.
 
 In addition to the above, `ActivitiQraphQLController` supports the following cases:
 
@@ -57,9 +57,9 @@ In addition to the above, `ActivitiQraphQLController` supports the following cas
 
 - If the "application/graphql" Content-Type header is present, treat the HTTP POST body contents as the GraphQL query string.
 
-#### QraphQL Query Response 
+#### QraphQL Query Response
 
-Regardless of the method by which the query and variables were sent, the response is returned in the body of the request in JSON format. 
+Regardless of the method by which the query and variables were sent, the response is returned in the body of the request in JSON format.
 
 ```
 {
@@ -83,11 +83,11 @@ Regardless of the method by which the query and variables were sent, the respons
   "errors": [ ]
 }
 ```
-If there were no errors returned, the "errors" field will be empty in the response object. 
+If there were no errors returned, the "errors" field will be empty in the response object.
 
 ### GraphQL Query Schema
 
-Activiti GraphQL query endpoint provides schema descriptions derived from JPA entity model at runtime for the following entities: `ProcessInstance`, `Task`, and `Variable`. The schema also derives GraphQL scalar types from JPA entity model attributes to validate provided variable values against the schema. 
+Activiti GraphQL query endpoint provides schema descriptions derived from JPA entity model at runtime for the following entities: `ProcessInstance`, `Task`, and `Variable`. The schema also derives GraphQL scalar types from JPA entity model attributes to validate provided variable values against the schema.
 
 Each entity in the query model is wrapped into two GraphQL query fields, i.e. ProcessInstance entity will have two representations in the GraphQL schema:
 
@@ -105,7 +105,7 @@ For example, you can use singular query wrapper, if you need a single object as 
           assignee
           status
         }
-      } 
+      }
     }
 
 Will return:
@@ -134,7 +134,7 @@ Will return:
 
 This GraphtQL schema supports flexible type safe criteria expressions with familiar SQL query syntax semantics using `where` arguments int the `select` query field to use any combination of logical expressions like `OR`, `AND`, `EQ`, `NE`, `GT`, `GE`, `LT`, `LR`, `IN`, `NIN`, `IS_NULL`, `NOT_NULL` provided by SQL query language.
 
-For example, the following query will find all running process instances with completed tasks: 
+For example, the following query will find all running process instances with completed tasks:
 
     query {
       ProcessInstances(where: {
@@ -151,7 +151,7 @@ For example, the following query will find all running process instances with co
             assignee
             status
           }
-        } 
+        }
       }
     }
 
@@ -192,7 +192,7 @@ Will return
 
 You can execute an inverse query to fitler results with a join in many-to-one association.
 
-For Example: 
+For Example:
 
     query {
       Tasks {
@@ -209,7 +209,7 @@ For Example:
             type
             value
           }
-        } 
+        }
       }
     }
 
@@ -269,7 +269,7 @@ Use plural query wrapper with Where Criteria Expressions to run complex queries 
             assignee
             status
           }
-        } 
+        }
       }
     }
 
@@ -306,7 +306,7 @@ The result will be:
         ]
       }
     }
-    
+
 To optimize query performance, the GraphQL Query DataFetcher implementation will execute an extra query to get the total elements only if you have requested 'pages' or 'total' fields.
 
 ### GraphQL Query Sorting
@@ -322,10 +322,10 @@ For Example:
           name(orderBy:DESC)
           assignee
           status
-        } 
+        }
       }
     }
-  
+
 Will Return:
 
     {
@@ -385,7 +385,7 @@ Just like a REST API, it is possible to pass arguments to an endpoint in a Graph
                 assignee
                 status
               }
-            } 
+            }
           }
         }
       ",
@@ -394,7 +394,7 @@ Just like a REST API, it is possible to pass arguments to an endpoint in a Graph
 
 ### GraphQL Query Performance
 -----------
-The Activiti GraphQL Data Fetcher implementation will build dynamic JPA fetch graph in order to minimize the number of queries executed against database in order to avoid 1+N lazy loading problems. 
+The Activiti GraphQL Data Fetcher implementation will build dynamic JPA fetch graph in order to minimize the number of queries executed against database in order to avoid 1+N lazy loading problems.
 
 ### How to demo Activiti GraphQL Query API
 
@@ -416,13 +416,6 @@ Our reference implementation uses JPA entities to store this state and we define
 - [Task](https://github.com/Activiti/Activiti/blob/master/activiti-services/activiti-services-query/activiti-services-query-model/src/main/java/org/activiti/services/query/model/Task.java)
 - [Variable](https://github.com/Activiti/Activiti/blob/master/activiti-services/activiti-services-query/activiti-services-query-model/src/main/java/org/activiti/services/query/model/Variable.java)
 
-<<<<<<< HEAD
-=======
-## Event Transformations into State
-
-This section describes the process of consuming events and transforming them into state,.
-
->>>>>>> adding 7-EA201710 release
 ## Implementations
 - JPA using Spring Data JPA
 - ElasticSearch using Spring Data Elastic (PR in review)

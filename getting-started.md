@@ -2,6 +2,8 @@
 
 ## Getting Started
 
+Welcome to our Getting Started Guide. This guide is a step by step tutorial on how to get Activiti Cloud up and running.
+
 The first decision that you will need to make is to choose between running all services with:
 
 * Docker Compose
@@ -14,11 +16,11 @@ The Docker Compose approach is probably faster, as it doesn’t require a VM, bu
 No matter which option do you choose, from a high level perspective these are the steps that you will need to perform the following steps:
 
 1. Start Infrastructure
-2. New runtime bundle
+2. New Activiti Cloud Application
    1. Configure it
    2. Build it
    3. Deploy it
-   4. Repeat 2 for a new Runtime Bundle
+   4. Repeat 2 for a new Activiti Cloud Application
 
 ## Docker Compose
 
@@ -30,15 +32,15 @@ Then you will need to clone the [github.com/activiti/activiti-cloud-examples](ht
 
 [![](https://salaboy.files.wordpress.com/2017/09/screen-shot-2017-09-09-at-14-44-30.png?w=960)](http://salaboy.com/2017/09/11/activiti-cloud-meets-kubernetes-and-they-like-each-other/screen-shot-2017-09-09-at-14-44-30/)
 
-Before you can start interacting with your services you need to add an entry to your "/etc/hosts" file so the SSO component can sign the verification tokens using the same internal name as the services which are behind the gateway. We have learnt a lot about Zuul \(Gateway\), Keycloak and how to do SSO with microservices, so expect a blog post about that shortly.
+Before you can start interacting with your services you need to add an entry to your "/etc/hosts" file so the SSO (Single Sign On) component can sign the verification tokens using the same internal name as the services which are behind the gateway.
 
 > sudo vi /etc/hosts  
 > \# add for sso  
 > 127.0.0.1       activiti-cloud-sso-idm
 
-This will start up all the infrastructure services + Audit and Query so you can focus on creating your runtime bundles.
+This will start up all the infrastructure services (Gateway, Service Registry, Message Broker, Single Sign On / Identity Management (Keycloak))  so you can focus on creating your Activiti Cloud Applications.
 
-Once you have all your infrastructure services started you can create a new Runtime Bundle Docker image with your business processes and required resources by using the project:
+Once you have all your infrastructure services started you can create a new Runtime Bundle (which is going to be the brain of your Activiti Cloud Application) Docker image with your business processes and required resources by using the project:
 
 [https://github.com/Activiti/activiti-cloud-examples/tree/master/docker-runtime-bundle](https://github.com/Activiti/activiti-cloud-examples/tree/master/docker-runtime-bundle)
 
@@ -60,21 +62,21 @@ If you require more Java magic and customizations, you can use:
 
 The obvious advantage of using the Java/Maven approach is that you can include unit tests for your processes and customizations.
 
-You need to make sure to tag your docker image accordingly \([https://github.com/Activiti/activiti-cloud-examples/blob/master/maven-runtime-bundle/pom.xml\#L100](https://github.com/Activiti/activiti-cloud-examples/blob/master/maven-runtime-bundle/pom.xml#L100)or when building the docker image manually with -t \) so then you can reference it in the rb-docker-compose.yml -&gt;[https://github.com/Activiti/activiti-cloud-examples/blob/master/docker/rb-docker-compose.yml\#L7](https://github.com/Activiti/activiti-cloud-examples/blob/master/docker/rb-docker-compose.yml#L7)
+You need to make sure to tag your docker image accordingly \([https://github.com/Activiti/activiti-cloud-examples/blob/master/maven-runtime-bundle/pom.xml\#L100](https://github.com/Activiti/activiti-cloud-examples/blob/master/maven-runtime-bundle/pom.xml#L100)or when building the docker image manually with -t \) so then you can reference it in the application-docker-compose.yml -&gt;[https://github.com/Activiti/activiti-cloud-examples/blob/master/docker/rb-docker-compose.yml\#L7](https://github.com/Activiti/activiti-cloud-examples/blob/master/docker/rb-docker-compose.yml#L7)
 
-Once you have your Runtime Bundle Docker Image ready you should be able to start it with:
+Once you have your Runtime Bundle Docker Image ready you should be able to start your Activiti Cloud Application by using the docker/application-docker-compose.yml file:
 
-> docker-compose -f rb-docker-compose.yml up -d
+> docker-compose -f application-docker-compose.yml up -d
 
 [![](https://salaboy.files.wordpress.com/2017/09/screen-shot-2017-09-09-at-15-07-59.png?w=960)](http://salaboy.com/2017/09/11/activiti-cloud-meets-kubernetes-and-they-like-each-other/screen-shot-2017-09-09-at-15-07-59/)
 
+This docker-compose file will start your runtime bundle plus the Query & Audit Service.
 
-
-At this point you have the infrastructure and one runtime bundle ready to be used.
+At this point you have the infrastructure and one Activiti Cloud Application ready to be used.
 
 To shut everything down run:
 
-> docker-compose -f rb-docker-compose.yml down
+> docker-compose -f application-docker-compose.yml down
 
 > docker-compose -f infrastructure-docker.yml down
 
@@ -82,15 +84,20 @@ To shut everything down run:
 
 ## MiniKube / Kubernetes
 
-With Kubernetes we will achieve a more realistic environment to test our services. By using Minikube we will achieve a similar runtime environment as with docker compose, with the big difference that kubernetes will take care to self heal our services in the case of failures.
+With Kubernetes we will achieve a more realistic environment to test our services. By using Minikube we will achieve a similar runtime environment as with docker compose, with the big difference that kubernetes will take care to self heal our services in the case of failures, automatically kill and move our services to different nodes in the cluster when they miss behave, load balance our services and tons of other good things.
 
 In order to get the minikube set up and running you need to first install minikube \([https://github.com/kubernetes/minikube](https://github.com/kubernetes/minikube)\) and start the cluster with:
 
-> minikube start --memory 8000
+> minikube start --memory 8000 --cpus 4
+
+**note** I'm using
+> minikube start --memory=8000 --cpus 4 --vm-driver xhyve
+
+This require some extra installations, for more information about using xhyve driver, read the minikube installation guide.
 
 [![](https://salaboy.files.wordpress.com/2017/09/screen-shot-2017-09-09-at-15-43-57.png)](http://salaboy.com/2017/09/11/activiti-cloud-meets-kubernetes-and-they-like-each-other/screen-shot-2017-09-09-at-15-43-57/)
 
-You can change the memory allocation if you want to, Activiti Cloud with the current services is using around 3GB to bootstrap all the services.
+You can change the memory allocation if you want to, Activiti Cloud with the current services is using around 3GB to bootstrap all the services in a clustered setup. That includes all the infrastructural services and one Activiti Cloud Application.
 
 You can access to the MiniKube dashboard running:
 
@@ -105,9 +112,12 @@ And that will give you the MiniKube entry point IP address that you need to my t
 > sudo vi /etc/hosts  
 > \# add for sso  
 > 127.0.0.1       activiti-cloud-sso-idm  
-> 192.168.64.4    activiti-cloud-sso-idm-kub
+> 192.168.64.x    activiti-cloud-sso-idm-kub
 
-For my case the minikube IP address is: 192.168.64.4, but you should replace it for yours.
+For my case the minikube IP address is: 192.168.64.x, but you should replace it for yours. You will find the address of your minikube instance by running
+> minikube dashboard
+
+And looking into your browser URL.
 
 Once the cluster is ready you can start deploying services to it and you can do that by going to the /kubernetes/kubectl/ directory inside the activiti-cloud-examples repository and run:
 
@@ -115,22 +125,22 @@ Once the cluster is ready you can start deploying services to it and you can do 
 
 Look at the Docker Compose section to read more about how to build your Runtime Bundle Docker images, and when you have those ready you can do:
 
-> kubectl create -f runtime-bundle.yml
+> kubectl create -f application.yml
 
 After running these commands you should see something like this in your Kubernetes Dashboard
 
 [![](https://salaboy.files.wordpress.com/2017/09/screen-shot-2017-09-10-at-11-51-53.png?w=960)](http://salaboy.com/2017/09/11/activiti-cloud-meets-kubernetes-and-they-like-each-other/screen-shot-2017-09-10-at-11-51-53/)
 
-Take a look at the runtime-bundle.yml \([https://github.com/Activiti/activiti-cloud-examples/blob/master/kubernetes/kubectl/runtime-bundle.yml\#L17](https://github.com/Activiti/activiti-cloud-examples/blob/master/kubernetes/kubectl/runtime-bundle.yml#L17)\) file for customizations regarding your Runtime Bundle image name and how to configure a Database for it. Notice that we are creating a Single Pod with both Runtime Bundle + PostgreSQL, but this is not a restriction, you can change your deployments to suit your needs.
+Take a look at the application.yml \([https://github.com/Activiti/activiti-cloud-examples/blob/master/kubernetes/kubectl/runtime-bundle.yml\#L17](https://github.com/Activiti/activiti-cloud-examples/blob/master/kubernetes/kubectl/runtime-bundle.yml#L17)\) file for customizations regarding your Runtime Bundle image name and how to configure a Database for it. Notice that we are creating a Single Pod with both Runtime Bundle + PostgreSQL, but this is not a restriction, you can change your deployments to suit your needs.
 
 A couple of caveats regarding this deployment:
 
-* In minikube you can’t create service of type LoadBalancer, for that reason we are using NodePort. You will need to change this to LoadBalancer in two services: entrypoint and activiti-cloud-sso-idm-kub for a real Kubernetes environment. You will find comments explaining this in the infrastructure.yml deployments
+* In minikube you can’t create service of type LoadBalancer, for that reason we are using NodePort. You will need to change this to LoadBalancer in two services: entrypoint and **activiti-cloud-sso-idm-kub** for a real Kubernetes environment. You will find comments explaining this in the infrastructure.yml deployments
 * In minikube we need to use the NodePorts specified in the infrastructure.yml in order to interact with the Gateway and SSO services. In a real Kubernetes environment you will need to use the Service specified ports intestead.
 
 Now that you have everything up and running, you need to know how to shut it down:
 
-> kubectl delete -f runtime-bundle.yml
+> kubectl delete -f application.yml
 
 > kubectl delete -f infrastructure.yml
 
@@ -178,4 +188,4 @@ This is Keycloak kicking in, asking you for your credentials. You can use **test
 
 Again, here you will need to replace to your environment IP depending what setup are you testing. If you are running with Docker Compose \(default URL to localhost\) you can go ahead and execute some requests.
 
-This should give you a high level idea about how to interact with these services and how to deploy new Runtime Bundles when you need them.
+This should give you a high level idea about how to interact with these services and how to deploy a new Activiti Cloud Application when you need them.

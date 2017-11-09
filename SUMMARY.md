@@ -6,7 +6,7 @@
   * [Beyond the 12 Factor Applications](12factor.md)
   * [Personas](personas.md)
   * [Previous Versions \(6.x & 5.x\)](previous.md)
-* [Getting Started](setting-up-the-environment.md)
+* [Getting Started](getting-started.md)
 * Components Architecture
   * [Overview](/components/Overview.md)
   * [Spring Cloud & Activiti Cloud](/components/spring-cloud.md)
