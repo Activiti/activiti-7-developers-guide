@@ -2,7 +2,7 @@
 
 The following diagram shows our current repository structure that might expand into the future, but the basic structure is going to probably remain unchanged.
 
-![](/assets/new-repositories.png)
+![](/assets/repositories.png)
 
 ## Main (Maven) Artifacts
 
