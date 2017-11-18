@@ -18,6 +18,7 @@
     * [Configuration Service](/components/activiti-cloud-infra/config.md)
     * [Distributed Logging](/components/activiti-cloud-infra/logging.md)
   * Activiti Cloud Platform
+    * [Cross Cutting Concerns](/components/activiti-cloud-platform/CrossCuttingConcerns.md)
     * [Process Model Service](/components/activiti-cloud-platform/ProcessModelService.md)
     * [Forms Runtime](/components/activiti-cloud-platform/FormRuntimeService.md)
   * Activiti Cloud Application
