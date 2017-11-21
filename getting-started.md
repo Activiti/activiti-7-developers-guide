@@ -48,7 +48,7 @@ Which doesn’t require any Java or Maven and it uses our Activiti-Cloud-Runtime
 
 > docker build -t rb-my-app .
 
-Inside the[docker-runtime-bundle](https://github.com/Activiti/activiti-cloud-examples/tree/master/docker-runtime-bundle)directory, which contains the Dockerfile specification to build the image.
+Inside the [docker-runtime-bundle](https://github.com/Activiti/activiti-cloud-examples/tree/master/docker-runtime-bundle) directory, which contains the Dockerfile specification to build the image.
 
 [![](https://salaboy.files.wordpress.com/2017/09/screen-shot-2017-09-09-at-14-55-07.png?w=960)](http://salaboy.com/2017/09/11/activiti-cloud-meets-kubernetes-and-they-like-each-other/screen-shot-2017-09-09-at-14-55-07/)
 
@@ -62,7 +62,7 @@ If you require more Java magic and customizations, you can use:
 
 The obvious advantage of using the Java/Maven approach is that you can include unit tests for your processes and customizations.
 
-You need to make sure to tag your docker image accordingly \([https://github.com/Activiti/activiti-cloud-examples/blob/master/maven-runtime-bundle/pom.xml\#L100](https://github.com/Activiti/activiti-cloud-examples/blob/master/maven-runtime-bundle/pom.xml#L100)or when building the docker image manually with -t \) so then you can reference it in the application-docker-compose.yml -&gt;[https://github.com/Activiti/activiti-cloud-examples/blob/master/docker/rb-docker-compose.yml\#L7](https://github.com/Activiti/activiti-cloud-examples/blob/master/docker/rb-docker-compose.yml#L7)
+You need to make sure to tag your docker image accordingly \([https://github.com/Activiti/activiti-cloud-examples/blob/master/maven-runtime-bundle/pom.xml\#L100](https://github.com/Activiti/activiti-cloud-examples/blob/master/maven-runtime-bundle/pom.xml#L100) or when building the docker image manually with -t \) so then you can reference it in the application-docker-compose.yml -&gt;[https://github.com/Activiti/activiti-cloud-examples/blob/master/docker/application-docker-compose.yml#L40](https://github.com/Activiti/activiti-cloud-examples/blob/master/docker/application-docker-compose.yml#L40)
 
 Once you have your Runtime Bundle Docker Image ready you should be able to start your Activiti Cloud Application by using the docker/application-docker-compose.yml file:
 
@@ -131,7 +131,7 @@ After running these commands you should see something like this in your Kubernet
 
 [![](https://salaboy.files.wordpress.com/2017/09/screen-shot-2017-09-10-at-11-51-53.png?w=960)](http://salaboy.com/2017/09/11/activiti-cloud-meets-kubernetes-and-they-like-each-other/screen-shot-2017-09-10-at-11-51-53/)
 
-Take a look at the application.yml \([https://github.com/Activiti/activiti-cloud-examples/blob/master/kubernetes/kubectl/runtime-bundle.yml\#L17](https://github.com/Activiti/activiti-cloud-examples/blob/master/kubernetes/kubectl/runtime-bundle.yml#L17)\) file for customizations regarding your Runtime Bundle image name and how to configure a Database for it. Notice that we are creating a Single Pod with both Runtime Bundle + PostgreSQL, but this is not a restriction, you can change your deployments to suit your needs.
+Take a look at the application.yml \([https://github.com/Activiti/activiti-cloud-examples/blob/master/kubernetes/kubectl/application.yml#L59](https://github.com/Activiti/activiti-cloud-examples/blob/master/kubernetes/kubectl/application.yml#L59)\) file for customizations regarding your Runtime Bundle image name and how to configure a Database for it. Notice that we are creating a Single Pod with both Runtime Bundle + PostgreSQL, but this is not a restriction, you can change your deployments to suit your needs.
 
 A couple of caveats regarding this deployment:
 
