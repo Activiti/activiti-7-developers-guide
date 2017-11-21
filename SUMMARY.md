@@ -7,7 +7,7 @@
   * [Personas](personas.md)
   * [Previous Versions \(6.x & 5.x\)](previous.md)
 * [Getting Started](getting-started.md)
-* Components Architecture
+* [Components Architecture](components-architecture.md)
   * [Overview](/components/Overview.md)
   * [Spring Cloud & Activiti Cloud](/components/spring-cloud.md)
   * Activiti Cloud Infrastructure
@@ -37,3 +37,4 @@
 * Releases
   * [Early Access 201710](/releases/7-EA201710.md)
   * [Early Access 201709](/releases/7-EA201709.md)
+

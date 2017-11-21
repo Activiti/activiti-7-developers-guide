@@ -1,5 +1,3 @@
-
-
 ## Getting Started
 
 Welcome to our Getting Started Guide. This guide is a step by step tutorial on how to get Activiti Cloud up and running.
@@ -11,7 +9,7 @@ The first decision that you will need to make is to choose between running all s
 
 The main difference between these two options is the degree of similarities that you will have a with a real production environment in your local setup. I would recommend Minikube if you are planning to run in Kubernetes hosted in a cloud provider. Minikube runs inside a VM, causing the application to be running inside a different instance of an Operating System. But if you're new to microservices Docker is a good place to start.
 
-The Docker Compose approach is probably faster, as it doesn’t require a VM, but you will need to be careful with configurations. Remember that if you are planning to run your applications in a clustered environment, each of the services might run in a different node.  
+The Docker Compose approach is probably faster, as it doesn’t require a VM, but you will need to be careful with configurations. Remember that if you are planning to run your applications in a clustered environment, each of the services might run in a different node.
 
 No matter which option do you choose, from a high level perspective these are the steps that you will need to perform the following steps:
 
@@ -26,21 +24,21 @@ No matter which option do you choose, from a high level perspective these are th
 
 If you choose the Docker Compose approach, you need to install Docker for your OS and Docker Compose will be ready to use in your terminal. \([https://docs.docker.com/engine/installation/](https://docs.docker.com/engine/installation/)\)
 
-Then you will need to clone the [github.com/activiti/activiti-cloud-examples](http://github.com/activiti/activiti-cloud-examples) repository or copy the contents of the docker/infrastructure.yml file into your laptop and then run:
+Then you will need to clone the [github.com/activiti/activiti-cloud-examples](http://github.com/activiti/activiti-cloud-examples) repository or copy the contents of the docker/infrastructure-docker.yml file into your laptop and then run:
 
 &gt; docker-compose -f infrastructure-docker.yml up -d
 
 [![](https://salaboy.files.wordpress.com/2017/09/screen-shot-2017-09-09-at-14-44-30.png?w=960)](http://salaboy.com/2017/09/11/activiti-cloud-meets-kubernetes-and-they-like-each-other/screen-shot-2017-09-09-at-14-44-30/)
 
-Before you can start interacting with your services you need to add an entry to your "/etc/hosts" file so the SSO (Single Sign On) component can sign the verification tokens using the same internal name as the services which are behind the gateway.
+Before you can start interacting with your services you need to add an entry to your "/etc/hosts" file so the SSO \(Single Sign On\) component can sign the verification tokens using the same internal name as the services which are behind the gateway.
 
 > sudo vi /etc/hosts  
 > \# add for sso  
-> 127.0.0.1       activiti-cloud-sso-idm
+> 127.0.0.1       activiti-cloud-sso-idm
 
-This will start up all the infrastructure services (Gateway, Service Registry, Message Broker, Single Sign On / Identity Management (Keycloak))  so you can focus on creating your Activiti Cloud Applications.
+This will start up all the infrastructure services \(Gateway, Service Registry, Message Broker, Single Sign On / Identity Management \(Keycloak\)\)  so you can focus on creating your Activiti Cloud Applications.
 
-Once you have all your infrastructure services started you can create a new Runtime Bundle (which is going to be the brain of your Activiti Cloud Application) Docker image with your business processes and required resources by using the project:
+Once you have all your infrastructure services started you can create a new Runtime Bundle \(which is going to be the brain of your Activiti Cloud Application\) Docker image with your business processes and required resources by using the project:
 
 [https://github.com/Activiti/activiti-cloud-examples/tree/master/docker-runtime-bundle](https://github.com/Activiti/activiti-cloud-examples/tree/master/docker-runtime-bundle)
 
@@ -77,7 +75,7 @@ At this point you have the infrastructure and one Activiti Cloud Application rea
 To shut everything down run:
 
 > docker-compose -f application-docker-compose.yml down
-
+>
 > docker-compose -f infrastructure-docker.yml down
 
 [![](https://salaboy.files.wordpress.com/2017/09/screen-shot-2017-09-09-at-15-40-09.png?w=960)](http://salaboy.com/2017/09/11/activiti-cloud-meets-kubernetes-and-they-like-each-other/screen-shot-2017-09-09-at-15-40-09/)
@@ -91,6 +89,7 @@ In order to get the minikube set up and running you need to first install miniku
 > minikube start --memory 8000 --cpus 4
 
 **note** I'm using
+
 > minikube start --memory=8000 --cpus 4 --vm-driver xhyve
 
 This require some extra installations, for more information about using xhyve driver, read the minikube installation guide.
@@ -111,10 +110,11 @@ And that will give you the MiniKube entry point IP address that you need to my t
 
 > sudo vi /etc/hosts  
 > \# add for sso  
-> 127.0.0.1       activiti-cloud-sso-idm  
-> 192.168.64.x    activiti-cloud-sso-idm-kub
+> 127.0.0.1       activiti-cloud-sso-idm  
+> 192.168.64.x    activiti-cloud-sso-idm-kub
 
 For my case the minikube IP address is: 192.168.64.x, but you should replace it for yours. You will find the address of your minikube instance by running
+
 > minikube dashboard
 
 And looking into your browser URL.
@@ -141,9 +141,9 @@ A couple of caveats regarding this deployment:
 Now that you have everything up and running, you need to know how to shut it down:
 
 > kubectl delete -f application.yml
-
+>
 > kubectl delete -f infrastructure.yml
-
+>
 > minikube stop
 
 # Is it working?
@@ -152,7 +152,7 @@ How do you test all these services? You have two options for now, but more are c
 
 ## \(Chrome\) Postman Collection
 
-Install Postman Chrome plugin, then download \(if you cloned the github repo for the cloud examples you already have this in your local environment\) the collection located here:[https://github.com/Activiti/activiti-cloud-examples/blob/master/Activiti%20v7%20REST%20API.postman\_collection.json](https://github.com/Activiti/activiti-cloud-examples/blob/master/Activiti%20v7%20REST%20API.postman_collection.json)
+Install Postman Chrome plugin, then download \(if you cloned the github repo for the cloud examples you already have this in your local environment\) the collection located here:[https://github.com/Activiti/activiti-cloud-examples/blob/master/Activiti%20v7%20REST%20API.postman\_collection.json](https://github.com/Activiti/activiti-cloud-examples/blob/master/Activiti v7 REST API.postman_collection.json)
 
 Import it into Postman and then you can execute different request against these services, mostly going through the API Gateway.
 
@@ -189,3 +189,4 @@ This is Keycloak kicking in, asking you for your credentials. You can use **test
 Again, here you will need to replace to your environment IP depending what setup are you testing. If you are running with Docker Compose \(default URL to localhost\) you can go ahead and execute some requests.
 
 This should give you a high level idea about how to interact with these services and how to deploy a new Activiti Cloud Application when you need them.
+
