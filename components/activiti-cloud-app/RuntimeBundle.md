@@ -129,6 +129,15 @@ Runtime Bundles then require the following list of infrastructural services:
 - Message Broker to emit and consume messages
 - Database to store the state of the process instances and tasks
 
+## Security
+
+In addition to authorization at endpoint-level provided through an external authorization system (and in the case of keycloak configured in a properties file), individual process definitions (and impliclity process instances) within a runtime bundle can have ACLs applied. These are applied via a properties file using a format such as:
+
+```
+activiti.cloud.runtime-bundle.security.user.testuser.policy.read=process_pool1,ProcessWithVariables
+activiti.cloud.runtime-bundle.security.group.hr.policy.write=process_pool1,ProcessWithVariables,SimpleProcess,ProcessWithVariables2,ProcessWithBoundarySignal
+```
+
 
 ## Source Code & Docker Image
 
