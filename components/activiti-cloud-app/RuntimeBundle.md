@@ -7,7 +7,8 @@ But there are some extra things that you need to know about Runtime Bundles:
 - Runtime Bundles in the context of Activiti Cloud represent a stateless instance of the process engine which is in charge of executing an immutable set of process definitions.
 - You cannot deploy new process definitions to a Runtime Bundle, instead you will create a new immutable version of your Runtime Bundle if you  want to update your process definitions.
 - Runtime Bundles expose a (Sync) REST and (Async) Message Based API to interact with them.
-- Runtime Bundles emit events in a fire & forget fashion using a default [ActivitiEventListener](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/master/activiti-cloud-services-runtime-bundle/activiti-cloud-services-api/src/main/java/org/activiti/cloud/services/events/MessageProducerActivitiEventListener.java) (Listen to the internal Process Engine events and transform them into messages)
+- Runtime Bundles emit events (in a fire & forget fashion) using a default [ActivitiEventListener](https://github.com/Activiti/Activiti/blob/master/activiti-services/activiti-services-events/src/main/java/org/activiti/services/events/MessageProducerActivitiEventListener.java) (Listen to the internal Process Engine events and transform them into messages)
+- Runtime Bundles, by default when executing Service Tasks (BPMN), will emit Integration Events to perform System to System integration. These Integration Events will be picked up by Activiti Cloud Connectors to perform integrations.
 
 ![](../../../assets/RuntimeBundle.png)
 
@@ -131,7 +132,7 @@ Runtime Bundles then require the following list of infrastructural services:
 
 ## Security
 
-In addition to authorization at endpoint-level provided through an external authorization system (and in the case of keycloak configured in a properties file), individual process definitions (and impliclity process instances) within a runtime bundle can have ACLs applied. These are applied via a properties file using a format such as:
+In addition to authorization at endpoint-level provided through an external authorization system (and in the case of Keycloak configured in a properties file), individual process definitions (and implicitly process instances) within a runtime bundle can have ACLs applied. These are applied via a properties file using a format such as:
 
 ```
 activiti.cloud.runtime-bundle.security.user.testuser.policy.read=process_pool1,ProcessWithVariables

@@ -8,6 +8,8 @@ This component was designed to aggregate data from a set of related Runtime Bund
 
 ![](/assets/QueryService.png)
 
+## Specification
+
 
 ## Endpoints
 The query component provides two different endpoints
