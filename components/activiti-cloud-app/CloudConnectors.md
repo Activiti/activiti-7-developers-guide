@@ -15,38 +15,64 @@ In order to implement this scenario we can divide the requirements into two diff
 The **What** is usually referred as Business Logic or Domain Specific Logic. This is why our Marketing company is the best, because our Domain Experts master the **What**.
 The **How** is what we developers & system integrators care about. We don't want to interfere with the **What**, quite the opposite, we want to make sure that as soon as the **What** is defined we can plug in all the technical bits so the company can have a new Marketing campaign up and running in minutes.
 
-As part of the **How**, it is important to understand that all campaigns will share a common set of building blocks which we call infrastructure. These are message brokers, security mechanisms, etc that will be share by all campaigns. For us to be fast and develop and deploy new campaigns quickly a running infrastructure must be running so multiple campaigns can share the common bits to avoid us deploying everything for each campaign. At the same time, it is important to notice that even if we share common infrastructural services, we should be able to scale each campaign independently.
+As part of the **How**, it is important to understand that all campaigns will share a common set of building blocks which we call infrastructure. These are message brokers, security mechanisms, etc. that will be share by all campaigns. For us to be fast and develop and deploy new campaigns quickly a running infrastructure must be in place so multiple campaigns can share the common bits. At the same time, it is important to notice that even if we share common infrastructural services, we should be able to scale each campaign independently.
+
 
 ## Implementation
 
+**Note Before starting:  it is important to understand that this example is complex because real life is complex. We tried to avoid too many hacks and shortcuts to make sure that we leverage the infrastructure as real applications (your implementations) will do. If you get overwhelmed with the amount of services and moving pieces you are probably not ready for uServices & Kubernetes just yet :). As part of the infrastructure we provide monitoring and tracing tools which will enable you to understand what is going on and how all these services are interacting.**
 
+First of all we need to tap into the Twitter Stream to consume tweets. For doing that we will use [Twitter4J] and because we are consuming data from an external system we will create an Activiti Cloud Connector to deal with all the Twitter interactions.
 
-We will start by tapping into the global twitter timeline using the twitter4j APIs. And for that we will create a new Twitter Activiti Cloud Connector which will include the [Twitter4j]() dependency. It is important to notice that connecting to twitter and fetching twitters is not a Domain Specific problem that we are trying to solve. For that reason, the connector is considered a System to System integration point, which needs to be coded, tested and released by a developer.
+### Twitter Activiti Cloud Connector
+Our Twitter Activiti Cloud Connector will be in charge of tapping into the Twitter Stream, route tweets based on their language and Tweet the prizes for the winners of each campaign.
 
-![](/assets/TwitterActivitiCloudConnector.png)
+ ![](../../../assets/TwitterCloudConnector.png)
 
-The Twitter Activiti Cloud Connector is in charge of fetching Tweets from the Global Twitter timeline and request the creation of a Process Instance for each tweet that it consumes. The Twitter Connector will do a pre-filter based on the language of the Tweet in order to select the appropriate Process Definition to process the tweet. 
+ In order to create this project we just need to create a simple Spring Boot 2 application and add our Activiti Cloud Connector Starter dependency to it. We also need the Twitter4J dependency and we are ready to go.
 
+```
+<dependency>
+  <groupId>org.activiti.cloud</groupId>
+  <artifactId>activiti-cloud-starter-connector</artifactId>
+</dependency>
+```
 
+If you look at the Twitter Activiti Cloud Connector you will notice the following:
+- We have a routing mechanism that based on each Tweet Language a process definition will be picked up to start a new Process Instance which will process the tweet.
+- This routing can be changed during Runtime by accessing to the Connector's exposed Endpoints. In real life scenarios you might have a completely separated Service that deals with this routing logic, the connector can remain as a simple integration point.
+- Even if we have a process definition reference, we don't know exactly where that Process Definition is hosted, meaning that the infrastructure will be in charge of sorting that out for us. This is one of the main aspects that contribute to the scalability of Activiti Cloud.
 
-The next step is to define our runtime bundle, that it only should contain our process definitions that for this example looks like this:
+### Language/Campaigns Manager/Router Runtime Bundle
 
-The first process is in charge of interacting with a couple of services, which involve another cloud connector. Because we didn’t want to share the same classpath between our twitter connector and the dependencies required to interact with these 3rd party services we kept them separated.
+The Language Specific Process definition will look like:
+- Select Campaigns
+- Process Tweets for each campaign (Start Process Instance that represent the campaign)
+  - If the tweet doesn't apply for the campaign end process instance
+- Rank Twitter User for the selected campaign
 
-Our 3rd party cloud connector is going to use the RestTemplate provide by spring to interact with the shout, beer and chuck Norris services. This connector will use histryx as a circuit breaker to make sure that if one of these services are down we can keep operating.
+Each language can include a variation of the process definition to deal with campaigns and tweets in different ways. For the sake of simplicity we will use this process definition to deal with multiple languages.
 
-Our third cloud connector is the one emulating a ranking service which is in charge of ranking the filtered tweets. It is also in charge of giving prizes to our top 3 twitter users every 10 minutes by starting a process in charge of giving prizes.
+Notice that we have a lot of business logic in here, and for that reason we will create our first Runtime Bundle which will contain the previously described business process.
 
+In order to do that we create another simple Spring Boot 2 application and we add our Activiti Cloud Runtime Bundle Starter as a dependency:
+```
+<dependency>
+  <groupId>org.activiti.cloud</groupId>
+  <artifactId>activiti-cloud-starter-runtime-bundle</artifactId>
+</dependency>
+```
 
-We will use the following Services:
-- Twitter Stream
-- [SHOUTCLOUD: THE CLOUD THAT SHOUTS BACK](http://shoutcloud.io)
-- https://punkapi.com/documentation/v2
-- [Chuck Norris Jokes Api](https://api.chucknorris.io)
+We also need to include our Business Process definition under: src/main/resources/processes/
 
+This project is called: "Campaign Manager/Router Runtime Bundle" and you can find the sources [here]( ).
 
-This example tries to demonstrate the different options that we can use to approach different problems. The following list of points are some of the decisions that we have made consciously while writing the example:
-* Both process definitions lives in the same runtime bundle. This was implemented in this way to simplify the example setup. You can place each process definition in a different runtime bundle to decouple their lifecycle (how often they get updated). For this particular scenario it would make a lot of sense to separate these process definitions for scalability reasons. Notice the different nature of these 2 processes. There is one process definition that might be started thousands of times per minute and the other just once every 10 minutes. You will probably want to scale the one in charge of processing tweets having multiple instances of that runtime bundle. Based on the nature of the process that process tweets, you want to make sure that this process services is never down, at the end of the day if you are giving prices away you want to be fair.
-* We could have implemented all service connectors in a single big cloud connector, but this would couple the logic, lifecycle and dependencies required to perform the interactions. We placed all the 3rd party connectors together because they are all rest calls, but notice that now if one of them is updated we will need to update the whole connector and their data types associated to those requests.  If we were using Feign or any other library to generate client stubs, we will also need to deal with the generated sources, which might clash and cause issues.
-* 3rd party services may fail or might be limited by SLA (x transactions per second or per $) using a rate limiter become handy to make sure that we limit the amount of resources that we use but at the same time we keep efficiency up.
-* The twitter connector has the flexibility to route different tweets (for example: different languages) to different processes. These processes can live in different runtime bundles which can be developed and maintained in different life cycles in complete isolation. The twitter connector can use centralised configuration management to change this routing while running without even restarting the service.
+The next step, once the correct process instance for the language is started to process the tweet is to run through the campaigns service. This service will be in charge of looking into all the available campaigns and forward the tweet to all the campaigns that might apply. Remember, campaigns are registered by language and they are dynamic, the can come and go without notifying this process.
+
+[IMAGE SHOWING PROCESS INTERACTING WITH CAMPAIGN SERVICE]
+
+The connector will query the Campaign service to see which campaigns are currently enable for the selected language and request to start a new Process Instance for each selected campaign.
+
+### Campaign Runtime Bundle
+Each campaign will be handled by a different runtime bundle, allowing us to scale them independently when needed. The campaign itself is the representation of how the business wants to deal with each tweet for different marketing campaigns. For this reason, one or more business processes will be included in this runtime bundle to describe which external services should be used. As part of the campaign, different services with different SLA & pricing schemes will be consumed
+ 
