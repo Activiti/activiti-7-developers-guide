@@ -4,3 +4,15 @@ There are some cross cutting concerns that all Activiti Cloud Services will shar
 
 You can find these cross cutting concerns modules in the following repository:
 [Activiti Cloud Service Common](https://github.com/Activiti/activiti-cloud-service-common/)
+
+## Remote Debugging
+
+The following example components for activiti cloud are enabled for remote debugging:
+
+Runtime bundles
+Query
+Audit
+Gateway
+Registry
+
+However in order to use this the docker-compose file needs to be modified - for full instructions see https://github.com/Activiti/activiti-cloud-query/pull/6
