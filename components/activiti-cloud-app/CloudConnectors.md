@@ -101,7 +101,7 @@ We create a simple campaign composed by 4 main steps:
 
 This is represented by the following business process:
 
-![](../../../assets/examples/english-campaing-process-def.png)
+![](../../../assets/examples/english-campaign-process-def.png)
 
 Each campaign can include a variation of the process definition to deal with tweets in different ways. For the sake of simplicity we will use this process definition to deal with multiple campaigns. But you are free to change this definition and experiment with different requirements.
 
@@ -112,7 +112,7 @@ We defined a simple rewarding process as well. It is composed of 3 main steps:
 - Generate a reward per user.
 - Tweet the reward to each user.
 
-![](../../../assets/examples/english-campaing-reward-process-def.png)
+![](../../../assets/examples/english-campaign-reward-process-def.png)
 
 
 ### Campaign Runtime Bundle
