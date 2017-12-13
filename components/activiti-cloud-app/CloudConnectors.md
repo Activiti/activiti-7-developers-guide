@@ -139,5 +139,99 @@ This intermediate layer of Cloud Connectors enable us to scale the process runti
 As you can imagine this Runtime Bundle will end up containerized into a Docker Image that we can deploy and scale independently. We generate this docker image using the Fabric8 Docker Maven Plugin.
 
 ## 3rd Party Service Connectors
+We grouped together all the services interactions related with REST Calls. We wanted to make sure that if we use the same dependencies to interact with 3rd Party Services we do it in a way that they can all share the same classpath. The moment that one of these services requires an extra library, we can split it up into a new connector.
+
+The services that we are interacting with are:
+-
+-
+-
+
+
 
 ## Ranking Service Connector
+
+
+## Running the Example
+There are 3 ways of running this example depending on how familiar you are with containers and orchestrators:
+- The Spring Boot way: so you will need to manually start each service plus some infrastructural components
+- The Docker Compose way: we provide 3 docker compose files to bootstrap different uServices (Infrastructure, Campaigns, Connectors)
+- The Kubernetes way: we provide 3 deployments descriptors to enable different aspects of the infrastructure (Infrastructure, Campaigns, Connectors)
+
+We obviously recommend the Kubernetes way, the other two approaches might be used for development purposes but they lack of real life management features.
+Kubernetes is not the ultimate tool but it does quite good in abstracting us from the specifics of the IaaS.
+
+First of all you need to clone the activiti-cloud-examples repository (currently in the development branch until we release it):
+```
+git clone https://github.com/Activiti/activiti-cloud-examples.git
+cd activiti-cloud-examples/
+cd trending-topics-campaigns/
+mvn clean install
+```
+
+### The Spring Boot way
+This approach is painful and usually not recommended unless you are making changes to every project and want to quickly test. Early stages of development usually tends to be like this.
+
+Remember that we will need to start 4 Spring Boot apps separately plus all the infrastructural services (Security, Message Brokers, Database)
+
+If you don't want to use Docker at all, then you will need to install RabbitMQ, Keycloak and PostgreSQL, components which are used by the Activiti Cloud building blocks and are considered part of the infrastructure. We recommend to just use Docker Compose to start these three components:
+
+
+```
+cd docker/
+docker-compose -f basic-infra-docker-compose.yml up -d
+```
+
+Next you can start our Activiti Cloud Connectors and Campaigns. You can start them in any order, they know how to work together.
+In order to be faithful to our previously described scenario we can start first the Activiti Cloud Twitter Connector (activiti-cloud-connectors-twitter).
+This will connect to the twitter stream, no matter how many campaigns we have running, at this point, there is no campaign defined.
+
+Notice that to work with Twitter and Twitter4J you need to create a new Twitter Application to obtain credentials. You can do this following the steps in here:
+https://apps.twitter.com/
+Make sure that you generate an access token for the app. You will need the 4 values: CONSUMER KEY, CONSUMER SECRET, ACCESS TOKEN and ACCESS TOKEN SECRET to launch the twitter connector.
+
+**Note: You will be tapping into the global twitter stream, so we are not responsible for what is written in there :)**
+
+```
+cd activiti-cloud-connectors-twitter/
+mvn -Dtwitter4j.oauth.consumerKey=<CONSUMER KEY HERE> -Dtwitter4j.oauth.consumerSecret=<CONSUMER SECRET HERE> -Dtwitter4j.oauth.accessToken=<ACCESS TOKEN HERE>  -Dtwitter4j.oauth.accessTokenSecret=<ACCESS TOKEN SECRET HERE> spring-boot:run
+```
+
+or alternatively
+
+```
+cd activiti-cloud-connectors-twitter/
+(mvn clean install)
+cd target/
+java -Dtwitter4j.oauth.consumerKey=<CONSUMER KEY HERE> -Dtwitter4j.oauth.consumerSecret=<CONSUMER SECRET HERE> -Dtwitter4j.oauth.accessToken=<ACCESS TOKEN HERE>  -Dtwitter4j.oauth.accessTokenSecret=<ACCESS TOKEN SECRET HERE> -jar activiti-cloud-connectors-twitter-1.0.0-SNAPSHOT.jar
+```
+
+After having the Twitter Connector consuming tweets from the Twitter Stream, we can start our other 2 connectors: activiti-cloud-connector-ranking and activiti-cloud-connector-3rd-party each in separate Terminals.
+
+Open a new terminal and run:
+```
+cd activiti-cloud-connector-ranking/
+mvn spring-boot:run
+```
+
+Again, open a new terminal and run:
+```
+cd activiti-cloud-connector-3rd-party/
+mvn spring-boot:run
+```
+
+Notice that you don't even need to wait for the application to start before starting any other application.
+
+Next you can start our first campaign:
+
+```
+cd english-campaign-rb/
+mvn spring-boot:run
+```
+
+Again, the order in which you execute these steps are not important.
+
+You should be able to see in each terminal the output of each service.
+
+## The Docker Compose Way
+
+## The Kubernetes Way (with Minikube)
