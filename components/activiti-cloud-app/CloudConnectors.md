@@ -61,13 +61,13 @@ The example is composed by 4 Maven projects that can be found here: [Trending To
 
 
 ### Twitter Activiti Cloud Connector
-First of all we need to tap into the Twitter Stream to consume tweets. For doing that we will use [Twitter4J]() and because we are consuming data from an external system we will create an Activiti Cloud Connector to deal with all the Twitter interactions.
+First of all we need to tap into the Twitter Stream to consume tweets. For doing that we will use [Twitter4J](http://twitter4j.org/en/configuration.html) and because we are consuming data from an external system we will create an Activiti Cloud Connector to deal with all the Twitter interactions.
 
 Our Twitter Activiti Cloud Connector will be in charge of tapping into the Twitter Stream, route tweets based on their language and Tweet the rewards for the winners of each campaign.
 
  ![](../../../assets/examples/TwitterCloudConnector.png)
 
- In order to create this project we just need to create a simple Spring Boot 2 application and add our Activiti Cloud Connector Starter dependency to it. We also need the Twitter4J dependency and we are ready to go.
+ In order to create this project we just need to create a simple Spring Boot 2 application and add our Activiti Cloud Connector Starter dependency to it. We also need the [Twitter4J](http://twitter4j.org/en/configuration.html) dependency and we are ready to go.
 
 ```
 <dependency>
@@ -233,5 +233,10 @@ Again, the order in which you execute these steps are not important.
 You should be able to see in each terminal the output of each service.
 
 ## The Docker Compose Way
+With Docker Compose things are much simpler. But still not something that you will want to use in production.
+With Docker Compose (as soon as you publish the docker images somewhere) you are enabled to not have maven, git or even java installed to run these services.
+
+
+
 
 ## The Kubernetes Way (with Minikube)
