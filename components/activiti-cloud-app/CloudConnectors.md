@@ -52,7 +52,7 @@ Each campaign will define 2 main things:
 **Note Before starting:  it is important to understand that this example is complex because real life is complex. We tried to avoid too many hacks and shortcuts to make sure that we leverage the infrastructure as real applications (your implementations) will do. If you get overwhelmed with the amount of services and moving pieces you are probably not ready for uServices & Kubernetes just yet :). As part of the infrastructure we provide monitoring and tracing tools which will enable you to understand what is going on and how all these services are interacting.**
 
 This section explains in detail the components required to create and run a new campaign.
-The example is composed by 4 Maven projects that can be found here: [Trending Topic Marketing Campaigns Example](http://github.com/activiti/activiti-cloud-examples/trending-topic-campaigns)
+The example is composed by 4 Maven projects that can be found here: [Trending Topic Marketing Campaigns Example](https://github.com/Activiti/activiti-cloud-examples/tree/develop/trending-topic-campaigns)
 
 - **activiti-cloud-connectors-3rd-party**: this Activiti Cloud Connector deals with how our business processes are going to interact with external services that we don't manage
 - **activiti-cloud-connectors-ranking**: this Activiti Cloud connector deals with how our processes are going to interact with the Ranking Service to be able to reward users for the different campaigns.
