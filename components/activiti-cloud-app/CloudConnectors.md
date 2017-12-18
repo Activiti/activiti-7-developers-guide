@@ -17,7 +17,7 @@ In order to illustrate the beauty of Activiti Cloud Connectors we will use the f
 
 ## Scenario (The WHAT)
 
-You can find this example in our [Activiti Cloud Examples Repository](http://github.com/activiti/activiti-cloud-examples/trending-topic-campaigns)
+You can find this example in our [Activiti Cloud Examples Repository](https://github.com/Activiti/activiti-cloud-examples/tree/develop/trending-topic-campaigns)
 
 Let's use the following Scenario to demonstrate all these concepts in action.
 
