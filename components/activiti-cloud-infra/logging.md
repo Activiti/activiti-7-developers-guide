@@ -21,5 +21,5 @@ https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html#dock
 For example
 ```
 minikube ssh
-sysctl -w vm.max_map_count=262144
+sudo sysctl -w vm.max_map_count=262144
 ```
