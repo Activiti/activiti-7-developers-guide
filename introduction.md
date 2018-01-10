@@ -33,7 +33,9 @@ The Process Engine shouldn’t worry about:
 
 Based on this list of things that the Process Engine shouldn’t do, we have created  different Activiti Cloud components and adopted 3rd party components that will interact with the process engine to provide all these functionalities that are required 90% of the time when we want to implement a BPM project.
 
-Activiti Cloud provides an opinionated way of deploying these components to enable your implementation to scale using production ready components from the moment you start your implementation. In addition to providing a recommended method of deployment we are making sure that using our tools feel natural for different personas (developers / devops / end users):
+Activiti Cloud is designed to support zero-downtime deployments (e.g. kubernetes rolling updates) and to scale using production ready components from the moment you start your implementation. Activiti Cloud makes it natural to use Activiti in modern cloud-based platforms.
+
+We are also making sure that using our tools feel natural for different personas (developers / devops / end users):
 - Spring Boot / Spring Cloud: if you are already using these technologies, adding Activiti Cloud to the mix should be straight forward
 - If you are looking into technologies such as Kubernetes and Docker, all our components are ready to use and aligned with the requirements of these environments.
 - If you want to change/customize some of the components that are provided out of the box you can by using our * -cloud-starters.
