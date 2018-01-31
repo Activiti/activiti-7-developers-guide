@@ -119,6 +119,12 @@ For my case the minikube IP address is: 192.168.64.x, but you should replace it 
 
 And looking into your browser URL.
 
+** Note **: Minikube runs inside a VM which means that it has a separate Docker Deamon. This means that if you build local docker images, those images will not be available to the Docker Deamon inside Minikube VM, for that reason it is recommened to point your Docker CLI tool to the minikube environment so images built locally in your environment are available to minikube. You can do this by running in your terminal:
+
+> eval $(minikube docker-env)
+
+It is important to understand that this is a valid configuration for the terminal where you executed this command, it is not a system wide configuration. So if you are build docker images you will need to do that in the same terminal. 
+
 Once the cluster is ready you can start deploying services to it and you can do that by going to the /kubernetes/kubectl/ directory inside the activiti-cloud-examples repository and run:
 
 > kubectl create -f infrastructure.yml
