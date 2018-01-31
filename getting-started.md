@@ -119,7 +119,7 @@ For my case the minikube IP address is: 192.168.64.x, but you should replace it 
 
 And looking into your browser URL.
 
-** Note **: Minikube runs inside a VM which means that it has a separate Docker Deamon. This means that if you build local docker images, those images will not be available to the Docker Deamon inside Minikube VM, for that reason it is recommened to point your Docker CLI tool to the minikube environment so images built locally in your environment are available to minikube. You can do this by running in your terminal:
+**Note: Minikube runs inside a VM which means that it has a separate Docker Deamon. This means that if you build local docker images, those images will not be available to the Docker Deamon inside Minikube VM, for that reason it is recommened to point your Docker CLI tool to the minikube environment so images built locally in your environment are available to minikube. You can do this by running in your terminal**
 
 > eval $(minikube docker-env)
 
