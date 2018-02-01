@@ -1,6 +1,6 @@
 # Activiti & Activiti Cloud Developer Guide
 
-[![Activiti](/assets/Activiti-cloud-vision.png)](http://www.slideshare.net/salaboy/activiti-activiti-cloud-devcon)
+[![Activiti](/assets/Activiti-cloud-vision2.png)](http://www.slideshare.net/salaboy/activiti-activiti-cloud-devcon)
 
 This GitBook introduces the new concepts and components added in Version 7.
 
