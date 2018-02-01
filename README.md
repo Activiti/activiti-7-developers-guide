@@ -2,6 +2,8 @@
 
 ![](/assets/Acitiviti_Icon_FullColor_GitHub_400x400.png)
 
+[![Activiti](/assets/DevCon-2018-Slides.png)](http://www.slideshare.net/salaboy/activiti-activiti-cloud-devcon)
+
 This GitBook introduces the new concepts and components added in Version 7.
 
 This Git Book will cover the basics on how to use Activiti 7 & Activiti Cloud and how it compares to the previous versions of the project.
