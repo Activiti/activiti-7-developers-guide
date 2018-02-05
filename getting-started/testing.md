@@ -1,6 +1,6 @@
 # Is it working?
 
-How do you test all these services? You have two options for now, but more are coming, you can use \(Chrome\) Postman Collection to hit the REST endpoints of these services and check that components such as Query and Audit are receiving events from our Process Executions or you can use our Demo Client App \(using Angular JS\) that will perform the security Web Flow, redirecting you to Keycloak UI for Single Sign On to all of our services. This simple application allow you to test the different endpoints to check that everything is working there.
+How do you test all these services? You have two options for now, but more are coming, you can use \(Chrome\) [Postman](https://www.getpostman.com) Collection to hit the REST endpoints of these services and check that components such as Query and Audit are receiving events from our Process Executions or you can use our Demo Client App \(using Angular JS\) that will perform the security Web Flow, redirecting you to [Keycloak](http://www.keycloak.org/) UI for Single Sign On to all of our services. This simple application allow you to test the different endpoints to check that everything is working there.
 
 ## \(Chrome\) Postman Collection
 
@@ -17,3 +17,6 @@ Notice that to perform any request you first need to get a Token, which will be 
 Once you have the token you can interact with any the other services that you have deployed.
 
 Notice also that based on the name of your runtime bundle the URL for such request might change. The API Gateway will use the name of your Runtime Bundle App to register a new route to it when it is deployed, you will need to adapt that accordingly.
+
+
+[Demo UI](demo-ui.md)

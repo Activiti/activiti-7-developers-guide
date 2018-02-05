@@ -22,4 +22,6 @@ This is Keycloak kicking in, asking you for your credentials. You can use **test
 
 Again, here you will need to replace to your environment IP depending what setup are you testing. If you are running with Docker Compose \(default URL to localhost\) you can go ahead and execute some requests.
 
+Our suggested first step is to create a new Process Instance, then you can try the audit and query services for the sample date. Alternatively to the web browser UI you can use PostMan with the provided collection here:[https://github.com/Activiti/activiti-cloud-examples/blob/master/Activiti%20v7%20REST%20API.postman\_collection.json](https://github.com/Activiti/activiti-cloud-examples/blob/master/Activiti v7 REST API.postman_collection.json)
+
 This should give you a high level idea about how to interact with these services and how to deploy a new Activiti Cloud Application when you need them.
