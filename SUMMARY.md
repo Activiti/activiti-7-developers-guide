@@ -27,6 +27,8 @@
     * [Audit Service](/components/activiti-cloud-app/AuditService.md)
     * [Notification Service](/components/activiti-cloud-app/Notification.md)
     * [Cloud Connectors](/components/activiti-cloud-app/CloudConnectors.md)
+  * [BluePrints](/blueprints/Overview.md)
+    * [Trending Topic Campaigns](/blueprints/trending-topic-campaigns/TrendingTopicCampaigns.md)    
 * [How to contribute](contribute.md)
 * [Repositories Structure](repositories.md)
 * Working with Activiti v7

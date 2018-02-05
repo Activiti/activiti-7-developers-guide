@@ -2,7 +2,6 @@
 
 Activiti Cloud BluePrints are designed to show users how different business scenarios can be implemented using Activiti Cloud Components. We started simple with the Trending Topic Campaigns example.
 
-
 ## Scenario (The WHAT)
 
 You can find this example in our [Activiti Cloud Examples Repository](https://github.com/Activiti/activiti-cloud-examples/tree/develop/trending-topic-campaigns)
@@ -191,7 +190,7 @@ mvn spring-boot:run
 
 Again, open a new terminal and run:
 ```
-cd activiti-cloud-connector-3rd-party/
+cd activiti-cloud-connector-processing/
 mvn spring-boot:run
 ```
 
