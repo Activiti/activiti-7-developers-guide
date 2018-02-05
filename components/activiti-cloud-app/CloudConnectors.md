@@ -12,6 +12,90 @@ Activiti Cloud Connectors provide:
 - An unified way to trigger actions in our Process Runtimes
 - (Future) Inter Process Communications: signal/catch/send & receive messages
 
+## Cloud Connector as BPMN Service Task
+Cloud Connectors are the default implementation for BPMN Service Tasks when only the attribute `implementation` is defined
+in the process definition file. The sections below explain how runtime bundle and Cloud Connectors interact.
+
+### Activiti Runtime Bundle side
+The Runtime Bundle relies on [Spring Cloud Streams](https://docs.spring.io/spring-cloud-stream/docs/current/reference/htmlsingle/) to delegate the service task execution to a Cloud Connector.
+Once the process execution reaches a *Service Task*, an *Integration Request* message is sent to a [dynamically bound destination](https://docs.spring.io/spring-cloud-stream/docs/current/reference/htmlsingle/#dynamicdestination) 
+having the same name as the one defined in the attribute `implementation` of the related Service Task. For instance, 
+in the following example a message will be sent to the destination `SendRewardToWinners`.
+
+`<serviceTask id="serviceTaskSendReward" name="Tweet Winners" implementation="SendRewardToWinners" />`
+
+After sending the integration request, the Runtime Bundle will wait for the *Integration Result* sent by the connector once its work is completed.
+In order to receive the Integration Result back the Runtime Bundle will listen to the input channel named `integrationResultsConsumer`.
+
+The runtime bundle starter (`activiti-cloud-starter-runtime-bundle`) will bring the following configuration for the `integrationResultsConsumer` channel:
+```
+spring.cloud.stream.bindings.integrationResultsConsumer.destination=integrationResult:${spring.application.name}
+spring.cloud.stream.bindings.integrationResultsConsumer.contentType=application/json
+spring.cloud.stream.bindings.integrationResultsConsumer.group=${ACT_RB_APP_NAME:my-runtime-bundle}
+```
+
+### Cloud Connector side
+#### Implementation
+In order to implement a Cloud Connector acting as a Service Task we will need:
+- Add a dependency to the connector starter:
+```
+<dependency>
+  <groupId>org.activiti.cloud</groupId>
+  <artifactId>activiti-cloud-starter-connector</artifactId>
+</dependency>
+```
+- Define an input channel, using Spring Cloud Stream `@Input` annotation, to receive the Integration Requests coming from the Runtime Bundle. E.g:
+```
+public interface RewardMessageChannels {
+    String REWARD_CONSUMER = "rewardConsumer";
+
+    @Input(REWARD_CONSUMER)
+    SubscribableChannel rewardConsumer();
+}
+
+```
+
+- Enable binds for the channel defined in the previous step
+```
+@Component
+@EnableBinding(RewardMessageChannels.class)
+public class SendRewardConnector {
+...
+}
+```
+- Implement the connector business logic and send the result back to the Runtime Bundle
+```
+    @StreamListener(value = RewardMessageChannels.REWARD_CONSUMER)
+    public void tweet(IntegrationRequestEvent event) {
+        
+        // business logic goes here
+
+        // build and send result back
+        Map<String, Object> results = new HashMap<>();
+        Message<IntegrationResultEvent> message = IntegrationResultEventBuilder.resultFor(event)
+                .withVariables(results)
+                .buildMessage();
+
+        integrationResultSender.send(message);
+    }
+```
+*Note:*  `IntegrationResultEventBuilder` and  `IntegrationResultSender` (autowired) are provided by `activiti-cloud-starter-connector`. 
+`IntegrationResultSender` will use dynamically bound destination again to make sure that the integration result message 
+will be sent to the right destination: `integrationResult:<TARGET_APPLICATION_NAME>`, where `TARGET_APPLICATION_NAME` is the name 
+of the runtime bundle which has sent the initial Integration Request.
+
+#### Configuration
+Eventually we'll need to configure the input channel declared above to receive integration requests only for the connector
+it's intended to. Remember that integration requests are sent to the destination defined by the attribute `implementation`
+of the related service task. In our example, `SendRewardToWinners`.
+
+```
+spring.cloud.stream.bindings.rewardConsumer.destination=SendRewardToWinners
+spring.cloud.stream.bindings.rewardConsumer.contentType=application/json
+spring.cloud.stream.bindings.rewardConsumer.group=integration
+```
+**Important:** note that Cloud Connectors and the Runtime Bundle can (and probably will) run into different Spring Boot 
+Applications / containers.
 
 In order to illustrate the beauty of Activiti Cloud Connectors we will use the following scenario which demonstrate how these connectors can be used in fully containerized environments.
 
@@ -52,11 +136,12 @@ Each campaign will define 2 main things:
 **Note Before starting:  it is important to understand that this example is complex because real life is complex. We tried to avoid too many hacks and shortcuts to make sure that we leverage the infrastructure as real applications (your implementations) will do. If you get overwhelmed with the amount of services and moving pieces you are probably not ready for uServices & Kubernetes just yet :). As part of the infrastructure we provide monitoring and tracing tools which will enable you to understand what is going on and how all these services are interacting.**
 
 This section explains in detail the components required to create and run a new campaign.
-The example is composed by 4 Maven projects that can be found here: [Trending Topic Marketing Campaigns Example](https://github.com/Activiti/activiti-cloud-examples/tree/develop/trending-topic-campaigns)
+The example is composed by 5 Maven projects that can be found here: [Trending Topic Marketing Campaigns Example](https://github.com/Activiti/activiti-cloud-examples/tree/develop/trending-topic-campaigns)
 
-- **activiti-cloud-connectors-3rd-party**: this Activiti Cloud Connector deals with how our business processes are going to interact with external services that we don't manage
+- **activiti-cloud-connectors-processing**: this Activiti Cloud Connector deals with Tweets processing. E.g clean up unnecessary characters, analyse the sentiment.
 - **activiti-cloud-connectors-ranking**: this Activiti Cloud connector deals with how our processes are going to interact with the Ranking Service to be able to reward users for the different campaigns.
 - **activiti-cloud-connectors-twitter**: this Activiti Cloud Connector deals with all the tasks related to Twitter which includes: listening the twitter stream & enabling our application to tweet to users that receive rewards.
+- **activiti-cloud-connectors-dummytwitter**: this Activiti Cloud Connector acts as the previous one, but using pre-defined dummy tweets. It's mainly used for demo purposes.
 - **english-campaign-rb**: this is an example Campaign to deal with English Tweets and rewards, we encourage you to create new campaigns.
 
 
@@ -137,19 +222,6 @@ Both the Campaign and Reward processes will interact with external services to p
 This intermediate layer of Cloud Connectors enable us to scale the process runtime independently from how they interact with other service. It also serves as a great place to add some technical and business details about each of these interactions. We need to consider that in real life interactions we might have SLAs and policies to limit or control these external services interactions. Activiti Cloud Connectors helps you to add these complex controls in a way that they are completely decoupled from your processes executions.
 
 As you can imagine this Runtime Bundle will end up containerized into a Docker Image that we can deploy and scale independently. We generate this docker image using the Fabric8 Docker Maven Plugin.
-
-## 3rd Party Service Connectors
-We grouped together all the services interactions related with REST Calls. We wanted to make sure that if we use the same dependencies to interact with 3rd Party Services we do it in a way that they can all share the same classpath. The moment that one of these services requires an extra library, we can split it up into a new connector.
-
-The services that we are interacting with are:
--
--
--
-
-
-
-## Ranking Service Connector
-
 
 ## Running the Example
 There are 3 ways of running this example depending on how familiar you are with containers and orchestrators:
