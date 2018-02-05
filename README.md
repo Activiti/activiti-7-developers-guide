@@ -1,6 +1,6 @@
 # Activiti & Activiti Cloud Developer Guide
 
-[![Activiti](/assets/Activiti-Vision-DevCon-2018.png)](http://www.slideshare.net/salaboy/activiti-activiti-cloud-devcon)
+[![Activiti](/assets/Acitiviti_Icon_FullColor_GitHub_400x400.png)](https://github.com/Activiti)
 
 This GitBook introduces the new concepts and components added in Version 7.
 
