@@ -15,6 +15,7 @@ In order to implement this scenario we can divide the requirements into two diff
 - **How** it needs to be done: all the technical aspects of how to get the data moved to different services to perform the **What**
 
 The **What** is usually referred as Business Logic or Domain Specific Logic. This is why our Marketing company is the best, because our Domain Experts master the **What**.
+
 The **How** is what we developers & system integrators care about. We don't want to interfere with the **What**, quite the opposite, we want to make sure that as soon as the **What** is defined we can plug in all the technical bits so the company can have a new Marketing campaign up and running in minutes.
 
 As part of the **How**, it is important to understand that all campaigns will share a common set of building blocks which we call infrastructure. These are message brokers, security mechanisms, etc. that will be share by all campaigns. For us to be fast and develop and deploy new campaigns quickly a running infrastructure must be in place so multiple campaigns can share the common bits. At the same time, it is important to notice that even if we share common infrastructural services, we should be able to scale each campaign independently.
@@ -38,7 +39,7 @@ Each campaign will define 2 main things:
 
 **Note Before starting:  it is important to understand that this example is complex because real life is complex. We tried to avoid too many hacks and shortcuts to make sure that we leverage the infrastructure as real applications (your implementations) will do. If you get overwhelmed with the amount of services and moving pieces you are probably not ready for uServices & Kubernetes just yet :). As part of the infrastructure we provide monitoring and tracing tools which will enable you to understand what is going on and how all these services are interacting.**
 
-This section explains in detail the components required to create and run a new marketing campaign.
+This section explains in detail the components required to create and run a new marketing campaign for a trending topic.
 The example is composed by 6 Maven projects that can be found here: [BluePrint Trending Topic Campaigns](https://github.com/Activiti/blueprint-trending-topic-campaigns/tree/develop/)
 
 - **english-campaign-rb**: this is an example Campaign to deal with English Tweets and rewards, we encourage you to create new campaigns with your own business processes and domain models.
@@ -60,7 +61,7 @@ Campaigns are domain specific uServices. Different marketing departments might n
 As stated before in the scenario section, campaigns are responsible for:
 - Defining how to process each tweet for a given trending topic
 - Defining how to reward users which participated the most in the campaign
-
+![](../../../assets/examples/campaigns.png)
 
 ## Campaign Definition
 We create a simple campaign composed by 4 main steps:
@@ -89,7 +90,7 @@ We defined a simple rewarding process as well. It is composed of 3 main steps:
 
 ##Campaign Runtime Bundle
 
-In order to be able to execute these Business Process Definitions we create a new Activiti Runtime Bundle by creating a Spring Boot 2 application and adding our Activiti Cloud Runtime Bundle Starter as a dependency:
+In order to be able to execute these Business Process Definitions we create a new Activiti Cloud Runtime Bundle by creating a Spring Boot 2 application and adding our Activiti Cloud Runtime Bundle Starter as a dependency:
 ```
 <dependency>
   <groupId>org.activiti.cloud</groupId>
@@ -100,7 +101,7 @@ In order to be able to execute these Business Process Definitions we create a ne
 Then we copy our Business Process definitions under:
 ``src/main/resources/processes/``
 
-The campaign runtime bundle project can be found here: [english-campaign-rb](https://github.com/Activiti/activiti-cloud-examples/tree/develop/trending-topic-campaigns/english-campaign-rb)
+The campaign runtime bundle project can be found here: [english-campaign-rb](https://github.com/Activiti/blueprint-trending-topic-campaigns/tree/develop/english-campaign-rb)
 
 Both the Campaign and Reward processes will interact with external services to perform their tasks. This interaction will be handled by our Activiti Cloud Connectors. Which serves as an intermediate layer between the Process Runtime and the external service.
 
@@ -108,12 +109,13 @@ Both the Campaign and Reward processes will interact with external services to p
 
 This intermediate layer of Cloud Connectors enable us to scale the process runtime independently from how they interact with other service. It also serves as a great place to add some technical and business details about each of these interactions. We need to consider that in real life interactions we might have SLAs and policies to limit or control these external services interactions. Activiti Cloud Connectors helps you to add these complex controls in a way that they are completely decoupled from your processes executions.
 
-As you can imagine this Runtime Bundle will end up containerized into a Docker Image that we can deploy and scale independently. We generate this docker image using the Fabric8 Docker Maven Plugin.
+We can easily build a docker image from our Runtime Bundle that we can deploy and scale independently if we are targeting an orchestrator such as Kubernetes. We generate this docker image using the Fabric8 Docker Maven Plugin, which is configured to generate the image after the Java application is packaged by maven. Notice that we can use the Fabric8 Plugin also to publish/deploy the image to a Docker Registry such as Docker Hub, which allow us to deploy all our components in a remote environment without the need of building each docker image locally in that remote environment.
 
 
-# Connectors
+# Activiti Cloud Connectors
+Activiti Cloud Connectors provides a clean way to define system to system interactions. On this BluePrint Activiti Cloud Connectors are used heavily to feed the campaigns with data that needs to be processed by our Campaign's business processes. In the following sections we describe these connectors which all share the same approach.
 
-### Twitter Activiti Cloud Connector
+## Twitter Activiti Cloud Connector
 First of all we need to tap into the Twitter Stream to consume tweets. For doing that we will use [Twitter4J](http://twitter4j.org/en/configuration.html) and because we are consuming data from an external system we will create an Activiti Cloud Connector to deal with all the Twitter interactions.
 
 Our Twitter Activiti Cloud Connector will be in charge of tapping into the Twitter Stream, route tweets based on their language and Tweet the rewards for the winners of each campaign.
@@ -134,8 +136,8 @@ If you look at the Twitter Activiti Cloud Connector you will notice the followin
 - The LangAwareTwitterStatusListener is in charge of getting the language of the Tweet and adding it to the Header of the message. We use this as a filter for campaigns to quickly drop messages that are not matching with the campaign language.
 - One Message Per Tweet is sent
 
-As you can imagine this connector will end up containerized into a Docker Image that we can deploy and scale independently. We generate this docker image using the Fabric8 Docker Maven Plugin.
-
+## Dummy Twitter Activiti Cloud Connector
+Alternatively you can use the Dummy Twitter component (which is started by default in our deployment descriptors)
 
 # Running the BluePrint
 There are 3 ways of running this example depending on how familiar you are with containers and orchestrators:
@@ -149,7 +151,7 @@ Kubernetes is not the ultimate tool but it does quite good in abstracting us fro
 First of all you need to clone the activiti-cloud-examples repository (currently in the development branch until we release it):
 ```
 git clone https://github.com/Activiti/activiti-cloud-examples.git
-cd activiti-cloud-examples/
+
 cd trending-topics-campaigns/
 mvn clean install
 ```
