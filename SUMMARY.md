@@ -6,7 +6,8 @@
   * [Beyond the 12 Factor Applications](12factor.md)
   * [Personas](personas.md)
   * [Previous Versions \(6.x & 5.x\)](previous.md)
-* [Getting Started](getting-started/getting-started.md)
+* Getting Started
+  * [Overview](getting-started/getting-started.md)
   * [Quickstart](getting-started/quickstart.md)
   * [Docker Compose](getting-started/docker.md)
   * [Kubernetes/Minikube](getting-started/minikube.md)
@@ -36,7 +37,7 @@
     * [Trending Topic Campaigns](/blueprints/trending-topic-campaigns/TrendingTopicCampaigns.md)    
 * [How to contribute](contribute.md)
 * [Repositories Structure](repositories.md)
-* Working with Activiti v7
+* Working with Activiti Cloud
   * [SSO and IDM](sso-and-idm.md)
     * [Integrating with an IDM](sso-and-idm/integrating-with-an-idm.md)
     * [Using Keycloak to Secure Endpoints](sso-and-idm/using-keycloak-to-secure-endpoints.md)
