@@ -3,7 +3,7 @@ The following list of books & PDFs are recommended reads if you want to understa
 
 - [OMG BPMN 2.x Spec](http://)
 - [Cloud Native Java](cloud-native-java.md)
-- [Building microservices](building-microservices.md)
+- [Building Microservices](building-microservices.md)
 - [BPMN method and style](bpmn-method-and-style.md)
 - [12 factor apps](http://12factor.net)
 - [Beyond the 12 factor app](beyond-12-factors.md)

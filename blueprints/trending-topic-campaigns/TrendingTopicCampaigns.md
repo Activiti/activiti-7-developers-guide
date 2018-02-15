@@ -131,13 +131,56 @@ Our Twitter Activiti Cloud Connector will be in charge of tapping into the Twitt
 </dependency>
 ```
 
+You can find the source code of this connector [here](https://github.com/Activiti/blueprint-trending-topic-campaigns/tree/develop/activiti-cloud-connectors-twitter)
+
 If you look at the Twitter Activiti Cloud Connector you will notice the following:
 - We setup the Twitter4J Stream Listener to listen to all the global twitter Stream
-- The LangAwareTwitterStatusListener is in charge of getting the language of the Tweet and adding it to the Header of the message. We use this as a filter for campaigns to quickly drop messages that are not matching with the campaign language.
-- One Message Per Tweet is sent
+- The [LangAwareTwitterStatusListener](https://github.com/Activiti/blueprint-trending-topic-campaigns/blob/develop/activiti-cloud-connectors-twitter/src/main/java/org/activiti/cloud/connectors/twitter/LangAwareTwitterStatusListener.java) is in charge of getting the language of the Tweet and adding it to the Header of the message. We use this as a filter for campaigns to quickly drop messages that are not matching with the campaign language.
+- One Message Per Tweet is sent via Spring Cloud Streams
 
 ## Dummy Twitter Activiti Cloud Connector
-Alternatively you can use the Dummy Twitter component (which is started by default in our deployment descriptors)
+Alternatively you can use the Dummy Twitter component (which is started by default in our deployment descriptors) to simulate a controlled social media feed. We created this dummy component to control the rate in which tweets are fed in and also the content of those tweets so we can test and assert the behaviour of all the services.
+
+You can find the source code of this connector [here](https://github.com/Activiti/blueprint-trending-topic-campaigns/tree/develop/activiti-cloud-connectors-dummytwitter)
+
+This connector uses a Spring Data CrudRepository to store tweets in a database which reads to dispatch based on a rate that can be configured with a property called "**tweet.rate**".
+
+This connector doesn't use Twitter4J because it simulates the feed with static data. 
+
+
+As all connectors it uses the **activiti-cloud-starter-connectors** to understand and work with IntegrationRequestEvents and IntegrationResultsEvents:
+
+```
+<dependency>
+  <groupId>org.activiti.cloud</groupId>
+  <artifactId>activiti-cloud-starter-connector</artifactId>
+</dependency>
+```
+
+## Processing Activiti Cloud Connectors
+This connector simulates a service that clean up and execute a sentiment analysis for the content of the tweet. This allow marketing campaigns to see if there is positive or negative engagement to their campaigns.
+For perfoming the sentiment analysis it uses the **standford-corenlp** library
+
+```
+<dependency>
+    <groupId>edu.stanford.nlp</groupId>
+    <artifactId>stanford-corenlp</artifactId>
+    <version>3.8.0</version>
+</dependency>
+```
+
+You can find the connector that does the Tweet Sentiment analysis here [TweetAnalyzerConnector]() https://github.com/Activiti/blueprint-trending-topic-campaigns/blob/develop/activiti-cloud-connectors-processing/src/main/java/org/activiti/cloud/connectors/processing/analyzer/TweetAnalyzerConnector.java#L35)
+
+As all connectors it uses the **activiti-cloud-starter-connectors** to understand and work with IntegrationRequestEvents and IntegrationResultsEvents:
+
+```
+<dependency>
+  <groupId>org.activiti.cloud</groupId>
+  <artifactId>activiti-cloud-starter-connector</artifactId>
+</dependency>
+```
+
+
 
 # Running the BluePrint
 There are 3 ways of running this example depending on how familiar you are with containers and orchestrators:
