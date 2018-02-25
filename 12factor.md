@@ -2,7 +2,7 @@
 
 In order to build Cloud Native Applications and Services, it is not enough to just package the old monolith inside a Docker Image and run it inside Kubernetes. We value the principles that Heroku defined as 12 factor applications: [https://12factor.net](https://12factor.net) \(and from a Pivotal perspective see [https://content.pivotal.io/ebooks/beyond-the-12-factor-app](https://content.pivotal.io/ebooks/beyond-the-12-factor-app) \). Without these guidelines it becomes difficult to scale in distributed environments. Activiti Cloud repositions the process engine to better interact with other components in such distributed environments.  The measure of success for Activiti Cloud is to have a low impedance mismatch with other microservices and the way they are designed, built and deployed.
 
-## \#1 - One codebase , one application
+## \#1 - One codebase, one application
 
 Our services are all under different repositories and each represents a single spring boot application.
 
