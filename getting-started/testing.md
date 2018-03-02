@@ -4,7 +4,7 @@ How do you test all these services? You have two options for now, but more are c
 
 ## \(Chrome\) Postman Collection
 
-Install Postman Chrome plugin, then download \(if you cloned the github repo for the cloud examples you already have this in your local environment\) the collection located here:[https://github.com/Activiti/activiti-cloud-examples/blob/master/Activiti%20v7%20REST%20API.postman\_collection.json](https://github.com/Activiti/activiti-cloud-examples/blob/master/Activiti v7 REST API.postman_collection.json)
+Install Postman Chrome plugin, then download \(if you cloned the github repo for the cloud examples you already have this in your local environment\) the collection located here:https://github.com/Activiti/activiti-cloud-examples/blob/master/Activiti%20v7%20REST%20API.postman\_collection.json (https://github.com/Activiti/activiti-cloud-examples/blob/master/Activiti v7 REST API.postman_collection.json)
 
 Import it into Postman and then you can execute different request against these services, mostly going through the API Gateway.
 
