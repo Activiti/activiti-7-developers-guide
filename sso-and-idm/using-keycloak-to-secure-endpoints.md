@@ -30,7 +30,9 @@ keycloak.security-constraints\[1\].securityCollections\[0\].patterns\[0\]=/\*pro
 
 This should match only to the endpoint for starting a process instance.
 
-If you envisage making a lot of changes like this then you’ll want to use the spring cloud config server so you can change properties at runtime. Otherwise it’ll be a case of building and redeploying the app. Spring boot does let you set properties through environment variables by turning dots to underscores but that’s a bit awkward, is still a restart and we might forget we’d done that.
+If you envisage making a lot of changes like this it’ll be a case of building and redeploying the app. Spring boot does let you set properties through environment variables by turning dots to underscores but that’s a bit awkward, is still a restart and we might forget we’d done that. 
+
+A point for future consideration is whether keycloak can be used with the spring cloud config server. In the meantime data-level restrictions can be put in place using the config server - see the Security sections for Runtime Bundle and for Query.
 
 ## **Server side**
 

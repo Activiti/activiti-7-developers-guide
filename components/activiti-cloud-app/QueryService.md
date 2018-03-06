@@ -39,7 +39,7 @@ When receiving an HTTP GET request, the GraphQL query should be specified in the
 ```
 This request could be sent via an HTTP GET like so:
 
-`http://server:port/graphql?query={ProcessInstance(processInstanceId:"1"){processInstanceId,tasks{id,name}}}`
+`http://server:port/admin/graphql?query={ProcessInstance(processInstanceId:"1"){processInstanceId,tasks{id,name}}}`
 
 Query variables can be sent as a JSON-encoded string in an additional query parameter called `variables`.
 
@@ -419,7 +419,16 @@ Our reference implementation uses JPA entities to store this state and we define
 - [Task](https://github.com/Activiti/Activiti/blob/master/activiti-services/activiti-services-query/activiti-services-query-model/src/main/java/org/activiti/services/query/model/Task.java)
 - [Variable](https://github.com/Activiti/Activiti/blob/master/activiti-services/activiti-services-query/activiti-services-query-model/src/main/java/org/activiti/services/query/model/Variable.java)
 
+## Security and Permissions
 
+By default all users can access everything. The endpoints that begin with /admin/ can be restricted to just admin users by passing a role to use as the admin role as the value of the ACTIVITI_ADMIN_ROLE environment variable. If using keycloak then this should be a keycloak role.
+
+Process instance, task and variable data can also be restricted to particular users or roles. This can be done by adding properties such as:
+
+activiti.cloud.security.user.testuser.rb-app-name.policy.read=defKey1
+activiti.cloud.security.user.hruser.rb-app-name.policy.read=defKey2
+
+Here rb-app-name is the name of a runtime bundle application.
 
 ## Implementations
  - [Activiti Cloud Query Service - JPA (Reference )using Spring Data JPA](https://github.com/Activiti/activiti-cloud-query/)
