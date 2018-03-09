@@ -38,13 +38,16 @@ spring.cloud.stream.bindings.integrationResultsConsumer.group=${ACT_RB_APP_NAME:
 #### Implementation
 In order to implement a Cloud Connector acting as a Service Task we will need:
 - Add a dependency to the connector starter:
+
 ```
 <dependency>
   <groupId>org.activiti.cloud</groupId>
   <artifactId>activiti-cloud-starter-connector</artifactId>
 </dependency>
 ```
+
 - Define an input channel, using Spring Cloud Stream `@Input` annotation, to receive the Integration Requests coming from the Runtime Bundle. E.g:
+
 ```
 public interface RewardMessageChannels {
     String REWARD_CONSUMER = "rewardConsumer";
@@ -56,6 +59,7 @@ public interface RewardMessageChannels {
 ```
 
 - Enable binds for the channel defined in the previous step
+
 ```
 @Component
 @EnableBinding(RewardMessageChannels.class)
@@ -63,7 +67,9 @@ public class SendRewardConnector {
 ...
 }
 ```
+
 - Implement the connector business logic and send the result back to the Runtime Bundle
+
 ```
     @StreamListener(value = RewardMessageChannels.REWARD_CONSUMER)
     public void tweet(IntegrationRequestEvent event) {
@@ -79,7 +85,8 @@ public class SendRewardConnector {
         integrationResultSender.send(message);
     }
 ```
-*Note:*  `IntegrationResultEventBuilder` and  `IntegrationResultSender` (autowired) are provided by `activiti-cloud-starter-connector`.
+
+*Note:* `IntegrationResultEventBuilder` and  `IntegrationResultSender` (autowired) are provided by `activiti-cloud-starter-connector`.
 `IntegrationResultSender` will use dynamically bound destination again to make sure that the integration result message
 will be sent to the right destination: `integrationResult:<TARGET_APPLICATION_NAME>`, where `TARGET_APPLICATION_NAME` is the name
 of the runtime bundle which has sent the initial Integration Request.
@@ -94,5 +101,6 @@ spring.cloud.stream.bindings.rewardConsumer.destination=SendRewardToWinners
 spring.cloud.stream.bindings.rewardConsumer.contentType=application/json
 spring.cloud.stream.bindings.rewardConsumer.group=integration
 ```
+
 **Important:** note that Cloud Connectors and the Runtime Bundle can (and probably will) run into different Spring Boot
 Applications / containers.
