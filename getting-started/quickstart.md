@@ -4,7 +4,7 @@
 
 Welcome to the new Activiti Cloud project. This Quickstart is aimed to let you get up and running with Activiti Cloud BPM in almost no time.
 
- Due to its ultra scalable and modular design, there are several components to download and start. We want to hide this complexity until you are ready for deployment. For testing and proof of concept purposes, this quickstart is more than enough to encourage you to try your own BPMN processes inside Activiti.
+Due to its ultra scalable and modular design, there are several components to download and start. We want to hide this complexity until you are ready for deployment. For testing and proof of concept purposes, this quickstart is more than enough to encourage you to try your own BPMN processes inside Activiti.  
 For this Quickstart guide to work, you need to have [Docker](http;//www.docker.com) and [Git](http://git.com) installed in your machine. If not, please begin by downloading and setting it up in your environment.
 
 Once you have Docker up and running, follow the next steps
@@ -16,11 +16,11 @@ Once you have Docker up and running, follow the next steps
 `docker-compose -f infrastructure-docker.yml up -d`  
 `docker-compose -f application-docker-compose.yml up -d`
 
-Then point your browser to http://localhost:3000.
+Then point your browser to [http://localhost:3000](http://localhost:3000).
 
 ![](/assets/keycloak.png)
 
-You will be prompted an username and password. Login with testuser/password. By clicking Login you will be redirected to the Demo UI.  
+You will be prompted an username and password. Login with testuser/password. By clicking Login you will be redirected to the Demo UI.
 
 ![](/assets/demo-ui-intro.png)
 
@@ -34,12 +34,11 @@ Take note of the uniquely generated ID. It is needed to start an instance of the
 
 This will generate a new instance of the process of the following BPMN process definition:
 
-
- ![](/assets/simple-process.png)
+![](/assets/simple-process.png)
 
 As you can see it is very simple, mostly like a "Hello, World". We can query the process instances currently running in our engine instance by clicking on the "Query Process Instances" button. This will print the following output:
 
- ![](/assets/query-process-instances.png)
+![](/assets/query-process-instances.png)
 
 Once we have a process instance running, it is time to see the available tasks for the user. In this case, we only have one possible task to execute, as you can see in the output of the "Query Tasks" button:
 
@@ -63,7 +62,8 @@ This will render a complete list of all the engine activity. It is very useful t
 
 ## Next Steps
 
-Despite the complexity of the previous steps you have now have the possibility to write infinitely scalable processes, up to glocal scale
-This is the power of Activiti Cloud !
+Despite the complexity of the previous steps you now have the possibility to write infinitely scalable processes, up to global scale  
+This is the power of Activiti 7 and Activiti Cloud!
 
 For more extensive and comprehensive documentation please refer to the [Getting Started Guide](./getting-started/getting-started.md)
+

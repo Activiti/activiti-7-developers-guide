@@ -6,7 +6,7 @@
   * [Beyond the 12 Factor Applications](12factor.md)
   * [Personas](personas.md)
   * [Previous Versions \(6.x & 5.x\)](previous.md)
-* Getting Started
+* [Getting Started](getting-started.md)
   * [Overview](getting-started/getting-started.md)
   * [Quickstart](getting-started/quickstart.md)
   * [Docker Compose](getting-started/docker.md)
@@ -34,7 +34,7 @@
     * [Notification Service](/components/activiti-cloud-app/Notification.md)
     * [Cloud Connectors](/components/activiti-cloud-app/CloudConnectors.md)
   * [BluePrints](/blueprints/Overview.md)
-    * [Trending Topic Campaigns](/blueprints/trending-topic-campaigns/TrendingTopicCampaigns.md)    
+    * [Trending Topic Campaigns](/blueprints/trending-topic-campaigns/TrendingTopicCampaigns.md)
 * [How to contribute](contribute.md)
 * [Repositories Structure](repositories.md)
 * Working with Activiti Cloud
@@ -48,3 +48,4 @@
   * [Early Access 201711](/releases/7-EA201711.md)
   * [Early Access 201710](/releases/7-EA201710.md)
   * [Early Access 201709](/releases/7-EA201709.md)
+
