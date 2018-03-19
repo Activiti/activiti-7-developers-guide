@@ -43,9 +43,9 @@
     * [Using Keycloak to Secure Endpoints](sso-and-idm/using-keycloak-to-secure-endpoints.md)
 * [Books & References](books/reference.md)
 * Releases
+  * [Early Access 201802](/releases/7-EA201802.md)
   * [Early Access 201801](/releases/7-EA201801.md)
   * [Early Access 201712](/releases/7-EA201712.md)
   * [Early Access 201711](/releases/7-EA201711.md)
   * [Early Access 201710](/releases/7-EA201710.md)
   * [Early Access 201709](/releases/7-EA201709.md)
-
