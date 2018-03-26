@@ -428,7 +428,9 @@ Process instance, task and variable data can also be restricted to particular us
 activiti.cloud.security.user.testuser.rb-app-name.policy.read=defKey1
 activiti.cloud.security.user.hruser.rb-app-name.policy.read=defKey2
 
-Here rb-app-name is the name of a runtime bundle application.
+Here rb-app-name is the name of a runtime bundle application. Or environment variables can be used such as
+
+`ACTIVITI_CLOUD_SECURITY_USER_HRUSER_RBMYAPP_POLICY_READ=SimpleProcess`
 
 ## Implementations
  - [Activiti Cloud Query Service - JPA (Reference )using Spring Data JPA](https://github.com/Activiti/activiti-cloud-query/)

@@ -138,6 +138,9 @@ In addition to authorization at endpoint-level provided through an external auth
 activiti.cloud.security.user.testuser.runtime-bundle.policy.read=process_pool1,ProcessWithVariables
 activiti.cloud.security.group.hr.runtime-bundle.policy.write=process_pool1,ProcessWithVariables,SimpleProcess,ProcessWithVariables2,ProcessWithBoundarySignal
 ```
+Or environment variables can be used such as:
+
+`ACTIVITI_CLOUD_SECURITY_USER_HRUSER_RBMYAPP_POLICY_WRITE=SimpleProcess`
 
 ## Source Code & Docker Image
 
