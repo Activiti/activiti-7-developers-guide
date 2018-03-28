@@ -421,7 +421,7 @@ Our reference implementation uses JPA entities to store this state and we define
 
 ## Security and Permissions
 
-By default all users can access everything. The endpoints that begin with /admin/ can be restricted to just admin users by passing a role to use as the admin role as the value of the ACTIVITI_ADMIN_ROLE environment variable. If using keycloak then this should be a keycloak role.
+By default only admin users can access everything. The endpoints that begin with /admin/ can be opened up by passing the role 'user' as the value of the ACTIVITI_ADMIN_ROLE environment variable.
 
 Process instance, task and variable data can also be restricted to particular users or roles. This can be done by adding properties such as:
 
