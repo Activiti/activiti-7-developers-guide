@@ -47,3 +47,17 @@ You can find the Spring Boot 2.x starters used to create our Docker Images and S
 
 - [Activiti Cloud Audit Service -> JPA (Reference) Docker Image](https://hub.docker.com/r/activiti/activiti-cloud-audit/)
 - [Activiti Cloud Audit Service -> MongoDB Docker Image](https://hub.docker.com/r/activiti/activiti-cloud-audit-mongodb/)
+
+
+## Security and Permissions
+
+Event data can be restricted to particular users or roles. This can be done by adding properties such as:
+
+activiti.cloud.security.user.testuser.rb-app-name.policy.read=defKey1
+activiti.cloud.security.user.hruser.rb-app-name.policy.read=defKey2
+
+Or a wildcard '*' can be used.
+
+Here rb-app-name is the name of a runtime bundle application. Or environment variables can be used such as
+
+`ACTIVITI_CLOUD_SECURITY_USER_HRUSER_RBMYAPP_POLICY_READ=SimpleProcess`
