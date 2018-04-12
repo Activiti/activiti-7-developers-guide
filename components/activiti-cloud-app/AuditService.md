@@ -13,8 +13,27 @@ There is also a MongoDB implementation, which makes your life easier if you want
 The core business logic for the Audit Service module can be found [here](https://github.com/Activiti/activiti-cloud-audit-service/tree/develop/activiti-cloud-services-audit). You can take these implementations as the specification for the Audit component and use them as the base for your own custom implementation. We recognise that different use cases might require different technologies to perform under different circumstances. For that reason we provide a reference implementation that does the work, but we promote alternative approaches when needed.
 If you are interested in contributing an alternative or extensions for our reference implementations we encourage you to get in touch.
 
-## Filters
+## Parameters
 
+Queries to REST endpoints can be restricted using parameters to match data fields. For example:
+
+`/audit/v1/events?processInstanceId={processInstanceId}`
+`/audit/v1/events?eventType={eventType}`
+
+## Security and Permissions
+
+By default all users can access everything. The endpoints that begin with /admin/ can be restricted to just admin users by passing a role to use as the admin role as the value of the ACTIVITI_ADMIN_ROLE environment variable. If using keycloak then this should be a keycloak role.
+
+Process instance, task and variable data can also be restricted to particular users or roles. This can be done by adding properties such as:
+
+activiti.cloud.security.user.testuser.rb-app-name.policy.read=defKey1
+activiti.cloud.security.user.hruser.rb-app-name.policy.read=defKey2
+
+Here rb-app-name is the name of a runtime bundle application. Or environment variables can be used such as
+
+`ACTIVITI_CLOUD_SECURITY_USER_HRUSER_RBMYAPP_POLICY_READ=SimpleProcess`
+`ACTIVITI_CLOUD_SECURITY_GROUP_HR_RBMYAPP_POLICY_WRITE=SimpleProcess`
+`ACTIVITI_CLOUD_SECURITY_GROUP_TESTGROUP_RBMYAPP_POLICY_WRITE=*`
 
 ## Spring Boot Starters
 You can find the Spring Boot 2.x starters used to create our Docker Images and Spring Boot enabled services in the following repository:

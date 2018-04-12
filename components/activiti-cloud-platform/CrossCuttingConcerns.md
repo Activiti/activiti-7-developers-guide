@@ -16,3 +16,7 @@ Gateway
 Registry
 
 However in order to use this the docker-compose file needs to be modified - for full instructions see https://github.com/Activiti/activiti-cloud-query/pull/6
+
+## Security
+
+See the security section of each component for access control policies. See also the sso-and-idm sections.

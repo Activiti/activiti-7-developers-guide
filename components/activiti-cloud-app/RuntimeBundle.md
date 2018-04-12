@@ -141,6 +141,8 @@ activiti.cloud.security.group.hr.runtime-bundle.policy.write=process_pool1,Proce
 Or environment variables can be used such as:
 
 `ACTIVITI_CLOUD_SECURITY_USER_HRUSER_RBMYAPP_POLICY_WRITE=SimpleProcess`
+`ACTIVITI_CLOUD_SECURITY_GROUP_HR_RBMYAPP_POLICY_WRITE=SimpleProcess`
+`ACTIVITI_CLOUD_SECURITY_GROUP_TESTGROUP_RBMYAPP_POLICY_WRITE=*`
 
 ## Source Code & Docker Image
 

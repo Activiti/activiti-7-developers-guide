@@ -431,6 +431,8 @@ activiti.cloud.security.user.hruser.rb-app-name.policy.read=defKey2
 Here rb-app-name is the name of a runtime bundle application. Or environment variables can be used such as
 
 `ACTIVITI_CLOUD_SECURITY_USER_HRUSER_RBMYAPP_POLICY_READ=SimpleProcess`
+`ACTIVITI_CLOUD_SECURITY_GROUP_HR_RBMYAPP_POLICY_WRITE=SimpleProcess`
+`ACTIVITI_CLOUD_SECURITY_GROUP_TESTGROUP_RBMYAPP_POLICY_WRITE=*`
 
 ## Implementations
  - [Activiti Cloud Query Service - JPA (Reference )using Spring Data JPA](https://github.com/Activiti/activiti-cloud-query/)
