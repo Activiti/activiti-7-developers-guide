@@ -191,11 +191,11 @@ There are 3 ways of running this example depending on how familiar you are with 
 We obviously recommend the Kubernetes way, the other two approaches might be used for development purposes but they lack of real life management features.
 Kubernetes is not the ultimate tool but it does quite good in abstracting us from the specifics of the IaaS.
 
-First of all you need to clone the activiti-cloud-examples repository (currently in the development branch until we release it):
+First of all you need to clone the blueprint-trending-topic-campaigns repository (currently in the development branch until we release it):
 ```
-git clone https://github.com/Activiti/activiti-cloud-examples.git
+git clone https://github.com/Activiti/blueprint-trending-topic-campaigns.git
 
-cd trending-topics-campaigns/
+cd blueprint-trending-topic-campaigns/
 mvn clean install
 ```
 
