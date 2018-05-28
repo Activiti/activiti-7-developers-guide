@@ -13,7 +13,7 @@ Once you have Docker up and running, follow the next steps
 `cd activiti-cloud-examples`  
 `echo '127.0.0.1 activiti-cloud-sso-idm' | sudo tee -a /etc/hosts`  
 `cd docker`  
-`docker-compose -f infrastructure-docker.yml up -d`  
+`docker-compose -f infrastructure-docker-compose.yml up -d`  
 `docker-compose -f application-docker-compose.yml up -d`
 
 Then point your browser to [http://localhost:3000](http://localhost:3000).
