@@ -4,7 +4,7 @@
 
 The other alternative, which looks more like building a client App, allows you to run an existing app that uses the Keycloak.js library to secure our rest calls and deal with requesting the token.
 
-You can find this app in the demo-ui-client \([https://github.com/Activiti/activiti-cloud-examples/tree/master/demo-ui-client](https://github.com/Activiti/activiti-cloud-examples/tree/master/demo-ui-client)\) directory of the activiti-cloud-examples repository.
+You can find this app in the activiti-cloud-demo-ui \([https://github.com/Activiti/activiti-cloud-demo-ui](https://github.com/Activiti/activiti-cloud-demo-ui)\) repo and its startup config in the [frontend-docker-compose file](https://github.com/Activiti/activiti-cloud-examples/blob/develop/docker/frontend-docker-compose.yml) in the docker directory of the activiti-cloud-examples repository.
 
 The README file in that directory guides you through the steps to execute the application.
 
