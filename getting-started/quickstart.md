@@ -16,7 +16,7 @@ Once you have Docker up and running, follow the next steps
 `docker-compose -f infrastructure-docker-compose.yml up -d`  
 `docker-compose -f application-docker-compose.yml up -d`
 
-Then point your browser to [http://localhost:3000](http://localhost:3000).
+Then point your browser to [http://localhost:8080](http://localhost:8080).
 
 ![](/assets/keycloak.png)
 
