@@ -33,6 +33,14 @@ you need to create an enviroment with the following values:
 
 ![](/assets/postman-environment.png)
 
+
+
+To shut everything down run:
+
+> docker-compose -f application-docker-compose.yml down
+>
+> docker-compose -f infrastructure-docker.yml down
+
 ## Next Steps
 
 Despite the complexity of the previous steps you now have the possibility to write infinitely scalable processes, up to global scale  
