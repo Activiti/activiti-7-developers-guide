@@ -26,6 +26,11 @@ You can use the [Postman](https://www.getpostman.com) Collection to interact wit
 https://github.com/Activiti/activiti-cloud-examples/blob/master/Activiti%20v7%20REST%20API.postman_collection.json
 
 After importing this collection to [Postman](https://www.getpostman.com) you need to setup your environment
+you need to create an enviroment with the following values:
+- gateway: http://localhost:8080
+- idm: http://activiti-cloud-sso-idm:8180
+- realm: springboot
+
 
 
 ## Next Steps
