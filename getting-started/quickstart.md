@@ -33,7 +33,15 @@ you need to create an enviroment with the following values:
 
 ![](/assets/postman-environment.png)
 
+A basic use case: 
 
+ * Getting a token from one of the **keycloak** folder endpoints: *getKeycloakToken <user_type>*
+ * Starting a process using *startProcess* or *startProcessWithVariables* endpoints in **rb-my-app** folder
+ * Checking in **query** which instances are running through *queryProcessInstances*
+ * Checking events in **audit** by means of *getEvents*
+
+If routes are to be checked, it is required to change the endpoint *routes* in **gateways** folder to:
+> {{gateway}}/actuator/routes
 
 To shut everything down run:
 
