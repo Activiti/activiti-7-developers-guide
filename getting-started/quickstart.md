@@ -32,7 +32,6 @@ you need to create an enviroment with the following values:
 - realm: springboot
 
 
-
 ## Next Steps
 
 Despite the complexity of the previous steps you now have the possibility to write infinitely scalable processes, up to global scale  
