@@ -2,9 +2,14 @@
 
 Activiti Cloud BluePrints are designed to show users how different business scenarios can be implemented using Activiti Cloud Components. We started simple with the Trending Topic Campaigns example.
 
+---
+**Workshop**
+This BluePrint has a workshop associated with it that you can follow to get your Activiti Cloud application deployed in Kubernetes.
+For all the instructions visit: [TTC Docs Workshop](https://github.com/Activiti/ttc-docs/blob/develop/workshop.md) 
+---
+
 ## Scenario (The WHAT)
 
-You can find this example here [Activiti Cloud BluePrint Trending Topic Campaigns](https://github.com/Activiti/blueprint-trending-topic-campaigns)
 
 Let's use the following Scenario to demonstrate all these concepts in action.
 
@@ -40,7 +45,9 @@ Each campaign will define 2 main things:
 **Note Before starting:  it is important to understand that this example is complex because real life is complex. We tried to avoid too many hacks and shortcuts to make sure that we leverage the infrastructure as real applications (your implementations) will do. If you get overwhelmed with the amount of services and moving pieces you are probably not ready for uServices & Kubernetes just yet :). As part of the infrastructure we provide monitoring and tracing tools which will enable you to understand what is going on and how all these services are interacting.**
 
 This section explains in detail the components required to create and run a new marketing campaign for a trending topic.
-The example is composed by 6 Maven projects that can be found here: [BluePrint Trending Topic Campaigns](https://github.com/Activiti/blueprint-trending-topic-campaigns/tree/develop/)
+The example is composed by 6 Maven projects that can be found here:
+
+https://github.com/activiti/ttc-*
 
 - **english-campaign-rb**: this is an example Campaign to deal with English Tweets and rewards, we encourage you to create new campaigns with your own business processes and domain models.
 - **activiti-cloud-connectors-processing**: this Activiti Cloud Connector deals with Tweets processing. E.g clean up unnecessary characters, analyse the sentiment of the content (possitive / negative).
@@ -145,7 +152,7 @@ You can find the source code of this connector [here](https://github.com/Activit
 
 This connector uses a Spring Data CrudRepository to store tweets in a database which reads to dispatch based on a rate that can be configured with a property called "**tweet.rate**".
 
-This connector doesn't use Twitter4J because it simulates the feed with static data. 
+This connector doesn't use Twitter4J because it simulates the feed with static data.
 
 
 As all connectors it uses the **activiti-cloud-starter-connectors** to understand and work with IntegrationRequestEvents and IntegrationResultsEvents:
