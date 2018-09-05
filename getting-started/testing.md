@@ -1,10 +1,10 @@
-# Is it working?
+# Testing
 
 How do you test all these services? You have two options for now, but more are coming, you can use \(Chrome\) [Postman](https://www.getpostman.com) Collection to hit the REST endpoints of these services and check that components such as Query and Audit are receiving events from our Process Executions or you can use our Demo Client App \(using Angular JS\) that will perform the security Web Flow, redirecting you to [Keycloak](http://www.keycloak.org/) UI for Single Sign On to all of our services. This simple application allow you to test the different endpoints to check that everything is working there.
 
 ## \(Chrome\) Postman Collection
 
-Install Postman Chrome plugin, then download \(if you cloned the github repo for the cloud examples you already have this in your local environment\) the collection located here:https://github.com/Activiti/activiti-cloud-examples/blob/master/Activiti%20v7%20REST%20API.postman_collection.json (https://github.com/Activiti/activiti-cloud-examples/blob/master/Activiti v7 REST API.postman_collection.json)
+Install Postman Chrome plugin, then download \(if you cloned the github repo for the cloud examples you already have this in your local environment\) the collection located here:[https://github.com/Activiti/activiti-cloud-examples/blob/master/Activiti v7 REST API.postman\_collection.json](https://github.com/Activiti/activiti-cloud-examples/blob/master/Activiti%20v7%20REST%20API.postman_collection.json) \([https://github.com/Activiti/activiti-cloud-examples/blob/master/Activiti](https://github.com/Activiti/activiti-cloud-examples/blob/master/Activiti) v7 REST API.postman\_collection.json\)
 
 Import it into Postman and then you can execute different request against these services, mostly going through the API Gateway.
 
@@ -18,5 +18,5 @@ Once you have the token you can interact with any the other services that you ha
 
 Notice also that based on the name of your runtime bundle the URL for such request might change. The API Gateway will use the name of your Runtime Bundle App to register a new route to it when it is deployed, you will need to adapt that accordingly.
 
+[Demo UI](https://github.com/Activiti/activiti-7-developers-guide/tree/dccb574f5c5eea97bcb331bac8321cd78c645cc8/getting-started/demo-ui.md)
 
-[Demo UI](demo-ui.md)

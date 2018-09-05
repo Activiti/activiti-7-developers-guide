@@ -1,6 +1,6 @@
-# Aligned with "The Twelve-Factor App"
+# Beyond the 12 Factor Applications
 
-To build Cloud Native Applications and Services, it is not enough to package the old monolith inside a Docker Image and run it inside Kubernetes. We value the principles that Heroku defined by "The Twelve-Factor App": [https://12factor.net](https://12factor.net) \(and from a Pivotal perspective see [https://content.pivotal.io/ebooks/beyond-the-12-factor-app](https://content.pivotal.io/ebooks/beyond-the-12-factor-app) \). Without these guidelines, it becomes difficult to scale in distributed environments. Activiti Cloud repositions the process engine to better interact with other components in such distributed environments.  The measure of success for Activiti Cloud is to have a low impedance mismatch with other microservices and the way they are designed, built and deployed.
+To build Cloud Native Applications and Services, it is not enough to package the old monolith inside a Docker Image and run it inside Kubernetes. We value the principles that Heroku defined by "The Twelve-Factor App": [https://12factor.net](https://12factor.net) \(and from a Pivotal perspective see [https://content.pivotal.io/ebooks/beyond-the-12-factor-app](https://content.pivotal.io/ebooks/beyond-the-12-factor-app) \). Without these guidelines, it becomes difficult to scale in distributed environments. Activiti Cloud repositions the process engine to better interact with other components in such distributed environments. The measure of success for Activiti Cloud is to have a low impedance mismatch with other microservices and the way they are designed, built and deployed.
 
 ## \#1 - One codebase, one application
 
@@ -43,7 +43,7 @@ Activiti Cloud provides to our users and implementers a production like environm
 
 ## \#10 - Administrative processes
 
-In Activiti Cloud administrative processes originally bundled along with the process engine are being refactored outside to reuse services provided by the infrastructure. Administrative Processes are one of the main problems in most Open Source BPM projects.  For this reason, we are working hard to get each of these processes out of the Process Engine scope.
+In Activiti Cloud administrative processes originally bundled along with the process engine are being refactored outside to reuse services provided by the infrastructure. Administrative Processes are one of the main problems in most Open Source BPM projects. For this reason, we are working hard to get each of these processes out of the Process Engine scope.
 
 ## \#11 - Port bindings
 
