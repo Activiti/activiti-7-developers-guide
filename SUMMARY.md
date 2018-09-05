@@ -9,6 +9,8 @@
   * [New Activiti Core APIs](core-apis.md)
 * Getting Started
   * [Overview](/getting-started/getting-started.md)
+  * [Getting Started with Activiti Core](/getting-started/getting-started-activiti-core.md) 
+  * [Getting Started with Activiti Cloud](/getting-started/getting-started-activiti-cloud.md) 
   * [Testing](/getting-started/testing.md)
 * Components Architecture
   * [Overview](/components/Overview.md)
