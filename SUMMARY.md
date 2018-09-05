@@ -7,10 +7,10 @@
   * [Personas](personas.md)
   * [Previous Versions \(6.x & 5.x\)](previous.md)
   * [New Activiti Core APIs](core-apis.md)
-* [Getting Started](getting-started.md)
+* Getting Started
   * [Overview](getting-started/getting-started.md)
   * [Testing](getting-started/testing.md)
-* [Components Architecture](components-architecture.md)
+* Components Architecture
   * [Overview](/components/Overview.md)
   * [Spring Cloud & Activiti Cloud](/components/spring-cloud.md)
   * Activiti Cloud Infrastructure
