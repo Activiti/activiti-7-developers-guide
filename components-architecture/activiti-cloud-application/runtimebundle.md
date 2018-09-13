@@ -1,26 +1,34 @@
 # Runtime Bundle
 
-Runtime Bundle is the Cloud version of the Process Engine. If you ever exposed Activiti \(the process engine\) as a service, you were defining a Runtime Bundle.
+Runtime Bundle is the Cloud version of the Process Engine. If you ever exposed Activiti \(the process engine\) as a service, you were defining a Runtime Bundle. 
 
 But there are some extra things that you need to know about Runtime Bundles:
 
 * Runtime Bundles in the context of Activiti Cloud represent a stateless instance of the process engine which is in charge of executing an immutable set of process definitions.
 * You cannot deploy new process definitions to a Runtime Bundle, instead you will create a new immutable version of your Runtime Bundle if you  want to update your process definitions.
 * Runtime Bundles expose a \(Sync\) REST and \(Async\) Message Based API to interact with them.
-* Runtime Bundles emit events \(in a fire & forget fashion\) using a default [ActivitiEventListener](https://github.com/Activiti/Activiti/blob/master/activiti-services/activiti-services-events/src/main/java/org/activiti/services/events/MessageProducerActivitiEventListener.java) \(Listen to the internal Process Engine events and transform them into messages\)
-* Runtime Bundles, by default when executing Service Tasks \(BPMN\), will emit Integration Events to perform System to System integration. These Integration Events will be picked up by Activiti Cloud Connectors to perform integrations.
+* Runtime Bundles emit events \(in a fire & forget fashion\) using a set of implementations of the internal [ActivitiEventListener](https://github.com/Activiti/Activiti/tree/39e0d2bde9ef79ba3c38d04e3c5c2e8cc8a3a983/activiti-api-impl/activiti-api-process-runtime-impl/src/main/java/org/activiti/runtime/api/event/internal) interface. \(Listen to the internal Process Engine events and transform them into messages\)
+* Runtime Bundles, by default when executing Service Tasks \(BPMN\), will emit Integration Events to perform System to System integration. These Integration Events will be picked up by Activiti Cloud Connectors to perform system to system integrations.
 
 ![](../../.gitbook/assets/runtimebundle.png)
 
 ## REST APIs \(HAL\)
 
-Runtime Bundles expose a REST API with the following endpoints:
+Runtime Bundles expose a REST API with the following **user** (**ACTIVITI_USER** role) endpoints:
 
-* /v1/process-definitions/
-  * GET /v1/process-definitions/
-* /v1/process-instances/
-* /v1/tasks
-  * GET /v1/tasks
+
+* [/v1/process-definitions/](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/develop/activiti-cloud-services-runtime-bundle/activiti-cloud-services-rest-api/src/main/java/org/activiti/cloud/services/rest/api/ProcessDefinitionController.java)
+* [/v1/process-definition/{id}/meta](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/develop/activiti-cloud-services-runtime-bundle/activiti-cloud-services-rest-api/src/main/java/org/activiti/cloud/services/rest/api/ProcessDefinitionMetaController.java)
+* [/v1/process-instances/](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/develop/activiti-cloud-services-runtime-bundle/activiti-cloud-services-rest-api/src/main/java/org/activiti/cloud/services/rest/api/ProcessInstanceController.java)
+*[/v1/process-instances/{id}/tasks](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/develop/activiti-cloud-services-runtime-bundle/activiti-cloud-services-rest-api/src/main/java/org/activiti/cloud/services/rest/api/ProcessInstanceTasksController.java)
+*[/v1/process-instances/{id}/variables](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/develop/activiti-cloud-services-runtime-bundle/activiti-cloud-services-rest-api/src/main/java/org/activiti/cloud/services/rest/api/ProcessInstanceVariableController.java)
+* [/v1/tasks](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/develop/activiti-cloud-services-runtime-bundle/activiti-cloud-services-rest-api/src/main/java/org/activiti/cloud/services/rest/api/TaskController.java)
+*[/v1/tasks/{id}/variables](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/develop/activiti-cloud-services-runtime-bundle/activiti-cloud-services-rest-api/src/main/java/org/activiti/cloud/services/rest/api/TaskVariableController.java)
+
+Also the following **admin** (**ACTIVITI_ADMIN** role) endpoints:
+* [/admin/v1/process-definitions/](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/develop/activiti-cloud-services-runtime-bundle/activiti-cloud-services-rest-api/src/main/java/org/activiti/cloud/services/rest/api/ProcessDefinitionAdminController.java)
+*[/admin/v1/process-instances](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/develop/activiti-cloud-services-runtime-bundle/activiti-cloud-services-rest-api/src/main/java/org/activiti/cloud/services/rest/api/ProcessInstanceAdminController.java)
+*[/admin/v1/tasks](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/develop/activiti-cloud-services-runtime-bundle/activiti-cloud-services-rest-api/src/main/java/org/activiti/cloud/services/rest/api/TaskAdminController.java)
 
 ## \(Async\) Command Based Interactions
 
