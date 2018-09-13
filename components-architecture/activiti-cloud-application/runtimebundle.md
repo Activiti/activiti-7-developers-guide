@@ -72,14 +72,31 @@ Process Related Payloads:
  Task Related Payloads:
     
   * [ClaimTaskPayload](https://github.com/Activiti/activiti-api/blob/develop/activiti-api-task-model/src/main/java/org/activiti/api/task/model/payloads/ClaimTaskPayload.java)
-  * [ReleaseTaskPayload](https://github.com/Activiti/activiti-api/blob/develop/activiti-api-task-model/src/main/java/org/activiti/api/task/model/payloads/ReleaseTaskPayload.java)
-  * [CompleteTaskPayload](https://github.com/Activiti/activiti-api/blob/develop/activiti-api-task-model/src/main/java/org/activiti/api/task/model/payloads/CompleteTaskPayload.java)
-    * inputVariables
-  * [SetTaskVariablePayload](https://github.com/Activiti/activiti-api/blob/develop/activiti-api-task-model/src/main/java/org/activiti/api/task/model/payloads/SetTaskVariablesPayload.java)
+    * id
     * taskId
-    * variables
+    * assignee
+  * [ReleaseTaskPayload](https://github.com/Activiti/activiti-api/blob/develop/activiti-api-task-model/src/main/java/org/activiti/api/task/model/payloads/ReleaseTaskPayload.java)
+    * id
+    * taskId
+  * [CompleteTaskPayload](https://github.com/Activiti/activiti-api/blob/develop/activiti-api-task-model/src/main/java/org/activiti/api/task/model/payloads/CompleteTaskPayload.java)
+    * id
+    * taskId
+    * variables [Map]
+  * [SetTaskVariablePayload](https://github.com/Activiti/activiti-api/blob/develop/activiti-api-task-model/src/main/java/org/activiti/api/task/model/payloads/SetTaskVariablesPayload.java)
+    * id
+    * taskId
+    * variables [Map]
   * [DeleteTaskPayload](https://github.com/Activiti/activiti-api/blob/develop/activiti-api-task-model/src/main/java/org/activiti/api/task/model/payloads/DeleteTaskPayload.java)
+    * id
+    * taskId
   * [UpdateTaskPayload](https://github.com/Activiti/activiti-api/blob/develop/activiti-api-task-model/src/main/java/org/activiti/api/task/model/payloads/UpdateTaskPayload.java)
+    * id
+    * taskId
+    * taskName
+    * description
+    * dueDate
+    * priority
+    * assignee
 
 ## Message Enabled
 
