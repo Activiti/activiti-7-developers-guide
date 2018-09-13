@@ -106,23 +106,44 @@ _Notice that a Runtime Bundle, by design, doesn't have WebSockets/Push Notificat
 
 Events are emitted by the process engine using a message queue so external components can react to them. All these events implements the [org.activiti.services.core.model.events.ProcessEngineEvent](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/master//activiti-cloud-services-runtime-bundle/activiti-cloud-services-api/src/main/java/org/activiti/cloud/services/api/events/ProcessEngineEvent.java) interface.
 
-These events can be found in the [activiti-cloud-services-events](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/master/activiti-cloud-services-runtime-bundle/activiti-cloud-services-events/) module.
+The events related with BPMN Activities can be found in the Java Core API [activiti-api-process-model](https://github.com/Activiti/activiti-api/tree/develop/activiti-api-process-model/src/main/java/org/activiti/api/process/model/events) module.
 
-* [ActivityStartedEvent](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/master/activiti-cloud-services-runtime-bundle/activiti-cloud-services-events/src/main/java/org/activiti/cloud/services/events/ActivityStartedEvent.java)
-* [ActivityCompletedEvent](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/master/activiti-cloud-services-runtime-bundle/activiti-cloud-services-events/src/main/java/org/activiti/cloud/services/events/ActivityCompletedEvent.java)
-* [ProcessStartedEvent](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/master/activiti-cloud-services-runtime-bundle/activiti-cloud-services-events/src/main/java/org/activiti/cloud/services/events/ProcessStartedEvent.java)
-* [ProcessCompletedEvent](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/master/activiti-cloud-services-runtime-bundle/activiti-cloud-services-events/src/main/java/org/activiti/cloud/services/events/ProcessCompletedEvent.java)
-* [TaskCreatedEvent](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/master/activiti-cloud-services-runtime-bundle/activiti-cloud-services-events/src/main/java/org/activiti/cloud/services/events/TaskCreatedEvent.java)
-* [TaskAssignedEvent](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/master/activiti-cloud-services-runtime-bundle/activiti-cloud-services-events/src/main/java/org/activiti/cloud/services/events/TaskAssignedEvent.java)
-* [TaskCompletedEvent](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/master/activiti-cloud-services-runtime-bundle/activiti-cloud-services-events/src/main/java/org/activiti/cloud/services/events/TaskCompletedEvent.java)
-* [VariableCreatedEvent](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/master/activiti-cloud-services-runtime-bundle/activiti-cloud-services-events/src/main/java/org/activiti/cloud/services/events/VariableCreatedEvent.java)
-* [VariableUpdatedEvent](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/master/activiti-cloud-services-runtime-bundle/activiti-cloud-services-events/src/main/java/org/activiti/cloud/services/events/VariableUpdatedEvent.java)
-* [VariableDeletedEvent](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/master/activiti-cloud-services-runtime-bundle/activiti-cloud-services-events/src/main/java/org/activiti/cloud/services/events/VariableDeletedEvent.java)
-* [SequenceFlowTakenEvent](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/master/activiti-cloud-services-runtime-bundle/activiti-cloud-services-api/src/main/java/org/activiti/cloud/services/events/SequenceFlowTakenEvent.java)
+* [BPMNActivityStartedEvent](https://github.com/Activiti/activiti-api/blob/develop/activiti-api-process-model/src/main/java/org/activiti/api/process/model/events/BPMNActivityStartedEvent.java)
+* [BPMNActivityCompletedEvent](https://github.com/Activiti/activiti-api/blob/develop/activiti-api-process-model/src/main/java/org/activiti/api/process/model/events/BPMNActivityCompletedEvent.java)
+* [BPMNActivityCancelledEvent](https://github.com/Activiti/activiti-api/blob/develop/activiti-api-process-model/src/main/java/org/activiti/api/process/model/events/BPMNActivityCancelledEvent.java)
+* [SequenceFlowEvent](https://github.com/Activiti/activiti-api/blob/develop/activiti-api-process-model/src/main/java/org/activiti/api/process/model/events/SequenceFlowEvent.java)
+
+We have shared events for Variables related operations and can be found here (also as part of the Java Core API [activiti-api-model-shared](https://github.com/Activiti/activiti-api/blob/develop/activiti-api-model-shared/))
+
+* [VariableCreatedEvent](https://github.com/Activiti/activiti-api/blob/develop/activiti-api-model-shared/src/main/java/org/activiti/api/model/shared/event/VariableCreatedEvent.java)
+* [VariableUpdatedEvent](https://github.com/Activiti/activiti-api/blob/develop/activiti-api-model-shared/src/main/java/org/activiti/api/model/shared/event/VariableUpdatedEvent.java)
+* [VariableDeletedEvent](https://github.com/Activiti/activiti-api/blob/develop/activiti-api-model-shared/src/main/java/org/activiti/api/model/shared/event/VariableDeletedEvent.java)
+
+The events related with Process Runtime can be found here (also as part of the Java Core API [activiti-api-process-runtime](https://github.com/Activiti/activiti-api/blob/develop/activiti-api-process-runtime))
+
+* [ProcessStartedEvent](https://github.com/Activiti/activiti-api/blob/develop/activiti-api-process-runtime/src/main/java/org/activiti/api/process/runtime/events/ProcessStartedEvent.java)
+* [ProcessCompletedEvent](https://github.com/Activiti/activiti-api/blob/develop/activiti-api-process-runtime/src/main/java/org/activiti/api/process/runtime/events/ProcessCompletedEvent.java)
+* [ProcessCancelledEvent](https://github.com/Activiti/activiti-api/blob/develop/activiti-api-process-runtime/src/main/java/org/activiti/api/process/runtime/events/ProcessCancelledEvent.java)
+* [ProcessResumedEvent](https://github.com/Activiti/activiti-api/blob/develop/activiti-api-process-runtime/src/main/java/org/activiti/api/process/runtime/events/ProcessResumedEvent.java)
+* [ProcessSuspendedEvent](https://github.com/Activiti/activiti-api/blob/develop/activiti-api-process-runtime/src/main/java/org/activiti/api/process/runtime/events/ProcessSuspendedEvent.java)
+* [ProcessCreatedEvent](https://github.com/Activiti/activiti-api/blob/develop/activiti-api-process-runtime/src/main/java/org/activiti/api/process/runtime/events/ProcessCreatedEvent.java)
+
+The events related with Tasks can be found here (also as part of the Java Core API [activiti-api-task-runtime](https://github.com/Activiti/activiti-api/tree/develop/activiti-api-task-runtime)) 
+
+* [TaskCreatedEvent](https://github.com/Activiti/activiti-api/blob/develop/activiti-api-task-runtime/src/main/java/org/activiti/api/task/runtime/events/TaskCreatedEvent.java)
+* [TaskAssignedEvent](https://github.com/Activiti/activiti-api/blob/develop/activiti-api-task-runtime/src/main/java/org/activiti/api/task/runtime/events/TaskAssignedEvent.java)
+* [TaskCompletedEvent](https://github.com/Activiti/activiti-api/blob/develop/activiti-api-task-runtime/src/main/java/org/activiti/api/task/runtime/events/TaskCompletedEvent.java)
+* [TaskSuspendedEvent](https://github.com/Activiti/activiti-api/blob/develop/activiti-api-task-runtime/src/main/java/org/activiti/api/task/runtime/events/TaskSuspendedEvent.java)
+* [TaskSuspendedEvent](https://github.com/Activiti/activiti-api/blob/develop/activiti-api-task-runtime/src/main/java/org/activiti/api/task/runtime/events/TaskSuspendedEvent.java)
+* [TaskActivatedEvent](https://github.com/Activiti/activiti-api/blob/develop/activiti-api-task-runtime/src/main/java/org/activiti/api/task/runtime/events/TaskActivatedEvent.java)
+* [TaskCandidateGroupAddedEvent](https://github.com/Activiti/activiti-api/blob/develop/activiti-api-task-runtime/src/main/java/org/activiti/api/task/runtime/events/TaskCandidateGroupAddedEvent.java)
+* [TaskCandidateGroupRemovedEvent](https://github.com/Activiti/activiti-api/blob/develop/activiti-api-task-runtime/src/main/java/org/activiti/api/task/runtime/events/TaskCandidateGroupRemovedEvent.java)
+* [TaskCandidateUserAddedEvent](https://github.com/Activiti/activiti-api/blob/develop/activiti-api-task-runtime/src/main/java/org/activiti/api/task/runtime/events/TaskCandidateUserAddedEvent.java)
+* [TaskCandidateUserRemovedEvent](https://github.com/Activiti/activiti-api/blob/develop/activiti-api-task-runtime/src/main/java/org/activiti/api/task/runtime/events/TaskCandidateUserRemovedEvent.java)
+
 
 ### Not covered Yet
 
-* ActivityCancelledEvent
 * ActivityCompensateEvent
 * ProcessCompletedErrorEvent
 
