@@ -7,7 +7,7 @@ But there are some extra things that you need to know about Runtime Bundles:
 * Runtime Bundles in the context of Activiti Cloud represent a stateless instance of the process engine which is in charge of executing an immutable set of process definitions.
 * You cannot deploy new process definitions to a Runtime Bundle, instead you will create a new immutable version of your Runtime Bundle if you  want to update your process definitions.
 * Runtime Bundles expose a \(Sync\) REST and \(Async\) Message Based API to interact with them.
-* Runtime Bundles emit events \(in a fire & forget fashion\) using a set of implementations of the internal [ActivitiEventListener](https://github.com/Activiti/Activiti/tree/39e0d2bde9ef79ba3c38d04e3c5c2e8cc8a3a983/activiti-api-impl/activiti-api-process-runtime-impl/src/main/java/org/activiti/runtime/api/event/internal) interface. \(Listen to the internal Process Engine events and transform them into messages\)
+* Runtime Bundles emit events \(in a fire & forget fashion\) using a set of implementations of the internal [ActivitiEventListener](https://github.com/Activiti/Activiti/tree/39e0d2bde9ef79ba3c38d04e3c5c2e8cc8a3a983/activiti-api-impl/activiti-api-process-runtime-impl/src/main/java/org/activiti/runtime/api/event/internal) interface. \(Listen to the internal Process Engine events and transform them into messages containing [all the events generated inside a transaction](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/develop/activiti-cloud-services-runtime-bundle/activiti-cloud-services-events/src/main/java/org/activiti/cloud/services/events/listeners/BaseCommandContextEventsAggregator.java) \)
 * Runtime Bundles, by default when executing Service Tasks \(BPMN\), will emit Integration Events to perform System to System integration. These Integration Events will be picked up by Activiti Cloud Connectors to perform system to system integrations.
 
 ![](../../.gitbook/assets/runtimebundle.png)
@@ -32,19 +32,40 @@ Also the following **admin** (**ACTIVITI_ADMIN** role) endpoints:
 
 ## \(Async\) Command Based Interactions
 
-Commands are defined inside the [activiti-cloud-services-api](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/tree/develop/activiti-cloud-services-runtime-bundle/activiti-cloud-services-api) project and they represent different actions that can be executed by the process engine and they will return a Command Result. When these commands are executed by the Message Endpoints the results will be sent to a different queue.
+Commands are defined as **Payloads** in the new [Java Core API layer](https://github.com/Activiti/activiti-api/tree/develop/activiti-api-process-model/src/main/java/org/activiti/api/process/model/payloads). These Payloads contains information to execute different actions implemented inside the process engine and they will return a Result if the execution generated data. When these Commands are executed by the Message Endpoints the results will be sent to a different queue.
 
-* _Commands_ \(implements [Command](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/master/activiti-cloud-services-runtime-bundle/activiti-cloud-services-api/src/main/java/org/activiti/cloud/services/api/commands/Command.java)\)
-  * [StartProcessInstanceCmd](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/master/activiti-cloud-services-runtime-bundle/activiti-cloud-services-api/src/main/java/org/activiti/cloud/services/api/commands/StartProcessInstanceCmd.java)
+These commands are processed by the [CommandEndpoint](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/develop/activiti-cloud-services-runtime-bundle/activiti-cloud-services-core/src/main/java/org/activiti/cloud/services/core/commands/CommandEndpoint.java) which delegate the operation to more specific [Executors for each Command](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/tree/develop/activiti-cloud-services-runtime-bundle/activiti-cloud-services-core/src/main/java/org/activiti/cloud/services/core/commands)
+
+* _Commands Payloads_ \(implements [Payload](https://github.com/Activiti/activiti-api/blob/develop/activiti-api-model-shared/src/main/java/org/activiti/api/model/shared/Payload.java)\)
+  * [StartProcessPayLoad](https://github.com/Activiti/activiti-api/blob/develop/activiti-api-process-model/src/main/java/org/activiti/api/process/model/payloads/StartProcessPayload.java)
+    * id
     * processDefinitionId
-    * variables
-  * [SuspendProcessInstanceCmd](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/master/activiti-cloud-services-runtime-bundle/activiti-cloud-services-api/src/main/java/org/activiti/cloud/services/api/commands/SuspendProcessInstanceCmd.java)
+    * processDefinitionKey
+    * processInstanceName
+    * businessKey
+    * variables [Map]
+  * [SuspendProcessPayload](https://github.com/Activiti/activiti-api/blob/develop/activiti-api-process-model/src/main/java/org/activiti/api/process/model/payloads/SuspendProcessPayload.java)
+    * id
     * processDefinitionId
-  * [ActivateProcessInstanceCmd](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/master/activiti-cloud-services-runtime-bundle/activiti-cloud-services-api/src/main/java/org/activiti/cloud/services/api/commands/ActivateProcessInstanceCmd.java)
+  * [ResumeProcessPayload](https://github.com/Activiti/activiti-api/blob/develop/activiti-api-process-model/src/main/java/org/activiti/api/process/model/payloads/ResumeProcessPayload.java)
+    * id
     * processDefinitionId
-  * [SignalProcessInstancesCmd](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/master/activiti-cloud-services-runtime-bundle/activiti-cloud-services-api/src/main/java/org/activiti/cloud/services/api/commands/SignalProcessInstancesCmd.java)
+  * [SignalPayload](https://github.com/Activiti/activiti-api/blob/develop/activiti-api-process-model/src/main/java/org/activiti/api/process/model/payloads/SignalPayload.java)
+    * id
     * name
-    * inputVariables
+    * variables
+  * [SetProcessVariables](https://github.com/Activiti/activiti-api/blob/develop/activiti-api-process-model/src/main/java/org/activiti/api/process/model/payloads/SetProcessVariablesPayload.java)
+    * id
+    * processInstanceId
+    * variables [Map]
+    * localOnly
+  * [DeleteProcessPayload](https://github.com/Activiti/activiti-api/blob/develop/activiti-api-process-model/src/main/java/org/activiti/api/process/model/payloads/DeleteProcessPayload.java)  
+    * id
+    * processInstanceId
+  * [RemoveProcessVariables](https://github.com/Activiti/activiti-api/blob/develop/activiti-api-process-model/src/main/java/org/activiti/api/process/model/payloads/RemoveProcessVariablesPayload.java) 
+    * id
+    * processInstanceId
+    
   * [ClaimTaskCmd](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/master/activiti-cloud-services-runtime-bundle/activiti-cloud-services-api/src/main/java/org/activiti/cloud/services/api/commands/ClaimTaskCmd.java)
   * [ReleaseTaskCmd](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/master/activiti-cloud-services-runtime-bundle/activiti-cloud-services-api/src/main/java/org/activiti/cloud/services/api/commands/ReleaseTaskCmd.java)
   * [CompleteTaskCmd](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/master/activiti-cloud-services-runtime-bundle/activiti-cloud-services-api/src/main/java/org/activiti/cloud/services/api/commands/CompleteTaskCmd.java)
