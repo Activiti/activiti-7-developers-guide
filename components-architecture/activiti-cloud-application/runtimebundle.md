@@ -149,46 +149,16 @@ The events related with Tasks can be found here (also as part of the Java Core A
 
 ## Runtime Bundle Data Types
 
-Runtime Bundles work and expose the following data types \([org.activiti.services.api.model](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/tree/develop/activiti-cloud-services-runtime-bundle/activiti-cloud-services-api/src/main/java/org/activiti/cloud/services/api/model)\):
+Runtime Bundles work and expose the following data types which are based on the new Java Core API model packages: 
+* [activiti-api-model-shared](https://github.com/Activiti/activiti-api/tree/develop/activiti-api-model-shared/src/main/java/org/activiti/api/model/shared/model)
+* [activiti-api-process-model](https://github.com/Activiti/activiti-api/tree/develop/activiti-api-process-model/src/main/java/org/activiti/api/process/model)
+* [activiti-api-task-model](https://github.com/Activiti/activiti-api/tree/develop/activiti-api-task-model/src/main/java/org/activiti/api/task/model)
 
-* [ProcessDefinition](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/master/activiti-cloud-services-runtime-bundle/activiti-cloud-services-api/src/main/java/org/activiti/cloud/services/api/model/ProcessDefinition.java)
-  * id
-  * name
-  * description
-  * version
-* [ProcessInstance](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/master/activiti-cloud-services-runtime-bundle/activiti-cloud-services-api/src/main/java/org/activiti/cloud/services/api/model/ProcessInstance.java)
-  * id
-  * name
-  * description
-  * processDefinitionId
-  * initiator
-  * startDate
-  * businessKey
-  * status
-* [Task](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/master/activiti-cloud-services-runtime-bundle/activiti-cloud-services-api/src/main/java/org/activiti/cloud/services/api/model/Task.java)
-  * id
-  * owner
-  * assignee
-  * name
-  * description
-  * createdDate
-  * claimedDate
-  * dueDate
-  * priority
-  * processDefinitionId
-  * processInstanceId
-  * parentTaskId
-  * status
-* [ProcessInstanceVariables](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/master/activiti-cloud-services-runtime-bundle/activiti-cloud-services-api/src/main/java/org/activiti/cloud/services/api/model/ProcessInstanceVariables.java)
-  * processInstanceId
-  * variables \(Map\)
-* [TaskVariables](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/master/activiti-cloud-services-runtime-bundle/activiti-cloud-services-api/src/main/java/org/activiti/cloud/services/api/model/TaskVariables.java)
-  * taskId
-  * variables \(Map\)
-  * scope
-* [ProcessDefinitionMeta](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/master/activiti-cloud-services-runtime-bundle/activiti-cloud-services-api/src/main/java/org/activiti/cloud/services/api/model/ProcessDefinitionMeta.java)
-* [ProcessDefinitionUserTask](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/master/activiti-cloud-services-runtime-bundle/activiti-cloud-services-api/src/main/java/org/activiti/cloud/services/api/model/ProcessDefinitionUserTask.java)
-* [ProcessDefinitionServiceTask](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/master/activiti-cloud-services-runtime-bundle/activiti-cloud-services-api/src/main/java/org/activiti/cloud/services/api/model/ProcessDefinitionServiceTask.java)
+And the Cloud Extension types:
+
+* [activiti-cloud-api-model-shared](https://github.com/Activiti/activiti-cloud-api/tree/develop/activiti-cloud-api-model-shared/src/main/java/org/activiti/cloud/api/model/shared)
+* [activiti-cloud-api-process-model](https://github.com/Activiti/activiti-cloud-api/tree/develop/activiti-cloud-api-process-model/src/main/java/org/activiti/cloud/api/process/model)
+* [activiti-cloud-api-task-model](https://github.com/Activiti/activiti-cloud-api/tree/develop/activiti-cloud-api-task-model/src/main/java/org/activiti/cloud/api/task/model)
 
 ## Requirements
 
