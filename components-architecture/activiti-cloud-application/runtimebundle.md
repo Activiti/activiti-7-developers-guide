@@ -22,18 +22,19 @@ Runtime Bundles expose a REST API with the following **user** (**ACTIVITI_USER**
 
 * [v1/process-instances/](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/develop/activiti-cloud-services-runtime-bundle/activiti-cloud-services-rest-api/src/main/java/org/activiti/cloud/services/rest/api/ProcessInstanceController.java)
 
-*[v1/process-instances/{id}/tasks](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/develop/activiti-cloud-services-runtime-bundle/activiti-cloud-services-rest-api/src/main/java/org/activiti/cloud/services/rest/api/ProcessInstanceTasksController.java)
+* [v1/process-instances/{id}/tasks](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/develop/activiti-cloud-services-runtime-bundle/activiti-cloud-services-rest-api/src/main/java/org/activiti/cloud/services/rest/api/ProcessInstanceTasksController.java)
 
-*[v1/process-instances/{id}/variables](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/develop/activiti-cloud-services-runtime-bundle/activiti-cloud-services-rest-api/src/main/java/org/activiti/cloud/services/rest/api/ProcessInstanceVariableController.java)
+* [v1/process-instances/{id}/variables](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/develop/activiti-cloud-services-runtime-bundle/activiti-cloud-services-rest-api/src/main/java/org/activiti/cloud/services/rest/api/ProcessInstanceVariableController.java)
 
 * [v1/tasks](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/develop/activiti-cloud-services-runtime-bundle/activiti-cloud-services-rest-api/src/main/java/org/activiti/cloud/services/rest/api/TaskController.java)
 
-*[v1/tasks/{id}/variables](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/develop/activiti-cloud-services-runtime-bundle/activiti-cloud-services-rest-api/src/main/java/org/activiti/cloud/services/rest/api/TaskVariableController.java)
+* [v1/tasks/{id}/variables](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/develop/activiti-cloud-services-runtime-bundle/activiti-cloud-services-rest-api/src/main/java/org/activiti/cloud/services/rest/api/TaskVariableController.java)
 
 Also the following **admin** (**ACTIVITI_ADMIN** role) endpoints:
+
 * [admin/v1/process-definitions/](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/develop/activiti-cloud-services-runtime-bundle/activiti-cloud-services-rest-api/src/main/java/org/activiti/cloud/services/rest/api/ProcessDefinitionAdminController.java)
-*[admin/v1/process-instances](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/develop/activiti-cloud-services-runtime-bundle/activiti-cloud-services-rest-api/src/main/java/org/activiti/cloud/services/rest/api/ProcessInstanceAdminController.java)
-*[admin/v1/tasks](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/develop/activiti-cloud-services-runtime-bundle/activiti-cloud-services-rest-api/src/main/java/org/activiti/cloud/services/rest/api/TaskAdminController.java)
+* [admin/v1/process-instances](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/develop/activiti-cloud-services-runtime-bundle/activiti-cloud-services-rest-api/src/main/java/org/activiti/cloud/services/rest/api/ProcessInstanceAdminController.java)
+* [admin/v1/tasks](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/develop/activiti-cloud-services-runtime-bundle/activiti-cloud-services-rest-api/src/main/java/org/activiti/cloud/services/rest/api/TaskAdminController.java)
 
 ## \(Async\) Command Based Interactions
 
