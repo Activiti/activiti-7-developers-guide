@@ -17,17 +17,11 @@ But there are some extra things that you need to know about Runtime Bundles:
 Runtime Bundles expose a REST API with the following **user** (**ACTIVITI_USER** role) endpoints:
 
 * [v1/process-definitions](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/develop/activiti-cloud-services-runtime-bundle/activiti-cloud-services-rest-api/src/main/java/org/activiti/cloud/services/rest/api/ProcessDefinitionController.java)
-
 * [v1/process-definition/{id}/meta](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/develop/activiti-cloud-services-runtime-bundle/activiti-cloud-services-rest-api/src/main/java/org/activiti/cloud/services/rest/api/ProcessDefinitionMetaController.java)
-
 * [v1/process-instances/](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/develop/activiti-cloud-services-runtime-bundle/activiti-cloud-services-rest-api/src/main/java/org/activiti/cloud/services/rest/api/ProcessInstanceController.java)
-
 * [v1/process-instances/{id}/tasks](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/develop/activiti-cloud-services-runtime-bundle/activiti-cloud-services-rest-api/src/main/java/org/activiti/cloud/services/rest/api/ProcessInstanceTasksController.java)
-
 * [v1/process-instances/{id}/variables](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/develop/activiti-cloud-services-runtime-bundle/activiti-cloud-services-rest-api/src/main/java/org/activiti/cloud/services/rest/api/ProcessInstanceVariableController.java)
-
 * [v1/tasks](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/develop/activiti-cloud-services-runtime-bundle/activiti-cloud-services-rest-api/src/main/java/org/activiti/cloud/services/rest/api/TaskController.java)
-
 * [v1/tasks/{id}/variables](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/develop/activiti-cloud-services-runtime-bundle/activiti-cloud-services-rest-api/src/main/java/org/activiti/cloud/services/rest/api/TaskVariableController.java)
 
 Also the following **admin** (**ACTIVITI_ADMIN** role) endpoints:
@@ -43,6 +37,9 @@ Commands are defined as **Payloads** in the new [Java Core API layer](https://gi
 These commands are processed by the [CommandEndpoint](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/develop/activiti-cloud-services-runtime-bundle/activiti-cloud-services-core/src/main/java/org/activiti/cloud/services/core/commands/CommandEndpoint.java) which delegate the operation to more specific [Executors for each Command](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/tree/develop/activiti-cloud-services-runtime-bundle/activiti-cloud-services-core/src/main/java/org/activiti/cloud/services/core/commands)
 
 * _Commands Payloads_ \(implements [Payload](https://github.com/Activiti/activiti-api/blob/develop/activiti-api-model-shared/src/main/java/org/activiti/api/model/shared/Payload.java)\)
+
+Process Related Payloads:
+
   * [StartProcessPayLoad](https://github.com/Activiti/activiti-api/blob/develop/activiti-api-process-model/src/main/java/org/activiti/api/process/model/payloads/StartProcessPayload.java)
     * id
     * processDefinitionId
@@ -68,27 +65,21 @@ These commands are processed by the [CommandEndpoint](https://github.com/Activit
   * [DeleteProcessPayload](https://github.com/Activiti/activiti-api/blob/develop/activiti-api-process-model/src/main/java/org/activiti/api/process/model/payloads/DeleteProcessPayload.java)  
     * id
     * processInstanceId
-  * [RemoveProcessVariables](https://github.com/Activiti/activiti-api/blob/develop/activiti-api-process-model/src/main/java/org/activiti/api/process/model/payloads/RemoveProcessVariablesPayload.java) 
+  * [RemoveProcessVariablesPayload](https://github.com/Activiti/activiti-api/blob/develop/activiti-api-process-model/src/main/java/org/activiti/api/process/model/payloads/RemoveProcessVariablesPayload.java) 
     * id
     * processInstanceId
+ 
+ Task Related Payloads:
     
-  * [ClaimTaskCmd](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/master/activiti-cloud-services-runtime-bundle/activiti-cloud-services-api/src/main/java/org/activiti/cloud/services/api/commands/ClaimTaskCmd.java)
-  * [ReleaseTaskCmd](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/master/activiti-cloud-services-runtime-bundle/activiti-cloud-services-api/src/main/java/org/activiti/cloud/services/api/commands/ReleaseTaskCmd.java)
-  * [CompleteTaskCmd](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/master/activiti-cloud-services-runtime-bundle/activiti-cloud-services-api/src/main/java/org/activiti/cloud/services/api/commands/CompleteTaskCmd.java)
+  * [ClaimTaskPayload](https://github.com/Activiti/activiti-api/blob/develop/activiti-api-task-model/src/main/java/org/activiti/api/task/model/payloads/ClaimTaskPayload.java)
+  * [ReleaseTaskPayload](https://github.com/Activiti/activiti-api/blob/develop/activiti-api-task-model/src/main/java/org/activiti/api/task/model/payloads/ReleaseTaskPayload.java)
+  * [CompleteTaskPayload](https://github.com/Activiti/activiti-api/blob/develop/activiti-api-task-model/src/main/java/org/activiti/api/task/model/payloads/CompleteTaskPayload.java)
     * inputVariables
-  * [SetTaskVariableCmd](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/master/activiti-cloud-services-runtime-bundle/activiti-cloud-services-api/src/main/java/org/activiti/cloud/services/api/commands/SetTaskVariablesCmd.java)
+  * [SetTaskVariablePayload](https://github.com/Activiti/activiti-api/blob/develop/activiti-api-task-model/src/main/java/org/activiti/api/task/model/payloads/SetTaskVariablesPayload.java)
     * taskId
     * variables
-* Command Results \(implements [CommandResults](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/master/activiti-cloud-services-runtime-bundle/activiti-cloud-services-api/src/main/java/org/activiti/cloud/services/api/commands/results/CommandResults.java)\)
-  * [StartProcessInstanceResults](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/master/activiti-cloud-services-runtime-bundle/activiti-cloud-services-api/src/main/java/org/activiti/cloud/services/api/commands/results/StartProcessInstanceResults.java)
-    * processInstanceId
-  * [SuspendProcessInstanceResults](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/master/activiti-cloud-services-runtime-bundle/activiti-cloud-services-api/src/main/java/org/activiti/cloud/services/api/commands/results/SuspendProcessInstanceResults.java)
-  * [ActivateProcessInstanceResults](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/master/activiti-cloud-services-runtime-bundle/activiti-cloud-services-api/src/main/java/org/activiti/cloud/services/api/commands/results/ActivateProcessInstanceResults.java)
-  * [SignalProcessInstancesResults](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/master/activiti-cloud-services-runtime-bundle/activiti-cloud-services-api/src/main/java/org/activiti/cloud/services/api/commands/results/SignalProcessInstancesResults.java)
-  * [ReleaseTaskResults](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/master/activiti-cloud-services-runtime-bundle/activiti-cloud-services-api/src/main/java/org/activiti/cloud/services/api/commands/results/ReleaseTaskResults.java)
-  * [ClaimTaskResults](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/master/activiti-cloud-services-runtime-bundle/activiti-cloud-services-api/src/main/java/org/activiti/cloud/services/api/commands/results/ClaimTaskResults.java)
-  * [CompleteTaskResults](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/master/activiti-cloud-services-runtime-bundle/activiti-cloud-services-api/src/main/java/org/activiti/cloud/services/api/commands/results/CompleteTaskResults.java)
-  * [SetTaskVariablesResults](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/master/activiti-cloud-services-runtime-bundle/activiti-cloud-services-api/src/main/java/org/activiti/cloud/services/api/commands/results/SetTaskVariablesResults.java)
+  * [DeleteTaskPayload](https://github.com/Activiti/activiti-api/blob/develop/activiti-api-task-model/src/main/java/org/activiti/api/task/model/payloads/DeleteTaskPayload.java)
+  * [UpdateTaskPayload](https://github.com/Activiti/activiti-api/blob/develop/activiti-api-task-model/src/main/java/org/activiti/api/task/model/payloads/UpdateTaskPayload.java)
 
 ## Message Enabled
 
