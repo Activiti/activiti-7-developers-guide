@@ -42,6 +42,7 @@
     * [Using Keycloak to Secure Endpoints](working-with-activiti-cloud/sso-and-idm/using-keycloak-to-secure-endpoints.md)
 * [Books & References](reference.md)
 * [Releases](releases/README.md)
+  * [Beta2](releases/7.0.0.beta2.md)
   * [Beta1](releases/7.0.0.beta1.md)
   * [Early Access 201802](releases/7-ea201802.md)
   * [Early Access 201801](releases/7-ea201801.md)
@@ -49,4 +50,3 @@
   * [Early Access 201711](releases/7-ea201711.md)
   * [Early Access 201710](releases/7-ea201710.md)
   * [Early Access 201709](releases/7-ea201709.md)
-
