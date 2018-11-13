@@ -1,4 +1,4 @@
 # Table of contents
 
-* [English](en/)
-* [Japanese](ja/)
+* [English](en/README.md)
+* [Japanese](ja/README.md)
