@@ -4,7 +4,7 @@
   * [What is Activiti Cloud?](introduction/what-is-activiti-cloud.md) 
   * [Personas](introduction/personas.md)
   * [Previous Versions](introduction/previous.md)
-* Releases
+* [Releases](releases/README.md)
   * [Beta3](releases/7.0.0.beta3.md)
   * [Beta2](releases/7.0.0.beta2.md)
   * [Beta1](releases/7.0.0.beta1.md)
