@@ -1,4 +1,4 @@
-# Introduction
+# Activiti Core & Activiti Cloud (Japanese)
 
 [![Activiti](../.gitbook/assets/acitiviti_icon_fullcolor_github_400x400.png)](https://github.com/Activiti)
 
