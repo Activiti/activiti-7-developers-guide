@@ -1,7 +1,6 @@
 # Table of contents
 
 * [Overview](overview/README.md)
-  * [What is Activiti Cloud?](overview/what-is-activiti-cloud.md) 
   * [Personas](overview/personas.md)
   * [Previous Versions](overview/previous.md)
 * [Community](community/README.md)
