@@ -11,7 +11,7 @@
 * [Components](components/README.md) 
     * [Spring Cloud](components/spring-cloud.md) 
     * [Activiti Cloud Infrastructure](components/activiti-cloud-infrastructure/README.md) 
-      * [Gateway](components/activiti-cloud-infrastructure/gataway.md)
+      * [Gateway](components/activiti-cloud-infrastructure/gateway.md)
       * [Identity Management / Single Sign On](components/activiti-cloud-infrastructure/sso.md)
       * [Distributed Logging / Tracing / Monitoring](components/activiti-cloud-infrastructure/logging.md)
     * [Activiti Cloud Platform Common](components/activiti-cloud-platform/README.md)
