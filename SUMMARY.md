@@ -2,7 +2,10 @@
 
 * [Overview](overview/README.md)
   * [Personas](overview/personas.md)
-  * [Previous Versions](overview/previous.md)
+  * [Previous Versions (5.x & 6.x)](overview/previous.md)
+* [Components](components/README.md) 
+* [BluePrints](blueprints/README.md)  
+  * [Trending Topic Campaigns](blueprints/trending-topic-campaigns.md)  
 * [Community](community/README.md)
   * [Roadmap](community/roadmap.md)  
   * [Repositories](community/repositories.md)
