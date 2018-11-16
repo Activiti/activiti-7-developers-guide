@@ -1,9 +1,12 @@
 # Table of contents
 
-* [Introduction](introduction/README.md)
-  * [What is Activiti Cloud?](introduction/what-is-activiti-cloud.md) 
-  * [Personas](introduction/personas.md)
-  * [Previous Versions](introduction/previous.md)
+* [Overview](overview/README.md)
+  * [What is Activiti Cloud?](overview/what-is-activiti-cloud.md) 
+  * [Personas](overview/personas.md)
+  * [Previous Versions](overview/previous.md)
+* [Community](community/README.md)
+  * [Roadmap](community/roadmap.md)  
+  * [Repositories](community/repositories.md)
 * [Releases](releases/README.md)
   * [Beta3](releases/7.0.0.beta3.md)
   * [Beta2](releases/7.0.0.beta2.md)
