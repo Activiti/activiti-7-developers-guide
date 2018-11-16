@@ -1,2 +1,0 @@
-# Activiti Cloud Infrastructure
-
