@@ -4,7 +4,20 @@ To build Cloud Native Applications and Services, it is not enough to package the
 
 ## \#1 - One codebase, one application
 
-Our services are all under different repositories and each represents a single spring boot application.
+Our examples services are all under different repositories and each represents a single Spring Boot application which is also enabled with Spring Cloud libraries. Each of these services repositories contains a set of artifacts that makes them suitable for CI/CD pipelines:
+- Jenkinsfile: pipeline to build, deploy and promote the current service to a Kubernetes Cluster.
+- Maven project: to define the service built with Spring Boot and Activiti Cloud Starters.
+- Dockerfile: to define how to build a docker image for the service
+- HELM Charts: to define the set of manifests (kubernetes descriptors) to deploy the service into a running Kubernetes Cluster.
+
+We provide for each building block a Spring Boot Starter that can be customized and extended for your domain specific requirements.
+
+Our Spring Boot Starters can be found here:
+- [Activiti Cloud Runtime Bundle](https://github.com/Activiti/activiti-cloud-runtime-bundle-service)
+- [Activiti Cloud Query Service](https://github.com/Activiti/activiti-cloud-query-service)
+- [Activiti Cloud Audit Service](https://github.com/Activiti/activiti-cloud-audit-service)
+- [Activiti Cloud Connectors Service](https://github.com/Activiti/activiti-cloud-connectors)
+
 
 ## \#2 - API first
 
