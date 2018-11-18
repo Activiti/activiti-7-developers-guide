@@ -2,11 +2,11 @@
 
 [![Activiti](../.gitbook/assets/acitiviti_icon_fullcolor_github_400x400.png)](https://github.com/Activiti)
 
-This GitBook introduces the new concepts and components added in Version 7.
+This GitBook introduces the new concepts and components added in Activiti Core and Activiti Cloud version 7.x.
 
-This Git Book will cover the basics on how to use Activiti 7 & Activiti Cloud and how it compares to the previous versions of the project.
+Here we cover the basics on how to use Activiti Core & Activiti Cloud and how it compares to the previous versions (5.x and 4.x) of this project.
 
-Access the book: [https://www.gitbook.com/book/activiti/activiti-7-developers-guide/](https://www.gitbook.com/book/activiti/activiti-7-developers-guide/)
+[Link to Access the published book](https://www.gitbook.com/book/activiti/activiti-7-developers-guide/)(https://www.gitbook.com/book/activiti/activiti-7-developers-guide/)
 
-Feel free to send Pull Requests to this GitHub repository in case you find typos or you want to submit improvements.
+We welcome Pull Requests and Issues to this [GitHub repository](https://github.com/Activiti/activiti-7-developers-guide/) in case you find typos or you want to submit new sections or improvements.
 
