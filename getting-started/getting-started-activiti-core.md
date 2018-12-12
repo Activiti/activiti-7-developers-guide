@@ -62,6 +62,10 @@ We recommend using our BOM \(bill of materials
 </dependencyManagement>
 ```
 
+{% hint style="info" %}
+Note: make sure you replace "7.0.0.XX" with a valid Activiti version. Latest version can be retrieved using this link: [https://search.maven.org/search?q=activiti-dependencies](https://search.maven.org/search?q=activiti-dependencies)
+{% endhint %}
+
 Now let’s switch to our DemoApplication.class: [https://github.com/Activiti/activiti-examples/blob/master/activiti-api-basic-task-example/src/main/java/org/activiti/examples/DemoApplication.java\#L25](https://github.com/Activiti/activiti-examples/blob/master/activiti-api-basic-task-example/src/main/java/org/activiti/examples/DemoApplication.java#L25)
 
 Then you will be able to use the TaskRuntime
