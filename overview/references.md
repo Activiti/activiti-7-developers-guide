@@ -1,4 +1,4 @@
-# Books & References
+# References
 
 The following list of books & PDFs are recommended reads if you want to understand the project future direction. We use these books as baseline shared language to discuss our architectural decisions and plans.
 
@@ -10,6 +10,4 @@ The following list of books & PDFs are recommended reads if you want to understa
 * [12 factor apps](http://12factor.net)
 * [Beyond the 12 factor app](https://content.pivotal.io/blog/beyond-the-twelve-factor-app)
 * [Kubernetes in Action](https://www.amazon.co.uk/Kubernetes-Action-Marko-Luksa/dp/1617293725/ref=sr_1_1?s=books&ie=UTF8&qid=1531487409&sr=1-1&keywords=kubernetes+in+action)
-
-
 

@@ -1,4 +1,4 @@
-# Cross Cutting Concerns
+# Activiti Cloud Platform Common
 
 There are some cross cutting concerns that all Activiti Cloud Services will share. The most basic example is how to deal with security and identity management \(meaning how to resolve who belong to which group\). Testing is also included here, as most of our services will require the same set of utility functions to perform some basic tests.
 

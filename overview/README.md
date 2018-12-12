@@ -1,6 +1,6 @@
-# What is Activiti Cloud?
+# Overview
 
-<img src="/assets/Activiti_Sticker.png" width="400">
+![](../.gitbook/assets/activiti_sticker.png)
 
 Activiti Cloud is the first Cloud Native BPM framework built to provide a scalable and transparent solution for BPM implementations in cloud environments.
 

@@ -1,4 +1,4 @@
-# Spring Cloud & Activiti Cloud
+# Spring Cloud
 
 From the Activiti framework point of view we rely in 3 key aspects from Spring Boot / Spring Cloud which enable our components \(such as the process engine\) to integrate nicely with the rest of the infrastructure.
 

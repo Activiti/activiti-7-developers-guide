@@ -1,4 +1,4 @@
-# Single Sign On \(SSO\) and Identity Management
+# Identity Management / Single Sign On
 
 Single Sign On is required to make sure that access to all our services is handled by a centralized component that create authorization tokens that can confirm that the user is authorized to work against different services.
 

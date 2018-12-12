@@ -1,4 +1,4 @@
-# Distributed Logging
+# Distributed Logging / Tracing / Monitoring
 
 The distributed logging example that we provided is based on the well known ELK\(Elasticsearch,logstash,kibana\) stack and it runs on Kubernetes. Please find this in: [https://github.com/Activiti/activiti-cloud-examples/tree/develop/kubernetes/kubectl/logging](https://github.com/Activiti/activiti-cloud-examples/tree/develop/kubernetes/kubectl/logging)
 

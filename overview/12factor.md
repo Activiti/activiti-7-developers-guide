@@ -1,34 +1,35 @@
-# Beyond the 12 Factor Applications
+# 12 Factor Apps
 
 To build Cloud Native Applications and Services, it is not enough to package the old monolith inside a Docker Image and run it inside Kubernetes. We value the principles that Heroku defined by "The Twelve-Factor App": [https://12factor.net](https://12factor.net) \(and from a Pivotal perspective see [https://content.pivotal.io/ebooks/beyond-the-12-factor-app](https://content.pivotal.io/ebooks/beyond-the-12-factor-app) \). Without these guidelines, it becomes difficult to scale in distributed environments. Activiti Cloud repositions the process engine to better interact with other components in such distributed environments. The measure of success for Activiti Cloud is to have a low impedance mismatch with other microservices and the way they are designed, built and deployed.
 
 ## \#1 - One codebase, one application
 
 Our examples services are all under different repositories and each represents a single Spring Boot application which is also enabled with Spring Cloud libraries. Each of these services repositories contains a set of artifacts that makes them suitable for CI/CD pipelines:
-- **Jenkinsfile**: (or other pipiline definition)pipeline to build, deploy and promote the current service to a Kubernetes Cluster.
-- **Maven project**: to define the service built with Spring Boot and Activiti Cloud Starters.
-- **Dockerfile**: to define how to build a docker image for the service
-- **HELM Charts**: to define the set of manifests (kubernetes descriptors) to deploy the service into a running Kubernetes Cluster.
+
+* **Jenkinsfile**: \(or other pipiline definition\)pipeline to build, deploy and promote the current service to a Kubernetes Cluster.
+* **Maven project**: to define the service built with Spring Boot and Activiti Cloud Starters.
+* **Dockerfile**: to define how to build a docker image for the service
+* **HELM Charts**: to define the set of manifests \(kubernetes descriptors\) to deploy the service into a running Kubernetes Cluster.
 
 We provide for each building block a Spring Boot Starter that can be customized and extended for your domain specific requirements.
 
 Our Spring Boot Starters can be found here:
-- [Activiti Cloud Runtime Bundle](https://github.com/Activiti/activiti-cloud-runtime-bundle-service)
-- [Activiti Cloud Query Service](https://github.com/Activiti/activiti-cloud-query-service)
-- [Activiti Cloud Audit Service](https://github.com/Activiti/activiti-cloud-audit-service)
-- [Activiti Cloud Connectors Service](https://github.com/Activiti/activiti-cloud-connectors)
 
+* [Activiti Cloud Runtime Bundle](https://github.com/Activiti/activiti-cloud-runtime-bundle-service)
+* [Activiti Cloud Query Service](https://github.com/Activiti/activiti-cloud-query-service)
+* [Activiti Cloud Audit Service](https://github.com/Activiti/activiti-cloud-audit-service)
+* [Activiti Cloud Connectors Service](https://github.com/Activiti/activiti-cloud-connectors)
 
 ## \#2 - API first
 
-REST and Message Driven APIs are defined for each service, and a specification for each can be found in the component documentation. We want to make sure that the contract is well defined so different implementations can be supported. The objective behind supporting different implementations (based on different technologies) enable us to support a wider range of scenarios (low latency, data intensive, your custom requirement, etc.)  
+REST and Message Driven APIs are defined for each service, and a specification for each can be found in the component documentation. We want to make sure that the contract is well defined so different implementations can be supported. The objective behind supporting different implementations \(based on different technologies\) enable us to support a wider range of scenarios \(low latency, data intensive, your custom requirement, etc.\)
 
 ## \#3 - Dependency Management
 
-Activiti Core and Activiti Cloud dependencies are managed using Bill of Materials (BoMs) which centralize the services and libraries dependencies. 
-These BoMs can be found in these two repositories:
-- [Activiti Core Dependencies](https://github.com/Activiti/activiti-dependencies)
-- [Activiti Cloud Dependencies](https://github.com/Activiti/activiti-cloud-dependencies)
+Activiti Core and Activiti Cloud dependencies are managed using Bill of Materials \(BoMs\) which centralize the services and libraries dependencies. These BoMs can be found in these two repositories:
+
+* [Activiti Core Dependencies](https://github.com/Activiti/activiti-dependencies)
+* [Activiti Cloud Dependencies](https://github.com/Activiti/activiti-cloud-dependencies)
 
 ## \#4 - Design, build, release, run
 

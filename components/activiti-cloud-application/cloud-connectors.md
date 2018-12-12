@@ -1,4 +1,4 @@
-# Cloud Connectors
+# Activiti Cloud Connectors
 
 Activiti Cloud Connectors provide an scalable way to perform bi-directional system to system interactions. It enable business processes to interact with external systems in a safe way without compromising the process runtime.
 

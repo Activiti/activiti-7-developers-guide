@@ -1,4 +1,4 @@
-# Getting Started with Activiti Cloud
+# Getting Started - Activiti Cloud
 
 ## Getting Started with Activiti Cloud
 
@@ -56,7 +56,7 @@ Before we start, make sure that you clone the [https://github.com/Activiti/activ
 
 Following using GKE we are demonstrating how to create a cluster by going to your Google Cloud Home Page and selecting Kubernetes Engine: [https://console.cloud.google.com/](https://console.cloud.google.com/)
 
-<img src="/.gitbook/assets/GCP-console.png" width="400">
+![](../.gitbook/assets/gcp-console.png)
 
 Then create a new Cluster:
 
@@ -154,9 +154,9 @@ You are now ready to start consuming these services to automate your own busines
 
 Finally, you can access to all services Swagger documentation by pointing your browser to:
 
-* http://activiti-cloud-gateway.EXTERNAL-IP.nip.io/rb-my-app/swagger-ui.html 
-* http://activiti-cloud-gateway.EXTERNAL-IP.nip.io/audit/swagger-ui.html 
-* http://activiti-cloud-gateway.EXTERNAL-IP.nip.io/query/swagger-ui.html
+* [http://activiti-cloud-gateway.EXTERNAL-IP.nip.io/rb-my-app/swagger-ui.html](http://activiti-cloud-gateway.EXTERNAL-IP.nip.io/rb-my-app/swagger-ui.html) 
+* [http://activiti-cloud-gateway.EXTERNAL-IP.nip.io/audit/swagger-ui.html](http://activiti-cloud-gateway.EXTERNAL-IP.nip.io/audit/swagger-ui.html) 
+* [http://activiti-cloud-gateway.EXTERNAL-IP.nip.io/query/swagger-ui.html](http://activiti-cloud-gateway.EXTERNAL-IP.nip.io/query/swagger-ui.html)
 
 All our services are using SpringFox to generate this documentation and provide a UI for it.
 

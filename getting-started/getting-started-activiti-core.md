@@ -1,4 +1,4 @@
-# Getting Started with Activiti Core
+# Getting Started - Activiti Core
 
 ## Getting Started with Activiti Core Runtime APIs
 

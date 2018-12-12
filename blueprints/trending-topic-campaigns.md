@@ -27,13 +27,13 @@ As part of the **How**, it is important to understand that all campaigns will sh
 
 Our Scenario will look like this:
 
-![](../../../.gitbook/assets/scenario.png)
+![](../.gitbook/assets/scenario.png)
 
 The twitter stream will be consumed by our Activiti Cloud Twitter Connector. The connector here will be in charge of picking up each tweet and dispatch it as a message \(throughout a message broker\) to the Campaigns Pool. Campaigns interested in the tweet will be able to pick it up and process it accordingly. As mentioned before, campaigns are associated with just one language, but we can easily change this to be based on location or any other value provided by twitter API.
 
 The Campaign Pool is dynamic by nature, new Campaigns can be added or removed at any time based on the needs of the company. Campaigns define how to deal with each trending topic that the company want to track and give rewards to their users.
 
-![](../../../.gitbook/assets/campaign.png)
+![](../.gitbook/assets/campaign.png)
 
 Each campaign will define 2 main things:
 
@@ -67,7 +67,7 @@ Campaigns are domain specific uServices. Different marketing departments might n
 * Defining how to process each tweet for a given trending topic
 * Defining how to reward users which participated the most in the campaign
 
-  ![](../../../.gitbook/assets/campaigns.png)
+  ![](../.gitbook/assets/campaigns.png)
 
 ### Campaign Definition
 
@@ -82,7 +82,7 @@ We create a simple campaign composed by 4 main steps:
 
 This is represented by the following business process:
 
-![](../../../.gitbook/assets/english-campaign-process-def.png)
+![](../.gitbook/assets/english-campaign-process-def.png)
 
 Each campaign can include a variation of the process definition to deal with tweets in different ways. For the sake of simplicity we will use this process definition to deal with multiple campaigns. But you are free to change this definition and experiment with different requirements.
 
@@ -94,7 +94,7 @@ We defined a simple rewarding process as well. It is composed of 3 main steps:
 * Generate a reward per user.
 * Tweet the reward to each user.
 
-![](../../../.gitbook/assets/english-campaign-reward-process-def.png)
+![](../.gitbook/assets/english-campaign-reward-process-def.png)
 
 ### Campaign Runtime Bundle
 
@@ -113,7 +113,7 @@ The campaign runtime bundle project can be found here: [english-campaign-rb](htt
 
 Both the Campaign and Reward processes will interact with external services to perform their tasks. This interaction will be handled by our Activiti Cloud Connectors. Which serves as an intermediate layer between the Process Runtime and the external service.
 
-![](../../../.gitbook/assets/campaign-cloud-connectors-services.png)
+![](../.gitbook/assets/campaign-cloud-connectors-services.png)
 
 This intermediate layer of Cloud Connectors enable us to scale the process runtime independently from how they interact with other service. It also serves as a great place to add some technical and business details about each of these interactions. We need to consider that in real life interactions we might have SLAs and policies to limit or control these external services interactions. Activiti Cloud Connectors helps you to add these complex controls in a way that they are completely decoupled from your processes executions.
 
@@ -129,7 +129,7 @@ First of all we need to tap into the Twitter Stream to consume tweets. For doing
 
 Our Twitter Activiti Cloud Connector will be in charge of tapping into the Twitter Stream, route tweets based on their language and Tweet the rewards for the winners of each campaign.
 
-![](../../../.gitbook/assets/twittercloudconnector.png)
+![](../.gitbook/assets/twittercloudconnector.png)
 
 In order to create this project we just need to create a simple Spring Boot 2 application and add our Activiti Cloud Connector Starter dependency to it. We also need the [Twitter4J](http://twitter4j.org/en/configuration.html) dependency and we are ready to go.
 
@@ -179,7 +179,7 @@ This connector simulates a service that clean up and execute a sentiment analysi
 </dependency>
 ```
 
-You can find the connector that does the Tweet Sentiment analysis here [TweetAnalyzerConnector](trendingtopiccampaigns.md) [https://github.com/Activiti/blueprint-trending-topic-campaigns/blob/develop/activiti-cloud-connectors-processing/src/main/java/org/activiti/cloud/connectors/processing/analyzer/TweetAnalyzerConnector.java\#L35](https://github.com/Activiti/blueprint-trending-topic-campaigns/blob/develop/activiti-cloud-connectors-processing/src/main/java/org/activiti/cloud/connectors/processing/analyzer/TweetAnalyzerConnector.java#L35)\)
+You can find the connector that does the Tweet Sentiment analysis here [TweetAnalyzerConnector](https://github.com/Activiti/activiti-7-developers-guide/tree/a169b3bebbeded9639076359738cd68397c81d30/blueprints/trendingtopiccampaigns.md) [https://github.com/Activiti/blueprint-trending-topic-campaigns/blob/develop/activiti-cloud-connectors-processing/src/main/java/org/activiti/cloud/connectors/processing/analyzer/TweetAnalyzerConnector.java\#L35](https://github.com/Activiti/blueprint-trending-topic-campaigns/blob/develop/activiti-cloud-connectors-processing/src/main/java/org/activiti/cloud/connectors/processing/analyzer/TweetAnalyzerConnector.java#L35)\)
 
 As all connectors it uses the **activiti-cloud-starter-connectors** to understand and work with IntegrationRequestEvents and IntegrationResultsEvents:
 
