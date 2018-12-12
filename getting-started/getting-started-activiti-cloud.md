@@ -152,7 +152,9 @@ You are now ready to start consuming these services to automate your own busines
 
 Finally, you can access to all services Swagger documentation by pointing your browser to:
 
-http://&lt;&gt;/rb-my-app/swagger-ui.html http://&lt;&gt;/audit/swagger-ui.html http://&lt;&gt;/query/swagger-ui.html
+* http://activiti-cloud-gateway.&lt;&gt;/rb-my-app/swagger-ui.html 
+* http://activiti-cloud-gateway.&lt;&gt;/audit/swagger-ui.html 
+* http://activiti-cloud-gateway.&lt;&gt;/query/swagger-ui.html
 
 All our services are using SpringFox to generate this documentation and provide a UI for it.
 
