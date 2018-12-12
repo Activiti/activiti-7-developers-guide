@@ -56,7 +56,7 @@ Before we start, make sure that you clone the [https://github.com/Activiti/activ
 
 Following using GKE we are demonstrating how to create a cluster by going to your Google Cloud Home Page and selecting Kubernetes Engine: [https://console.cloud.google.com/](https://console.cloud.google.com/)
 
-![](../../.gitbook/assets/GCP-console.png)
+<img src="/.gitbook/assets/GCP-console.png" width="400">
 
 Then create a new Cluster:
 
