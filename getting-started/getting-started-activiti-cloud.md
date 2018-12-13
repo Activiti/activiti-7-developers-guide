@@ -187,13 +187,15 @@ Expected results:
 
 ## Interacting with your Application
 
-We recommend to download our Activiti Cloud Postman collection for Postman \([https://www.getpostman.com](https://www.getpostman.com) \) from our Activiti Cloud Examples repository:
+If you don't have it installed already, install the [Postman client](https://www.getpostman.com) on your machine. 
 
-[https://github.com/Activiti/activiti-cloud-examples](https://github.com/Activiti/activiti-cloud-examples)
+Then, download the Activiti Cloud Postman collection from the [Activiti Cloud Examples repository](https://github.com/Activiti/activiti-cloud-examples) using the command below:
 
-You can clone or download the files in that repository and then import into Postman the collection
+```bash
+curl -o Activiti_v7_REST_API.postman_collection.json https://raw.githubusercontent.com/Activiti/activiti-cloud-examples/develop/Activiti%20v7%20REST%20API.postman_collection.json
+```
 
-[https://github.com/Activiti/activiti-cloud-examples/blob/develop/Activiti v7 REST API.postman\_collection.json](https://github.com/Activiti/activiti-cloud-examples/blob/develop/Activiti%20v7%20REST%20API.postman_collection.json)
+Import the collection in Postman using _**Import**_ button.
 
 Before calling any service you will need to create a new Environment in Postman. You can do that by going to the Manage Environment icon \(cog\)
 
@@ -218,6 +220,18 @@ Once you get the token for a user, you can interact with all the user endpoints.
 Now you can also start a new Process Instance from our SimpleProcess:
 
 ![](../.gitbook/assets/postman-start-processinstance.png)
+
+```bash
+{
+  "processDefinitionKey": "SimpleProcess",
+  "variables": {
+    "firstName": "salaboy",
+    "lastName": "salaboy",
+    "age": 99
+  },
+  "payloadType":"StartProcessPayload"
+}
+```
 
 You can check that the audit service contains the events associated to the just started process instance.
 
