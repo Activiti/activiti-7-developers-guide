@@ -189,7 +189,7 @@ Expected results:
 
 If you don't have it installed already, install the [Postman client](https://www.getpostman.com) on your machine. 
 
-Then, download the Activiti Cloud Postman collection from the [Activiti Cloud Examples repository](https://github.com/Activiti/activiti-cloud-examples) using the command below:
+Then, download the Activiti Cloud Postman collection from the [Activiti Cloud Examples repository](https://github.com/Activiti/activiti-cloud-examples) using the command below \(copy/paste into your terminal\):
 
 ```bash
 
