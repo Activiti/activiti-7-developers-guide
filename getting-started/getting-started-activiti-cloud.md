@@ -69,7 +69,7 @@ Once the cluster is created click on the Connect Button on the right hand side o
 
 ![Kubernetes clusters list view](../.gitbook/assets/cluster-connect.png)
 
-This will open a popup to show you how to connect with the cluster. Copy the command, open a terminal and paste it into your terminal as shown below.
+This will open a popup with a command to connect to the cluster. Copy it to your clipboard, open a terminal and paste the command into your terminal as shown below.
 
 ![](../.gitbook/assets/screenshot-2018-12-13-at-10.13.17.png)
 
@@ -91,6 +91,8 @@ kubectl apply -f helm-service-account-role.yaml
 helm init --service-account helm --upgrade
 ```
 
+Expected results:
+
 ![](../.gitbook/assets/screenshot-2018-12-13-at-10.40.41.png)
 
 ![](../.gitbook/assets/screenshot-2018-12-13-at-10.42.56.png)
@@ -101,6 +103,8 @@ One more thing that we need to do in order to be able to expose our services to 
 helm install stable/nginx-ingress
 ```
 
+Expected results:
+
 ![](../.gitbook/assets/helm-install-nginx.png)
 
 Now that NGINX Ingress Controller is being deployed, we need to wait for it to expose itself using a Public IP. We need this Public IP to interact with our services from outside the cluster. You can find this IP by running the following command:
@@ -108,6 +112,8 @@ Now that NGINX Ingress Controller is being deployed, we need to wait for it to e
 ```bash
 kubectl get services
 ```
+
+Expected results:
 
 ![](../.gitbook/assets/kubectl-get-services-ip.png)
 
@@ -123,31 +129,61 @@ Now that we have our Cluster in place, HELM installed and an Ingress Controller 
 
 The first step is to register the Activiti Cloud HELM charts into HELM. We do this by running the following commands:
 
-\| helm repo add activiti-cloud-charts [https://activiti.github.io/activiti-cloud-charts/](https://activiti.github.io/activiti-cloud-charts/)
+```bash
+helm repo add activiti-cloud-charts https://activiti.github.io/activiti-cloud-charts/
+```
 
-\| helm repo update
+```bash
+helm repo update
+```
 
-The next step is to parameterize your deployment to your cluster. The Activiti Cloud Full Example Chart can be customized to turn on and off different features, but there is one mandatory parameter that needs to be provided which is the external domain name that is going to be used by this installation.
+Expected results:
 
-In order to do this, you can copy or modify the values.yaml file located here: [https://github.com/Activiti/activiti-cloud-charts/blob/master/activiti-cloud-full-example/values.yaml](https://github.com/Activiti/activiti-cloud-charts/blob/master/activiti-cloud-full-example/values.yaml) . You need to replace the string “REPLACEME” to .nip.io.
+![](../.gitbook/assets/screenshot-2018-12-13-at-10.55.52.png)
 
-For my cluster that was:
+The next step is to configure your deployment to your cluster. The Activiti Cloud Full Example Chart can be customized to turn on and off different features, but there is one mandatory parameter that needs to be provided which is the external domain name that is going to be used by this installation.
+
+In order to do this, you can copy or modify the values.yaml file located here: [https://github.com/Activiti/activiti-cloud-charts/blob/master/activiti-cloud-full-example/values.yaml](https://github.com/Activiti/activiti-cloud-charts/blob/master/activiti-cloud-full-example/values.yaml) . You need to replace the string “REPLACEME” to &lt;EXTERNAL-IP&gt;.nip.io.
+
+In our case:
 
 104.155.53.158.nip.io in every occurrence of “REPLACEME”.
 
-Once you made all these changes you are ready to deploy the chart by running the following command:
+![](../.gitbook/assets/value-yaml-with-external-ip.png)
 
-\| helm install -f values.yaml activiti-cloud-charts/activiti-cloud-full-example
+Once you have performed  the 3 changes, deploy the chart by running the following command:
+
+```bash
+helm install -f values.yaml activiti-cloud-charts/activiti-cloud-full-example
+```
+
+Expected results:
+
+![](../.gitbook/assets/deploy-activiti-cloud.png)
 
 This will trigger the deployment process, and you need to wait until the services are up and running. You can check this by running:
 
-\| kubectl get pods
+```bash
+kubectl get pods
+```
 
-Notice the READY column 1/1 in all the pods, that means that we have 1 pod in Kubernetes running our service. It is also important to notice that HELM created a release of our CHART. Because we haven’t specified a name for this release HELM choose one random name, in my case, it was: bumptious-yak. This means that we can manage this release independently of other Activiti Cloud Applications that we want to deploy using the same approach. You can run helm list and then helm delete to remove all the Activiti Cloud Services for this release.
+Expected results:
+
+![](../.gitbook/assets/pods-services-up.png)
+
+{% hint style="info" %}
+_Note: the READY column 1/1 in all the pods, that means that we have 1 pod in Kubernetes running our service. It is also important to notice that HELM created a release of our CHART. Because we haven’t specified a name for this release HELM choose one random name, in our case, it was: bumptious-yak. This means that we can manage this release independently of other Activiti Cloud Applications that we want to deploy using the same approach. You can run helm list and then helm delete to remove all the Activiti Cloud Services for this release._
+{% endhint %}
 
 In order to access to your services now, you can run the following command:
 
-\| kubectl get ingress
+```bash
+kubectl get ingress
+```
+
+Expected results:
+
+![](../.gitbook/assets/kubectl-get-ingress.png)
 
 ## Interacting with your Application
 
