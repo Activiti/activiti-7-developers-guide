@@ -6,87 +6,114 @@ Activiti Cloud is a set of Cloud Native components designed from the ground up t
 
 We have gone through a very valuable journey, meeting very passionate developers, communities and existing and potential customers who are looking to leverage these technologies \(and business automation solutions\) to reduce time to market and improve business agility in the Cloud. We have also contributed with these communities, making sure that the Open Source projects that we consume get back our valuable feedback and contributions.
 
-As part of the first Beta1 release, we are providing 4 foundational Building Blocks
+Activiti Cloud includes 4 foundational building blocks:
 
 * Activiti Cloud Runtime Bundle
 * Activiti Cloud Query
 * Activiti Cloud Audit
 * Activiti Cloud Connectors
 
-These Building Blocks are Spring Boot Starters that can be attached to any Spring Boot \(2.x\) application. These Building Blocks are enhanced with Spring Cloud functionalities which provide the Cloud Native capabilities.
+These building blocks are Spring Boot Starters that can be attached to any Spring Boot \(2.x\) application. These building blocks are enhanced with Spring Cloud functionalities which provide the Cloud Native capabilities.
 
 By using these components you can create Activiti Cloud applications that:
 
-* Can be scaled independently based on demand
-* Can be managed in completely isolated cycles
-* Can be upgraded and maintained independently
-* Can provide domain specific features using the right tool for the job
+* can be scaled independently based on demand
+* can be managed in completely isolated cycles
+* can be upgraded and maintained independently
+* can provide domain specific features using the right tool for the job
 
 On this tutorial, we wanted to show how to get started by deploying an example set of these building blocks in Kubernetes. We strongly recommend having a real Kubernetes Cluster such as GKE, PKS or EKS. We have tested the content of this blog post in AWS \(Using Kops, PKS, GKE and also with Jenkins X\)
 
-Let’s get our hands dirty with Kubernetes, HELM and Activiti Cloud.
+Let’s get started with Kubernetes, HELM and Activiti Cloud.
 
 ## Kubernetes Deployment & HELM Charts
 
-The quickest and easiest way to deploy things to Kubernetes is by using HELM charts. HELM, as described by their own documentation, is: “a tool that streamlines installing and managing Kubernetes applications. Think of it like apt/yum/homebrew for Kubernetes.”
+The quickest and easiest way to deploy things to Kubernetes is by using HELM charts. HELM, as described in the official documentation, is: “_a tool that streamlines installing and managing Kubernetes applications. Think of it like apt/yum/homebrew for Kubernetes_.”
 
-As part of the Beta1 release, we have created a set of hierarchical HELM charts that can be used to deploy several components, some related to infrastructure \(such as SSO and Gateway\) and some Application specific components like Runtime Bundle, Audit Service, Query Service and a Cloud Connector.
+As part of Activiti Cloud, we have created a set of hierarchical HELM charts that can be used to deploy several components, some related to infrastructure \(such as SSO and Gateway\) and some Application specific components like Runtime Bundle, Audit Service, Query Service and a Cloud Connector.
 
 These HELM charts can be found here: [https://github.com/Activiti/activiti-cloud-charts](https://github.com/Activiti/activiti-cloud-charts).
 
-In this blog post, we will be looking more specifically at: [https://github.com/Activiti/activiti-cloud-charts/tree/master/activiti-cloud-full-example](https://github.com/Activiti/activiti-cloud-charts/tree/master/activiti-cloud-full-example)
+In this quick-start, we will be looking more specifically at: [https://github.com/Activiti/activiti-cloud-charts/tree/master/activiti-cloud-full-example](https://github.com/Activiti/activiti-cloud-charts/tree/master/activiti-cloud-full-example)
 
 This “Activiti Cloud Full Example” deploys the following components:
 
+![Activiti Cloud application full example chart](../.gitbook/assets/activiti-cloud-full-example-chart.png)
+
 One important thing to notice is that each of the Activiti Cloud components can be used independently. This example is intended to show a large-scale deployment scenario. You can start small with a Runtime Bundle \(which provides the process and task runtimes\), but if you want to scale things up you need to know what you are aiming for, and this charts shows you exactly that.
 
-Now, moving forward you will need to download and install the following tools:
+### Download and install Kubectl and HELM
 
-Kubectl : [https://kubernetes.io/docs/tasks/tools/install-kubectl/](https://kubernetes.io/docs/tasks/tools/install-kubectl/) HELM: [https://docs.helm.sh/using\_helm/\#installing-helm](https://docs.helm.sh/using_helm/#installing-helm) And as I mentioned before having a real life cluster is recommended.
+* Kubectl : [https://kubernetes.io/docs/tasks/tools/install-kubectl/](https://kubernetes.io/docs/tasks/tools/install-kubectl/) 
+* HELM: [https://docs.helm.sh/using\_helm/\#installing-helm](https://docs.helm.sh/using_helm/#installing-helm) 
 
-The Google Cloud Platform offers a $300 free credit if you don’t have a Google Cloud account. See [https://console.cloud.google.com/freetrial](https://console.cloud.google.com/freetrial)
+Clone the [https://github.com/Activiti/activiti-cloud-charts](https://github.com/Activiti/activiti-cloud-charts) and go to the “activiti-cloud-full-example” directory, we will use some files from there.
 
-If you choose GKE, you will also need to install the Google Cloud SDK CLI tool:
+## Create and configure the Google Kubernetes Engine \(GKE\) cluster
 
-[https://cloud.google.com/sdk/install](https://cloud.google.com/sdk/install)
+Using a real life cluster is recommended. As a free option, the Google Cloud Platform offers a $300 free credit: [https://console.cloud.google.com/freetrial](https://console.cloud.google.com/freetrial)
 
-## Creating and configuring the Cluster
+Once you have created your account, install the Google Cloud SDK CLI tool: [https://cloud.google.com/sdk/install](https://cloud.google.com/sdk/install)
 
-Before we start, make sure that you clone the [https://github.com/Activiti/activiti-cloud-charts](https://github.com/Activiti/activiti-cloud-charts) and go to the “activiti-cloud-full-example” directory, we will use some files from there.
-
-Following using GKE we are demonstrating how to create a cluster by going to your Google Cloud Home Page and selecting Kubernetes Engine: [https://console.cloud.google.com/](https://console.cloud.google.com/)
+Go to your Google Cloud Home Page \([https://console.cloud.google.com](https://console.cloud.google.com/)\) and select _**Kubernetes Engine / Clusters.**_ 
 
 ![](../.gitbook/assets/gcp-console.png)
 
-Then create a new Cluster:
+Then select the CREATE CLUSTER button ![](../.gitbook/assets/screenshot-2018-12-13-at-10.04.37.png) from  the top menu. 
 
 Enter the Cluster Name, select the Zone based on your location and I’ve selected 2 vCPUs and left the Size to the default value \(3\).
 
+![GKE cluster creation settings](../.gitbook/assets/create-cluster-parameters.png)
+
 Once the cluster is created click on the Connect Button on the right hand side of the table:
 
-This will open a popup to show you how to connect with the cluster, open a terminal and copy the command that was displayed in the previous pop up.
+![Kubernetes clusters list view](../.gitbook/assets/cluster-connect.png)
 
-Now you have your Cluster configured and ready to be used.
+This will open a popup to show you how to connect with the cluster. Copy the command, open a terminal and paste it into your terminal as shown below.
 
-Note: If you are working with an existing cluster, you will need to check if you have an Ingress Controller already installed, you can skip the following steps if that is the case.
+![](../.gitbook/assets/screenshot-2018-12-13-at-10.13.17.png)
 
-Now let's configure HELM to work in the Cluster.
+Now you have your cluster configured and ready to be used.
 
-First, we need to start by giving HELM permissions to deploy things into the cluster. There are tons of articles on how to do this \([https://medium.com/google-cloud/helm-on-gke-cluster-quick-hands-on-guide-ecffad94b0](https://medium.com/google-cloud/helm-on-gke-cluster-quick-hands-on-guide-ecffad94b0)\) by running in a terminal the following command \(you can copy/clone/download the helm-service-account-role.yaml file from here: [https://github.com/Activiti/activiti-cloud-charts/blob/master/activiti-cloud-full-example/helm-service-account-role.yaml](https://github.com/Activiti/activiti-cloud-charts/blob/master/activiti-cloud-full-example/helm-service-account-role.yaml) \):
+{% hint style="info" %}
+_Note: if you are working with an existing cluster, you will need to check if you have an Ingress Controller already installed, you can skip the following steps if that is the case._
+{% endhint %}
 
-\| kubectl apply -f helm-service-account-role.yaml
+Let's now configure HELM to work in the Cluster. We first need to give HELM permissions to deploy things into the cluster. Copy/clone/download the helm-service-account-role.yaml file from here: [https://github.com/Activiti/activiti-cloud-charts/blob/master/activiti-cloud-full-example/helm-service-account-role.yaml](https://github.com/Activiti/activiti-cloud-charts/blob/master/activiti-cloud-full-example/helm-service-account-role.yaml) \). 
 
-\| helm init --service-account helm --upgrade
+Run the commands below in your terminal: 
+
+```bash
+kubectl apply -f helm-service-account-role.yaml
+```
+
+```bash
+helm init --service-account helm --upgrade
+```
+
+![](../.gitbook/assets/screenshot-2018-12-13-at-10.40.41.png)
+
+![](../.gitbook/assets/screenshot-2018-12-13-at-10.42.56.png)
 
 One more thing that we need to do in order to be able to expose our services to be accessed from outside the cluster is to set up an Ingress Controller, which will automatically create routes to the internal services that we want to expose, in order to do this we just need to run the following command:
 
-\| helm install stable/nginx-ingress
+```bash
+helm install stable/nginx-ingress
+```
+
+![](../.gitbook/assets/helm-install-nginx.png)
 
 Now that NGINX Ingress Controller is being deployed, we need to wait for it to expose itself using a Public IP. We need this Public IP to interact with our services from outside the cluster. You can find this IP by running the following command:
 
-\| kubectl get services
+```bash
+kubectl get services
+```
 
-Notice that you might need to run kubectl get services serveral times until you can see the External IP for your ingress controller. If you see PENDING, wait for a few seconds and run the command again.
+![](../.gitbook/assets/kubectl-get-services-ip.png)
+
+{% hint style="info" %}
+_Note: you might need to run kubectl get services serveral times until you can see the External IP for your ingress controller. If you see PENDING, wait for a few seconds and run the command again._
+{% endhint %}
 
 We will use nip.io as DNS service to map our services to this External IP which will follow the following format: ..nip.io
 
