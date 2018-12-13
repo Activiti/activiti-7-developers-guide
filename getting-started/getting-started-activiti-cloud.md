@@ -197,21 +197,35 @@ You can clone or download the files in that repository and then import into Post
 
 Before calling any service you will need to create a new Environment in Postman. You can do that by going to the Manage Environment icon \(cog\)
 
+![](../.gitbook/assets/postman-manage-environment.png)
+
 Then “Add” a new environment and add a name to it. Now you need to configure the variables for the environment: “gateway”, “idm” and “realm”
 
 For gateway you need to copy the url associated with your Ingress, the same for idm which is SSO and IDM using Keycloak. For the realm enter “activiti”:
 
+![](../.gitbook/assets/postman-env-variables.png)
+
 Click Save or Update and then you are ready to start using that Environment. Make sure that you select the environment in the dropdown of the right:
 
-As shown in the previous screenshot, if you go to the keycloak directory and select the “getKeycloakToken for testuser” you will get the token which will be used to authenticate further requests. Notice that this token is time sensitive and it will be automatically invalidated so you might need to get it again if you start getting unauthorized errors.
+![](../.gitbook/assets/postman-select-env-and-get-a-token.png)
+
+As shown in the previous screenshot, if you go to the _**keycloak**_ directory and select the “_**getKeycloakToken testuser**_” you will get the token which will be used to authenticate further requests. Notice that this token is time sensitive and it will be automatically invalidated so you might need to get it again if you start getting unauthorized errors.
 
 Once you get the token for a user, you can interact with all the user endpoints. For example, you can create a request to see which Process Definitions are deployed inside our Example Runtime Bundle:
 
+![](../.gitbook/assets/postman-get-processdef.png)
+
 Now you can also start a new Process Instance from our SimpleProcess:
+
+![](../.gitbook/assets/postman-start-processinstance.png)
 
 You can check that the audit service contains the events associated to the just started process instance.
 
+![](../.gitbook/assets/postman-get-audit-events.png)
+
 And that the query service already contains information about the process execution:
+
+![](../.gitbook/assets/postman-query-processinstances.png)
 
 You are now ready to start consuming these services to automate your own business processes.
 
@@ -220,6 +234,8 @@ Finally, you can access to all services Swagger documentation by pointing your b
 * [http://activiti-cloud-gateway.EXTERNAL-IP.nip.io/rb-my-app/swagger-ui.html](http://activiti-cloud-gateway.EXTERNAL-IP.nip.io/rb-my-app/swagger-ui.html) 
 * [http://activiti-cloud-gateway.EXTERNAL-IP.nip.io/audit/swagger-ui.html](http://activiti-cloud-gateway.EXTERNAL-IP.nip.io/audit/swagger-ui.html) 
 * [http://activiti-cloud-gateway.EXTERNAL-IP.nip.io/query/swagger-ui.html](http://activiti-cloud-gateway.EXTERNAL-IP.nip.io/query/swagger-ui.html)
+
+![](../.gitbook/assets/screenshot-2018-12-13-at-11.21.47.png)
 
 All our services are using SpringFox to generate this documentation and provide a UI for it.
 
