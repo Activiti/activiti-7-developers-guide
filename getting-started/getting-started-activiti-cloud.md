@@ -241,9 +241,9 @@ All our services are using SpringFox to generate this documentation and provide 
 
 ## Summary
 
-In this blog post we have seen how to get started with Activiti Cloud and more specifically with the Activiti Cloud HELM charts in GKE. If you are not familiar with Kubernetes, Docker and GKE this might look like a lot of new information and it is our mission to simplify all the steps covered in these getting started guide. For that reason, we recommend you to checkout the Jenkins X project, which greatly simplifies the first two sections about creating clusters and configuring the basic infrastructure for your projects.
+In this quick-start we have seen how to create a Kubernetes cluster \(using GKE\) and deploy an Activiti Cloud application using the Activiti Cloud HELM charts. If you are not familiar with Kubernetes, Docker and GKE this might look like a lot of new information and it is our mission to simplify all the steps covered in these getting started guide. For that reason, we recommend you to checkout the Jenkins X project, which greatly simplifies the first two sections about creating clusters and configuring the basic infrastructure for your projects.
 
 As part of the Activiti Cloud initiative we are making sure that we follow best practices coming from the Kubernetes, Docker and Spring Cloud communities and we are contributing back with fixes and feedback to make this technology stack the best for Cloud Native applications.
 
-As always feel free to get in touch with us via Gitter: [https://gitter.im/Activiti/Activiti7?utm\_source=share-link&utm\_medium=link&utm\_campaign=share-link](https://gitter.im/Activiti/Activiti7?utm_source=share-link&utm_medium=link&utm_campaign=share-link) if you have questions or feedback about these examples and tutorials.
+If you have questions or feedback about this tutorial, feel free to get in touch with the Activiti team via the dedicated [Gitter](https://gitter.im/Activiti/Activiti7?utm_source=share-link&utm_medium=link&utm_campaign=share-link%20) [channel](https://gitter.im/Activiti/Activiti7?utm_source=share-link&utm_medium=link&utm_campaign=share-link%20).
 
