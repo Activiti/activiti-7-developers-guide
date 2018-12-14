@@ -1,11 +1,9 @@
 # Getting Started
 
-As described in our introduction section, Activiti is currently divided into two main categories:
+Welcome to this tutorial on how to get started with [Activiti](../). Two deployment options are available, you can try both or pick the one that suits best with your needs. Enjoy your Activiti hands-on session, it's now time to practice!
 
-* [Activiti Core ](getting-started-activiti-core.md)
-* [Activiti Cloud](getting-started-activiti-cloud.md) 
+* \_\_[_**Getting started with Activiti Core**_](getting-started-activiti-core.md) __to learn how to use the new Java Runtime API inside a Spring Boot application. This spring boot approach is using Activiti Core as a library inside your java application.
+* \_\_[_**Getting started with Activiti Cloud**_](getting-started-activiti-cloud.md) ****to learn how to deploy an Activiti Cloud example application into a Kubernetes cluster using HELM charts.
 
-If you want to get started with Activiti Core you follow the Getting Started Guide for the new Runtime APIs: [Activiti Core](https://github.com/Activiti/activiti-7-developers-guide/tree/e2d3adcb1b9577bd02690dfc613933ee2e5a3139/getting-started/getting-started-activiti-core.md)
 
-If you want to get started with our Cloud Native Building Blocks in Kubernetes you can follow our Getting Started Guide using the Activiti Cloud HELM Charts: [Activiti Cloud](https://github.com/Activiti/activiti-7-developers-guide/tree/e2d3adcb1b9577bd02690dfc613933ee2e5a3139/getting-started/getting-started-activiti-cloud.md)
 
