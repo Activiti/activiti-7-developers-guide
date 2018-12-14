@@ -6,6 +6,8 @@ The default IDM is keycloak and we've created an integration module for it:
 
 [https://github.com/Activiti/Activiti/tree/activiti-7-201709-EA/activiti-services/activiti-services-identity-keycloak](https://github.com/Activiti/Activiti/tree/activiti-7-201709-EA/activiti-services/activiti-services-identity-keycloak)
 
+The cloud examples are based on keycloak by default. They come with a default realm which can be [extended with extra users and roles at deploy time](https://github.com/Activiti/activiti-cloud-charts/pull/32/files#diff-8e9b5b5cf988767272f16d363998e613R41).
+
 There's also an implementation based on a properties file:
 
 [https://github.com/Activiti/Activiti/tree/activiti-7-201709-EA/activiti-services/activiti-services-identity-basic](https://github.com/Activiti/Activiti/tree/activiti-7-201709-EA/activiti-services/activiti-services-identity-basic)
@@ -21,6 +23,8 @@ UserGroupLookupProxy is used by Activiti to find the groups for a user \(e.g. to
 ## Do I have to create a module?
 
 No, you can just implement the relevant classes in your Activiti application. You don't have to implement a UserGroupLookupProxy if you don't want to \(but then groups for users won't be looked up\). Activiti just needs to be told who the current user \(their ID\) is through Authentication.setAuthenticatedUserId.
+
+This approach has been used by members of the community to [integrate with UAA](https://github.com/Activiti/Activiti/issues/2009#issuecomment-437983794)
 
 ## How did it work in previous versions?
 
