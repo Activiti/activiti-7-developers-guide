@@ -26,7 +26,7 @@ The primary objective of the Process Runtime from the Activiti Cloud perspective
 The Process Runtime shouldn’t worry about:
 
 * Where the process definitions are stored
-  * Dealing with process versions and changes
+* Dealing with process versions and changes
 * Identity Management
 * Single Sign-On
 * Job executions
