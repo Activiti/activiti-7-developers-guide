@@ -55,9 +55,8 @@ This section explains in detail the components required to create and run a new 
 * **activiti-cloud-connectors-twitter**: this Activiti Cloud Connector deals with all the tasks related to Twitter which includes: listening the twitter stream & enabling our application to tweet to users that receive rewards.
 * **activiti-cloud-connectors-dummytwitter**: this Activiti Cloud Connector acts as the previous one, but using pre-defined dummy tweets. It's mainly used for demo purposes. We created this connector to have more control over the rate in which tweets arrive and also to control a little bit the content of the tweets that might be found offensive for some audiences.
 
-Besides that there are two more directories in this repository related with Docker & Kubernetes:
+Besides that there are two more directories in this repository related with Kubernetes:
 
-* **docker/**: contains the docker compose files to start the infrastructure, cloud connectors and two separate campaigns.
 * **kubernetes/**: contains the kubernetes descriptor files for starting the infrastructure, cloud connectors and a campaign. it also contains the descriptors for deploying logging and tracing mechanisms to gain visibility about how the information is flowing between each of the deployed components.
 
 ## Campaigns
@@ -109,7 +108,7 @@ In order to be able to execute these Business Process Definitions we create a ne
 
 Then we copy our Business Process definitions under: `src/main/resources/processes/`
 
-The campaign runtime bundle project can be found here: [english-campaign-rb](https://github.com/Activiti/blueprint-trending-topic-campaigns/tree/develop/english-campaign-rb)
+The campaign runtime bundle project can be found here: [ttc-rb-english-campaign](https://github.com/Activiti/ttc-rb-english-campaign)
 
 Both the Campaign and Reward processes will interact with external services to perform their tasks. This interaction will be handled by our Activiti Cloud Connectors. Which serves as an intermediate layer between the Process Runtime and the external service.
 
@@ -145,14 +144,14 @@ You can find the source code of this connector [here](https://github.com/Activit
 If you look at the Twitter Activiti Cloud Connector you will notice the following:
 
 * We setup the Twitter4J Stream Listener to listen to all the global twitter Stream
-* The [LangAwareTwitterStatusListener](https://github.com/Activiti/blueprint-trending-topic-campaigns/blob/develop/activiti-cloud-connectors-twitter/src/main/java/org/activiti/cloud/connectors/twitter/LangAwareTwitterStatusListener.java) is in charge of getting the language of the Tweet and adding it to the Header of the message. We use this as a filter for campaigns to quickly drop messages that are not matching with the campaign language.
+* The [SocialFeedService](https://github.com/Activiti/ttc-connectors-dummytwitter/blob/master/src/main/java/org/activiti/cloud/connectors/twitter/services/SocialFeedService.java#L72) is in charge of getting the language of the Tweet and adding it to the Header of the message. We use this as a filter for campaigns to quickly drop messages that are not matching with the campaign language.
 * One Message Per Tweet is sent via Spring Cloud Streams
 
 ### Dummy Twitter Activiti Cloud Connector
 
 Alternatively you can use the Dummy Twitter component \(which is started by default in our deployment descriptors\) to simulate a controlled social media feed. We created this dummy component to control the rate in which tweets are fed in and also the content of those tweets so we can test and assert the behaviour of all the services.
 
-You can find the source code of this connector [here](https://github.com/Activiti/blueprint-trending-topic-campaigns/tree/develop/activiti-cloud-connectors-dummytwitter)
+You can find the source code of this connector [here](https://github.com/Activiti/ttc-connectors-dummytwitter)
 
 This connector uses a Spring Data CrudRepository to store tweets in a database which reads to dispatch based on a rate that can be configured with a property called "**tweet.rate**".
 
@@ -200,80 +199,9 @@ There are 3 ways of running this example depending on how familiar you are with 
 
 We obviously recommend the Kubernetes way, the other two approaches might be used for development purposes but they lack of real life management features. Kubernetes is not the ultimate tool but it does quite good in abstracting us from the specifics of the IaaS.
 
-First of all you need to clone the blueprint-trending-topic-campaigns repository \(currently in the development branch until we release it\):
+You can of course run the application using thhe Spring Boot and Docker way, but the team is only working actively on the Kubernetes way. We also recommend to run these examples in a real Kubernetes Cluster, you can always get some free credit in the major Cloud Providers.
 
-```text
-git clone https://github.com/Activiti/blueprint-trending-topic-campaigns.git
+Look at [TTC-Docs](https://github.com/Activiti/ttc-docs/blob/develop/workshop.md) for further instructions. 
 
-cd blueprint-trending-topic-campaigns/
-mvn clean install
-```
 
-#### The Spring Boot way
-
-This approach is painful and usually not recommended unless you are making changes to every project and want to quickly test. Early stages of development usually tends to be like this.
-
-Remember that we will need to start 4 Spring Boot apps separately plus all the infrastructural services \(Security, Message Brokers, Database\)
-
-If you don't want to use Docker at all, then you will need to install RabbitMQ, Keycloak and PostgreSQL, components which are used by the Activiti Cloud building blocks and are considered part of the infrastructure. We recommend to just use Docker Compose to start these three components:
-
-```text
-cd docker/
-docker-compose -f basic-infra-docker-compose.yml up -d
-```
-
-Next you can start our Activiti Cloud Connectors and Campaigns. You can start them in any order, they know how to work together. In order to be faithful to our previously described scenario we can start first the Activiti Cloud Twitter Connector \(activiti-cloud-connectors-twitter\). This will connect to the twitter stream, no matter how many campaigns we have running, at this point, there is no campaign defined.
-
-Notice that to work with Twitter and Twitter4J you need to create a new Twitter Application to obtain credentials. You can do this following the steps in here: [https://apps.twitter.com/](https://apps.twitter.com/) Make sure that you generate an access token for the app. You will need the 4 values: CONSUMER KEY, CONSUMER SECRET, ACCESS TOKEN and ACCESS TOKEN SECRET to launch the twitter connector.
-
-**Note: You will be tapping into the global twitter stream, so we are not responsible for what is written in there :\)**
-
-```text
-cd activiti-cloud-connectors-twitter/
-mvn -Dtwitter4j.oauth.consumerKey=<CONSUMER KEY HERE> -Dtwitter4j.oauth.consumerSecret=<CONSUMER SECRET HERE> -Dtwitter4j.oauth.accessToken=<ACCESS TOKEN HERE>  -Dtwitter4j.oauth.accessTokenSecret=<ACCESS TOKEN SECRET HERE> spring-boot:run
-```
-
-or alternatively
-
-```text
-cd activiti-cloud-connectors-twitter/
-(mvn clean install)
-cd target/
-java -Dtwitter4j.oauth.consumerKey=<CONSUMER KEY HERE> -Dtwitter4j.oauth.consumerSecret=<CONSUMER SECRET HERE> -Dtwitter4j.oauth.accessToken=<ACCESS TOKEN HERE>  -Dtwitter4j.oauth.accessTokenSecret=<ACCESS TOKEN SECRET HERE> -jar activiti-cloud-connectors-twitter-1.0.0-SNAPSHOT.jar
-```
-
-After having the Twitter Connector consuming tweets from the Twitter Stream, we can start our other 2 connectors: activiti-cloud-connector-ranking and activiti-cloud-connector-3rd-party each in separate Terminals.
-
-Open a new terminal and run:
-
-```text
-cd activiti-cloud-connector-ranking/
-mvn spring-boot:run
-```
-
-Again, open a new terminal and run:
-
-```text
-cd activiti-cloud-connector-processing/
-mvn spring-boot:run
-```
-
-Notice that you don't even need to wait for the application to start before starting any other application.
-
-Next you can start our first campaign:
-
-```text
-cd english-campaign-rb/
-mvn spring-boot:run
-```
-
-Again, the order in which you execute these steps are not important.
-
-You should be able to see in each terminal the output of each service.
-
-### The Docker Compose Way
-
-With Docker Compose things are much simpler. But still not something that you will want to use in production. With Docker Compose \(as soon as you publish the docker images somewhere\) you are enabled to not have maven, git or even java installed to run these services.
-
-### The Kubernetes Way \(with Minikube\)
 
