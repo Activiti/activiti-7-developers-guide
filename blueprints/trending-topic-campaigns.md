@@ -201,7 +201,5 @@ We obviously recommend the Kubernetes way, the other two approaches might be use
 
 You can of course run the application using thhe Spring Boot and Docker way, but the team is only working actively on the Kubernetes way. We also recommend to run these examples in a real Kubernetes Cluster, you can always get some free credit in the major Cloud Providers.
 
-Look at [TTC-Docs](https://github.com/Activiti/ttc-docs/blob/develop/workshop.md) for further instructions. 
-
-
+Look at [TTC-Docs](https://github.com/Activiti/ttc-docs/blob/develop/workshop.md) for further instructions.
 

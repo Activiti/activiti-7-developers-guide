@@ -149,7 +149,7 @@ In our case:
 
 104.155.53.158.nip.io in every occurrence of “REPLACEME”.
 
-![](../.gitbook/assets/value-yaml-with-external-ip.png)
+![](../.gitbook/assets/screenshot-2018-12-19-at-15.24.31.png)
 
 Once you have performed  the 3 changes, deploy the chart by running the following command:
 
