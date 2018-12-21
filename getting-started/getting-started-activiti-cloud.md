@@ -143,13 +143,41 @@ Expected results:
 
 The next step is to configure your deployment to your cluster. The Activiti Cloud Full Example Chart can be customized to turn on and off different features, but there is one mandatory parameter that needs to be provided which is the external domain name that is going to be used by this installation.
 
-In order to do this, you can copy or modify the values.yaml file located here: [https://github.com/Activiti/activiti-cloud-charts/blob/master/activiti-cloud-full-example/values.yaml](https://github.com/Activiti/activiti-cloud-charts/blob/master/activiti-cloud-full-example/values.yaml) . You need to replace the string “REPLACEME” to &lt;EXTERNAL-IP&gt;.nip.io.
+In order to do this, download the values.yaml file located here: [https://github.com/Activiti/activiti-cloud-charts/blob/master/activiti-cloud-full-example/values.yaml](https://github.com/Activiti/activiti-cloud-charts/blob/master/activiti-cloud-full-example/values.yaml) . 
 
-In our case:
+Replace the string “REPLACEME” to &lt;EXTERNAL-IP&gt;.nip.io.
 
-104.155.53.158.nip.io in every occurrence of “REPLACEME”.
+In our case: 104.155.53.158.nip.io in every occurrence of “REPLACEME”.
 
-![](../.gitbook/assets/screenshot-2018-12-19-at-15.24.31.png)
+Set the Activiti Cloud modeling to true.
+
+```yaml
+# Default values for activiti-cloud-full-example.
+...
+
+global:
+  keycloak:
+    url: "http://activiti-keycloak.104.155.60.221.nip.io/auth"
+  gateway:
+    host: &gatewayhost "activiti-cloud-gateway.104.155.60.221.nip.io"
+
+activiti-cloud-modeling:
+  enabled: true
+...
+infrastructure:
+  activiti-keycloak:
+    keycloak:
+      enabled: true
+      keycloak:
+        ingress:
+          enabled: true
+          path: /
+          proxyBufferSize: "16k"
+          hosts:
+            - "activiti-keycloak.104.155.60.221.nip.io"
+ ...
+
+```
 
 Once you have performed  the 3 changes, deploy the chart by running the following command:
 
