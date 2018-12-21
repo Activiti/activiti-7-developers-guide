@@ -282,6 +282,14 @@ Finally, you can access to all services Swagger documentation by pointing your b
 
 All our services are using SpringFox to generate this documentation and provide a UI for it.
 
+Also the Activiti Cloud full example includes the bpmn 2 modeling experience that you can access at this address:  [http://activiti-cloud-gateway.](http://activiti-cloud-gateway.104.155.60.221.nip.io/activiti-cloud-modeling/)[EXTERNAL-IP.nip.io](http://activiti-cloud-gateway.EXTERNAL-IP.nip.io/rb-my-app/swagger-ui.html)[/activiti-cloud-modeling/](http://activiti-cloud-gateway.104.155.60.221.nip.io/activiti-cloud-modeling/) 
+
+Credentials: modeler/password
+
+![New process modeling experience](../.gitbook/assets/screenshot-2018-12-21-at-15.13.44.png)
+
+For more information about the bpmn designer, please check the following blog post explaining how to [use the modeler to design a business process](https://community.alfresco.com/community/bpm/blog/2018/12/10/activiti-7-beta-using-the-modeler-to-design-business-processes).
+
 ## Summary
 
 In this quick-start we have seen how to create a Kubernetes cluster \(using GKE\) and deploy an Activiti Cloud application using the Activiti Cloud HELM charts. If you are not familiar with Kubernetes, Docker and GKE this might look like a lot of new information and it is our mission to simplify all the steps covered in these getting started guide. For that reason, we recommend you to checkout the Jenkins X project, which greatly simplifies the first two sections about creating clusters and configuring the basic infrastructure for your projects.
