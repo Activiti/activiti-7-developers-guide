@@ -1,9 +1,4 @@
 # Activiti Cloud Modeling
-
-<<<<<<< Updated upstream:components/activiti-cloud-modeling.md
-TBD
-
-=======
 Activiti Cloud Modeling services provide the backend and frontend functionality to support our Activiti Modeler Application. 
 
 The backend services is currently composed by two Spring Boot Starters:
@@ -14,5 +9,4 @@ The User Interface built with Angular can be [found here](https://github.com/act
 
 This application uses [BPMN.io](http://bpmn.io) for the BPMN process standard xml generation. 
 
-
->>>>>>> Stashed changes:components/activiti-cloud-modeling/README.md
+![New process modeling experience](../.gitbook/assets/screenshot-2018-12-21-at-15.13.44.png)
