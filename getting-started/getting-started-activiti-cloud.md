@@ -286,7 +286,7 @@ Also the Activiti Cloud full example includes the bpmn 2 modeling experience tha
 
 Credentials: modeler/password
 
-![New process modeling experience](../.gitbook/assets/screenshot-2018-12-21-at-15.13.44.png)
+![](../.gitbook/assets/activiti-modeling-app.png)
 
 For more information about the bpmn designer, please check the [following blog post](https://community.alfresco.com/community/bpm/blog/2018/12/10/activiti-7-beta-using-the-modeler-to-design-business-processes).
 
