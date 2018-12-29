@@ -10,7 +10,7 @@ The Application Service should also interact with the Configuration Service to u
 
 Applications have a relationship with IDM and security, because we are using Keycloak as our SSO and IDM provider, Applications might require to have a different realm configuration.
 
-![](../../.gitbook/assets/application-service-diagram.png)
+![](../../assets/application-service-diagram.png)
 
 The Application Service has relationships with 4 key components:
 
@@ -40,7 +40,7 @@ The Application Service then, will be in charge of interacting with the Service 
 
 The sequence of interactions is as follows:
 
-![](../../.gitbook/assets/application-service-cycle.png)
+![](../../assets/application-service-cycle.png)
 
 It is important to notice that there is no state storing as part of the Application Service, all state is created based on the Deployment Descriptors in the Config Service and based on the currently deployed services in the Service Registry.
 
