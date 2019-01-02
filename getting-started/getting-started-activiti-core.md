@@ -44,7 +44,7 @@ If you are running inside a Spring Boot 2 application you only need to add the a
 </dependency>
 ```
 
-We recommend using our BOM \(bill of materials)
+We recommend using our BOM \(bill of materials\)
 
 [https://github.com/Activiti/activiti-examples/blob/master/activiti-api-basic-task-example/pom.xml\#L30](https://github.com/Activiti/activiti-examples/blob/master/activiti-api-basic-task-example/pom.xml#L30)
 
@@ -299,9 +299,9 @@ Users belonging to this group will be able to claim and work on the task.
 
 We encourage you to run these examples and experiment with them and get in touch if you have questions or if you find issues.
 
-Summary
+## Summary
 
-In this blog post we have seen how to get started using the new ProcessRuntime and TaskRuntime API from the new Activiti Core Beta1 project.
+In this tutorial, we have seen how to get started using the new ProcessRuntime and TaskRuntime API from the new Activiti Core Beta project.
 
 We recommend you to check the Activiti Examples repository, for more examples: [https://github.com/Activiti/activiti-examples](https://github.com/Activiti/activiti-examples)
 

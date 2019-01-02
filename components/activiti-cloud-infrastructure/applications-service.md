@@ -4,24 +4,24 @@ The Application Service provides monitoring capabilities to arrange a set of Bui
 
 The Application Service Spring Boot Starter source code can be found here: [https://github.com/Activiti/activiti-cloud-app-service](https://github.com/Activiti/activiti-cloud-app-service)
 
-The Application Service is not responsible for deploying/provisioning new applications, but it should expose operations such as the structure and status of the application to understand when applications are already provisioned and ready to receive requests. This means that for at least the initial version of this service most of the operations will be READ only. This service should react to changes in the environment (new service registration/de-registration) to make sure that the Application Service is providing data that is up to date and reflecting the real status of the deployments, this can be achieved by monitoring the Service Registry.
+The Application Service is not responsible for deploying/provisioning new applications, but it should expose operations such as the structure and status of the application to understand when applications are already provisioned and ready to receive requests. This means that for at least the initial version of this service most of the operations will be READ only. This service should react to changes in the environment \(new service registration/de-registration\) to make sure that the Application Service is providing data that is up to date and reflecting the real status of the deployments, this can be achieved by monitoring the Service Registry.
 
-The Application Service should also interact with the Configuration Service to understand each application and its infrastructural services configurations and dependencies. For example: if  Runtime Bundle (one of our core building blocks) depends on a Relational Database and a Message Broker, it can look into a Configuration Service (or configMaps) for an entry related to the application service to understand which infrastructural services are required for the application to run. We can be smart and list these requirements before deployment time, so an administrator can make sure that those infrastructural services are ready.
+The Application Service should also interact with the Configuration Service to understand each application and its infrastructural services configurations and dependencies. For example: if Runtime Bundle \(one of our core building blocks\) depends on a Relational Database and a Message Broker, it can look into a Configuration Service \(or configMaps\) for an entry related to the application service to understand which infrastructural services are required for the application to run. We can be smart and list these requirements before deployment time, so an administrator can make sure that those infrastructural services are ready.
 
 Applications have a relationship with IDM and security, because we are using Keycloak as our SSO and IDM provider, Applications might require to have a different realm configuration.
 
-![](../../assets/application-service-diagram.png)
+![](../../.gitbook/assets/application-service-diagram.png)
 
 The Application Service has relationships with 4 key components:
 
-- Configuration Service (ConfigMaps in K8s and Configuration Service in Spring Cloud)
-- Service Registry (Eureka outside of K8s and the K8s Service Registry)
-- Gateway (Spring Cloud Gateway)
-- Identity Management / SSO (KeyCloak)
+* Configuration Service \(ConfigMaps in K8s and Configuration Service in Spring Cloud\)
+* Service Registry \(Eureka outside of K8s and the K8s Service Registry\)
+* Gateway \(Spring Cloud Gateway\)
+* Identity Management / SSO \(KeyCloak\)
 
-In order to provide these high level abstractions (one application composed by a set of services) we need to have an Application Deployment Descriptor, which basically describe the Application expected structure. This Deployment Descriptor describes how the application is composed and implicitly define what is required for the Application to be UP (state).
+In order to provide these high level abstractions \(one application composed by a set of services\) we need to have an Application Deployment Descriptor, which basically describe the Application expected structure. This Deployment Descriptor describes how the application is composed and implicitly define what is required for the Application to be UP \(state\).
 
-For this reason, the first step of the interaction is to create this high level Deployment Descriptor.  This high level Deployment Descriptor maps the Activiti Cloud Building Blocks (Runtime Bundles, Cloud Connectors, Query & Audit Services, etc.) to an Application structure.
+For this reason, the first step of the interaction is to create this high level Deployment Descriptor. This high level Deployment Descriptor maps the Activiti Cloud Building Blocks \(Runtime Bundles, Cloud Connectors, Query & Audit Services, etc.\) to an Application structure.
 
 This Deployment Descriptor will live inside the Config Server, which has a structure to store Deployment Descriptors in a directory fashion. In other words, the Deployment Descriptor Directory will have a list of Application Deployment Descriptors available, that can be queried to obtain references to the available Deployment Descriptors for Applications.
 
@@ -29,8 +29,8 @@ This Deployment Descriptors will be used to match against the Service Registry t
 
 Each Service provisioned will require to have two pieces of MetaData that will allow the correlation against these Deployment Descriptors:
 
-- Activiti Cloud Application Name
-- Activiti Cloud Service Type
+* Activiti Cloud Application Name
+* Activiti Cloud Service Type
 
 If these two pieces of information are added to the Service Instance information inside the Service Registry, the Application Service will be able to correlate, validate and monitor the relationship between the services that are currently deployed.
 
@@ -40,44 +40,45 @@ The Application Service then, will be in charge of interacting with the Service 
 
 The sequence of interactions is as follows:
 
-![](../../assets/application-service-cycle.png)
+![](../../.gitbook/assets/application-service-cycle.png)
 
 It is important to notice that there is no state storing as part of the Application Service, all state is created based on the Deployment Descriptors in the Config Service and based on the currently deployed services in the Service Registry.
 
-## Data Types
+## Data Types
+
 As the first Draft of the service the following Data Types are going to be introduced.
 
 These entities and data types should be agnostic to the underlying implementation. These Data Types represent our view of the world when we think about Activiti Cloud Applications, and we shouldn’t assume any particular implementation or technology stack.
 
-- ApplicationDeploymentDirectory
-    - ApplicationDeploymentEntry[]
-- DeploymentDescriptor
-    - applicationName
-    - applicationVersion
-    - serviceDeploymentDescriptors[]
-      - Name
-      - Version
-      - ServiceType
-- Application[]
-  - Application
-    - Name
-    - Version
-    - ProjectRelease
-    - Realm (Security Group / IDM bindings)
-    - Status
-    - Services
-      - URL (path??)
-      - Configurations[]
-        - Resources[]
-      - ServiceType
-      - Name (Descriptive name)
-      - ArtifactName (artifact – maven / docker image)
-      - Version
-      - Status
-- ServiceType -> Enum:  (Connector, Runtime Bundle, Audit, Query, Domain Service)
-- ProjectRelease (Coming from Modeling Service)
-- Status (UP, DOWN, PENDING, ERROR)
-- Realm (TBD)
+* ApplicationDeploymentDirectory
+  * ApplicationDeploymentEntry\[\]
+* DeploymentDescriptor
+  * applicationName
+  * applicationVersion
+  * serviceDeploymentDescriptors\[\]
+    * Name
+    * Version
+    * ServiceType
+* Application\[\]
+  * Application
+    * Name
+    * Version
+    * ProjectRelease
+    * Realm \(Security Group / IDM bindings\)
+    * Status
+    * Services
+      * URL \(path??\)
+      * Configurations\[\]
+        * Resources\[\]
+      * ServiceType
+      * Name \(Descriptive name\)
+      * ArtifactName \(artifact – maven / docker image\)
+      * Version
+      * Status
+* ServiceType -&gt; Enum:  \(Connector, Runtime Bundle, Audit, Query, Domain Service\)
+* ProjectRelease \(Coming from Modeling Service\)
+* Status \(UP, DOWN, PENDING, ERROR\)
+* Realm \(TBD\)
 
 ## REST endpoints
 

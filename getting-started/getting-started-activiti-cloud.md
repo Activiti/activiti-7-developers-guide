@@ -22,7 +22,7 @@ By using these components you can create Activiti Cloud applications that:
 * can be upgraded and maintained independently
 * can provide domain specific features using the right tool for the job
 
-On this tutorial, we wanted to show how to get started by deploying an example set of these building blocks in Kubernetes. We strongly recommend having a real Kubernetes Cluster such as GKE, PKS or EKS. We have tested the content of this blog post in AWS (using Kops), PKS, GKE and also with Jenkins X.
+On this tutorial, we wanted to show how to get started by deploying an example set of these building blocks in Kubernetes. We strongly recommend having a real Kubernetes Cluster such as GKE, PKS or EKS. We have tested the content of this blog post in AWS \(Using Kops, PKS, GKE and also with Jenkins X\)
 
 Let’s get started with Kubernetes, HELM and Activiti Cloud.
 
@@ -40,7 +40,7 @@ This “Activiti Cloud Full Example” deploys the following components:
 
 ![Activiti Cloud application full example chart](../.gitbook/assets/activiti-cloud-full-example-chart.png)
 
-One important thing to notice is that each of the Activiti Cloud components can be used independently. This example is intended to show a large-scale deployment scenario. You can start small with a Runtime Bundle \(which provides the process and task runtimes\), but if you want to scale things up you need to know what you are aiming for, and these charts show you exactly that.
+One important thing to notice is that each of the Activiti Cloud components can be used independently. This example is intended to show a large-scale deployment scenario. You can start small with a Runtime Bundle \(which provides the process and task runtimes\), but if you want to scale things up you need to know what you are aiming for, and this charts shows you exactly that.
 
 ### Download and install Kubectl and HELM
 
@@ -59,7 +59,7 @@ Go to your Google Cloud Home Page \([https://console.cloud.google.com](https://c
 
 ![](../.gitbook/assets/gcp-console.png)
 
-Then select the CREATE CLUSTER button ![](../.gitbook/assets/screenshot-2018-12-13-at-10.04.37.png) from the top menu. 
+Then select the CREATE CLUSTER button ![](../.gitbook/assets/screenshot-2018-12-13-at-10.04.37.png) from  the top menu. 
 
 Enter the Cluster Name, select the Zone based on your location and I’ve selected 2 vCPUs and left the Size to the default value \(3\).
 
@@ -179,7 +179,7 @@ infrastructure:
 
 ```
 
-Once you have performed the 3 changes, deploy the chart by running the following command:
+Once you have performed  the 3 changes, deploy the chart by running the following command:
 
 ```bash
 helm install -f values.yaml activiti-cloud-charts/activiti-cloud-full-example
@@ -282,17 +282,17 @@ Finally, you can access to all services Swagger documentation by pointing your b
 
 All our services are using SpringFox to generate this documentation and provide a UI for it.
 
-Also the Activiti Cloud full example includes the BPMN 2.0 modeling experience that you can access at this address:  [http://activiti-cloud-gateway.](http://activiti-cloud-gateway.104.155.60.221.nip.io/activiti-cloud-modeling/)[EXTERNAL-IP.nip.io](http://activiti-cloud-gateway.EXTERNAL-IP.nip.io/rb-my-app/swagger-ui.html)[/activiti-cloud-modeling/](http://activiti-cloud-gateway.104.155.60.221.nip.io/activiti-cloud-modeling/) 
+Also the Activiti Cloud full example includes the bpmn 2 modeling experience that you can access at this address:  [http://activiti-cloud-gateway.](http://activiti-cloud-gateway.104.155.60.221.nip.io/activiti-cloud-modeling/)[EXTERNAL-IP.nip.io](http://activiti-cloud-gateway.EXTERNAL-IP.nip.io/rb-my-app/swagger-ui.html)[/activiti-cloud-modeling/](http://activiti-cloud-gateway.104.155.60.221.nip.io/activiti-cloud-modeling/) 
 
 Credentials: modeler/password
 
 ![](../.gitbook/assets/activiti-modeling-app.png)
 
-For more information about the BPMN designer, please check the [following blog post](https://community.alfresco.com/community/bpm/blog/2018/12/10/activiti-7-beta-using-the-modeler-to-design-business-processes).
+For more information about the bpmn designer, please check the [following blog post](https://community.alfresco.com/community/bpm/blog/2018/12/10/activiti-7-beta-using-the-modeler-to-design-business-processes).
 
 ## Summary
 
-In this quick-start we have seen how to create a Kubernetes cluster \(using GKE\) and deploy an Activiti Cloud application using the Activiti Cloud HELM charts. If you are not familiar with Kubernetes, Docker and GKE this might look like a lot of new information and it is our mission to simplify all the steps covered in this getting started guide. For that reason, we recommend you to checkout the Jenkins X project, which greatly simplifies the first two sections about creating clusters and configuring the basic infrastructure for your projects.
+In this quick-start we have seen how to create a Kubernetes cluster \(using GKE\) and deploy an Activiti Cloud application using the Activiti Cloud HELM charts. If you are not familiar with Kubernetes, Docker and GKE this might look like a lot of new information and it is our mission to simplify all the steps covered in these getting started guide. For that reason, we recommend you to checkout the Jenkins X project, which greatly simplifies the first two sections about creating clusters and configuring the basic infrastructure for your projects.
 
 As part of the Activiti Cloud initiative we are making sure that we follow best practices coming from the Kubernetes, Docker and Spring Cloud communities and we are contributing back with fixes and feedback to make this technology stack the best for Cloud Native applications.
 
