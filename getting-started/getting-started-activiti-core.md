@@ -44,7 +44,7 @@ If you are running inside a Spring Boot 2 application you only need to add the a
 </dependency>
 ```
 
-We recommend using our BOM \(bill of materials
+We recommend using our BOM \(bill of materials)
 
 [https://github.com/Activiti/activiti-examples/blob/master/activiti-api-basic-task-example/pom.xml\#L30](https://github.com/Activiti/activiti-examples/blob/master/activiti-api-basic-task-example/pom.xml#L30)
 
@@ -133,7 +133,7 @@ public TaskRuntimeEventListener taskAssignedListener() {
 }
 ```
 
-You can register as many TaskRuntimeEventListeners as you want. This will enable your application to be notified with Runtime events are triggered by the services.
+You can register as many TaskRuntimeEventListeners as you want. This will enable your application to be notified when Runtime events are triggered by the services.
 
 ## ProcessRuntime API
 
