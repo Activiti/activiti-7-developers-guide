@@ -59,7 +59,7 @@ Go to your Google Cloud Home Page \([https://console.cloud.google.com](https://c
 
 ![](../.gitbook/assets/gcp-console.png)
 
-Then select the CREATE CLUSTER button ![](assets/create-GKE-cluster-button.png) from  the top menu. 
+Then select the CREATE CLUSTER button ![](Activiti/activiti-7-developers-guide/getting-started/assets/create-GKE-cluster-button.png) from  the top menu. 
 
 Enter the Cluster Name, select the Zone based on your location and I’ve selected 2 vCPUs and left the Size to the default value \(3\).
 
