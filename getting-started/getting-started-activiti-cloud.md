@@ -55,11 +55,11 @@ Using a real life cluster is recommended. As a free option, the Google Cloud Pla
 
 Once you have created your account, install the Google Cloud SDK CLI tool: [https://cloud.google.com/sdk/install](https://cloud.google.com/sdk/install)
 
-Go to your Google Cloud Home Page \([https://console.cloud.google.com](https://console.cloud.google.com/)\) and select _**Kubernetes Engine / Clusters.**_ 
+Go to your Google Cloud Home Page \([https://console.cloud.google.com](https://console.cloud.google.com/)\) and select _**Kubernetes Engine / Clusters.**_
 
 ![](../.gitbook/assets/gcp-console.png)
 
-Then select the CREATE CLUSTER button ![](../assets/create-GKE-cluster-button.png) from  the top menu. 
+Then select the CREATE CLUSTER button ![](../.gitbook/assets/create-gke-cluster-button.png) from the top menu.
 
 Enter the Cluster Name, select the Zone based on your location and I’ve selected 2 vCPUs and left the Size to the default value \(3\).
 
@@ -79,9 +79,9 @@ Now you have your cluster configured and ready to be used.
 _Note: if you are working with an existing cluster, you will need to check if you have an Ingress Controller already installed, you can skip the following steps if that is the case._
 {% endhint %}
 
-Let's now configure HELM to work in the Cluster. We first need to give HELM permissions to deploy things into the cluster. Copy/clone/download the helm-service-account-role.yaml file from here: [https://github.com/Activiti/activiti-cloud-charts/blob/master/activiti-cloud-full-example/helm-service-account-role.yaml](https://github.com/Activiti/activiti-cloud-charts/blob/master/activiti-cloud-full-example/helm-service-account-role.yaml) \). 
+Let's now configure HELM to work in the Cluster. We first need to give HELM permissions to deploy things into the cluster. Copy/clone/download the helm-service-account-role.yaml file from here: [https://github.com/Activiti/activiti-cloud-charts/blob/master/activiti-cloud-full-example/helm-service-account-role.yaml](https://github.com/Activiti/activiti-cloud-charts/blob/master/activiti-cloud-full-example/helm-service-account-role.yaml) \).
 
-Run the commands below in your terminal: 
+Run the commands below in your terminal:
 
 ```bash
 kubectl apply -f helm-service-account-role.yaml
@@ -143,7 +143,7 @@ Expected results:
 
 The next step is to configure your deployment to your cluster. The Activiti Cloud Full Example Chart can be customized to turn on and off different features, but there is one mandatory parameter that needs to be provided which is the external domain name that is going to be used by this installation.
 
-In order to do this, download the values.yaml file located here: [https://github.com/Activiti/activiti-cloud-charts/blob/master/activiti-cloud-full-example/values.yaml](https://github.com/Activiti/activiti-cloud-charts/blob/master/activiti-cloud-full-example/values.yaml) . 
+In order to do this, download the values.yaml file located here: [https://github.com/Activiti/activiti-cloud-charts/blob/master/activiti-cloud-full-example/values.yaml](https://github.com/Activiti/activiti-cloud-charts/blob/master/activiti-cloud-full-example/values.yaml) .
 
 Replace the string “REPLACEME” to &lt;EXTERNAL-IP&gt;.nip.io.
 
@@ -176,10 +176,9 @@ infrastructure:
           hosts:
             - "activiti-keycloak.104.155.60.221.nip.io"
  ...
-
 ```
 
-Once you have performed  the 3 changes, deploy the chart by running the following command:
+Once you have performed the 3 changes, deploy the chart by running the following command:
 
 ```bash
 helm install -f values.yaml activiti-cloud-charts/activiti-cloud-full-example
@@ -215,12 +214,11 @@ Expected results:
 
 ## Interacting with your Application
 
-If you don't have it installed already, install the [Postman client](https://www.getpostman.com) on your machine. 
+If you don't have it installed already, install the [Postman client](https://www.getpostman.com) on your machine.
 
 Then, download the Activiti Cloud Postman collection from the [Activiti Cloud Examples repository](https://github.com/Activiti/activiti-cloud-examples) using the command below \(copy/paste into your terminal\):
 
 ```bash
-
 curl -o Activiti_v7_REST_API.postman_collection.json https://raw.githubusercontent.com/Activiti/activiti-cloud-examples/develop/Activiti%20v7%20REST%20API.postman_collection.json
 ```
 
@@ -282,7 +280,7 @@ Finally, you can access to all services Swagger documentation by pointing your b
 
 All our services are using SpringFox to generate this documentation and provide a UI for it.
 
-Also the Activiti Cloud full example includes the bpmn 2 modeling experience that you can access at this address:  [http://activiti-cloud-gateway.](http://activiti-cloud-gateway.104.155.60.221.nip.io/activiti-cloud-modeling/)[EXTERNAL-IP.nip.io](http://activiti-cloud-gateway.EXTERNAL-IP.nip.io/rb-my-app/swagger-ui.html)[/activiti-cloud-modeling/](http://activiti-cloud-gateway.104.155.60.221.nip.io/activiti-cloud-modeling/) 
+Also the Activiti Cloud full example includes the bpmn 2 modeling experience that you can access at this address: [http://activiti-cloud-gateway.](http://activiti-cloud-gateway.104.155.60.221.nip.io/activiti-cloud-modeling/)[EXTERNAL-IP.nip.io](http://activiti-cloud-gateway.EXTERNAL-IP.nip.io/rb-my-app/swagger-ui.html)[/activiti-cloud-modeling/](http://activiti-cloud-gateway.104.155.60.221.nip.io/activiti-cloud-modeling/)
 
 Credentials: modeler/password
 
