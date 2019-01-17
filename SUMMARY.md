@@ -8,7 +8,7 @@
   * [References](overview/references.md)
 * [Getting Started](getting-started/README.md)
   * [Getting Started - Activiti Cloud](getting-started/getting-started-activiti-cloud.md)
-* [Getting Started - Activiti Core](getting-started-activiti-core.md)
+  * [Getting Started - Activiti Core](getting-started/getting-started-activiti-core.md)
 * [Components](components/README.md)
   * [Spring Cloud](components/spring-cloud.md)
   * [Activiti Cloud Infrastructure](components/activiti-cloud-infrastructure/README.md)

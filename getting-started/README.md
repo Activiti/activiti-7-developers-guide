@@ -6,7 +6,7 @@ Welcome to this tutorial on how to get started with [Activiti](../). Two deploym
   * Step 1: Create and configure a Kubernetes cluster
   * Step 2: Deploy the Activiti Cloud Full Example
   * Step 3: Interact with your application
-* \_\_[_**Getting started with Activiti Core**_](../getting-started-activiti-core.md) __to learn how to use the new Java Runtime API inside a Spring Boot application. This spring boot approach is using Activiti Core as a library inside your java application.
+* \_\_[_**Getting started with Activiti Core**_](getting-started-activiti-core.md) __to learn how to use the new Java Runtime API inside a Spring Boot application. This spring boot approach is using Activiti Core as a library inside your java application.
 
 
 
