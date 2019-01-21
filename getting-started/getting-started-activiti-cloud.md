@@ -26,7 +26,7 @@ On this tutorial, we wanted to show how to get started by deploying an example s
 
 Let’s get started with Kubernetes, HELM and Activiti Cloud.
 
-## Kubernetes Deployment & HELM Charts
+## Install Kubectl, HELM and Activiti Cloud Full Example
 
 The quickest and easiest way to deploy things to Kubernetes is by using HELM charts. HELM, as described in the official documentation, is: “_a tool that streamlines installing and managing Kubernetes applications. Think of it like apt/yum/homebrew for Kubernetes_.”
 
@@ -42,7 +42,7 @@ This “Activiti Cloud Full Example” deploys the following components:
 
 One important thing to notice is that each of the Activiti Cloud components can be used independently. This example is intended to show a large-scale deployment scenario. You can start small with a Runtime Bundle \(which provides the process and task runtimes\), but if you want to scale things up you need to know what you are aiming for, and this charts shows you exactly that.
 
-### Download and install Kubectl and HELM
+### Install Kubectl and HELM
 
 * Kubectl : [https://kubernetes.io/docs/tasks/tools/install-kubectl/](https://kubernetes.io/docs/tasks/tools/install-kubectl/) 
 * HELM: [https://docs.helm.sh/using\_helm/\#installing-helm](https://docs.helm.sh/using_helm/#installing-helm) 
@@ -54,13 +54,13 @@ git clone https://github.com/Activiti/activiti-cloud-charts
 cd activiti-cloud-full-example
 ```
 
-## Create and configure the Google Kubernetes Engine \(GKE\) cluster
+## Create a Kubernetes cluster with the Google Cloud Platform
 
-Using a real life cluster is recommended. As a free option, the Google Cloud Platform offers a $300 free credit: [https://console.cloud.google.com/freetrial](https://console.cloud.google.com/freetrial)
+As a free option, the Google Cloud Platform offers a $300 free credit: [https://console.cloud.google.com/freetrial](https://console.cloud.google.com/freetrial)
 
 Once you have created your account, install the Google Cloud SDK CLI tool: [https://cloud.google.com/sdk/install](https://cloud.google.com/sdk/install)
 
-Go to your Google Cloud Home Page \([https://console.cloud.google.com](https://console.cloud.google.com/)\) and select _**Kubernetes Engine / Clusters.**_
+To create a new cluster, go to your Google Cloud Home Page \([https://console.cloud.google.com](https://console.cloud.google.com/)\) and select _**Kubernetes Engine / Clusters.**_
 
 ![](../.gitbook/assets/gcp-console.png)
 
@@ -84,9 +84,7 @@ Now you have your cluster configured and ready to be used.
 _Note: if you are working with an existing cluster, you will need to check if you have an Ingress Controller already installed, you can skip the following steps if that is the case._
 {% endhint %}
 
-Let's now configure HELM to work in the Cluster. We first need to give HELM permissions to deploy things into the cluster. Copy/clone/download the helm-service-account-role.yaml file from here: [https://github.com/Activiti/activiti-cloud-charts/blob/master/activiti-cloud-full-example/helm-service-account-role.yaml](https://github.com/Activiti/activiti-cloud-charts/blob/master/activiti-cloud-full-example/helm-service-account-role.yaml) \).
-
-Run the commands below in your terminal:
+Let's now configure HELM to work in the Cluster. We first need to give HELM permissions to deploy things into the cluster. From the “activiti-cloud-full-example” directory, run the commands below in your terminal:
 
 ```bash
 kubectl apply -f helm-service-account-role.yaml
