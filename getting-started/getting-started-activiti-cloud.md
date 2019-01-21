@@ -49,6 +49,11 @@ One important thing to notice is that each of the Activiti Cloud components can 
 
 Clone the [https://github.com/Activiti/activiti-cloud-charts](https://github.com/Activiti/activiti-cloud-charts) and go to the “activiti-cloud-full-example” directory, we will use some files from there.
 
+```bash
+git clone https://github.com/Activiti/activiti-cloud-charts
+cd activiti-cloud-full-example
+```
+
 ## Create and configure the Google Kubernetes Engine \(GKE\) cluster
 
 Using a real life cluster is recommended. As a free option, the Google Cloud Platform offers a $300 free credit: [https://console.cloud.google.com/freetrial](https://console.cloud.google.com/freetrial)
