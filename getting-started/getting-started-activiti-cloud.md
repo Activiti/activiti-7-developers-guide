@@ -51,7 +51,7 @@ Clone the [https://github.com/Activiti/activiti-cloud-charts](https://github.com
 
 ```bash
 git clone https://github.com/Activiti/activiti-cloud-charts
-cd activiti-cloud-full-example
+cd activiti-cloud-charts/activiti-cloud-full-example
 ```
 
 ## Create a Kubernetes cluster with the Google Cloud Platform
