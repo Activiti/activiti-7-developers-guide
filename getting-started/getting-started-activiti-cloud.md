@@ -26,7 +26,7 @@ On this tutorial, we wanted to show how to get started by deploying an example s
 
 Let’s get started with Kubernetes, HELM and Activiti Cloud.
 
-## Install Kubectl, HELM and Activiti Cloud Full Example
+## Prerequisites
 
 The quickest and easiest way to deploy things to Kubernetes is by using HELM charts. HELM, as described in the official documentation, is: “_a tool that streamlines installing and managing Kubernetes applications. Think of it like apt/yum/homebrew for Kubernetes_.”
 
@@ -42,25 +42,40 @@ This “Activiti Cloud Full Example” deploys the following components:
 
 One important thing to notice is that each of the Activiti Cloud components can be used independently. This example is intended to show a large-scale deployment scenario. You can start small with a Runtime Bundle \(which provides the process and task runtimes\), but if you want to scale things up you need to know what you are aiming for, and this charts shows you exactly that.
 
-### Install Kubectl and HELM
+### Install Kubectl, HELM and Activiti Cloud Full Example
 
 * Kubectl : [https://kubernetes.io/docs/tasks/tools/install-kubectl/](https://kubernetes.io/docs/tasks/tools/install-kubectl/) 
-* HELM: [https://docs.helm.sh/using\_helm/\#installing-helm](https://docs.helm.sh/using_helm/#installing-helm) 
+* HELM: [https://docs.helm.sh/using\_helm/\#installing-helm](https://docs.helm.sh/using_helm/#installing-helm)
 
 Clone the [https://github.com/Activiti/activiti-cloud-charts](https://github.com/Activiti/activiti-cloud-charts) and go to the “activiti-cloud-full-example” directory, we will use some files from there.
 
 ```bash
-git clone https://github.com/Activiti/activiti-cloud-charts
-cd activiti-cloud-charts/activiti-cloud-full-example
+$ git clone https://github.com/Activiti/activiti-cloud-charts
+$ cd activiti-cloud-charts/activiti-cloud-full-example
 ```
 
-## Create a Kubernetes cluster with the Google Cloud Platform
+The next consist in creating a Kubernetes cluster that you will use to deploy the Activiti Cloud full example. Here are the instructions for:
 
-As a free option, the Google Cloud Platform offers a $300 free credit: [https://console.cloud.google.com/freetrial](https://console.cloud.google.com/freetrial)
+* Google Cloud Platform  - GKE \(free option\)
+* Amazon Web Services - EKS
 
-Once you have created your account, install the Google Cloud SDK CLI tool: [https://cloud.google.com/sdk/install](https://cloud.google.com/sdk/install)
+We let you decide which cloud platform best suits you. You can also deploy the Activiti Cloud full example on you local machine using for example Docker Desktop. We recommend using a cloud infrastructure for a faster and smoother experience but if you need a local install you can check [our blog post series here](https://community.alfresco.com/community/bpm/blog/2018/12/10/getting-started-with-activiti-7-beta#jive_content_id_Deploying_and_Running_a_Business_Process). 
 
-To create a new cluster, go to your Google Cloud Home Page \([https://console.cloud.google.com](https://console.cloud.google.com/)\) and select _**Kubernetes Engine / Clusters.**_
+## Step 1: Create a Kubernetes cluster
+
+### A\) Using Google Cloud Platform - GKE
+
+#### 1\) Create a Google Cloud Platform \(GCP\) account
+
+As a free option, GCP offers a $300 free credit: [https://console.cloud.google.com/freetrial](https://console.cloud.google.com/freetrial)
+
+####  2\) Install CLI
+
+Install the SDK CLI tool: [https://cloud.google.com/sdk/install](https://cloud.google.com/sdk/install)
+
+#### 3\) Create a Kubernetes cluster \(GKE\)
+
+To create a new Kubernetes cluster, go to your GCP Console Home Page \([https://console.cloud.google.com](https://console.cloud.google.com/)\) and select _**Kubernetes Engine / Clusters.**_
 
 ![](../.gitbook/assets/gcp-console.png)
 
@@ -84,14 +99,108 @@ Now you have your cluster configured and ready to be used.
 _Note: if you are working with an existing cluster, you will need to check if you have an Ingress Controller already installed, you can skip the following steps if that is the case._
 {% endhint %}
 
+### B\) Using Amazon Web Services - EKS
+
+#### 1\) Install aws-iam-authenticator for Amazon EKS
+
+Amazon EKS clusters requires the [AWS IAM Authenticator for Kubernetes](https://github.com/kubernetes-sigs/aws-iam-authenticator) to allow IAM authentication for your Kubernetes cluster. Use go get to install the aws-iam-authenticator binary:
+
+```bash
+$ go get -u -v github.com/kubernetes-sigs/aws-iam-authenticator/cmd/aws-iam-authenticator
+```
+
+{% hint style="info" %}
+_Note: use Go 1.7 or greater._
+{% endhint %}
+
+Add $HOME/go/bin to your PATH environment variable:
+
+* For Bash shells on macOS:
+
+```bash
+$ export PATH=$HOME/go/bin:$PATH && echo 'export PATH=$HOME/go/bin:$PATH' >> ~/.bash_profile
+```
+
+* For Bash shells on Linux:
+
+```bash
+ $ export PATH=$HOME/go/bin:$PATH && echo 'export PATH=$HOME/go/bin:$PATH' >> ~/.bashrc
+```
+
+Run this command to test that the aws-iam-authenticator binary works:
+
+```bash
+$ aws-iam-authenticator help
+```
+
+#### **2/ Install AWS CLI**
+
+To install the aws cli, check the user guide: [https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)
+
+Once installed, check your AWS CLI version with the following command:
+
+```bash
+$ aws --version
+```
+
+Example output:
+
+```text
+aws-cli/1.16.87 Python/3.7.2 Darwin/18.2.0 botocore/1.12.77
+```
+
+{% hint style="info" %}
+_Note: your system's Python version must be Python 3, or Python 2.7.9 or greater. Otherwise, you receive hostname doesn't match errors with AWS CLI calls to Amazon EKS._
+{% endhint %}
+
+Configure your AWS CLI to interact with your AWS account using the command below:
+
+```text
+$ aws configure
+AWS Access Key ID [None]: <your-access-key-ID>
+AWS Secret Access Key [None]:<your-secet-access-key>
+Default region name [None]: <your-region>
+Default output format [None]: json
+```
+
+#### 3/ Create a Kubernetes cluster \(EKS\)
+
+To simplify the creation of our cluster on EKS, we are using a simple CLI tool named eksctl available here: [https://github.com/weaveworks/eksctl](https://github.com/weaveworks/eksctl).
+
+To create a basic EKS cluster with a given name and region, run:
+
+```bash
+$ eksctl create cluster [--name=<name>] [--region=<region>]
+```
+
+Go to your AWS console and check the details about your EKS cluster.
+
+![AWS Console EKS dashboard.](https://lh4.googleusercontent.com/12kEk6ILvXG1RaVr-evgNwOeCzRAHaequODOj2a9iMC5Ahj53ZUrQvjbSl-Kx-sZLRXxbo0W1AsP9ES_VYwWAjgln0nIx7LYz5bjinmW-j-7BagbaTgKVYdRrcn9RGlpKtxp5jVH)
+
+#### **4\) Configure Kubectl for Amazon EKS**
+
+Use the AWS CLI update-kubeconfig command to create or update your kubeconfig for your cluster.
+
+```bash
+$ aws eks update-kubeconfig --name <cluster_name>
+```
+
+Test your configuration:
+
+```bash
+$ kubectl get svc
+```
+
+##  **Step 2: Configure HELM and install NGINX Ingress**
+
 Let's now configure HELM to work in the Cluster. We first need to give HELM permissions to deploy things into the cluster. From the “activiti-cloud-full-example” directory, run the commands below in your terminal:
 
 ```bash
-kubectl apply -f helm-service-account-role.yaml
+$ kubectl apply -f helm-service-account-role.yaml
 ```
 
 ```bash
-helm init --service-account helm --upgrade
+$ helm init --service-account helm --upgrade
 ```
 
 Expected results:
@@ -103,7 +212,7 @@ Expected results:
 One more thing that we need to do in order to be able to expose our services to be accessed from outside the cluster is to set up an Ingress Controller, which will automatically create routes to the internal services that we want to expose, in order to do this we just need to run the following command:
 
 ```bash
-helm install stable/nginx-ingress
+$ helm install stable/nginx-ingress
 ```
 
 Expected results:
@@ -113,46 +222,46 @@ Expected results:
 Now that NGINX Ingress Controller is being deployed, we need to wait for it to expose itself using a Public IP. We need this Public IP to interact with our services from outside the cluster. You can find this IP by running the following command:
 
 ```bash
-kubectl get services
+$ kubectl get services
 ```
 
-Expected results:
+Example output with GCP deployment:
 
 ![](../.gitbook/assets/kubectl-get-services-ip.png)
 
-{% hint style="info" %}
-_Note: you might need to run kubectl get services serveral times until you can see the External IP for your ingress controller. If you see PENDING, wait for a few seconds and run the command again._
-{% endhint %}
-
 We will use nip.io as DNS service to map our services to this External IP which will follow the following format: ..nip.io
 
-## Deploying Activiti Cloud Full Example
+Example output with AWS deployment:
+
+![](../.gitbook/assets/nginx-ingress-dns.png)
+
+## Step 3: Deploy Activiti Cloud Full Example
 
 Now that we have our Cluster in place, HELM installed and an Ingress Controller to access our services from outside the cluster we are ready to deploy the Activiti Cloud Full Example HELM Chart.
 
 The first step is to register the Activiti Cloud HELM charts into HELM. We do this by running the following commands:
 
 ```bash
-helm repo add activiti-cloud-charts https://activiti.github.io/activiti-cloud-charts/
+$ helm repo add activiti-cloud-charts https://activiti.github.io/activiti-cloud-charts/
 ```
 
 ```bash
-helm repo update
+$ helm repo update
 ```
 
-Expected results:
+Example output:
 
 ![](../.gitbook/assets/screenshot-2018-12-13-at-10.55.52.png)
 
 The next step is to configure your deployment to your cluster. The Activiti Cloud Full Example Chart can be customized to turn on and off different features, but there is one mandatory parameter that needs to be provided which is the external domain name that is going to be used by this installation.
 
-In order to do this, download the values.yaml file located here: [https://github.com/Activiti/activiti-cloud-charts/blob/master/activiti-cloud-full-example/values.yaml](https://github.com/Activiti/activiti-cloud-charts/blob/master/activiti-cloud-full-example/values.yaml) .
+### A\) Configure your deployment for GCP
 
-Replace the string “REPLACEME” to &lt;EXTERNAL-IP&gt;.nip.io.
+Open the “_values.yaml_” file located at: activiti-cloud-charts/activiti-cloud-full-example.
 
-In our case: 104.155.53.158.nip.io in every occurrence of “REPLACEME”.
+Set the Activiti Cloud modeling to true and replace the 3 occurrences of the string “**REPLACEME**” to "**&lt;EXTERNAL-IP&gt;.nip.io**". In our case: **104.155.53.158.nip.io** in every occurrence of “**REPLACEME**”.
 
-Set the Activiti Cloud modeling to true.
+Example "_values.yaml_" file:
 
 ```yaml
 # Default values for activiti-cloud-full-example.
@@ -181,10 +290,55 @@ infrastructure:
  ...
 ```
 
-Once you have performed the 3 changes, deploy the chart by running the following command:
+### B\) Configure your deployment for AWS
+
+With AWS, you need to create a new Record Set in Route 53. To do so, go to the AWS Management Console and open the Route 53 console. Select a public Hosted Zones and create a new Record Set. Name it using “\*” character in order to create a wildcard. In the Alias Target, select the DNS name of the Ingress controller that we deployed earlier. Use the following command to get the ELB DNS name:
 
 ```bash
-helm install -f values.yaml activiti-cloud-charts/activiti-cloud-full-example
+$ kubectl get services
+```
+
+![New Record Set in Route 53.](../.gitbook/assets/route-53-record-set-elb-dns.png)
+
+Open the “_values.yaml_” file located at: activiti-cloud-charts/activiti-cloud-full-example.
+
+Set the Activiti Cloud modeling to true and replace the 3 occurrences of the string “**REPLACEME**” to "**&lt;your-public-domain&gt;**". In our case: _**raphaelallegre.com**_ in every occurrence of “**REPLACEME**”.
+
+Example "_values.yaml_" file:
+
+```yaml
+# Default values for activiti-cloud-full-example.
+...
+
+global:
+  keycloak:
+    url: "http://activiti-keycloak.raphaelallegre.com/auth"
+  gateway:
+    host: &gatewayhost "activiti-cloud-gateway.raphaelallegre.com"
+
+activiti-cloud-modeling:
+  enabled: true
+...
+infrastructure:
+  activiti-keycloak:
+    keycloak:
+      enabled: true
+      keycloak:
+        ingress:
+          enabled: true
+          path: /
+          proxyBufferSize: "16k"
+          hosts:
+            - "activiti-keycloak.raphaelallegre.com"
+ ...
+```
+
+### C\) Deploy the Helm chart
+
+Once you have performed the 4 changes, deploy the chart by running the following command:
+
+```bash
+$ helm install -f values.yaml activiti-cloud-charts/activiti-cloud-full-example
 ```
 
 Expected results:
@@ -211,15 +365,39 @@ In order to access to your services now, you can run the following command:
 kubectl get ingress
 ```
 
-Expected results:
+Expected results with GCP deployment:
 
 ![](../.gitbook/assets/kubectl-get-ingress.png)
 
-## Interacting with your Application
+Expected results with AWS deployment:
+
+![](../.gitbook/assets/kube-get-ingress-aws-eks.png)
+
+### D\) Access your services
+
+You can access the Keycloak admin console and the Activiti Cloud Modeling application at:
+
+For GCP at:
+
+* [http://activiti-keycloak](http://activiti-keycloak).&lt;EXTERNAL-IP&gt;.nip.io/auth \(admin/admin\)
+* [http://activiti-cloud-gateway](http://activiti-cloud-gateway).&lt;EXTERNAL-IP&gt;.nip.io/activiti-cloud-modeling \(modeler/password\)
+
+For AWS at:
+
+* [http://activiti-keycloak](http://activiti-keycloak).&lt;yourpublicdomain&gt;/auth \(admin/admin\)
+* [http://activiti-cloud-gateway](http://activiti-cloud-gateway).&lt;yourpublicdomain&gt;/activiti-cloud-modeling \(modeler/password\)
+
+In our case, here is the BPMN 2 process modelling application:
+
+![Activiti BPMN 2 process modelling application.](../.gitbook/assets/activiti-modeling-application.png)
+
+For more information about the BPMN modelling application, please check the [following blog post](https://community.alfresco.com/community/bpm/blog/2018/12/10/activiti-7-beta-using-the-modeler-to-design-business-processes).
+
+## Step 4: Interact with your Application
 
 If you don't have it installed already, install the [Postman client](https://www.getpostman.com) on your machine.
 
-Then, download the Activiti Cloud Postman collection from the [Activiti Cloud Examples repository](https://github.com/Activiti/activiti-cloud-examples) using the command below \(copy/paste into your terminal\):
+Then, download the Activiti Cloud Postman collection from the [Activiti Cloud Examples repository](https://github.com/Activiti/activiti-cloud-examples) using the command:
 
 ```bash
 curl -o Activiti_v7_REST_API.postman_collection.json https://raw.githubusercontent.com/Activiti/activiti-cloud-examples/develop/Activiti%20v7%20REST%20API.postman_collection.json
@@ -282,14 +460,6 @@ Finally, you can access to all services Swagger documentation by pointing your b
 ![](../.gitbook/assets/screenshot-2018-12-13-at-11.21.47.png)
 
 All our services are using SpringFox to generate this documentation and provide a UI for it.
-
-Also the Activiti Cloud full example includes the bpmn 2 modeling experience that you can access at this address: [http://activiti-cloud-gateway.](http://activiti-cloud-gateway.104.155.60.221.nip.io/activiti-cloud-modeling/)[EXTERNAL-IP.nip.io](http://activiti-cloud-gateway.EXTERNAL-IP.nip.io/rb-my-app/swagger-ui.html)[/activiti-cloud-modeling/](http://activiti-cloud-gateway.104.155.60.221.nip.io/activiti-cloud-modeling/)
-
-Credentials: modeler/password
-
-![](../.gitbook/assets/activiti-modeling-app.png)
-
-For more information about the bpmn designer, please check the [following blog post](https://community.alfresco.com/community/bpm/blog/2018/12/10/activiti-7-beta-using-the-modeler-to-design-business-processes).
 
 ## Summary
 
