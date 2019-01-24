@@ -93,7 +93,7 @@ This will open a popup with a command to connect to the cluster. Copy it to your
 
 ![](../.gitbook/assets/screenshot-2018-12-13-at-10.13.17.png)
 
-Now you have your cluster configured and ready to be used, you can jump to **Step 2**.
+Now you have your cluster configured and ready to be used, you can jump to [**Step 2**](#step-2-configure-helm-and-install-nginx-ingress).
 
 {% hint style="info" %}
 _Note: if you are working with an existing cluster, you will need to check if you have an Ingress Controller already installed, you can skip the NGINX Ingress installation \(step 2\) if that is the case._
