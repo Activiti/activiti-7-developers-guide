@@ -56,8 +56,8 @@ $ cd activiti-cloud-charts/activiti-cloud-full-example
 
 The next consist in creating a Kubernetes cluster that you will use to deploy the Activiti Cloud full example. Here are the instructions for:
 
-* Google Cloud Platform  - GKE \(free option\)
-* Amazon Web Services - EKS
+* [Google Cloud Platform  - GKE \(free option\)](#a-using-google-cloud-platform-gke)
+* [Amazon Web Services - EKS](#b-using-amazon-web-services-eks)
 
 We let you decide which cloud platform best suits you. You can also deploy the Activiti Cloud full example on you local machine using for example Docker Desktop. We recommend using a cloud infrastructure for a faster and smoother experience but if you need a local install you can check [our blog post series here](https://community.alfresco.com/community/bpm/blog/2018/12/10/getting-started-with-activiti-7-beta#jive_content_id_Deploying_and_Running_a_Business_Process). 
 
