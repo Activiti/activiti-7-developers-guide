@@ -188,14 +188,14 @@ Go to your AWS console and check the details about your EKS cluster.
 
 ![AWS Console EKS dashboard.](https://lh4.googleusercontent.com/12kEk6ILvXG1RaVr-evgNwOeCzRAHaequODOj2a9iMC5Ahj53ZUrQvjbSl-Kx-sZLRXxbo0W1AsP9ES_VYwWAjgln0nIx7LYz5bjinmW-j-7BagbaTgKVYdRrcn9RGlpKtxp5jVH)
 
-{% hint style="info" %}
-Note: to delete your EKS cluster run the command:
+{% hint style="warning" %}
+_Note: to delete your EKS cluster run the command:_
 
 ```bash
 eksctl delete cluster --name=<name> [--region=<region>]
 ```
 
-Make sure it deleted all the associated EC2 resources avoiding you any bad surprises when checking your bill 😀 
+_Make sure it deleted all the associated EC2 resources avoiding you any bad surprises when checking your bill_ 😀
 {% endhint %}
 
 #### **4\) Configure Kubectl for Amazon EKS**
@@ -310,7 +310,8 @@ infrastructure:
             - "activiti-keycloak.104.155.60.221.nip.io"
  ...
 ```
-You can now go directly to [Deploy the Helm chart section](#c-deploy-the-helm-chart)
+
+You can now go directly to [Deploy the Helm chart section](getting-started-activiti-cloud.md#c-deploy-the-helm-chart)
 
 ### B\) Configure your deployment for AWS
 
