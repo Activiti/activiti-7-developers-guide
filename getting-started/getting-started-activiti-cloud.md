@@ -310,6 +310,7 @@ infrastructure:
             - "activiti-keycloak.104.155.60.221.nip.io"
  ...
 ```
+You can now go directly to [Deploy the Helm chart section](#c-deploy-the-helm-chart)
 
 ### B\) Configure your deployment for AWS
 
