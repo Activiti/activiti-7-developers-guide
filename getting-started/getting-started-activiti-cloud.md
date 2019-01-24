@@ -56,10 +56,10 @@ $ cd activiti-cloud-charts/activiti-cloud-full-example
 
 The next consist in creating a Kubernetes cluster that you will use to deploy the Activiti Cloud full example. Here are the instructions for:
 
-* [Google Cloud Platform  - GKE \(free option\)](#a-using-google-cloud-platform-gke)
-* [Amazon Web Services - EKS](#b-using-amazon-web-services-eks)
+* [Google Cloud Platform  - GKE \(free option\)](getting-started-activiti-cloud.md#a-using-google-cloud-platform-gke)
+* [Amazon Web Services - EKS](getting-started-activiti-cloud.md#b-using-amazon-web-services-eks)
 
-We let you decide which cloud platform best suits you. You can also deploy the Activiti Cloud full example on you local machine using for example Docker Desktop. We recommend using a cloud infrastructure for a faster and smoother experience but if you need a local install you can check [our blog post series here](https://community.alfresco.com/community/bpm/blog/2018/12/10/getting-started-with-activiti-7-beta#jive_content_id_Deploying_and_Running_a_Business_Process). 
+We let you decide which cloud platform best suits you. You can also deploy the Activiti Cloud full example on you local machine using for example Docker Desktop. We recommend using a cloud infrastructure for a faster and smoother experience but if you need a local install you can check [our blog post series here](https://community.alfresco.com/community/bpm/blog/2018/12/10/getting-started-with-activiti-7-beta#jive_content_id_Deploying_and_Running_a_Business_Process).
 
 ## Step 1: Create a Kubernetes cluster
 
@@ -69,7 +69,7 @@ We let you decide which cloud platform best suits you. You can also deploy the A
 
 As a free option, GCP offers a $300 free credit: [https://console.cloud.google.com/freetrial](https://console.cloud.google.com/freetrial)
 
-####  2\) Install CLI
+#### 2\) Install CLI
 
 Install the SDK CLI tool: [https://cloud.google.com/sdk/install](https://cloud.google.com/sdk/install)
 
@@ -93,7 +93,7 @@ This will open a popup with a command to connect to the cluster. Copy it to your
 
 ![](../.gitbook/assets/screenshot-2018-12-13-at-10.13.17.png)
 
-Now you have your cluster configured and ready to be used, you can jump to [**Step 2**](#step-2-configure-helm-and-install-nginx-ingress).
+Now you have your cluster configured and ready to be used, you can jump directly to [**Step 2**](getting-started-activiti-cloud.md#step-2-configure-helm-and-install-nginx-ingress).
 
 {% hint style="info" %}
 _Note: if you are working with an existing cluster, you will need to check if you have an Ingress Controller already installed, you can skip the NGINX Ingress installation \(step 2\) if that is the case._
@@ -173,9 +173,30 @@ To create a basic EKS cluster with a given name and region, run:
 $ eksctl create cluster [--name=<name>] [--region=<region>]
 ```
 
+A cluster will be created with default parameters:
+
+* exciting auto-generated name, e.g. "fabulous-mushroom-1527688624"
+* 2x `m5.large` nodes \(this instance type suits most common use-cases, and is good value for money\)
+* use official AWS EKS AMI
+* `us-west-2` region
+* dedicated VPC \(check your quotas\)
+* using static AMI resolver
+
+Check the [eksctl doc](https://github.com/weaveworks/eksctl) if you want to change default parameters.
+
 Go to your AWS console and check the details about your EKS cluster.
 
 ![AWS Console EKS dashboard.](https://lh4.googleusercontent.com/12kEk6ILvXG1RaVr-evgNwOeCzRAHaequODOj2a9iMC5Ahj53ZUrQvjbSl-Kx-sZLRXxbo0W1AsP9ES_VYwWAjgln0nIx7LYz5bjinmW-j-7BagbaTgKVYdRrcn9RGlpKtxp5jVH)
+
+{% hint style="info" %}
+Note: to delete your EKS cluster run the command:
+
+```bash
+eksctl delete cluster --name=<name> [--region=<region>]
+```
+
+Make sure it deleted all the associated EC2 resources avoiding you any bad surprises when checking your bill 😀 
+{% endhint %}
 
 #### **4\) Configure Kubectl for Amazon EKS**
 
@@ -191,7 +212,7 @@ Test your configuration:
 $ kubectl get svc
 ```
 
-##  **Step 2: Configure HELM and install NGINX Ingress**
+## **Step 2: Configure HELM and install NGINX Ingress**
 
 Let's now configure HELM to work in the Cluster. We first need to give HELM permissions to deploy things into the cluster. From the “activiti-cloud-full-example” directory, run the commands below in your terminal:
 
