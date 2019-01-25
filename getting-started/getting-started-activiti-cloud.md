@@ -382,7 +382,7 @@ Expected results:
 _Note: the READY column 1/1 in all the pods, that means that we have 1 pod in Kubernetes running our service. It is also important to notice that HELM created a release of our CHART. Because we haven’t specified a name for this release HELM choose one random name, in our case, it was: bumptious-yak. This means that we can manage this release independently of other Activiti Cloud Applications that we want to deploy using the same approach. You can run helm list and then helm delete to remove all the Activiti Cloud Services for this release._
 {% endhint %}
 
-In order to access to your services now, you can run the following command:
+In order to access your services now, you can run the following command:
 
 ```bash
 kubectl get ingress
@@ -438,7 +438,7 @@ For gateway you need to copy the url associated with your Ingress, the same for 
 
 ![](../.gitbook/assets/postman-env-variables.png)
 
-Click Save or Update and then you are ready to start using that Environment. Make sure that you select the environment in the dropdown of the right:
+Click Save or Update and then you are ready to start using that Environment. Make sure that you select the environment in the dropdown on the right:
 
 ![](../.gitbook/assets/postman-select-env-and-get-a-token.png)
 
@@ -486,7 +486,7 @@ All our services are using SpringFox to generate this documentation and provide 
 
 ## Summary
 
-In this tutorial we have seen how to create a Kubernetes cluster \(using GKE or EKS\) and deploy an Activiti Cloud application using the Activiti Cloud HELM charts. If you are not familiar with Kubernetes, Docker and GKE or AWS this might look like a lot of new information and it is our mission to simplify all the steps covered in these getting started guide. For that reason, we recommend you to checkout the Jenkins X project, which greatly simplifies the first two sections about creating clusters and configuring the basic infrastructure for your projects.
+In this tutorial we have seen how to create a Kubernetes cluster \(using GKE or EKS\) and deploy an Activiti Cloud application using the Activiti Cloud HELM charts. If you are not familiar with Kubernetes, Docker and GKE or AWS this might look like a lot of new information and it is our mission to simplify all the steps covered in these getting started guides. For that reason, we recommend you checkout the Jenkins X project, which greatly simplifies the first two sections about creating clusters and configuring the basic infrastructure for your projects.
 
 As part of the Activiti Cloud initiative we are making sure that we follow best practices coming from the Kubernetes, Docker and Spring Cloud communities and we are contributing back with fixes and feedback to make this technology stack the best for Cloud Native applications.
 
