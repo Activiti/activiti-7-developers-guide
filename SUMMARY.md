@@ -31,6 +31,7 @@
   * [Repositories](community/repositories.md)
   * [Contributing](community/contributing.md)
 * [Releases](releases/README.md)
+  * [RC1](releases/7.0.0.RC1.md)
   * [Beta5](releases/7.0.0.beta5.md)
   * [Beta4](releases/7.0.0.beta4.md)
   * [Beta3](releases/7.0.0.beta3.md)
