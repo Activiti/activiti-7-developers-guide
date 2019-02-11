@@ -233,7 +233,7 @@ Expected results:
 One more thing that we need to do in order to be able to expose our services to be accessed from outside the cluster is to set up an Ingress Controller, which will automatically create routes to the internal services that we want to expose, in order to do this we just need to run the following command:
 
 ```bash
-$ helm install stable/nginx-ingress
+$ helm install stable/nginx-ingress --version 1.1.2
 ```
 
 Expected results:
