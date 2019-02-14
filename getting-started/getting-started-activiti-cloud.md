@@ -299,7 +299,7 @@ We will use "**your-public-domain**" to deploy Activiti Helm chart in the next s
 Once you have resolved you domain name, install Helm chart by running the Helm install command using your public domain name to set the `global.gateway.domain` key. In our case replace the string “**REPLACEME**” with the domain from previous step.
 
 ```bash
-$ helm install activiti-cloud-charts/activiti-cloud-full-example --set global.gateway.domain=REPLACEME
+$ helm install example activiti-cloud-charts/activiti-cloud-full-example --set global.gateway.domain=REPLACEME
 ```
 
 Expected results:
