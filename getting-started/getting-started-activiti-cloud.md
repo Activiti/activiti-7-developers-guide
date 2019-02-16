@@ -274,42 +274,11 @@ Example output:
 
 ![](../.gitbook/assets/screenshot-2018-12-13-at-10.55.52.png)
 
-The next step is to configure your deployment to your cluster. The Activiti Cloud Full Example Chart can be customized to turn on and off different features, but there is one mandatory parameter that needs to be provided which is the external domain name that is going to be used by this installation.
+The next step is to configure your deployment to your cluster. The Activiti Cloud Full Example Chart can be customized to turn on and off different features, but there is one mandatory parameter that needs to be provided which is the external domain name that is going to be used by this installation:
 
 ### A\) Configure your deployment for GCP
 
-Open the “_values.yaml_” file located at: activiti-cloud-charts/activiti-cloud-full-example.
-
-Set the Activiti Cloud modeling to true and replace the 3 occurrences of the string “**REPLACEME**” to "**&lt;EXTERNAL-IP&gt;.nip.io**". In our case: **104.155.53.158.nip.io** in every occurrence of “**REPLACEME**”.
-
-Example "_values.yaml_" file:
-
-```yaml
-# Default values for activiti-cloud-full-example.
-...
-
-global:
-  keycloak:
-    url: "http://activiti-keycloak.104.155.60.221.nip.io/auth"
-  gateway:
-    host: &gatewayhost "activiti-cloud-gateway.104.155.60.221.nip.io"
-
-activiti-cloud-modeling:
-  enabled: true
-...
-infrastructure:
-  activiti-keycloak:
-    keycloak:
-      enabled: true
-      keycloak:
-        ingress:
-          enabled: true
-          path: /
-          proxyBufferSize: "16k"
-          hosts:
-            - "activiti-keycloak.104.155.60.221.nip.io"
- ...
-```
+We will use "**&lt;EXTERNAL-IP&gt;.nip.io**" to deploy Activiti Helm chart. In our case: **104.155.53.158.nip.io**
 
 You can now go directly to [Deploy the Helm chart section](getting-started-activiti-cloud.md#c-deploy-the-helm-chart)
 
@@ -323,50 +292,48 @@ $ kubectl get services
 
 ![New Record Set in Route 53.](../.gitbook/assets/route-53-record-set-elb-dns.png)
 
-Open the “_values.yaml_” file located at: activiti-cloud-charts/activiti-cloud-full-example.
-
-Set the Activiti Cloud modeling to true and replace the 3 occurrences of the string “**REPLACEME**” to "**&lt;your-public-domain&gt;**". In our case: _**raphaelallegre.com**_ in every occurrence of “**REPLACEME**”.
-
-Example "_values.yaml_" file:
-
-```yaml
-# Default values for activiti-cloud-full-example.
-...
-
-global:
-  keycloak:
-    url: "http://activiti-keycloak.raphaelallegre.com/auth"
-  gateway:
-    host: &gatewayhost "activiti-cloud-gateway.raphaelallegre.com"
-
-activiti-cloud-modeling:
-  enabled: true
-...
-infrastructure:
-  activiti-keycloak:
-    keycloak:
-      enabled: true
-      keycloak:
-        ingress:
-          enabled: true
-          path: /
-          proxyBufferSize: "16k"
-          hosts:
-            - "activiti-keycloak.raphaelallegre.com"
- ...
-```
+We will use "**your-public-domain**" to deploy Activiti Helm chart in the next section. In our case: **raphaelallegre.com**.
 
 ### C\) Deploy the Helm chart
 
-Once you have performed the 4 changes, deploy the chart by running the following command:
+Once you have resolved you domain name, install Helm chart by running the Helm install command using your public domain name to set the `global.gateway.domain` key. In our case replace the string “**REPLACEME**” with the domain from previous step.
 
 ```bash
-$ helm install -f values.yaml activiti-cloud-charts/activiti-cloud-full-example
+$ helm install example activiti-cloud-charts/activiti-cloud-full-example --set global.gateway.domain=REPLACEME
 ```
 
 Expected results:
 
-![](../.gitbook/assets/deploy-activiti-cloud.png)
+```
+NOTES:
+               _   _       _ _   _    _____ _                 _
+     /\       | | (_)     (_) | (_)  / ____| |               | |
+    /  \   ___| |_ ___   ___| |_ _  | |    | | ___  _   _  __| |
+   / /\ \ / __| __| \ \ / / | __| | | |    | |/ _ \| | | |/ _` |
+  / ____ \ (__| |_| |\ V /| | |_| | | |____| | (_) | |_| | (_| |
+ /_/    \_\___|\__|_| \_/ |_|\__|_|  \_____|_|\___/ \__,_|\__,_|
+ Version: 7.0.0.GA
+
+Thank you for installing activiti-cloud-full-example-1.1.1
+
+Your release is named example.
+
+To learn more about the release, try:
+
+  $ helm status example
+  $ helm get example
+
+Get the application URLs:
+
+Activiti Keycloak : http://activiti-cloud-gateway.104.105.153.158.nip.io/auth
+Activiti Gateway  : http://activiti-cloud-gateway.104.105.153.158.nip.io/
+Activiti Modeler  : http://activiti-cloud-gateway.104.105.153.158.nip.io/activiti-cloud-modeling
+Activiti GraphiQL : http://activiti-cloud-gateway.104.105.153.158.nip.io/graphiql
+
+To see deployment status, try:
+
+  $ kubectl get pods 
+```
 
 This will trigger the deployment process, and you need to wait until the services are up and running. You can check this by running:
 
@@ -402,12 +369,12 @@ You can access the Keycloak admin console and the Activiti Cloud Modeling applic
 
 For GCP at:
 
-* [http://activiti-keycloak](http://activiti-keycloak).&lt;EXTERNAL-IP&gt;.nip.io/auth \(admin/admin\)
+* [http://activiti-cloud-gateway](http://activiti-cloud-gateway.&lt;EXTERNAL-IP&gt;.nip.io/auth \(admin/admin\)
 * [http://activiti-cloud-gateway](http://activiti-cloud-gateway).&lt;EXTERNAL-IP&gt;.nip.io/activiti-cloud-modeling \(modeler/password\)
 
 For AWS at:
 
-* [http://activiti-keycloak](http://activiti-keycloak).&lt;yourpublicdomain&gt;/auth \(admin/admin\)
+* [http://activiti-cloud-gateway](http://activiti-cloud-gateway).&lt;yourpublicdomain&gt;/auth \(admin/admin\)
 * [http://activiti-cloud-gateway](http://activiti-cloud-gateway).&lt;yourpublicdomain&gt;/activiti-cloud-modeling \(modeler/password\)
 
 In our case, here is the BPMN 2 process modelling application:
