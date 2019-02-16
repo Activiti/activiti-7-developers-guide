@@ -260,6 +260,8 @@ Example output with AWS deployment:
 
 Now that we have our Cluster in place, HELM installed and an Ingress Controller to access our services from outside the cluster we are ready to deploy the Activiti Cloud Full Example HELM Chart.
 
+[![asciicast](https://asciinema.org/a/227940.svg)](https://asciinema.org/a/227940)
+
 The first step is to register the Activiti Cloud HELM charts into HELM. We do this by running the following commands:
 
 ```bash
