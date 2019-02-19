@@ -50,8 +50,8 @@ One important thing to notice is that each of the Activiti Cloud components can 
 Clone the [https://github.com/Activiti/activiti-cloud-charts](https://github.com/Activiti/activiti-cloud-charts) and go to the “activiti-cloud-full-example” directory, we will use some files from there.
 
 ```bash
-$ git clone https://github.com/Activiti/activiti-cloud-charts
-$ cd activiti-cloud-charts/activiti-cloud-full-example
+git clone https://github.com/Activiti/activiti-cloud-charts
+cd activiti-cloud-charts/activiti-cloud-full-example
 ```
 
 The next consist in creating a Kubernetes cluster that you will use to deploy the Activiti Cloud full example. Here are the instructions for:
@@ -106,7 +106,7 @@ _Note: if you are working with an existing cluster, you will need to check if yo
 Amazon EKS clusters requires the [AWS IAM Authenticator for Kubernetes](https://github.com/kubernetes-sigs/aws-iam-authenticator) to allow IAM authentication for your Kubernetes cluster. Use go get to install the aws-iam-authenticator binary:
 
 ```bash
-$ go get -u -v github.com/kubernetes-sigs/aws-iam-authenticator/cmd/aws-iam-authenticator
+go get -u -v github.com/kubernetes-sigs/aws-iam-authenticator/cmd/aws-iam-authenticator
 ```
 
 {% hint style="info" %}
@@ -118,19 +118,19 @@ Add $HOME/go/bin to your PATH environment variable:
 * For Bash shells on macOS:
 
 ```bash
-$ export PATH=$HOME/go/bin:$PATH && echo 'export PATH=$HOME/go/bin:$PATH' >> ~/.bash_profile
+export PATH=$HOME/go/bin:$PATH && echo 'export PATH=$HOME/go/bin:$PATH' >> ~/.bash_profile
 ```
 
 * For Bash shells on Linux:
 
 ```bash
- $ export PATH=$HOME/go/bin:$PATH && echo 'export PATH=$HOME/go/bin:$PATH' >> ~/.bashrc
+ export PATH=$HOME/go/bin:$PATH && echo 'export PATH=$HOME/go/bin:$PATH' >> ~/.bashrc
 ```
 
 Run this command to test that the aws-iam-authenticator binary works:
 
 ```bash
-$ aws-iam-authenticator help
+aws-iam-authenticator help
 ```
 
 #### **2/ Install AWS CLI**
@@ -140,7 +140,7 @@ To install the aws cli, check the user guide: [https://docs.aws.amazon.com/cli/l
 Once installed, check your AWS CLI version with the following command:
 
 ```bash
-$ aws --version
+aws --version
 ```
 
 Example output:
@@ -170,7 +170,7 @@ To simplify the creation of our cluster on EKS, we are using a simple CLI tool n
 To create a basic EKS cluster with a given name and region, run:
 
 ```bash
-$ eksctl create cluster [--name=<name>] [--region=<region>]
+eksctl create cluster [--name=<name>] [--region=<region>]
 ```
 
 A cluster will be created with default parameters:
@@ -203,13 +203,13 @@ _Make sure it deleted all the associated EC2 resources avoiding you any bad surp
 Use the AWS CLI update-kubeconfig command to create or update your kubeconfig for your cluster.
 
 ```bash
-$ aws eks update-kubeconfig --name <cluster_name>
+aws eks update-kubeconfig --name <cluster_name>
 ```
 
 Test your configuration:
 
 ```bash
-$ kubectl get svc
+kubectl get svc
 ```
 
 ## **Step 2: Configure HELM and install NGINX Ingress**
@@ -217,11 +217,11 @@ $ kubectl get svc
 Let's now configure HELM to work in the Cluster. We first need to give HELM permissions to deploy things into the cluster. From the “activiti-cloud-full-example” directory, run the commands below in your terminal:
 
 ```bash
-$ kubectl apply -f helm-service-account-role.yaml
+kubectl apply -f helm-service-account-role.yaml
 ```
 
 ```bash
-$ helm init --service-account helm --upgrade
+helm init --service-account helm --upgrade
 ```
 
 Expected results:
@@ -233,7 +233,7 @@ Expected results:
 One more thing that we need to do in order to be able to expose our services to be accessed from outside the cluster is to set up an Ingress Controller, which will automatically create routes to the internal services that we want to expose, in order to do this we just need to run the following command:
 
 ```bash
-$ helm install stable/nginx-ingress --version 1.1.2
+helm install stable/nginx-ingress --version 1.1.2
 ```
 
 Expected results:
@@ -243,7 +243,7 @@ Expected results:
 Now that NGINX Ingress Controller is being deployed, we need to wait for it to expose itself using a Public IP. We need this Public IP to interact with our services from outside the cluster. You can find this IP by running the following command:
 
 ```bash
-$ kubectl get services
+kubectl get services
 ```
 
 Example output with GCP deployment:
@@ -265,11 +265,11 @@ Now that we have our Cluster in place, HELM installed and an Ingress Controller 
 The first step is to register the Activiti Cloud HELM charts into HELM. We do this by running the following commands:
 
 ```bash
-$ helm repo add activiti-cloud-charts https://activiti.github.io/activiti-cloud-charts/
+helm repo add activiti-cloud-charts https://activiti.github.io/activiti-cloud-charts/
 ```
 
 ```bash
-$ helm repo update
+helm repo update
 ```
 
 Example output:
@@ -289,7 +289,7 @@ You can now go directly to [Deploy the Helm chart section](getting-started-activ
 With AWS, you need to create a new Record Set in Route 53. To do so, go to the AWS Management Console and open the Route 53 console. Select a public Hosted Zones and create a new Record Set. Name it using “\*” character in order to create a wildcard. In the Alias Target, select the DNS name of the Ingress controller that we deployed earlier. Use the following command to get the ELB DNS name:
 
 ```bash
-$ kubectl get services
+kubectl get services
 ```
 
 ![New Record Set in Route 53.](../.gitbook/assets/route-53-record-set-elb-dns.png)
@@ -301,12 +301,12 @@ We will use "**your-public-domain**" to deploy Activiti Helm chart in the next s
 Once you have resolved you domain name, install Helm chart by running the Helm install command using your public domain name to set the `global.gateway.domain` key. In our case replace the string “**REPLACEME**” with the domain from previous step.
 
 ```bash
-$ helm install example activiti-cloud-charts/activiti-cloud-full-example --set global.gateway.domain=REPLACEME
+helm install --name example activiti-cloud-charts/activiti-cloud-full-example --set global.gateway.domain=REPLACEME
 ```
 
 Expected results:
 
-```
+```text
 NOTES:
                _   _       _ _   _    _____ _                 _
      /\       | | (_)     (_) | (_)  / ____| |               | |
@@ -334,7 +334,7 @@ Activiti GraphiQL : http://activiti-cloud-gateway.104.105.153.158.nip.io/graphiq
 
 To see deployment status, try:
 
-  $ kubectl get pods 
+  $ kubectl get pods
 ```
 
 This will trigger the deployment process, and you need to wait until the services are up and running. You can check this by running:
@@ -371,7 +371,7 @@ You can access the Keycloak admin console and the Activiti Cloud Modeling applic
 
 For GCP at:
 
-* [http://activiti-cloud-gateway](http://activiti-cloud-gateway.&lt;EXTERNAL-IP&gt;.nip.io/auth \(admin/admin\)
+* [http://activiti-cloud-gateway](http://activiti-cloud-gateway.<EXTERNAL-IP>.nip.io/auth%20%28admin/admin\)
 * [http://activiti-cloud-gateway](http://activiti-cloud-gateway).&lt;EXTERNAL-IP&gt;.nip.io/activiti-cloud-modeling \(modeler/password\)
 
 For AWS at:
