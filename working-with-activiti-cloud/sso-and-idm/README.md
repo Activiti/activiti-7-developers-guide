@@ -1,4 +1,0 @@
-# SSO and IDM
-
-
-
