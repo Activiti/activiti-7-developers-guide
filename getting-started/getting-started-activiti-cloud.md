@@ -224,21 +224,11 @@ kubectl apply -f helm-service-account-role.yaml
 helm init --service-account helm --upgrade
 ```
 
-Expected results:
-
-![](../.gitbook/assets/screenshot-2018-12-13-at-10.40.41.png)
-
-![](../.gitbook/assets/screenshot-2018-12-13-at-10.42.56.png)
-
-One more thing that we need to do in order to be able to expose our services to be accessed from outside the cluster is to set up an Ingress Controller, which will automatically create routes to the internal services that we want to expose, in order to do this we just need to run the following command:
+In order to be able to expose our services to be accessed from outside the cluster, we need to set up an Ingress Controller, which will automatically create routes to the internal services that we want to expose. To install the NGINX Ingress controller, run the following command:
 
 ```bash
 helm install stable/nginx-ingress --version 1.1.2
 ```
-
-Expected results:
-
-![](../.gitbook/assets/helm-install-nginx.png)
 
 Now that NGINX Ingress Controller is being deployed, we need to wait for it to expose itself using a Public IP. We need this Public IP to interact with our services from outside the cluster. You can find this IP by running the following command:
 
@@ -248,9 +238,9 @@ kubectl get services
 
 Example output with GCP deployment:
 
-![](../.gitbook/assets/kubectl-get-services-ip.png)
+![External IP for NGINX Ingress controller.](../.gitbook/assets/kubectl-get-services-external-ip.png)
 
-We will use nip.io as DNS service to map our services to this External IP which will follow the following format: ..nip.io
+
 
 Example output with AWS deployment:
 
@@ -258,11 +248,7 @@ Example output with AWS deployment:
 
 ## Step 3: Deploy Activiti Cloud Full Example
 
-Now that we have our Cluster in place, HELM installed and an Ingress Controller to access our services from outside the cluster we are ready to deploy the Activiti Cloud Full Example HELM Chart.
-
-[![asciicast](https://asciinema.org/a/227940.svg)](https://asciinema.org/a/227940)
-
-The first step is to register the Activiti Cloud HELM charts into HELM. We do this by running the following commands:
+The first step is to register the Activiti Cloud HELM charts into HELM running the following commands:
 
 ```bash
 helm repo add activiti-cloud-charts https://activiti.github.io/activiti-cloud-charts/
@@ -272,25 +258,17 @@ helm repo add activiti-cloud-charts https://activiti.github.io/activiti-cloud-ch
 helm repo update
 ```
 
-Example output:
-
-![](../.gitbook/assets/screenshot-2018-12-13-at-10.55.52.png)
-
-The next step is to configure your deployment to your cluster. The Activiti Cloud Full Example Chart can be customized to turn on and off different features, but there is one mandatory parameter that needs to be provided which is the external domain name that is going to be used by this installation:
+The Activiti Cloud Full Example Chart can be customized to turn on and off different features, but there is one mandatory parameter that needs to be provided which is the external domain name that is going to be used by this installation:
 
 ### A\) Configure your deployment for GCP
 
-We will use "**&lt;EXTERNAL-IP&gt;.nip.io**" to deploy Activiti Helm chart. In our case: **104.155.53.158.nip.io**
+With GCP, use "**&lt;EXTERNAL-IP&gt;.nip.io**" to deploy Activiti Helm chart. In our case: **35.194.42.164.nip.io**
 
 You can now go directly to [Deploy the Helm chart section](getting-started-activiti-cloud.md#c-deploy-the-helm-chart)
 
 ### B\) Configure your deployment for AWS
 
-With AWS, you need to create a new Record Set in Route 53. To do so, go to the AWS Management Console and open the Route 53 console. Select a public Hosted Zones and create a new Record Set. Name it using “\*” character in order to create a wildcard. In the Alias Target, select the DNS name of the Ingress controller that we deployed earlier. Use the following command to get the ELB DNS name:
-
-```bash
-kubectl get services
-```
+With AWS, you need to create a new Record Set in Route 53. To do so, go to the AWS Management Console and open the Route 53 console. Select a public Hosted Zones and create a new Record Set. Name it using “\*” character in order to create a wildcard. In the Alias Target, select the DNS name of the Ingress controller that we deployed earlier.
 
 ![New Record Set in Route 53.](../.gitbook/assets/route-53-record-set-elb-dns.png)
 
@@ -301,8 +279,7 @@ We will use "**your-public-domain**" to deploy Activiti Helm chart in the next s
 Once you have resolved you domain name, install Helm chart by running the Helm install command using your public domain name to set the `global.gateway.domain` key. In our case replace the string “**REPLACEME**” with the domain from previous step.
 
 ```bash
-helm install --name example activiti-cloud-charts/activiti-cloud-full-example \ 
---set global.gateway.domain=REPLACEME
+helm install --name example activiti-cloud-charts/activiti-cloud-full-example --set global.gateway.domain=REPLACEME
 ```
 
 Expected results:
@@ -328,30 +305,19 @@ To learn more about the release, try:
 
 Get the application URLs:
 
-Activiti Keycloak : http://activiti-cloud-gateway.104.105.153.158.nip.io/auth
-Activiti Gateway  : http://activiti-cloud-gateway.104.105.153.158.nip.io/
-Activiti Modeler  : http://activiti-cloud-gateway.104.105.153.158.nip.io/activiti-cloud-modeling
-Activiti GraphiQL : http://activiti-cloud-gateway.104.105.153.158.nip.io/graphiql
+Activiti Keycloak : http://activiti-cloud-gateway.default.35.194.42.164.nip.io/auth
+Activiti Gateway  : http://activiti-cloud-gateway.default.35.194.42.164.nip.io/
+Activiti Modeler  : http://activiti-cloud-gateway.default.35.194.42.164.nip.io/activiti-cloud-modeling
+Activiti GraphiQL : http://activiti-cloud-gateway.default.35.194.42.164.nip.io/graphiql
 
 To see deployment status, try:
 
-  $ kubectl get pods
+  $ kubectl get pods -n default
 ```
 
+Below is the BPMN 2 modelling application. Default user: modeler/password.
+
 ![Activiti BPMN 2 process modelling application.](../.gitbook/assets/activiti-modeler.png)
-
-Default user for modelling application: modeler/password.
-
-### 
-
-For AWS at:
-
-* [http://activiti-cloud-gateway](http://activiti-cloud-gateway).&lt;yourpublicdomain&gt;/auth \(admin/admin\)
-* [http://activiti-cloud-gateway](http://activiti-cloud-gateway).&lt;yourpublicdomain&gt;/activiti-cloud-modeling \(modeler/password\)
-
-In our case, here is the BPMN 2 process modelling application:
-
-![Activiti BPMN 2 process modelling application.](../.gitbook/assets/activiti-modeling-application.png)
 
 For more information about the BPMN modelling application, please check the [following blog post](https://community.alfresco.com/community/bpm/blog/2018/12/10/activiti-7-beta-using-the-modeler-to-design-business-processes).
 
