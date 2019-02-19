@@ -301,7 +301,8 @@ We will use "**your-public-domain**" to deploy Activiti Helm chart in the next s
 Once you have resolved you domain name, install Helm chart by running the Helm install command using your public domain name to set the `global.gateway.domain` key. In our case replace the string “**REPLACEME**” with the domain from previous step.
 
 ```bash
-helm install --name example activiti-cloud-charts/activiti-cloud-full-example --set global.gateway.domain=REPLACEME
+helm install --name example activiti-cloud-charts/activiti-cloud-full-example \ 
+--set global.gateway.domain=REPLACEME
 ```
 
 Expected results:
@@ -337,42 +338,11 @@ To see deployment status, try:
   $ kubectl get pods
 ```
 
-This will trigger the deployment process, and you need to wait until the services are up and running. You can check this by running:
+![Activiti BPMN 2 process modelling application.](../.gitbook/assets/activiti-modeler.png)
 
-```bash
-kubectl get pods
-```
+Default user for modelling application: modeler/password.
 
-Expected results:
-
-![](../.gitbook/assets/pods-services-up.png)
-
-{% hint style="info" %}
-_Note: the READY column 1/1 in all the pods, that means that we have 1 pod in Kubernetes running our service. It is also important to notice that HELM created a release of our CHART. Because we haven’t specified a name for this release HELM choose one random name, in our case, it was: bumptious-yak. This means that we can manage this release independently of other Activiti Cloud Applications that we want to deploy using the same approach. You can run helm list and then helm delete to remove all the Activiti Cloud Services for this release._
-{% endhint %}
-
-In order to access your services now, you can run the following command:
-
-```bash
-kubectl get ingress
-```
-
-Expected results with GCP deployment:
-
-![](../.gitbook/assets/kubectl-get-ingress.png)
-
-Expected results with AWS deployment:
-
-![](../.gitbook/assets/kube-get-ingress-aws-eks.png)
-
-### D\) Access your services
-
-You can access the Keycloak admin console and the Activiti Cloud Modeling application at:
-
-For GCP at:
-
-* [http://activiti-cloud-gateway](http://activiti-cloud-gateway.<EXTERNAL-IP>.nip.io/auth%20%28admin/admin\)
-* [http://activiti-cloud-gateway](http://activiti-cloud-gateway).&lt;EXTERNAL-IP&gt;.nip.io/activiti-cloud-modeling \(modeler/password\)
+### 
 
 For AWS at:
 
