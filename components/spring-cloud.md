@@ -8,5 +8,5 @@ Secondly, we rely heavily on Spring Cloud Stream to make sure that we can consum
 
 Finally, we leverage the abstraction layers on top of several services such as Service Registry, Gateway for dynamic service registration, discovery and routing, Distributed Configuration Service, etc. To leverage these capabitiles inside Kubernetes we use the Spring Cloud Kubernetes project which has been included in the Spring Cloud release train. By using Spring Cloud Kubernetes we can integrate our services to Kubernetes native services to levarage Service Discovery, Configurations, Secrets, etc.
 
-We leverage all the components to make sure that we run nicely in distributed environments with technologies such as Docker and Kubernetes. We are also making sure that Activiti Cloud doesn’t overlap with any of the features provided by such technologies to not cause any mismatch.
+We leverage all the components to make sure that we run nicely in distributed environments with technologies such as Docker inside Kubernetes. We are also making sure that Activiti Cloud doesn’t overlap with any of the features provided by such technologies to not cause any friction.
 

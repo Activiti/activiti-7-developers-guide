@@ -84,7 +84,7 @@ These entities and data types should be agnostic to the underlying implementatio
 
 The application service expose the /v1/apps/ endpoint which answers the questions of how many applications are up and running and the state of each individual app. This service can be used in conjunction with the Gateway component to decide when to register routes for each individual application.
 
-This service also expose a deployment descriptor directory. This directory represents the definition of which applications will be "controlled" and monitored by this service. These descriptors can be updated dynamically, for example in the centralized configuration service. Deployment Descriptors can be compared with HELM charts, but these descriptors represent a higher level abstractions of the structure of the apps. In general there will be a one to one mapping to a HHELM chart.
+This service also expose a deployment descriptor directory. This directory represents the definition of which applications will be "controlled" and monitored by this service. These descriptors can be updated dynamically, for example in the centralized configuration service. Deployment Descriptors can be compared with HELM charts, but these descriptors represent a higher level abstractions of the structure of the apps. In general there will be a one to one mapping to a HELM chart.
 
 ### Applications Endpoints
 
