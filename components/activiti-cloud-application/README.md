@@ -1,4 +1,4 @@
-# Activiti Cloud Applications
+# Activiti Cloud Application
 
 Activiti Cloud Applications are composed by Activiti Cloud core set of building blocks. These building blocks are:
 
@@ -9,5 +9,4 @@ Activiti Cloud Applications are composed by Activiti Cloud core set of building 
 * **Activiti Cloud Notification Service**: in conjuctions with the Query Service, the Notification Service enables the core building blocks with Subscriptions and push notifications about the state of the application. 
 
 These core building blocks will expose REST and Message Based endpoints to enable Domain Specific application to interact with them. Between the core building blocks the communications are **Asynchronous** using Spring Cloud Streams \(and by default the RabbitMQ binder\).
-
 

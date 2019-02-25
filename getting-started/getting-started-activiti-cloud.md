@@ -154,7 +154,7 @@ _Note: your system's Python version must be Python 3, or Python 2.7.9 or greater
 Configure your AWS CLI to interact with your AWS account using the command below:
 
 ```text
-$ aws configure
+aws configure
 AWS Access Key ID [None]: <your-access-key-ID>
 AWS Secret Access Key [None]:<your-secet-access-key>
 Default region name [None]: <your-region>
@@ -168,7 +168,7 @@ To simplify the creation of our cluster on EKS, we are using a simple CLI tool n
 To create a basic EKS cluster with a given name and region, run:
 
 ```bash
-eksctl create cluster [--name=<name>] [--region=<region>]
+eksctl create cluster --name=<name> --region=<region>
 ```
 
 A cluster will be created with default parameters:
@@ -190,7 +190,7 @@ Go to your AWS console and check the details about your EKS cluster.
 _Note: to delete your EKS cluster run the command:_
 
 ```bash
-eksctl delete cluster --name=<name> [--region=<region>]
+eksctl delete cluster --name=<name> --region=<region>
 ```
 
 _Make sure it deleted all the associated EC2 resources avoiding you any bad surprises when checking your bill_ 😀
@@ -315,7 +315,7 @@ To see deployment status, try:
 
 Below is the BPMN 2 modelling application. Default user: modeler/password.
 
-![Activiti BPMN 2 process modelling application.](../.gitbook/assets/activiti-modeler.png)
+![Activiti BPMN 2 process modelling application.](../.gitbook/assets/activiti-modeler%20%281%29.png)
 
 For more information about the BPMN modelling application, please check the [following blog post](https://community.alfresco.com/community/bpm/blog/2018/12/10/activiti-7-beta-using-the-modeler-to-design-business-processes).
 

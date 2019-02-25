@@ -1,7 +1,6 @@
 # Activiti Cloud Notification Service
 
-In order to provide a scalable notification service, we evaluated GraphQL and the integration with messaging systems such as RabbitMQ to provide reliable Subscription based mechanism where users can register interest in certain events emitted by the core building blocks.
-For now this endpoint is available as ACTIVITI_ADMIN role only. 
+In order to provide a scalable notification service, we evaluated GraphQL and the integration with messaging systems such as RabbitMQ to provide reliable Subscription based mechanism where users can register interest in certain events emitted by the core building blocks. For now this endpoint is available as ACTIVITI\_ADMIN role only.
 
 ## GraphQL Query Endpoint
 
@@ -417,7 +416,7 @@ The Activiti GraphQL Data Fetcher implementation will build dynamic JPA fetch gr
 
 The GraphiQL browser \([https://github.com/graphql/graphiql](https://github.com/graphql/graphiql)\) can be used for simple testing. It provides schema documentation browser and query builder with auto-completion support, as well as parameter bindings.
 
-
 Then, navigate to [http://host:port/graphiql.html](http://host:port/graphiql.html) to load GraphiQL browser. The collapsed Docs panel can opened by clicking on the button in the upper right corner to expose current test schema models.
 
 You can run GraphQL queries in the left pannel. Type the query and hit the run button. The results should come up in the middle panel. If your query has variables, there is a minimized panel at the bottom left. Simply click on this to expand, and type in your variables as a JSON string with quoted keys.
+
