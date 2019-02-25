@@ -266,11 +266,15 @@ You can now go directly to [Deploy the Helm chart section](getting-started-activ
 
 ### B\) Configure your deployment for AWS
 
-With AWS, you need to create a new Record Set in Route 53. To do so, go to the AWS Management Console and open the Route 53 console. Select a public Hosted Zones and create a new Record Set. Name it using “\*” character in order to create a wildcard. In the Alias Target, select the DNS name of the Ingress controller that we deployed earlier.
+{% hint style="info" %}
+_For this step, you need a public domain name. If you don't have one, use Route 53 to register a new public domain name._
+{% endhint %}
+
+Go to the AWS Management Console and open the Route 53 console. Go to _Hosted zones_ and select a public Hosted Zones and create a new Record Set. Name it using “\*” character in order to create a wildcard. In the Alias Target, select the DNS name of the Ingress controller \(ELB\) that we deployed earlier.
 
 ![New Record Set in Route 53.](../.gitbook/assets/route-53-record-set-elb-dns.png)
 
-We will use "**your-public-domain**" to deploy Activiti Helm chart in the next section. In our case: **raphaelallegre.com**.
+Use "**your-public-domain**" to deploy Activiti Helm chart in the next section. In our case: **raphaelallegre.com**
 
 ### C\) Deploy the Helm chart
 
@@ -280,7 +284,19 @@ Once you have resolved you domain name, install Helm chart by running the Helm i
 helm install --name example activiti-cloud-charts/activiti-cloud-full-example --set global.gateway.domain=REPLACEME
 ```
 
-Expected results:
+In our case for GCP, we use:
+
+```bash
+global.gateway.domain=35.194.42.164.nip.io
+```
+
+For AWS, we have:
+
+```bash
+global.gateway.domain=raphaelallegre.com
+```
+
+Here is the example result with GCP:
 
 ```text
 NOTES:
