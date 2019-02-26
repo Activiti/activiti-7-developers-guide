@@ -1,6 +1,6 @@
 # 12 Factor Apps
 
-To build Cloud Native Applications and Services, it is not enough to package the old monolith inside a Docker Image and run it inside Kubernetes. We value the principles that Heroku defined by "The Twelve-Factor App": [https://12factor.net](https://12factor.net) \(and from a Pivotal perspective see [https://content.pivotal.io/ebooks/beyond-the-12-factor-app](https://content.pivotal.io/ebooks/beyond-the-12-factor-app) \). Without these guidelines, it becomes difficult to scale in distributed environments. Activiti Cloud repositions the process engine to better interact with other components in such distributed environments. The measure of success for Activiti Cloud is to have a low impedance mismatch with other microservices and the way they are designed, built and deployed.
+To build Cloud Native Applications and Services, it is not enough to package the old monolith inside a Docker Image and run it inside Kubernetes. We value the principles that Heroku defined called "The Twelve-Factor App": [https://12factor.net](https://12factor.net) \(and from a Pivotal perspective see [https://content.pivotal.io/ebooks/beyond-the-12-factor-app](https://content.pivotal.io/ebooks/beyond-the-12-factor-app) \). Without these guidelines, it becomes difficult to scale in distributed environments. Activiti Cloud repositions the process engine to better interact with other components in such distributed environments. The measure of success for Activiti Cloud is to have a low impedance mismatch with other microservices and the way they are designed, built and deployed.
 
 ## \#1 - One codebase, one application
 
@@ -34,17 +34,17 @@ Activiti Core and Activiti Cloud dependencies are managed using Bill of Material
 ## \#4 - Design, build, release, run
 
 * **Design**: we keep a closed loop between design, RFC and coding to make sure that we rapidly build small features that improve our services and can frequently be released \(at least once a month\).
-* **Build**: Our CI servers build each of our services and release to Alfresco Nexus and Maven central so you can depend on frequently released artefacts and nightly builds. If you work against nightly builds of our services and projects while you are developing your apps you can help us to make sure that everything will work for you when you release your apps/services. Stop fearing SNAPSHOTS. All of our services can be configured using environment variables so we keep them immutable and you can change their configuration using standard container practices
+* **Build**: Our CI servers build each of our services and release to Alfresco Nexus and Maven central so you can depend on frequently released artefacts. All of our services can be configured using environment variables so we keep them immutable and you can change their configuration using standard container practices
 * **Release**: for domain-specific modules/services we provide mechanisms to make sure that you can reproduce your releases to be able to audit and troubleshoot when things go wrong
-* **Run**: we provide both docker-compose and Minikube setups so you can run all the infrastructure and services locally for development purposes
+* **Run**: we provide hierarchical HELM charts that enable simple deployment of both infrastructure and applications. You can find how to get started with these HELM charts in our Getting Started Guides.
 
 ## \#5 - Configurations, credentials and code
 
-Configurations for all Activiti Cloud services are provided by env variables and the use of Spring Cloud configuration service is available for system/platform-wide configurations.
+Configurations for all Activiti Cloud services are provided by env variables and the use of Spring Cloud configuration service is available for system/platform-wide configurations. These configuration can be divided by environments and by using Secrets from Kubernetes we enable integration with other secret provider. 
 
 ## \#6 - Logs
 
-Activiti Cloud services' logs are delegated to the infrastructure. You can hook up your ELK stack to analyse and monitor your logs. Environment variables are used to configure where the logs are written.
+Activiti Cloud services' logs are delegated to the infrastructure. You can hook up your ELK stack to analyse and monitor your logs. Environment variables are used to configure where the logs are written. We want to rely on common tools for monitoring and logging instead of providing our own custom solution for this. 
 
 ## \#7 - Disposability
 
@@ -56,7 +56,7 @@ Activiti Cloud services use the concept of bounded resources for security, email
 
 ## \#9 - Environment parity
 
-Activiti Cloud provides to our users and implementers a production like environment to produce their domain-specific artefacts that can be published later on to production environments. Activiti Cloud relies on industry standards to make sure that dealing with multiple environments for development, testing/QA and production is as easy and real as possible.
+Activiti Cloud provides to our users and implementers a production like environment to produce their domain-specific artefacts that can be published later on to production environments. Activiti Cloud relies on industry standards to make sure that dealing with multiple environments for development, testing/QA and production is as easy and real as possible. We rely on technologies such as HELM and GitOps practices to make sure that these environments can be easily reproduced across different clusters.
 
 ## \#10 - Administrative processes
 
@@ -64,7 +64,7 @@ In Activiti Cloud administrative processes originally bundled along with the pro
 
 ## \#11 - Port bindings
 
-All Activiti Cloud services are spring boot applications that allow environment variables to configure their name \(for auto-discovery\) and their port where they will run to serve as backing services to other applications and services.
+All Activiti Cloud services are Spring Boot applications that allow environment variables to configure their name \(for auto-discovery\) and their port where they will run to serve as backing services to other applications and services. All our services run in the same port, and they leverage Kubernetes networking to do the mappings and bindings.
 
 ## \#12 - Stateless Process
 
@@ -72,13 +72,13 @@ Activiti Cloud services are stateless by design, and if they require to store st
 
 ## \#13 - Concurrency
 
-Runtime bundles were designed with the idea of scaling process execution - if there are too many requests to create process instances of a type or too many interactions against a specific set of process instances, new runtime bundle instances can be created on demand to handle the load. No extra configuration is required to achieve this scalability in Activiti Cloud - it is an innate feature of the platform.
+Runtime Bundles were designed with the idea of scaling process execution - if there are too many requests to create process instances of a type or too many interactions against a specific set of process instances, new runtime bundle instances can be created on demand to handle the load. No extra configuration is required to achieve this scalability in Activiti Cloud - it is an innate feature of the platform.
 
 ## \#14 - Telemetry
 
-Activiti cloud services provide telemetry by standard spring boot actuators and health indicators, but it also provides business level telemetry my emitting a standardised set of events that expose the engine operations. All this information can be used for data warehousing and forecasting purposes.
+Activiti Cloud services provide telemetry by standard Spring Boot (micrometer) actuators and health indicators, but it also provides business level telemetry my emitting a standardised set of events that expose the runtime operations. All this information can be used for data warehousing, reporting  and forecasting purposes.
 
 ## \#15 - Authentication and Authorization
 
-Activiti cloud relies on SSO and IDM for all its services. RBAC \(role-based access control\) is a native part of all our services.
+Activiti Cloud relies on SSO and IDM for all its services. RBAC \(role-based access control\) is a native part of all our services. Activiti Cloud components will provide hook points for domain specific extensions to build more complex use cases.
 
