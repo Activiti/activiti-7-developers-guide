@@ -67,9 +67,9 @@ If you go down another level in the previous diagram, you will see a set of repo
 
 These docker images are being tagged every month when we go through our release process, in our examples we always point to the latest build \(which happens after every commit to these repositories\).
 
-These Docker Images are used to provide examples about how to deploy all these services using [Docker Compose](https://docs.docker.com/compose/), [Kubernetes](http://kubernetes.io), and Kubernetes HELM charts. You can find these examples inside the [activiti-cloud-examples](https://github.com/activiti/activiti-cloud-examples) repository.
+These Docker Images are used to provide examples about how to deploy all these services to [Kubernetes](http://kubernetes.io). We use HELM as deployment tool to deploy our HELM Charts that you can find in the [Activiti Cloud Charts](http://github.com/activiti/activiti-cloud-charts) reporitory. We recommend looking at our Activiti Cloud Getting Started guides for more instructions on how to get started in Kubernetes.
 
-You, as a user, are encouraged to generate your own Docker images with your required customizations. We have tried to keep these images as simple as possible.
+You, as a user, are encouraged to generate your own Docker images with your required customizations. We have tried to keep these images as simple and as parameterizable as possible.
 
 ## Open Pull Requests at Organization level
 

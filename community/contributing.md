@@ -6,9 +6,9 @@ If you want to contribute get in touch with the project members and ask for guid
 
 Activiti now uses fixed versions instead of maven snapshot versions. This changes how to create pull requests that span multiple repositories.
 
-For example, say you are working on related changes in both the Activiti/Acitiviti or 'engine' repository and also `activiti-cloud-runtime-bundle-service`. The changes in `activiti-cloud-runtime-bundle-service` will depend on the changes here. To use these changes you need to build the artifacts from your modified version of the engine repo against the modified version of `activiti-cloud-runtime-bundle-service`.
+For example, say you are working on related changes in both the Activiti/Acitiviti repository and also `activiti-cloud-runtime-bundle-service`. The changes in `activiti-cloud-runtime-bundle-service` will depend on the changes here. To use these changes you need to build the artifacts from your modified version of the Activiti/Activiti repo against the modified version of `activiti-cloud-runtime-bundle-service`.
 
-So in runtime-bundle service we need to apply the snapshot version. We can do this by taking the name of the maven artifact ending with `-dependencies` from the repo and applying this as a new dependency entry in the `dependencyManagement` section of module ending with `-dependencies` in the target `activiti-cloud-runtime-bundle-service` repository. This means we locally add the entry:
+So in activiti-cloud-runtime-bundle-service repository we need to apply the SNAPSHOT version. We can do this by taking the name of the maven artifact ending with `-dependencies` from the repo and applying this as a new dependency entry in the `dependencyManagement` section of module ending with `-dependencies` in the target `activiti-cloud-runtime-bundle-service` repository. This means we locally add the entry:
 
 ```markup
       <dependency>
