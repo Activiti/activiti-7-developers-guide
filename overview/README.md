@@ -39,7 +39,7 @@ The Process Runtime shouldn’t worry about:
 
 Based on this list of things that the Process Runtime shouldn’t do, we have created different Activiti Cloud components and adopted 3rd party components that will interact with the process runtime to provide all these functionalities that are required 90% of the time when we want to implement a BPM project.
 
-Activiti Cloud is designed to support zero-downtime deployments \(e.g. kubernetes rolling updates\) and to scale using production-ready components from the moment you start your implementation. Activiti Cloud makes it natural to use Activiti in modern cloud-based platforms.
+Activiti Cloud is designed to support zero-downtime deployments \(e.g. kubernetes rolling updates, canary releases, A/B testing\) and to scale using production-ready components from the moment you start your implementation. Activiti Cloud makes it natural to use Activiti in modern cloud-based platforms.
 
 We are also making sure that using our tools feel natural for different personas \(developers / DevOps / end users\):
 

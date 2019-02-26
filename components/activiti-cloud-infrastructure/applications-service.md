@@ -14,8 +14,8 @@ Applications have a relationship with IDM and security, because we are using Key
 
 The Application Service has relationships with 4 key components:
 
-* Configuration Service \(ConfigMaps in K8s and Configuration Service in Spring Cloud\)
-* Service Registry \(Eureka outside of K8s and the K8s Service Registry\)
+* Configuration Service \(K8s ConfigMaps & Secrets\)
+* Service Registry \(K8s Service Registry\)
 * Gateway \(Spring Cloud Gateway\)
 * Identity Management / SSO \(KeyCloak\)
 

@@ -2,10 +2,9 @@
 
 Activiti Cloud Modeling services provide the backend and frontend functionality to support our Activiti Modeler Application.
 
-The backend services is currently composed by two Spring Boot Starters:
+The backend services are provided by the following Spring Boot Starters:
 
-* [Activiti Cloud Org Service](https://github.com/activiti/activiti-cloud-org-service): provides the organizational structure for your Projects
-* [Activiti Cloud Process Model Service](https://github.com/activiti/activiti-cloud-process-model-service): provides the interfaces to store models, independently of the storage that wants to be used.
+* [Activiti Cloud Org Service](https://github.com/activiti/activiti-cloud-org-service): provides the organizational structure for your Projects as well as support for storing different models (such as Process Models, Connector Definitions, etc.)
 
 The User Interface built with Angular can be [found here](https://github.com/activiti/activiti-modeling-app)
 
