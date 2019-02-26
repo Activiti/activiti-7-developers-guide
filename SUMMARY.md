@@ -6,6 +6,7 @@
   * [Personas](overview/personas.md)
   * [Previous Versions \(5.x & 6.x\)](overview/previous.md)
   * [References](overview/references.md)
+  * [Cloud Native BPMN support](overview/bpmn.md)
 * [Getting Started](getting-started/README.md)
   * [Getting Started - Activiti Cloud](getting-started/getting-started-activiti-cloud.md)
   * [Getting Started - Activiti Core](getting-started/getting-started-activiti-core.md)

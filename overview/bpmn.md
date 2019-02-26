@@ -12,5 +12,6 @@ The list of supported BPMN elements in the 7.0.x Release Train is:
 - Gateways: Parallel, Exclusive
 - Call Activity
 
+These BPMN elements are currently available in the Activiti Modeler application, and we will enable more as we add more support, tests and comformance for each of the remaining elements.
+
 The remaining BPMN elements will be covered by future releases. We value the community feedback and we will prioritize based on what the community think that should be supported first. You can find the roadmap and the issues created for supporting these elements here. If you don't find what you are looking for please create a new issue and we will classify them accordingly. If you found the issue describing a BPMN element that you want to use please vote it up (by adding a reaction or comments) in github so we can prioritize based on this feedback.
- 
