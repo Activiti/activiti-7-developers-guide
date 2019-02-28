@@ -28,7 +28,7 @@ When receiving an HTTP GET request, the GraphQL query should be specified in the
 
 This request could be sent via an HTTP GET like so:
 
-`http://server:port/admin/graphql?query={ProcessInstance(processInstanceId:"1"){processInstanceId,tasks{id,name}}}`
+`http://host/graphql?query={ProcessInstance(processInstanceId:"1"){processInstanceId,tasks{id,name}}}`
 
 Query variables can be sent as a JSON-encoded string in an additional query parameter called `variables`.
 
@@ -38,8 +38,8 @@ A standard GraphQL POST request uses the application/json content type, and incl
 
 ```text
 {
-  "query": "{ProcessInstance(processInstanceId:\"1\"){processInstanceId,tasks{id,name}}}",
-  "variables": { "processInstanceId": "value" }
+  "query": "query($id: String) { ProcessInstance(processInstanceId: $id) { processInstanceId, tasks { id, name } } }",
+  "variables": { "id": "value" }
 }
 ```
 
@@ -73,11 +73,11 @@ Regardless of the method by which the query and variables were sent, the respons
       ]
     }
   },
-  "errors": [ ]
+  "errors": null
 }
 ```
 
-If there were no errors returned, the "errors" field will be empty in the response object.
+If there were no errors returned, the "errors" field will be null in the response object.
 
 ### GraphQL Query Schema
 
@@ -138,13 +138,13 @@ For example, the following query will find all running process instances with co
 query {
   ProcessInstances(where: {
     OR: {
-      status: { LIKE: "Running"}
+      status: { IN: RUNNING }
     }
   }) {
     select {
       processInstanceId
       status
-      tasks(where: {status: {EQ: "Completed"}}) {
+      tasks(where: {status: {EQ: COMPLETED}}) {
         id
         name
         assignee
@@ -163,25 +163,25 @@ Will return
     "select": [
       {
         "processInstanceId": "0",
-        "status": "Running",
+        "status": "RUNNING",
         "tasks": [
           {
             "id": "1",
             "name": "task1",
             "assignee": "assignee",
-            "status": "Completed"
+            "status": "COMPLETED"
           }
         ]
       },
       {
         "processInstanceId": "1",
-        "status": "Running",
+        "status": "RUNNING",
         "tasks": [
           {
             "id": "5",
             "name": "task5",
             "assignee": "assignee",
-            "status": "Completed"
+            "status": "COMPLETED"
           }
         ]
       }
@@ -229,7 +229,7 @@ Will return result:
         "status": "Running",
         "processInstance": {
           "processInstanceId": "1",
-          "status": "Running"
+          "status": "RUNNING"
         },
         "variables": [
           {
@@ -247,10 +247,10 @@ Will return result:
       {
         "name": "task5",
         "assignee": "assignee",
-        "status": "Completed",
+        "status": "COMPLETED",
         "processInstance": {
           "processInstanceId": 1,
-          "status": "Running"
+          "status": "RUNNING"
         },
         "variables": []
       }
@@ -296,19 +296,19 @@ The result will be:
             "id": "2",
             "name": "task2",
             "assignee": "assignee",
-            "status": "Running"
+            "status": "RUNNING"
           },
           {
             "id": "3",
             "name": "task3",
             "assignee": "assignee",
-            "status": "Running"
+            "status": "RUNNING"
           },
           {
             "id": "1",
             "name": "task1",
             "assignee": "assignee",
-            "status": "Completed"
+            "status": "COMPLETED"
           }
         ]
       }
@@ -385,16 +385,16 @@ Just like a REST API, it is possible to pass arguments to an endpoint in a Graph
 
 ```text
 {
-   "query": "query filterByStatus($status: String!) {
+   "query": "query($status: String!) {
       ProcessInstances(where: {
         OR: {
-          status: { LIKE: $status}
+          status: { EQ: $status}
         }
       }) {
         select {
           processInstanceId
           status
-          tasks(where: {status: {EQ: \"Completed\"}}) {
+          tasks(where: {status: {EQ: COMPLETED}}) {
             id
             name
             assignee
@@ -404,7 +404,7 @@ Just like a REST API, it is possible to pass arguments to an endpoint in a Graph
       }
     }
   ",
-   "variables":{"status":"Running"}
+   "variables":{"status":"RUNNING"}
 }
 ```
 
@@ -414,9 +414,9 @@ The Activiti GraphQL Data Fetcher implementation will build dynamic JPA fetch gr
 
 ### How to demo Activiti GraphQL Query API
 
-The GraphiQL browser \([https://github.com/graphql/graphiql](https://github.com/graphql/graphiql)\) can be used for simple testing. It provides schema documentation browser and query builder with auto-completion support, as well as parameter bindings.
+The GraphiQL app browser can be used for simple testing. It provides schema documentation browser and query builder with auto-completion support, as well as parameter bindings.
 
-Then, navigate to [http://host:port/graphiql.html](http://host:port/graphiql.html) to load GraphiQL browser. The collapsed Docs panel can opened by clicking on the button in the upper right corner to expose current test schema models.
+Then, navigate to [http://host/graphiql](http://host/graphiql) to load GraphiQL browser. The collapsed Docs panel can opened by clicking on the button in the upper right corner to expose current test schema models.
 
 You can run GraphQL queries in the left pannel. Type the query and hit the run button. The results should come up in the middle panel. If your query has variables, there is a minimized panel at the bottom left. Simply click on this to expand, and type in your variables as a JSON string with quoted keys.
 
