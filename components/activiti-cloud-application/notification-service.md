@@ -63,12 +63,14 @@ Regardless of the method by which the query and variables were sent, the respons
         {
           "id": "4",
           "name": "task4",
+          "assignee": "assignee",
+          "status": "COMPLETED",
         },
         {
           "id": "5",
           "name": "task5",
           "assignee": "assignee",
-          "status": "Completed",
+          "status": "COMPLETED",
         }
       ]
     }
