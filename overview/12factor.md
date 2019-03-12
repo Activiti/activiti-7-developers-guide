@@ -40,11 +40,11 @@ Activiti Core and Activiti Cloud dependencies are managed using Bill of Material
 
 ## \#5 - Configurations, credentials and code
 
-Configurations for all Activiti Cloud services are provided by env variables and the use of Spring Cloud configuration service is available for system/platform-wide configurations. These configuration can be divided by environments and by using Secrets from Kubernetes we enable integration with other secret provider. 
+Configurations for all Activiti Cloud services are provided by env variables and the use of Spring Cloud configuration service is available for system/platform-wide configurations. These configuration can be divided by environments and by using Secrets from Kubernetes we enable integration with other secret provider.
 
 ## \#6 - Logs
 
-Activiti Cloud services' logs are delegated to the infrastructure. You can hook up your ELK stack to analyse and monitor your logs. Environment variables are used to configure where the logs are written. We want to rely on common tools for monitoring and logging instead of providing our own custom solution for this. 
+Activiti Cloud services' logs are delegated to the infrastructure. You can hook up your ELK stack to analyse and monitor your logs. Environment variables are used to configure where the logs are written. We want to rely on common tools for monitoring and logging instead of providing our own custom solution for this.
 
 ## \#7 - Disposability
 
@@ -76,7 +76,7 @@ Runtime Bundles were designed with the idea of scaling process execution - if th
 
 ## \#14 - Telemetry
 
-Activiti Cloud services provide telemetry by standard Spring Boot (micrometer) actuators and health indicators, but it also provides business level telemetry my emitting a standardised set of events that expose the runtime operations. All this information can be used for data warehousing, reporting  and forecasting purposes.
+Activiti Cloud services provide telemetry by standard Spring Boot \(micrometer\) actuators and health indicators, but it also provides business level telemetry my emitting a standardised set of events that expose the runtime operations. All this information can be used for data warehousing, reporting and forecasting purposes.
 
 ## \#15 - Authentication and Authorization
 
