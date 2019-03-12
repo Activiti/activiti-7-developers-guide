@@ -49,15 +49,102 @@ One important thing to notice is that each of the Activiti Cloud components can 
 
 In the next section, we show you how to create a Kubernetes cluster using Amazon Web Services EKS or Google Cloud Platform GKE. We let you decide which cloud platform best suits you. You can also deploy the Activiti Cloud full example on you local machine using for example Docker Desktop. We recommend using a cloud infrastructure for a faster and smoother experience but if you need a local install you can check [our blog post series here](https://community.alfresco.com/community/bpm/blog/2018/12/10/getting-started-with-activiti-7-beta#jive_content_id_Deploying_and_Running_a_Business_Process).
 
-## Steps 1 and 2: Create a K8 cluster and deploy Activiti Cloud full example
+## Steps 1 and 2: Create a K8 cluster and configure it
 
 ### [Option A: Using Amazon EKS ](amazon-eks.md)
 
 ### [Option B: Using Google Cloud - GKE](google-cloud-gke.md)
 
-#### 
+## Step 3: Deploy Activiti Cloud Full Example
 
-## Step 3: Use the deployed services
+The first step is to register the Activiti Cloud HELM charts into HELM running the following commands:
+
+```bash
+helm repo add activiti-cloud-charts https://activiti.github.io/activiti-cloud-charts/
+```
+
+```bash
+helm repo update
+```
+
+The Activiti Cloud Full Example Chart can be customized to turn on and off different features, but there is one mandatory parameter that needs to be provided which is the external domain name that is going to be used by this installation:
+
+### 1-a\) Configure your deployment for AWS
+
+{% hint style="info" %}
+_For this step, you need a public domain name. If you don't have one, use Route 53 to register a new public domain name._
+{% endhint %}
+
+Go to the AWS Management Console and open the Route 53 console. Go to _Hosted zones_ and select a public Hosted Zones and create a new Record Set. Name it using “\*” character in order to create a wildcard. In the Alias Target, select the DNS name of the Ingress controller \(ELB\) that we deployed earlier.
+
+![New Record Set in Route 53.](../../.gitbook/assets/route-53-record-set-elb-dns.png)
+
+Use "**your-public-domain**" to deploy Activiti Helm chart in the next section. In our case: **raphaelallegre.com**
+
+### 1-b\) Configure your deployment for **GCP**
+
+With GCP, use "**&lt;EXTERNAL-IP&gt;.nip.io**" to deploy Activiti Helm chart. In our case: **35.194.42.164.nip.io**
+
+### 2\) Deploy the Helm chart
+
+Once you have resolved you domain name, install Helm chart by running the Helm install command using your public domain name to set the `global.gateway.domain` key. In our case replace the string “**REPLACEME**” with the domain from previous step.
+
+```bash
+helm install --name example activiti-cloud-charts/activiti-cloud-full-example --set global.gateway.domain=REPLACEME
+```
+
+In our case for AWS, we use:
+
+```bash
+global.gateway.domain=raphaelallegre.com
+```
+
+In our case for GCP, we use:
+
+```bash
+global.gateway.domain=35.194.42.164.nip.io
+```
+
+Here is the example result for GCP:
+
+```text
+NOTES:
+               _   _       _ _   _    _____ _                 _
+     /\       | | (_)     (_) | (_)  / ____| |               | |
+    /  \   ___| |_ ___   ___| |_ _  | |    | | ___  _   _  __| |
+   / /\ \ / __| __| \ \ / / | __| | | |    | |/ _ \| | | |/ _` |
+  / ____ \ (__| |_| |\ V /| | |_| | | |____| | (_) | |_| | (_| |
+ /_/    \_\___|\__|_| \_/ |_|\__|_|  \_____|_|\___/ \__,_|\__,_|
+ Version: 7.0.0.GA
+
+Thank you for installing activiti-cloud-full-example-1.1.1
+
+Your release is named example.
+
+To learn more about the release, try:
+
+  $ helm status example
+  $ helm get example
+
+Get the application URLs:
+
+Activiti Keycloak : http://activiti-cloud-gateway.default.35.194.42.164.nip.io/auth
+Activiti Gateway  : http://activiti-cloud-gateway.default.35.194.42.164.nip.io/
+Activiti Modeler  : http://activiti-cloud-gateway.default.35.194.42.164.nip.io/activiti-cloud-modeling
+Activiti GraphiQL : http://activiti-cloud-gateway.default.35.194.42.164.nip.io/graphiql
+
+To see deployment status, try:
+
+  $ kubectl get pods -n default
+```
+
+Below is the BPMN 2 modelling application. Default user: modeler/password.
+
+![Activiti BPMN 2 process modelling application.](../../.gitbook/assets/activiti-modeler%20%281%29.png)
+
+For more information about the BPMN modelling application, please check the [following blog post](https://community.alfresco.com/community/bpm/blog/2018/12/10/activiti-7-beta-using-the-modeler-to-design-business-processes).
+
+## Step 4: Use the deployed services
 
 If you don't have it installed already, install the [Postman client](https://www.getpostman.com) on your machine.
 
