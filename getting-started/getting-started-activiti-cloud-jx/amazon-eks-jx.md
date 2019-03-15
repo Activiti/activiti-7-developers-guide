@@ -266,3 +266,97 @@ $ jx console
 
 You can also navigate to GitHub and see that Jenkins X provisioned the projects representing the environments’ Helm chart definitions as just built by Jenkins.
 
+![](../../.gitbook/assets/env-repos-github.png)
+
+### Configure Activiti Environmnents Domain Name
+
+After Jx creates the environment Helm chart in your Git repository, open staging and production repos, then edit env/values.yaml file to set the value of global.gateway.domain key using expose.config.domain value.
+```
+expose:
+  config:
+    domain: X.X.X.X.nip.io # <==== Use this value to set global.gateway.domain
+
+global:
+  gateway:
+    # Set value from expose.config.domain key, i.e. 1.2.3.4.nip.io
+    domain: REPLACEME
+```
+Then, click to Commit the change. This should trigger Jenkins pipeline to rebuild and update the environments Helm chart configurations. We are now ready to deploy Activiti Cloud Platform Helm chart into GitOps environments.
+
+### Create Activiti Cloud Platform CI/CD Quickstarts
+
+![](../../.gitbook/assets/jx-create-quickstart.png)
+
+#### Create Activiti Cloud Quickstart Location in Jx Team Environment
+
+We will need to create Activiti Jx Quickstart Location to use Activiti Quickstart CI/CD Templates published in Activiti Github https://github.com/Activiti organization repository:
+
+Run this command to add Activiti Quickstart location for your team:
+```
+$ jx create quickstartlocation --owner activiti
+```
+To get the list of registered quickstart locations run command:
+```
+$ jx get quickstartlocations
+GIT SERVER         KIND   OWNER                 INCLUDES EXCLUDES
+https://github.com github jenkins-x-quickstarts *        WIP-*
+https://github.com github activiti              *        WIP-*
+```
+#### Setup Activiti Cloud Platform in your Git repository
+
+Simply run the following command to create your first Activiti Cloud platform Git repository:
+
+```
+$ jx create quickstart --owner activiti \
+	--filter activiti-cloud-platform-quickstart \
+	--project-name=activiti-cloud-platform \
+	--batch-mode
+```
+In terminal run Jx commands to monitor the deployment progress:
+```
+$ jx get activity -w
+$ jx get pipelines
+$ jx console
+```
+Then, after ~4-5 minutes you should see your Activiti Cloud Platform  deployed into staging environment:
+```
+$ kubectl get pods -w -n staging
+```
+![](../../.gitbook/assets/kubectl-get-pods-staging-platform.png)
+
+#### Setup Activiti Cloud Connector in your Git repository
+
+Run the following command to create your first connector project Git repository:
+```
+$ jx create quickstart --owner activiti \
+	--filter activiti-cloud-connector-quickstart \
+	--project-name=activiti-rb-connector \
+	--batch-mode
+```
+
+#### Setup Activiti Cloud Runtime Bundle in your Git repository
+
+Run the following command to create your first runtime bundle project Git repository:
+```
+$ jx create quickstart --owner activiti \
+	--filter activiti-cloud-runtime-bundle-quickstart \
+	--project-name=activiti-rb-app \
+	--batch-mode
+```
+Then, after ~4-5 minutes you should see your Connector and Runtime Bundle deployed into staging environment:
+```
+$ kubectl get pods -w -n staging
+```
+![](../../.gitbook/assets/kubectl-get-pods-staging-runtime.png)
+
+![](../../.gitbook/assets/jx-congratulations.png)
+
+#### Open Activiti Cloud Modeler
+
+http://activiti-cloud-gateway.jx-staging.1,2,3,4.nip.io/activiti-cloud-modeling. 
+
+Here instead of 1,2,3,4.nip.io use the earlier CLUSTER_DOMAIN=$(kubectl get cm ingress-config -o=go-template --template='{{.data.domain}}'
+
+Login into using credentials: modeler/password
+
+![](../../.gitbook/assets/modeler-ui-landing.png)
