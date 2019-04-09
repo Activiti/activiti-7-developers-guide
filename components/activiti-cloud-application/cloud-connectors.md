@@ -73,13 +73,13 @@ public class SendRewardConnector {
 
 ```text
     @StreamListener(value = RewardMessageChannels.REWARD_CONSUMER)
-    public void tweet(IntegrationRequestEvent event) {
+    public void tweet(IntegrationRequest event) {
 
         // business logic goes here
 
         // build and send result back
         Map<String, Object> results = new HashMap<>();
-        Message<IntegrationResultEvent> message = IntegrationResultEventBuilder.resultFor(event)
+        Message<IntegrationResult> message = IntegrationResultBuilder.resultFor(event)
                 .withVariables(results)
                 .buildMessage();
 
@@ -87,7 +87,7 @@ public class SendRewardConnector {
     }
 ```
 
-_Note:_ `IntegrationResultEventBuilder` and `IntegrationResultSender` \(autowired\) are provided by `activiti-cloud-starter-connector`. `IntegrationResultSender` will use dynamically bound destination again to make sure that the integration result message will be sent to the right destination: `integrationResult:<TARGET_APPLICATION_NAME>`, where `TARGET_APPLICATION_NAME` is the name of the runtime bundle which has sent the initial Integration Request.
+_Note:_ `IntegrationResultBuilder` and `IntegrationResultSender` \(autowired\) are provided by `activiti-cloud-starter-connector`. `IntegrationResultSender` will use dynamically bound destination again to make sure that the integration result message will be sent to the right destination: `integrationResult:<TARGET_APPLICATION_NAME>`, where `TARGET_APPLICATION_NAME` is the name of the runtime bundle which has sent the initial Integration Request.
 
 #### Configuration
 
