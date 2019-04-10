@@ -5,9 +5,9 @@ Docker compose is the easiest way for running activiti cloud on computer.
 At least 4 cores and 8 Gb RAM available in your Docker setup. 
 ## Additional packages
 Before you start running Activiti in docker-compose following packages have to be installed:
-  * Install Docker itself please find more details in [Docker web site] (https://www.docker.com/)
-  * Install Docker-compose [https://docs.docker.com/compose/install/]
-  * Install Make For linux and mac it is usually installed already, for windows  [http://gnuwin32.sourceforge.net/packages/make.htm] or if you are using chocolatey on windows ``choco install make``
+  * Install Docker itself please find more details in [Docker web site](https://www.docker.com/)
+  * Install Docker-compose [Docker-compose page](https://docs.docker.com/compose/install/)
+  * Install Make For linux and mac it is usually installed already, for windows   [Make installataion page](http://gnuwin32.sourceforge.net/packages/make.htm) or if you are using chocolatey on windows ``choco install make``
 
 ## Prerequisite:
 Change DOCKER_IP to your ip in .env
