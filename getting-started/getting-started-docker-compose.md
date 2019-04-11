@@ -17,6 +17,8 @@ Before you start, the following packages must be installed:
 
 ## Clone Activiti Cloud Examples 
 
+Open Bash command line terminal and run these commands to clone https://github.com/Activiti/activiti-cloud-examples into your local environment:
+
 ```sh
 git clone https://github.com/Activiti/activiti-cloud-examples
 cd docker-compose
