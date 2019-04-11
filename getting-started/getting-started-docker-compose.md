@@ -14,8 +14,15 @@ Before you start, the following packages must be installed:
   * Docker-compose [Docker-compose page](https://docs.docker.com/compose/install/) if you use Docker for Desktop. 
   * GNU Make. For Linux and Mac it is usually installed already, for Windows follow [Chocolatey GNU Make](https://chocolatey.org/packages/make) to install Make.
   * Git Bash Terminal . For Linux and Maс it is usually pre-installed. For Windows, follow [Chocolatey Git Install](https://chocolatey.org/packages/git.install) to install Git Bash Terminal.
-  
-## Configure Your Environemnt
+
+## Clone https://github.com/Activiti/activiti-cloud-examples into your local environment
+
+```sh
+git clone https://github.com/Activiti/activiti-cloud-examples
+cd docker-compose
+```
+
+## Configure Your Environment
 
 You need to edit `.env` file to configure DOCKER_IP property based on your OS and Docker VM type. 
 
