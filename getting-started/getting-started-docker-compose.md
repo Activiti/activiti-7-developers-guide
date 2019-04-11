@@ -13,7 +13,7 @@ Before you start, the following packages must be installed:
   * Docker for Desktop [Docker web site](https://www.docker.com/) or [Docker Toolbox](https://github.com/docker/toolbox/releases) for your OS 
   * Docker-compose [Docker-compose page](https://docs.docker.com/compose/install/) if you use Docker for Desktop. 
   * GNU Make. For Linux and Mac it is usually installed already, for Windows follow [Chocolatey GNU Make](https://chocolatey.org/packages/make) to install Make.
-  * Git Bash Terminal . For Linux and Max it is usually pre-installed. For Windows, follow [Chocolatey Git Install](https://chocolatey.org/packages/git.install) to install Git Bash Terminal.
+  * Git Bash Terminal . For Linux and Maс it is usually pre-installed. For Windows, follow [Chocolatey Git Install](https://chocolatey.org/packages/git.install) to install Git Bash Terminal.
   
 ## Configure Your Environemnt
 
@@ -42,7 +42,7 @@ make application
 make modeler
 ```
 
-#### Start Using Docker Compose
+#### Start all serices Using Docker Compose
 
 ```sh
 docker-compose up
@@ -53,6 +53,7 @@ docker-compose up
 ```sh
 make stop
 ```
+
 
 #### Stop Application
 
@@ -70,6 +71,10 @@ make modeler/stop
 
 ```sh
 make down
+```
+#### Shutdown All Services Using Docker Compose
+```sh
+docker-compose down
 ```
 
 ### Usefull commands
