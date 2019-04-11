@@ -184,6 +184,6 @@ Or environment variables can be used such as:
 
 ## Source Code & Docker Image
 
-* [Runtime Bundle -&gt; Source Code](https://github.com/activiti/activiti-cloud-runtime-bundle) Here you can find a Runtime Bundle example that you can use as the starting point to build your domain specific Runtime Bundles. This project was built using the [Runtime Bundle Starter that you can find here](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/tree/develop/activiti-cloud-starter-runtime-bundle).
+* [Runtime Bundle -&gt; Source Code](https://github.com/Activiti/activiti-cloud-runtime-bundle-service) Here you can find a Runtime Bundle example that you can use as the starting point to build your domain specific Runtime Bundles. This project was built using the [Runtime Bundle Starter that you can find here](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/tree/develop/activiti-cloud-starter-runtime-bundle).
 * [Runtime Bundle -&gt; Docker Image](https://hub.docker.com/r/activiti/activiti-cloud-runtime-bundle/)
 
