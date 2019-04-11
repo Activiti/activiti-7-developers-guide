@@ -85,10 +85,15 @@ To see and follow logs in your terminal
 make logs 
 ```
 
-To see logs for service only
+To see logs for one service only
 
 ```sh
-make rb-my-app/logs 
+make  example-runtime-bundle/logs
+```
+Quickly ssh to service pod
+
+```sh
+make  example-runtime-bundle/ssh
 ```
 
 Other available actions
@@ -117,4 +122,8 @@ Start Postman and add to Postman collection _Activiti v7 REST API.postman_collec
 Then use _activiti_ as default environment. <br>
 To start work execute _getKeycloakToken hruser_ in Postman Keycloak collection. Then run startProcess in rb-my-app Postman collection. 
 
+### Common errors
+* Please be sure that you are located in docker-compose folder before running commands.
+* If something doesn't work with modeller first of all clear cookies or start in incognito window
+* If you are using nip.io address make sure that local firewall or company firewall doesn't block requiests
 
