@@ -113,6 +113,8 @@ make help
 
 ### Modeller 
 
+After starting Modeler, wait for the containers to start. You can check the status by running `make ps` and `make logs` command to make sure that the containers are ready. 
+
 To access modeler please open the url in your browser:
 
 ```sh
