@@ -6,7 +6,7 @@ Activiti Cloud BluePrints are designed to show users how different business scen
 
 **Workshop** This BluePrint has a workshop associated with it that you can follow to get your Activiti Cloud application deployed in Kubernetes.
 
-### For all the instructions visit: [TTC Docs Workshop](https://github.com/Activiti/ttc-docs/blob/develop/workshop.md)
+### For all the instructions visit: [TTC Docs Workshop](https://github.com/Activiti/ttc-docs/blob/master/workshop.md)
 
 ### Scenario \(The WHAT\)
 
