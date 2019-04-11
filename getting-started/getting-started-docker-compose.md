@@ -15,7 +15,7 @@ Before you start, the following packages must be installed:
   * GNU Make. For Linux and Mac it is usually installed already, for Windows follow [Chocolatey GNU Make](https://chocolatey.org/packages/make) to install Make.
   * Git Bash Terminal . For Linux and Maс it is usually pre-installed. For Windows, follow [Chocolatey Git Install](https://chocolatey.org/packages/git.install) to install Git Bash Terminal.
 
-## Clone https://github.com/Activiti/activiti-cloud-examples into your local environment
+## Clone Activiti Cloud Examples 
 
 ```sh
 git clone https://github.com/Activiti/activiti-cloud-examples
