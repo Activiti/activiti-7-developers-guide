@@ -21,7 +21,7 @@ Open Bash command line terminal and run these commands to clone https://github.c
 
 ```sh
 git clone https://github.com/Activiti/activiti-cloud-examples
-cd docker-compose
+cd activiti-cloud-examples/docker-compose
 ```
 
 ## Configure Your Environment
@@ -33,22 +33,40 @@ You need to edit `.env` file to configure DOCKER_IP property based on your OS an
 
 ## How To Run Activity Cloud 
 
-#### Start all services 
+#### Start Modeler
 
 ```sh
-make all
+make modeler
 ```
 
-#### Start all services without Modeler 
+After starting Modeler, wait for the containers to start. You can check the status by running `make ps` and `make logs` command to make sure that the containers are ready. 
+
+To access modeler please open the url in your browser:
+
+```sh
+http://$DOCKER_IP/activiti-cloud-modeling
+```
+
+You will be redirected to keycloak where you have to use credentials *modeler/password* 
+
+#### Start Application
 
 ```sh
 make application 
 ```
 
-#### Start Modeler only
+You will need to use [Postman](https://www.getpostman.com/downloads/) to use Activiti Rest Apis
+
+Start Postman and add to Postman collection _Activiti v7 REST API.postman_collection.json_ located in https://github.com/Activiti/activiti-cloud-examples <br>
+
+*Then at the top right choose manage environment then use your own ip in _current value_ tab.* <br> 
+Then use _activiti_ as default environment. <br>
+To start work execute _getKeycloakToken hruser_ in Postman Keycloak collection. Then run startProcess in rb-my-app Postman collection. 
+
+#### Start All Services 
 
 ```sh
-make modeler
+make all
 ```
 
 #### Start all serices Using Docker Compose
@@ -110,28 +128,6 @@ Other available actions
 ```sh
 make help
 ```
-
-### Modeller 
-
-After starting Modeler, wait for the containers to start. You can check the status by running `make ps` and `make logs` command to make sure that the containers are ready. 
-
-To access modeler please open the url in your browser:
-
-```sh
-http://$DOCKER_IP/activiti-cloud-modeling
-```
-
-You will be redirected to keycloak where you have to use credentials *modeler/password* 
-
-### Start sample process 
-
-You will need to use [Postman](https://www.getpostman.com/downloads/) to use Activiti Rest Apis
-
-Start Postman and add to Postman collection _Activiti v7 REST API.postman_collection.json_ located in https://github.com/Activiti/activiti-cloud-examples <br>
-
-*Then at the top right choose manage environment then use your own ip in _current value_ tab.* <br> 
-Then use _activiti_ as default environment. <br>
-To start work execute _getKeycloakToken hruser_ in Postman Keycloak collection. Then run startProcess in rb-my-app Postman collection. 
 
 ### Common errors
 * Please be sure that you are located in docker-compose folder before running commands.
