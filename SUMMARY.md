@@ -12,6 +12,7 @@
     * [Amazon EKS](getting-started/getting-started-activiti-cloud/amazon-eks.md)
     * [Google Cloud GKE](getting-started/getting-started-activiti-cloud/google-cloud-gke.md)
     * [Docker Compose](getting-started/getting-started-docker-compose.md)
+    * [Jenkins X](getting-started/getting-started-activiti-cloud-jx/README.md)
   * [Getting Started - Activiti Core](getting-started/getting-started-activiti-core.md)
 * [Components](components/README.md)
   * [Spring Cloud](components/spring-cloud.md)
