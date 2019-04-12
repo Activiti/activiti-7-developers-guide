@@ -10,10 +10,10 @@ You will need to allocate at least 4 CPU cores and 8 Gb of RAM for your Docker V
 
 Before you start, the following packages must be installed:
 
-  * Docker for Desktop [Docker web site](https://www.docker.com/) or [Docker Toolbox](https://github.com/docker/toolbox/releases) for your OS 
-  * Docker-compose [Docker-compose page](https://docs.docker.com/compose/install/) if you use Docker for Desktop. 
-  * GNU Make. For Linux and Mac it is usually installed already, for Windows follow [Chocolatey GNU Make](https://chocolatey.org/packages/make) to install Make.
-  * Git Bash Terminal . For Linux and Maс it is usually pre-installed. For Windows, follow [Chocolatey Git Install](https://chocolatey.org/packages/git.install) to install Git Bash Terminal.
+  * Install [Docker for Desktop](https://www.docker.com/) or [Docker Toolbox](https://github.com/docker/toolbox/releases) for your OS 
+  * Install [Docker-compose](https://docs.docker.com/compose/install/) if you use Docker for Desktop. 
+  * Install GNU Make. For Linux and Mac it is usually installed already, for Windows use [Chocolatey GNU Make](https://chocolatey.org/packages/make) to install Make.
+  * Install Git Bash Terminal . For Linux and Maс it is usually pre-installed. If you use Docker for Desktop on Windows, use [Chocolatey Git Install](https://chocolatey.org/packages/git.install) to install Git Bash Terminal. 
 
 ## Clone Activiti Cloud Examples 
 
