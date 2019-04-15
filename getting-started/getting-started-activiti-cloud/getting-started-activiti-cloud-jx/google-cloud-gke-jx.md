@@ -4,11 +4,11 @@
 
 The diagram below shows a GKE cluster deployed in GCP and exposed to the outside world using Network Load Balancer and Cloud DNS domain mapping.
 
-![](https://github.com/Activiti/activiti-7-developers-guide/tree/5caadbe7353a052114052e94125df882790d743a/.gitbook/assets/eks-cluster.png)
+![](../../../.gitbook/assets/eks-cluster.png)
 
 Jenkins-X platform is then deployed and configured with Git provider to trigger Kubernetes-based pipelines which produce Docker images pushed into private Google Container Registry \(GCR\). Jenkins-X will also deploy our Activiti Cloud Helm chart into Namespace of a GKE cluster and expose it via Ingress to the outside world.
 
-![](https://github.com/Activiti/activiti-7-developers-guide/tree/5caadbe7353a052114052e94125df882790d743a/.gitbook/assets/activiti-kdl.png)
+![](../../../.gitbook/assets/activiti-kdl.png)
 
 The diagram above uses Kubernetes Deployment Language: [https://github.com/raffaelespazzoli/kdl](https://github.com/raffaelespazzoli/kdl)
 
@@ -220,7 +220,11 @@ To open Jenkins UI in the browser, run the following command to get Jenkins UI l
 $ jx console
 ```
 
-![](https://github.com/Activiti/activiti-7-developers-guide/tree/5caadbe7353a052114052e94125df882790d743a/.gitbook/assets/jenkins-console-login.png) In the Jenkins UI, you can confirm that Jenkins X has successfully installed Jenkins instance:
+![](../../../.gitbook/assets/jenkins-console-login.png)
+
+In the Jenkins UI, you can confirm that Jenkins X has successfully installed Jenkins instance:
+
+![](../../../.gitbook/assets/jenkins-ui-no-pipelines.png)
 
 ![](https://github.com/Activiti/activiti-7-developers-guide/tree/5caadbe7353a052114052e94125df882790d743a/.gitbook/assets/jenkins-ui-no-pipelines.png) Close the Jenkins UI tab and go back to your shell.
 
@@ -271,7 +275,11 @@ After Jx created new environments, run `jx console` command to open Jenkins UI, 
 $ jx console
 ```
 
-![](https://github.com/Activiti/activiti-7-developers-guide/tree/5caadbe7353a052114052e94125df882790d743a/.gitbook/assets/jenkins-ui-env-pipelines.png) You can also navigate to GitHub and see that Jenkins X provisioned the projects representing the environments’ Helm chart definitions as just built by Jenkins.
+![](../../../.gitbook/assets/jenkins-ui-env-pipelines.png)
+
+You can also navigate to GitHub and see that Jenkins X provisioned the projects representing the environments’ Helm chart definitions as just built by Jenkins.
+
+![](../../../.gitbook/assets/env-repos-github.png)
 
 ![](https://github.com/Activiti/activiti-7-developers-guide/tree/5caadbe7353a052114052e94125df882790d743a/.gitbook/assets/env-repos-github.png)
 
@@ -294,7 +302,7 @@ Click to Commit the change. This should trigger Jenkins pipeline to rebuild and 
 
 ### Step 4. Create Activiti Cloud Platform CI/CD Quickstarts
 
-![](https://github.com/Activiti/activiti-7-developers-guide/tree/5caadbe7353a052114052e94125df882790d743a/.gitbook/assets/jx-create-quickstart.png)
+![](../../../.gitbook/assets/jx-create-quickstart.png)
 
 **Create Activiti Cloud Quickstart Location in Jx Team Environment**
 
@@ -383,9 +391,9 @@ Then, after ~4-5 minutes you should see your Connector and Runtime Bundle deploy
 $ kubectl get pods -w -n staging
 ```
 
-![](https://github.com/Activiti/activiti-7-developers-guide/tree/5caadbe7353a052114052e94125df882790d743a/.gitbook/assets/kubectl-get-pods-staging-runtime.png)
+![](../../../.gitbook/assets/kubectl-get-pods-staging-runtime.png)
 
-![](https://github.com/Activiti/activiti-7-developers-guide/tree/5caadbe7353a052114052e94125df882790d743a/.gitbook/assets/jx-congratulations.png)
+![](../../../.gitbook/assets/jx-congratulations.png)
 
 #### Open Activiti Cloud Modeler
 
@@ -395,5 +403,5 @@ Here instead of 1,2,3,4.nip.io use the earlier CLUSTER\_DOMAIN=$\(kubectl get cm
 
 Login into using credentials: modeler/password
 
-![](https://github.com/Activiti/activiti-7-developers-guide/tree/5caadbe7353a052114052e94125df882790d743a/.gitbook/assets/modeler-ui-landing.png)
+![](../../../.gitbook/assets/modeler-ui-landing.png)
 
