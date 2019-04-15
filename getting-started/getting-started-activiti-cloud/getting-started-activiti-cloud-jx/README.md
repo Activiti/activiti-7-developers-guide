@@ -30,7 +30,7 @@ We provide steps how to leverage the power of cloud provider services to create 
 
 The services available differ across cloud providers. So far we have specific instructions for getting started with GKE or with Amazon EKS.
 
-### [Amazon Elastic Kubernetes Services Instructions](amazon-eks-jx.md)
+### [Amazon Elastic Kubernetes Services Instructions](https://github.com/Activiti/activiti-7-developers-guide/tree/08503b350aeaae6a0946757a851bad4b6fb53d4c/getting-started/getting-started-activiti-cloud-jx/amazon-eks-jx.md)
 
-### [Google Kubernetes Engine Instructions](google-cloud-gke-jx.md)
+### [Google Kubernetes Engine Instructions](https://github.com/Activiti/activiti-7-developers-guide/tree/08503b350aeaae6a0946757a851bad4b6fb53d4c/getting-started/getting-started-activiti-cloud-jx/google-cloud-gke-jx.md)
 
