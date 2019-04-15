@@ -4,11 +4,11 @@
 
 The diagram below shows an EKS cluster deployed in AWS and exposed to the outside world using Network Load Balancer [NLB](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/introduction.html) and Route 53 domain mapping.
 
-![](https://github.com/Activiti/activiti-7-developers-guide/tree/9c5c70e5ca216805a8bfd3d8e69600b367fad8cf/.gitbook/assets/eks-cluster.png)
+![](../../../.gitbook/assets/eks-cluster.png)
 
 Jenkins-X platform is then deployed and configured with Git provider to trigger Kubernetes-based pipelines which produce Docker images pushed into private Elastic Container Registry \(ECR\). Jenkins-X will also deploy our Activiti Cloud Helm chart into an EKS cluster and expose it via ingress to the outside world.
 
-![](https://github.com/Activiti/activiti-7-developers-guide/tree/9c5c70e5ca216805a8bfd3d8e69600b367fad8cf/.gitbook/assets/activiti-kdl.png)
+![](../../../.gitbook/assets/activiti-kdl.png)
 
 The diagram above uses Kubernetes Deployment Language: [https://github.com/raffaelespazzoli/kdl](https://github.com/raffaelespazzoli/kdl)
 
@@ -56,11 +56,11 @@ To access our EKS cluster by domain name, we need to configure a real domain tha
 
 In order to add a domain to AWS, choose Route 53 Service from the AWS console and click the blue Create Hosted Zone button. In the dialog box, type the name of your domain and click the blue Create button.
 
-![](https://github.com/Activiti/activiti-7-developers-guide/tree/9c5c70e5ca216805a8bfd3d8e69600b367fad8cf/.gitbook/assets/route53-hosted-zone.png)
+![](../../../.gitbook/assets/route53-hosted-zone.png)
 
 After creating the hosted zone, you should see it in your Route 53 console below. You should configure your domain to delegate to the AWS name servers defined in NS record of your hosted zone as shown here:
 
-![](https://github.com/Activiti/activiti-7-developers-guide/tree/9c5c70e5ca216805a8bfd3d8e69600b367fad8cf/.gitbook/assets/route53-record-set.png)
+![](../../../.gitbook/assets/route53-record-set.png)
 
 ### Installing the Jenkins-X Cli
 
@@ -137,11 +137,11 @@ $ jx create cluster eks \
 
 This will provision activiti-cloud EKS cluster with 3 nodes of type m5.xlarge \(4CPU’s, 16GB RAM\)
 
-![](https://github.com/Activiti/activiti-7-developers-guide/tree/9c5c70e5ca216805a8bfd3d8e69600b367fad8cf/.gitbook/assets/jx-create-cluster-eks.png)
+![](../../../.gitbook/assets/jx-create-cluster-eks.png)
 
 You can watch progress in the CloudFormation console: [https://console.aws.amazon.com/cloudformation/](https://console.aws.amazon.com/cloudformation/)
 
-![](https://github.com/Activiti/activiti-7-developers-guide/tree/9c5c70e5ca216805a8bfd3d8e69600b367fad8cf/.gitbook/assets/cloudformation-console.png)
+![](../../../.gitbook/assets/cloudformation-console.png)
 
 Execution of “jx create cluster” can take a while \(~-20-25 min\) while eksctl waits until the EKS cluster is fully initialized. As soon as the command finishes, you can verify installation using the following command:
 
@@ -156,7 +156,7 @@ activiti-cloud
 
 Now that we have the EKS cluster up and running, we can install the Jenkins X platform into it. The Jenkins X platform consists of the Jenkins server itself, a Nexus server, configuration stored in Kubernetes, and a couple of other components, all packaged into single Helm chart.
 
-![](https://github.com/Activiti/activiti-7-developers-guide/tree/9c5c70e5ca216805a8bfd3d8e69600b367fad8cf/.gitbook/assets/jx-create-cluster-platform.png)
+![](../../../.gitbook/assets/jx-create-cluster-platform.png)
 
 The Jenkins X platform can be installed using the following command without installing default environments repos. We will create Activiti Cloud Environments GitOps repos later.
 
@@ -172,27 +172,29 @@ During the installation process, jx may ask you to confirm some settings, mostly
 
 If you don’t have domain name configured in Route 53, choose not to register wildcard DNS name in Route 53 for you:
 
-![](https://github.com/Activiti/activiti-7-developers-guide/tree/9c5c70e5ca216805a8bfd3d8e69600b367fad8cf/.gitbook/assets/route53-wildcard-dns.png)
+![](../../../.gitbook/assets/route53-wildcard-dns.png)
 
 Jx requires to create a Git API token, which it will use to create and access Git repositories on your behalf. Follow the instructions from jx console to generate the API token \(by clicking the link generated for you by jx\).
 
-![](https://github.com/Activiti/activiti-7-developers-guide/tree/9c5c70e5ca216805a8bfd3d8e69600b367fad8cf/.gitbook/assets/create-api-token.png)
+![](../../../.gitbook/assets/create-api-token.png)
 
 In the GitHub dialog window, specify the unique name i.e. activiti-cloud, of the token as shown below:
 
-![](https://github.com/Activiti/activiti-7-developers-guide/tree/9c5c70e5ca216805a8bfd3d8e69600b367fad8cf/.gitbook/assets/github-new-personal-access-token.png)
+![](../../../.gitbook/assets/github-new-personal-access-token.png)
 
 Then click the green Generate Token button, copy the value of the token, and paste it to the jx cli input.
 
-![](https://github.com/Activiti/activiti-7-developers-guide/tree/9c5c70e5ca216805a8bfd3d8e69600b367fad8cf/.gitbook/assets/github-generate-token.png) ![](https://github.com/Activiti/activiti-7-developers-guide/tree/9c5c70e5ca216805a8bfd3d8e69600b367fad8cf/.gitbook/assets/github-copy-token.png)
+![](../../../.gitbook/assets/github-generate-token.png)
+
+![](../../../.gitbook/assets/github-copy-token.png)
 
 During the installation process you might notice that jx automatically opens the Jenkins server running on “[http://jenkins.jx.35.164.211.214.nip.io/me/configure”](http://jenkins.jx.35.164.211.214.nip.io/me/configure”) address logs into it, and saves some settings. Jx uses headless browser automation to generate Jenkins API token on your behalf. This token will be later used internally by Jenkins X to automatically create Jenkins jobs on your behalf.
 
-![](https://github.com/Activiti/activiti-7-developers-guide/tree/9c5c70e5ca216805a8bfd3d8e69600b367fad8cf/.gitbook/assets/jenkins-api-token.png)
+![](../../../.gitbook/assets/jenkins-api-token.png)
 
 After a few minutes, the jx install command should finish creating the Jenkins X platform. It should also tell you the URL that you can use to access your Jenkins server, and a random admin password for this server.
 
-![](https://github.com/Activiti/activiti-7-developers-guide/tree/9c5c70e5ca216805a8bfd3d8e69600b367fad8cf/.gitbook/assets/jenkins-admin-password.png)
+![](../../../.gitbook/assets/jenkins-admin-password.png)
 
 The URL to access Jenkins will printed in the output of the console together with random admin password auto-generated by jx We now can use Jenkins credentials to log into our Jenkins server and see that Jenkins has successfully installed.
 
@@ -208,11 +210,11 @@ To open Jenkins UI in the browser, run the following command::
 $ jx console
 ```
 
-![](https://github.com/Activiti/activiti-7-developers-guide/tree/9c5c70e5ca216805a8bfd3d8e69600b367fad8cf/.gitbook/assets/jenkins-console-login.png)
+![](../../../.gitbook/assets/jenkins-console-login.png)
 
 In the Jenkins UI, you can confirm that Jenkins X has successfully installed Jenkins instance:
 
-![](https://github.com/Activiti/activiti-7-developers-guide/tree/9c5c70e5ca216805a8bfd3d8e69600b367fad8cf/.gitbook/assets/jenkins-ui-no-pipelines.png)
+![](../../../.gitbook/assets/jenkins-ui-no-pipelines.png)
 
 Close the Jenkins UI tab and go back to your shell.
 
@@ -259,11 +261,11 @@ After Jx created new environments, run `jx console` command to open Jenkins UI, 
 $ jx console
 ```
 
-![](https://github.com/Activiti/activiti-7-developers-guide/tree/9c5c70e5ca216805a8bfd3d8e69600b367fad8cf/.gitbook/assets/jenkins-ui-env-pipelines.png)
+![](../../../.gitbook/assets/jenkins-ui-env-pipelines.png)
 
 You can also navigate to GitHub and see that Jenkins X provisioned the projects representing the environments’ Helm chart definitions as just built by Jenkins.
 
-![](https://github.com/Activiti/activiti-7-developers-guide/tree/9c5c70e5ca216805a8bfd3d8e69600b367fad8cf/.gitbook/assets/env-repos-github.png)
+![](../../../.gitbook/assets/env-repos-github.png)
 
 ### Configure Activiti Environmnents Domain Name
 
@@ -284,7 +286,7 @@ Then, click to Commit the change. This should trigger Jenkins pipeline to rebuil
 
 ### Create Activiti Cloud Platform CI/CD Quickstarts
 
-![](https://github.com/Activiti/activiti-7-developers-guide/tree/9c5c70e5ca216805a8bfd3d8e69600b367fad8cf/.gitbook/assets/jx-create-quickstart.png)
+![](../../../.gitbook/assets/jx-create-quickstart.png)
 
 #### Create Activiti Cloud Quickstart Location in Jx Team Environment
 
@@ -330,7 +332,9 @@ Then, after ~4-5 minutes you should see your Activiti Cloud Platform deployed in
 $ kubectl get pods -w -n staging
 ```
 
-![](https://github.com/Activiti/activiti-7-developers-guide/tree/9c5c70e5ca216805a8bfd3d8e69600b367fad8cf/.gitbook/assets/kubectl-get-pods-staging-platform.png)
+![](../../../.gitbook/assets/kubectl-get-pods-staging-platform.png)
+
+#### 
 
 #### Setup Activiti Cloud Connector in your Git repository
 
@@ -360,9 +364,11 @@ Then, after ~4-5 minutes you should see your Connector and Runtime Bundle deploy
 $ kubectl get pods -w -n staging
 ```
 
-![](https://github.com/Activiti/activiti-7-developers-guide/tree/9c5c70e5ca216805a8bfd3d8e69600b367fad8cf/.gitbook/assets/kubectl-get-pods-staging-runtime.png)
+![](../../../.gitbook/assets/kubectl-get-pods-staging-runtime.png)
 
-![](https://github.com/Activiti/activiti-7-developers-guide/tree/9c5c70e5ca216805a8bfd3d8e69600b367fad8cf/.gitbook/assets/jx-congratulations.png)
+![](../../../.gitbook/assets/jx-congratulations.png)
+
+
 
 #### Open Activiti Cloud Modeler
 
@@ -372,5 +378,5 @@ Here instead of 1,2,3,4.nip.io use the earlier CLUSTER\_DOMAIN=$\(kubectl get cm
 
 Login into using credentials: modeler/password
 
-![](https://github.com/Activiti/activiti-7-developers-guide/tree/9c5c70e5ca216805a8bfd3d8e69600b367fad8cf/.gitbook/assets/modeler-ui-landing.png)
+![](../../../.gitbook/assets/modeler-ui-landing.png)
 
