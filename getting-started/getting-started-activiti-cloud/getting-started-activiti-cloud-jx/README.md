@@ -6,11 +6,9 @@ Activiti Cloud is the new generation of business process automation platform off
 
 ![](../../../.gitbook/assets/what-is-activiti-cloud.png)
 
-![](https://github.com/Activiti/activiti-7-developers-guide/tree/08503b350aeaae6a0946757a851bad4b6fb53d4c/.gitbook/assets/what-is-activiti-cloud.png)
-
 Activiti Cloud Architecture:
 
-![](https://github.com/Activiti/activiti-7-developers-guide/tree/08503b350aeaae6a0946757a851bad4b6fb53d4c/.gitbook/assets/activiti-cloud-architecture.png)
+![](../../../.gitbook/assets/activiti-cloud-architecture.png)
 
 Activiti Cloud CI/CD has adopted open source Jenkins-X CI/CD project to make it simple for developers to work using DevOps principles and best practices in order to accelerate building and deploying process driven applications in the Cloud.
 
@@ -24,7 +22,7 @@ Jenkins X builds on top of Kubernetes to provide automated Continuous Integratio
 * Lower failure rate of releases
 * Faster Mean Time To Recovery
 
-![](https://github.com/Activiti/activiti-7-developers-guide/tree/08503b350aeaae6a0946757a851bad4b6fb53d4c/.gitbook/assets/activiti7-devops-building-blocks.png)
+![](../../../.gitbook/assets/activiti7-devops-building-blocks.png)
 
 We provide steps how to leverage the power of cloud provider services to create a solid foundation for Activiti Cloud CI/CD pipelines based on the Jenkins X project.
 
