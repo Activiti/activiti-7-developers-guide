@@ -16,7 +16,7 @@ When receiving an HTTP GET request, the GraphQL query should be specified in the
 
 ```text
 {
-  ProcessInstance(processInstanceId:1) {
+  ProcessInstance(processInstanceId:"1") {
     processInstanceId
     tasks {
       id
@@ -83,7 +83,7 @@ If there were no errors returned, the "errors" field will be null in the respons
 
 ### GraphQL Query Schema
 
-Activiti GraphQL query endpoint provides schema descriptions derived from JPA entity model at runtime for the following entities: `ProcessInstance`, `Task`, and `Variable`. The schema also derives GraphQL scalar types from JPA entity model attributes to validate provided variable values against the schema.
+Activiti GraphQL query endpoint provides schema descriptions derived from JPA entity model at runtime for the following entities: `ProcessInstance`, `Task`, `ProcessVariable` and `TaskVariable`. The schema also derives GraphQL scalar types from JPA entity model attributes to validate provided variable values against the schema.
 
 Each entity in the query model is wrapped into two GraphQL query fields, i.e. ProcessInstance entity will have two representations in the GraphQL schema:
 
@@ -117,13 +117,13 @@ Will return:
         "id": "4",
         "name": "task4",
         "assignee": "assignee",
-        "status": "Running"
+        "status": "ASSIGNED"
       },
       {
         "id": "5",
         "name": "task5",
         "assignee": "assignee",
-        "status": "Completed"
+        "status": "COMPLETED"
       }
     ]
   }
@@ -132,21 +132,19 @@ Will return:
 
 ### GraphQL Pluralized Query Wrapper with Where Criteria Expressions
 
-This GraphtQL schema supports flexible type safe criteria expressions with familiar SQL query syntax semantics using `where` arguments int the `select` query field to use any combination of logical expressions like `OR`, `AND`, `EQ`, `NE`, `GT`, `GE`, `LT`, `LR`, `IN`, `NIN`, `IS_NULL`, `NOT_NULL` provided by SQL query language.
+This GraphtQL schema supports flexible type safe criteria expressions with familiar SQL query syntax semantics using `where` arguments int the `select` query field to use any combination of logical expressions like `OR`, `AND`, `EQ`, `NE`, `GT`, `GE`, `LT`, `LR`, `IN`, `NIN`, `IS_NULL`, `NOT_NULL`, `BETWEEN`, `NOT_BETWEEN` provided by SQL query language.
 
-For example, the following query will find all running process instances with completed tasks:
+For example, the following query will find all running process instances with active tasks:
 
 ```text
 query {
   ProcessInstances(where: {
-    OR: {
-      status: { IN: RUNNING }
-    }
+    status: { IN: RUNNING }
   }) {
     select {
       processInstanceId
       status
-      tasks(where: {status: {EQ: COMPLETED}}) {
+      tasks(where: {status: {IN: [CREATED,ASSIGNED] }}) {
         id
         name
         assignee
@@ -171,7 +169,7 @@ Will return
             "id": "1",
             "name": "task1",
             "assignee": "assignee",
-            "status": "COMPLETED"
+            "status": "ASSIGNED"
           }
         ]
       },
@@ -183,7 +181,7 @@ Will return
             "id": "5",
             "name": "task5",
             "assignee": "assignee",
-            "status": "COMPLETED"
+            "status": "ASSIGNED"
           }
         ]
       }
@@ -418,7 +416,11 @@ The Activiti GraphQL Data Fetcher implementation will build dynamic JPA fetch gr
 
 The GraphiQL app browser can be used for simple testing. It provides schema documentation browser and query builder with auto-completion support, as well as parameter bindings.
 
-Then, navigate to [http://host/graphiql](http://host/graphiql) to load GraphiQL browser. The collapsed Docs panel can opened by clicking on the button in the upper right corner to expose current test schema models.
+Then, navigate to [http://host/notifications/graphiql](http://host/notifications/graphiql) to load GraphiQL browser. Use `hradmin` or `testadmin` user to login. 
+
+The collapsed Docs panel can opened by clicking on the button in the upper right corner to expose current test schema models.
 
 You can run GraphQL queries in the left pannel. Type the query and hit the run button. The results should come up in the middle panel. If your query has variables, there is a minimized panel at the bottom left. Simply click on this to expand, and type in your variables as a JSON string with quoted keys.
+
+
 
