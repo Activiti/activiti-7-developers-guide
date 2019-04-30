@@ -16,7 +16,7 @@ When receiving an HTTP GET request, the GraphQL query should be specified in the
 
 ```text
 {
-  ProcessInstance(processInstanceId:1) {
+  ProcessInstance(processInstanceId:"1") {
     processInstanceId
     tasks {
       id
@@ -83,7 +83,7 @@ If there were no errors returned, the "errors" field will be null in the respons
 
 ### GraphQL Query Schema
 
-Activiti GraphQL query endpoint provides schema descriptions derived from JPA entity model at runtime for the following entities: `ProcessInstance`, `Task`, and `Variable`. The schema also derives GraphQL scalar types from JPA entity model attributes to validate provided variable values against the schema.
+Activiti GraphQL query endpoint provides schema descriptions derived from JPA entity model at runtime for the following entities: `ProcessInstance`, `Task`, `ProcessVariable` and `TaskVariable`. The schema also derives GraphQL scalar types from JPA entity model attributes to validate provided variable values against the schema.
 
 Each entity in the query model is wrapped into two GraphQL query fields, i.e. ProcessInstance entity will have two representations in the GraphQL schema:
 
@@ -117,13 +117,13 @@ Will return:
         "id": "4",
         "name": "task4",
         "assignee": "assignee",
-        "status": "Running"
+        "status": "ASSIGNED"
       },
       {
         "id": "5",
         "name": "task5",
         "assignee": "assignee",
-        "status": "Completed"
+        "status": "COMPLETED"
       }
     ]
   }
@@ -132,21 +132,19 @@ Will return:
 
 ### GraphQL Pluralized Query Wrapper with Where Criteria Expressions
 
-This GraphtQL schema supports flexible type safe criteria expressions with familiar SQL query syntax semantics using `where` arguments int the `select` query field to use any combination of logical expressions like `OR`, `AND`, `EQ`, `NE`, `GT`, `GE`, `LT`, `LR`, `IN`, `NIN`, `IS_NULL`, `NOT_NULL` provided by SQL query language.
+This GraphtQL schema supports flexible type safe criteria expressions with familiar SQL query syntax semantics using `where` arguments int the `select` query field to use any combination of logical expressions like `OR`, `AND`, `EQ`, `NE`, `GT`, `GE`, `LT`, `LR`, `IN`, `NIN`, `IS_NULL`, `NOT_NULL`, `BETWEEN`, `NOT_BETWEEN` provided by SQL query language.
 
-For example, the following query will find all running process instances with completed tasks:
+For example, the following query will find all running process instances with active tasks:
 
 ```text
 query {
   ProcessInstances(where: {
-    OR: {
-      status: { IN: RUNNING }
-    }
+    status: { IN: RUNNING }
   }) {
     select {
       processInstanceId
       status
-      tasks(where: {status: {EQ: COMPLETED}}) {
+      tasks(where: {status: {IN: [CREATED,ASSIGNED] }}) {
         id
         name
         assignee
@@ -171,7 +169,7 @@ Will return
             "id": "1",
             "name": "task1",
             "assignee": "assignee",
-            "status": "COMPLETED"
+            "status": "ASSIGNED"
           }
         ]
       },
@@ -183,7 +181,7 @@ Will return
             "id": "5",
             "name": "task5",
             "assignee": "assignee",
-            "status": "COMPLETED"
+            "status": "ASSIGNED"
           }
         ]
       }
@@ -418,7 +416,110 @@ The Activiti GraphQL Data Fetcher implementation will build dynamic JPA fetch gr
 
 The GraphiQL app browser can be used for simple testing. It provides schema documentation browser and query builder with auto-completion support, as well as parameter bindings.
 
-Then, navigate to [http://host/graphiql](http://host/graphiql) to load GraphiQL browser. The collapsed Docs panel can opened by clicking on the button in the upper right corner to expose current test schema models.
+Then, navigate to [http://host/notifications/graphiql](http://host/notifications/graphiql) to load GraphiQL browser. Use `hradmin` or `testadmin` user to login. 
+
+The collapsed Docs panel can opened by clicking on the button in the upper right corner to expose current test schema models.
 
 You can run GraphQL queries in the left pannel. Type the query and hit the run button. The results should come up in the middle panel. If your query has variables, there is a minimized panel at the bottom left. Simply click on this to expand, and type in your variables as a JSON string with quoted keys.
+
+
+## GraphQL Subscription API
+
+Activiti Notifications GraphQL Query endpoint provides a universal mechanism to execute declarative queries using a complete and understandable schema description of the process instance, task and variable data that gives users the power to ask for exactly what they need in the shape they want. However, often times users want to get pushed updates from the server when data they care about changes. To support that, we are introducing support for GraphQL Subscriptions that offers real-time data updates with subscriptions and push data notifications in near real-time over WebSockets.
+
+### How it works
+
+Notifications Service GraphQL Subscriptions implementation leverages Spring’s WebSocket Message Broker to provide real-time full duplex communication between client application and backend Notification service.
+
+The root of GraphQL Subscription type provides `engineEvents` query field to subscribe to `ProcessEngineNotification` type:
+
+```text
+type Subscription {
+  engineEvents (
+      serviceName : String, 
+      appName : String, 
+      processDefinitionKey : String,
+      processInstanceId : String,
+      businessKey : String 
+  ) : ProcessEngineNotification
+}
+```
+
+The `ProcessEngineNotification` type provides data fiels to specify any combination of `EVENT_TYPES` you may want to receive as part of the notifcation payload:
+
+```
+type ProcessEngineNotification {
+	serviceName : String
+	appName : String 
+	processDefinitionKey : String 
+	processInstanceId : String 
+	businessKey : String 
+	PROCESS_STARTED : [PROCESS_STARTED]
+	PROCESS_COMPLETED : [PROCESS_COMPLETED]
+	PROCESS_CREATED : [PROCESS_CREATED]
+	PROCESS_CANCELLED : [PROCESS_CANCELLED]
+	PROCESS_RESUMED : [PROCESS_RESUMED]
+	PROCESS_SUSPENDED : [PROCESS_SUSPENDED]
+	ACTIVITY_STARTED : [ACTIVITY_STARTED]
+	ACTIVITY_CANCELLED : [ACTIVITY_CANCELLED]
+	ACTIVITY_COMPLETED : [ACTIVITY_COMPLETED]
+	VARIABLE_CREATED : [VARIABLE_CREATED]
+	VARIABLE_UPDATED : [VARIABLE_UPDATED]
+	VARIABLE_DELETED : [VARIABLE_DELETED]
+	SEQUENCE_FLOW_TAKEN : [SEQUENCE_FLOW_TAKEN]
+	TASK_CREATED : [TASK_CREATED]
+	TASK_COMPLETED : [TASK_COMPLETED]
+	TASK_ASSIGNED : [TASK_ASSIGNED]
+	TASK_ACTIVATED : [TASK_ACTIVATED]
+	TASK_SUSPENDED : [TASK_SUSPENDED]
+	TASK_CANCELLED : [TASK_CANCELLED]
+	INTEGRATION_REQUESTED : [INTEGRATION_REQUESTED]
+	INTEGRATION_RESULT_RECEIVED : [INTEGRATION_RESULT_RECEIVED]
+	TASK_CANDIDATE_USER_ADDED: [TASK_CANDIDATE_USER_ADDED]
+	TASK_CANDIDATE_USER_REMOVED: [TASK_CANDIDATE_USER_REMOVED]
+	TASK_CANDIDATE_GROUP_ADDED: [TASK_CANDIDATE_GROUP_ADDED]
+	TASK_CANDIDATE_GROUP_REMOVED: [TASK_CANDIDATE_GROUP_REMOVED]
+}
+```
+
+Each `EVENT_TYPE` defines its own unique attributes, i.e. `PROCESS_STARTER` event type defines the following fields:
+
+```
+type PROCESS_STARTED {
+    serviceName : String
+    serviceFullName : String
+    serviceVersion : String
+    serviceType : String
+    appName : String
+    appVersion : String
+    entityId : String
+
+    id : String
+    timestamp : Long
+    entity : ProcessInstanceType
+    eventType : String
+    
+    nestedProcessDefinitionId : String
+    nestedProcessInstanceId : String    
+}
+```
+
+It also contains embedded `entity` field of type `ProcessInstanceType` having the following attributes:
+
+```
+type ProcessInstanceType {
+	id : String
+	parentId : String
+	name : String
+	description : String
+	processDefinitionId : String
+	processDefinitionKey : String
+	processDefinitionVersion : Long
+	businessKey: String
+	initiator : String
+	startDate : String
+	status : String
+}
+```
+
 
