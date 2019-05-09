@@ -4,7 +4,7 @@ The BPMN specification describe a large number of constructs \(bpmn elements\) t
 
 As part of this initiative we defined comformance sets to validate different use cases composed by different combinations of BPMN elements. These comformance tests uses both the new Java API and the Cloud Native APIs to validate the correct behaviour of all our components. You can find the [conformance scenarios here](bpmn.md).
 
-The list of supported BPMN elements in the 7.0.x Release Train is:
+The list of supported BPMN elements in the 7.1.x Release Train is:
 
 * Start / End Events
 * SequenceFlows \(conditional, default\)
@@ -12,6 +12,8 @@ The list of supported BPMN elements in the 7.0.x Release Train is:
 * User Task \(assignee, candidateUsers, candidateGroups\)
 * Gateways: Parallel, Exclusive
 * Call Activity
+* Signal Intermediate Catch Event, Signal Intermediate Throw Event, Signal Boundary Event
+
 
 These BPMN elements are currently available in the Activiti Modeler application, and we will enable more as we add more support, tests and comformance for each of the remaining elements.
 
