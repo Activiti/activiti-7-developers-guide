@@ -416,12 +416,11 @@ The Activiti GraphQL Data Fetcher implementation will build dynamic JPA fetch gr
 
 The GraphiQL app browser can be used for simple testing. It provides schema documentation browser and query builder with auto-completion support, as well as parameter bindings.
 
-Then, navigate to [http://host/notifications/graphiql](http://host/notifications/graphiql) to load GraphiQL browser. Use `hradmin` or `testadmin` user to login. 
+Then, navigate to [http://host/notifications/graphiql](http://host/notifications/graphiql) to load GraphiQL browser. Use `hradmin` or `testadmin` user to login.
 
 The collapsed Docs panel can opened by clicking on the button in the upper right corner to expose current test schema models.
 
 You can run GraphQL queries in the left pannel. Type the query and hit the run button. The results should come up in the middle panel. If your query has variables, there is a minimized panel at the bottom left. Simply click on this to expand, and type in your variables as a JSON string with quoted keys.
-
 
 ## GraphQL Subscription API
 
@@ -447,44 +446,44 @@ type Subscription {
 
 The `ProcessEngineNotification` type provides data fiels to specify any combination of `EVENT_TYPES` you may want to receive as part of the notifcation payload:
 
-```
+```text
 type ProcessEngineNotification {
-	serviceName : String
-	appName : String 
-	processDefinitionKey : String 
-	processInstanceId : String 
-	businessKey : String 
-	PROCESS_STARTED : [PROCESS_STARTED]
-	PROCESS_COMPLETED : [PROCESS_COMPLETED]
-	PROCESS_CREATED : [PROCESS_CREATED]
-	PROCESS_CANCELLED : [PROCESS_CANCELLED]
-	PROCESS_RESUMED : [PROCESS_RESUMED]
-	PROCESS_SUSPENDED : [PROCESS_SUSPENDED]
-	ACTIVITY_STARTED : [ACTIVITY_STARTED]
-	ACTIVITY_CANCELLED : [ACTIVITY_CANCELLED]
-	ACTIVITY_COMPLETED : [ACTIVITY_COMPLETED]
-	VARIABLE_CREATED : [VARIABLE_CREATED]
-	VARIABLE_UPDATED : [VARIABLE_UPDATED]
-	VARIABLE_DELETED : [VARIABLE_DELETED]
-	SEQUENCE_FLOW_TAKEN : [SEQUENCE_FLOW_TAKEN]
-	TASK_CREATED : [TASK_CREATED]
-	TASK_COMPLETED : [TASK_COMPLETED]
-	TASK_ASSIGNED : [TASK_ASSIGNED]
-	TASK_ACTIVATED : [TASK_ACTIVATED]
-	TASK_SUSPENDED : [TASK_SUSPENDED]
-	TASK_CANCELLED : [TASK_CANCELLED]
-	INTEGRATION_REQUESTED : [INTEGRATION_REQUESTED]
-	INTEGRATION_RESULT_RECEIVED : [INTEGRATION_RESULT_RECEIVED]
-	TASK_CANDIDATE_USER_ADDED: [TASK_CANDIDATE_USER_ADDED]
-	TASK_CANDIDATE_USER_REMOVED: [TASK_CANDIDATE_USER_REMOVED]
-	TASK_CANDIDATE_GROUP_ADDED: [TASK_CANDIDATE_GROUP_ADDED]
-	TASK_CANDIDATE_GROUP_REMOVED: [TASK_CANDIDATE_GROUP_REMOVED]
+    serviceName : String
+    appName : String 
+    processDefinitionKey : String 
+    processInstanceId : String 
+    businessKey : String 
+    PROCESS_STARTED : [PROCESS_STARTED]
+    PROCESS_COMPLETED : [PROCESS_COMPLETED]
+    PROCESS_CREATED : [PROCESS_CREATED]
+    PROCESS_CANCELLED : [PROCESS_CANCELLED]
+    PROCESS_RESUMED : [PROCESS_RESUMED]
+    PROCESS_SUSPENDED : [PROCESS_SUSPENDED]
+    ACTIVITY_STARTED : [ACTIVITY_STARTED]
+    ACTIVITY_CANCELLED : [ACTIVITY_CANCELLED]
+    ACTIVITY_COMPLETED : [ACTIVITY_COMPLETED]
+    VARIABLE_CREATED : [VARIABLE_CREATED]
+    VARIABLE_UPDATED : [VARIABLE_UPDATED]
+    VARIABLE_DELETED : [VARIABLE_DELETED]
+    SEQUENCE_FLOW_TAKEN : [SEQUENCE_FLOW_TAKEN]
+    TASK_CREATED : [TASK_CREATED]
+    TASK_COMPLETED : [TASK_COMPLETED]
+    TASK_ASSIGNED : [TASK_ASSIGNED]
+    TASK_ACTIVATED : [TASK_ACTIVATED]
+    TASK_SUSPENDED : [TASK_SUSPENDED]
+    TASK_CANCELLED : [TASK_CANCELLED]
+    INTEGRATION_REQUESTED : [INTEGRATION_REQUESTED]
+    INTEGRATION_RESULT_RECEIVED : [INTEGRATION_RESULT_RECEIVED]
+    TASK_CANDIDATE_USER_ADDED: [TASK_CANDIDATE_USER_ADDED]
+    TASK_CANDIDATE_USER_REMOVED: [TASK_CANDIDATE_USER_REMOVED]
+    TASK_CANDIDATE_GROUP_ADDED: [TASK_CANDIDATE_GROUP_ADDED]
+    TASK_CANDIDATE_GROUP_REMOVED: [TASK_CANDIDATE_GROUP_REMOVED]
 }
 ```
 
 Each `EVENT_TYPE` defines its own unique attributes, i.e. `PROCESS_STARTER` event type defines the following fields:
 
-```
+```text
 type PROCESS_STARTED {
     serviceName : String
     serviceFullName : String
@@ -498,7 +497,7 @@ type PROCESS_STARTED {
     timestamp : Long
     entity : ProcessInstanceType
     eventType : String
-    
+
     nestedProcessDefinitionId : String
     nestedProcessInstanceId : String    
 }
@@ -506,20 +505,19 @@ type PROCESS_STARTED {
 
 It also contains embedded `entity` field of type `ProcessInstanceType` having the following attributes:
 
-```
+```text
 type ProcessInstanceType {
-	id : String
-	parentId : String
-	name : String
-	description : String
-	processDefinitionId : String
-	processDefinitionKey : String
-	processDefinitionVersion : Long
-	businessKey: String
-	initiator : String
-	startDate : String
-	status : String
+    id : String
+    parentId : String
+    name : String
+    description : String
+    processDefinitionId : String
+    processDefinitionKey : String
+    processDefinitionVersion : Long
+    businessKey: String
+    initiator : String
+    startDate : String
+    status : String
 }
 ```
-
 

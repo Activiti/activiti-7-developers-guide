@@ -8,7 +8,7 @@ _**Getting started with Activiti Cloud**_ : here are 3 options.
 * [Automated CI/CD with Jenkins-X](getting-started-activiti-cloud/getting-started-activiti-cloud-jx/)
   * on AWS EKS
   * on GCP GKE
-* [Using Helm](getting-started-activiti-core.md)
+* [Using Helm](getting-started-activiti-cloud/)
   * on AWS EKS
   * on GCP GKE
 
