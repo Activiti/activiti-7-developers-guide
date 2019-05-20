@@ -29,7 +29,8 @@ cd activiti-cloud-examples/docker-compose
 You need to edit `.env` file to configure DOCKER\_IP property based on your OS and Docker VM type.
 
 * Use your local computer IP address for Docker for Desktop on Linux, Mac or Windows
-* Use `docker-machine ip` command if you use Docker Toolbox 
+* Use `docker-machine ip` command if you use Docker Toolbox
+* Don't use 127.0.0.1 or localhost
 
 ## How To Run Activity Cloud
 
