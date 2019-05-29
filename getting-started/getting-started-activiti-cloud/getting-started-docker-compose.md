@@ -58,12 +58,11 @@ make application
 
 You will need to use [Postman](https://www.getpostman.com/downloads/) to use Activiti Rest Apis
 
-Start Postman and add to Postman collection _Activiti v7 REST API.postman\_collection.json_ located in [https://github.com/Activiti/activiti-cloud-examples](https://github.com/Activiti/activiti-cloud-examples)   
+Start Postman and add to Postman collection _Activiti v7 REST API.postman\_collection.json_ located in [https://github.com/Activiti/activiti-cloud-examples](https://github.com/Activiti/activiti-cloud-examples)
 
-
-_Then at the top right choose manage environment then use your own ip in current value tab._   
- Then use _activiti_ as default environment.   
- To start work execute _getKeycloakToken hruser_ in Postman Keycloak collection. Then run startProcess in rb-my-app Postman collection.
+_Then at the top right choose manage environment then use your own ip in current value tab._  
+Then use _activiti_ as default environment.  
+To start work execute _getKeycloakToken hruser_ in Postman Keycloak collection. Then run startProcess in rb-my-app Postman collection.
 
 #### Start All Services
 
