@@ -127,7 +127,7 @@
   - The user is the assignee of the task, so no need to claim
   - Calling delete on a task that belongs to a process should produce an ActivitiException: “The task cannot be deleted because is part of a running process”
 
-[User Task For Candidate Delete](https://github.com/salaboy/bpmn-scenarios/blob/master/processes/UserTask%20with%20CandidateUser.bpmn20.xml) 
+- [User Task For Candidate Delete](https://github.com/salaboy/bpmn-scenarios/blob/master/processes/UserTask%20with%20CandidateUser.bpmn20.xml) 
   - A process creates a task and the user execute delete on it
   - The user is the candidate of the task
   - Calling delete on a task that belongs to a process should produce an **ActivitiException**
