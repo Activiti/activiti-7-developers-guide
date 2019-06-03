@@ -1,4 +1,4 @@
-##Scenario Set 1: 
+# Scenario Set 1: Basic Service Tasks
 - [Service Task with Implementation](https://github.com/salaboy/bpmn-scenarios/blob/master/processes/ServiceTask%20with%20Implementation.bpmn20.xml) 
   - Check that the process start and the status after start is COMPLETED, due the Connector is a sync operation
   - Check that the connector logic is executed
