@@ -17,8 +17,9 @@ Based on these dimensions, we will start by covering the different combinations 
 - Basic Scenarios using the Local USER APIs (**ACTIVITI_USER** Role API): 
   - Basic scenarios test the execution of BPMN elements in isolation. We should test happy and non-happy paths to understand which errors will be generated in case of issues during the execution. 
   - [Set #0: Process Information](set-0-basic-process-information.md)
-  - [Set #1: Service Task](set-0-basic-service-tasks.md)
-  - [Set #2: User Task](set-1-basic-user-tasks.md)
+  - [Set #1: Service Task](set-1-basic-service-tasks.md)
+  - [Set #2: User Task](set-2-basic-user-tasks.md)
+  - [Set #3: User Task Assignments](set-3-basic-user-task-assignments.md)
 - Basic Scenarios using the Distributed USER APIs
 - Basic Scenarios using the Local USER APIs with Data Handling
 - Basic Scenarios using the Distributed USER APIs with Data Handling
