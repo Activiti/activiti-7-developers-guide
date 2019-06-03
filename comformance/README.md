@@ -14,7 +14,9 @@ There are different dimensions that needs to be covered in order to have a sensi
 - Performance (that can be analyzed separately) 
 
 Based on these dimensions, we will start by covering the different combinations in the following order:
-- [Basic Scenarios using the Local USER APIs](set-0-basic-core-user.md)
+- Basic Scenarios using the Local USER APIs
+  - [Set #0: Process Information](set-0-basic-process-information.md)
+  - [Set #1: Service Task](set-0-basic-service-tasks.md)
 - Basic Scenarios using the Distributed USER APIs
 - Basic Scenarios using the Local USER APIs with Data Handling
 - Basic Scenarios using the Distributed USER APIs with Data Handling

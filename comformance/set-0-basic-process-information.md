@@ -11,25 +11,27 @@ Basic scenarios test the execution of BPMN elements in isolation. We should test
     - name
   - Start Process without Variables (StartProcess Operation)
     - Check that 8 events gets generated
-      - PROCESS_CREATED
-      - PROCESS_STARTED
-      - ACTIVITY_STARTED
-      - ACTIVITY_COMPLETED
-      - SEQUENCE_FLOW_TAKEN
-      - ACTIVITY_STARTED
-      - ACTIVITY_COMPLETED
-      - PROCESS_COMPLETED
+      - Start Operation
+        - PROCESS_CREATED
+        - PROCESS_STARTED
+        - ACTIVITY_STARTED
+        - ACTIVITY_COMPLETED
+        - SEQUENCE_FLOW_TAKEN
+        - ACTIVITY_STARTED
+        - ACTIVITY_COMPLETED
+        - PROCESS_COMPLETED
   - Start Process with Variables (1 Variable)
     - Check that 9 events gets generated
-      - PROCESS_CREATED
-      - VARIABLE_CREATED
-      - PROCESS_STARTED
-      - ACTIVITY_STARTED
-      - ACTIVITY_COMPLETED
-      - SEQUENCE_FLOW_TAKEN
-      - ACTIVITY_STARTED
-      - ACTIVITY_COMPLETED
-      - PROCESS_COMPLETED
+      - Start Operation
+        - PROCESS_CREATED
+        - VARIABLE_CREATED
+        - PROCESS_STARTED
+        - ACTIVITY_STARTED
+        - ACTIVITY_COMPLETED
+        - SEQUENCE_FLOW_TAKEN
+        - ACTIVITY_STARTED
+        - ACTIVITY_COMPLETED
+        - PROCESS_COMPLETED
 
 - [Process with Generic Task](https://github.com/salaboy/bpmn-scenarios/blob/master/processes/Process%20with%20Generic%20%20BPMN%20Task.bpmn20.xml) 
   - Check that the process instance is COMPLETED (status) after start, BPMN Generic task doesn’t have any associated behaviour so the task is automatically completed by the engine
@@ -37,17 +39,18 @@ Basic scenarios test the execution of BPMN elements in isolation. We should test
     - businessKey
     - Name
   - Check that 11 events are generated
-    - PROCESS_CREATED
-    - PROCESS_STARTED,
-    - ACTIVITY_STARTED,
-    - ACTIVITY_COMPLETED,
-    - SEQUENCE_FLOW_TAKEN,
-    - ACTIVITY_STARTED,
-    - ACTIVITY_COMPLETED,
-    - SEQUENCE_FLOW_TAKEN,
-    - ACTIVITY_STARTED,
-    - ACTIVITY_COMPLETED,
-    - PROCESS_COMPLETED
+    - Start Operation
+      - PROCESS_CREATED
+      - PROCESS_STARTED,
+      - ACTIVITY_STARTED,
+      - ACTIVITY_COMPLETED,
+      - SEQUENCE_FLOW_TAKEN,
+      - ACTIVITY_STARTED,
+      - ACTIVITY_COMPLETED,
+      - SEQUENCE_FLOW_TAKEN,
+      - ACTIVITY_STARTED,
+      - ACTIVITY_COMPLETED,
+      - PROCESS_COMPLETED
 - [Process Instance Delete](https://github.com/salaboy/bpmn-scenarios/blob/master/processes/UserTask%20with%20no%20User%20or%20Group%20Assignment.bpmn20.xml)
   - Start a process instance with a wait/safe state such as a UserTask
   - We will need to check for process events only, Task Events should be validated in Set 2
