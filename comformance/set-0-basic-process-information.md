@@ -1,8 +1,5 @@
-# Basic Scenarios (ACTIVITI_USER Role API) 
 
-Basic scenarios test the execution of BPMN elements in isolation. We should test happy and non-happy paths to understand which errors will be generated in case of issues during the execution. You can find the process definitions used for these scenarios here:
-
-##Scenario Set 0: 
+#Scenario Set 0: Process Information and Base BPMN Elements
 - [Process Information](https://github.com/salaboy/bpmn-scenarios/blob/master/processes/Process%20Information.bpmn20.xml) 
 ![](../.gitbook/assets/process-information.png)
   - Check that the process instance is COMPLETED (status) after start

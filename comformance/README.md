@@ -20,6 +20,7 @@ Based on these dimensions, we will start by covering the different combinations 
   - [Set #1: Service Task](set-1-basic-service-tasks.md)
   - [Set #2: User Task](set-2-basic-user-tasks.md)
   - [Set #3: User Task Assignments](set-3-basic-user-task-assignments.md)
+  - [Set #4: Gateways](set-4-basic-gateways.md)
 - Basic Scenarios using the Distributed USER APIs
 - Basic Scenarios using the Local USER APIs with Data Handling
 - Basic Scenarios using the Distributed USER APIs with Data Handling

@@ -16,7 +16,7 @@
   - User 1 should release the task
   - User 2 should be able to see the task as candidate
 
-- [User Task 1 with Candidate Group 1, User 1 claim and add Candidate Group] 2 (UserTaskCandidateAPIsRuntimeTest)
+- [User Task 1 with Candidate Group 1, User 1 claim and add Candidate Group 2] (UserTaskCandidateAPIsRuntimeTest)
   - User 1 should be able to claim the task
   - User 1 should be able to add candidate User 2 
   - User 1 should release the task
