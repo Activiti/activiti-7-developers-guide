@@ -13,6 +13,8 @@
     * [BPMN Comformance Set 2](comformance/set-2-basic-user-tasks.md)
     * [BPMN Comformance Set 3](comformance/set-3-basic-user-task-assignments.md)
     * [BPMN Comformance Set 4](comformance/set-4-basic-gateways.md)
+    * [BPMN Comformance Set 5](comformance/set-5-basic-call-activity.md)
+    * [BPMN Comformance Set 6](comformance/set-6-basic-signals.md)
 * [Getting Started](getting-started/README.md)
   * [Getting Started - Activiti Cloud](getting-started/getting-started-activiti-cloud/README.md)
     * [Amazon EKS](getting-started/getting-started-activiti-cloud/amazon-eks.md)
