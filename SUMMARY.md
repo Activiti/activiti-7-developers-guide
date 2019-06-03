@@ -7,6 +7,7 @@
   * [Previous Versions \(5.x & 6.x\)](overview/previous.md)
   * [References](overview/references.md)
   * [Cloud Native BPMN support](overview/bpmn.md)
+  * [BPMN Comformance](comformance/README.md)
 * [Getting Started](getting-started/README.md)
   * [Getting Started - Activiti Cloud](getting-started/getting-started-activiti-cloud/README.md)
     * [Amazon EKS](getting-started/getting-started-activiti-cloud/amazon-eks.md)
