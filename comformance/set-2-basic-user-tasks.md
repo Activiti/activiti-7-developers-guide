@@ -1,4 +1,4 @@
-# Scenario Set 2: Basic User Tasks
+## Scenario Set 2: Basic User Tasks
 - [User Task with User Assignment](https://github.com/salaboy/bpmn-scenarios/blob/master/processes/UserTask%20with%20Assignee.bpmn20.xml) 
   - We should be able to start the process and check that the Status after start is RUNNING
   - This process instance has a concrete assignee: “user1”

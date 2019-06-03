@@ -1,4 +1,4 @@
-# Scenario Set 4: Gateways
+## Scenario Set 4: Gateways
 - [Exclusive Gateway with two User Tasks assigned to User 1 and User 2]()
   - Due a simple expression User 1 should see a task created after the exclusive gateway
 - [Exclusive Gateway with Expression Error]()

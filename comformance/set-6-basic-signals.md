@@ -1,4 +1,4 @@
-# Scenario Set 6: Signals
+## Scenario Set 6: Signals
 - [Process throwing a signal event]()
   - Start Operation:
     - PROCESS_CREATED

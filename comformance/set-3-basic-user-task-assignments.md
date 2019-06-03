@@ -1,4 +1,4 @@
-# Scenario Set 3: User Tasks, User & Group Assignments visibility/access
+## Scenario Set 3: User Tasks, User & Group Assignments visibility/access
 
 
 - [User Task 1 assigned to User 1 followed by User Task 2 with Candidate Group 1]

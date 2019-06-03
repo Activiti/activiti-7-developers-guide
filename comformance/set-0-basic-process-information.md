@@ -1,5 +1,5 @@
 
-#Scenario Set 0: Process Information and Base BPMN Elements
+## Scenario Set 0: Process Information and Base BPMN Elements
 - [Process Information](https://github.com/salaboy/bpmn-scenarios/blob/master/processes/Process%20Information.bpmn20.xml) 
 ![](../.gitbook/assets/process-information.png)
   - Check that the process instance is COMPLETED (status) after start
