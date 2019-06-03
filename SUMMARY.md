@@ -8,6 +8,7 @@
   * [References](overview/references.md)
   * [Cloud Native BPMN support](overview/bpmn.md)
   * [BPMN Comformance](comformance/README.md)
+    * [BPMN Comformance Set 0](comformance/set-0-basic-core-user.md)
 * [Getting Started](getting-started/README.md)
   * [Getting Started - Activiti Cloud](getting-started/getting-started-activiti-cloud/README.md)
     * [Amazon EKS](getting-started/getting-started-activiti-cloud/amazon-eks.md)
