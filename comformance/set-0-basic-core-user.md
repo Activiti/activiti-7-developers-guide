@@ -49,19 +49,19 @@ Basic scenarios test the execution of BPMN elements in isolation. We should test
     - ACTIVITY_COMPLETED,
     - PROCESS_COMPLETED
 - [Process Instance Delete](https://github.com/salaboy/bpmn-scenarios/blob/master/processes/UserTask%20with%20no%20User%20or%20Group%20Assignment.bpmn20.xml) 
-- Start a process instance with a wait/safe state such as a UserTask
-- We will need to check for process events only, Task Events should be validated in Set 2
-  - Start Operation
-    - PROCESS_CREATED
-    - PROCESS_STARTED
-    - ACTIVITY_STARTED,
-    - ACTIVITY_COMPLETED,
-    - SEQUENCE_FLOW_TAKEN,
-    - ACTIVITY_STARTED
-  - Delete Operator
-    - ACTIVITY_CANCELLED,
-    - PROCESS_CANCELLED
-- After delete, we shouldn’t be able to find the process instance
+  - Start a process instance with a wait/safe state such as a UserTask
+  - We will need to check for process events only, Task Events should be validated in Set 2
+    - Start Operation
+      - PROCESS_CREATED
+      - PROCESS_STARTED
+      - ACTIVITY_STARTED,
+      - ACTIVITY_COMPLETED,
+      - SEQUENCE_FLOW_TAKEN,
+      - ACTIVITY_STARTED
+    - Delete Operator
+      - ACTIVITY_CANCELLED,
+      - PROCESS_CANCELLED
+  - After delete, we shouldn’t be able to find the process instance
 
 - [Process Instance Suspend / Resume](https://github.com/salaboy/bpmn-scenarios/blob/master/processes/UserTask%20with%20no%20User%20or%20Group%20Assignment.bpmn20.xml) 
   - Start a process instance with a wait/safe state such as a UserTask
