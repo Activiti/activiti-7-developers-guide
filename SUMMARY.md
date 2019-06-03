@@ -10,7 +10,7 @@
   * [BPMN Comformance](comformance/README.md)
     * [BPMN Comformance Set 0](comformance/set-0-basic-process-information.md)
     * [BPMN Comformance Set 1](comformance/set-1-basic-service-tasks.md)
-    * [BPMN Comformance Set 2](comformance/set-1-basic-user-tasks.md)
+    * [BPMN Comformance Set 2](comformance/set-2-basic-user-tasks.md)
 * [Getting Started](getting-started/README.md)
   * [Getting Started - Activiti Cloud](getting-started/getting-started-activiti-cloud/README.md)
     * [Amazon EKS](getting-started/getting-started-activiti-cloud/amazon-eks.md)
