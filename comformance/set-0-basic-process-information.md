@@ -1,7 +1,7 @@
 
 ## Scenario Set 0: Process Information and Base BPMN Elements
 - [Process Information](https://github.com/salaboy/bpmn-scenarios/blob/master/processes/Process%20Information.bpmn20.xml) 
-![](../.gitbook/assets/process-information.png)
+![](../.gitbook/assets/set-0-start-end-events.png)
   - Check that the process instance is COMPLETED (status) after start
   - Check that the process instance information is correctly propagated
     - businessKey
