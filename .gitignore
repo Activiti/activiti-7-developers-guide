@@ -19,3 +19,4 @@ _book
 **.idea/**
 .idea/
 *.iml
+.gitbook/.DS_Store
