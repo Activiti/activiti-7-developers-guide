@@ -12,31 +12,26 @@ You can find the source code for these [comformance tests here](https://github.c
   - Check that the process instance information is correctly propagated
     - businessKey
     - name
-  - Start Process Operation
-    - No process variables are defined  
-    - Check that 8 events gets generated
-      - Start Process Operation
-        - PROCESS_CREATED
-        - PROCESS_STARTED
-        - ACTIVITY_STARTED
-        - ACTIVITY_COMPLETED
-        - SEQUENCE_FLOW_TAKEN
-        - ACTIVITY_STARTED
-        - ACTIVITY_COMPLETED
-        - PROCESS_COMPLETED
-  - Start Process Operation
+  - **Start Process Operation**
+    - PROCESS_CREATED
+    - PROCESS_STARTED
+    - ACTIVITY_STARTED
+    - ACTIVITY_COMPLETED
+    - SEQUENCE_FLOW_TAKEN
+    - ACTIVITY_STARTED
+    - ACTIVITY_COMPLETED
+    - PROCESS_COMPLETED
+  - **Start Process Operation**
     - Add one process Variable
-    - Check that 9 events gets generated
-      - Start Process Operation
-        - PROCESS_CREATED
-        - VARIABLE_CREATED
-        - PROCESS_STARTED
-        - ACTIVITY_STARTED
-        - ACTIVITY_COMPLETED
-        - SEQUENCE_FLOW_TAKEN
-        - ACTIVITY_STARTED
-        - ACTIVITY_COMPLETED
-        - PROCESS_COMPLETED
+    - PROCESS_CREATED
+    - VARIABLE_CREATED
+    - PROCESS_STARTED
+    - ACTIVITY_STARTED
+    - ACTIVITY_COMPLETED
+    - SEQUENCE_FLOW_TAKEN
+    - ACTIVITY_STARTED
+    - ACTIVITY_COMPLETED
+    - PROCESS_COMPLETED
 
 ![](../.gitbook/assets/set-0-base-task.png)
 - [Process with Generic Task](https://github.com/salaboy/bpmn-scenarios/blob/master/processes/Process%20with%20Generic%20%20BPMN%20Task.bpmn20.xml) 
@@ -45,33 +40,32 @@ You can find the source code for these [comformance tests here](https://github.c
   - Check that the process instance information is correctly propagated
     - businessKey
     - Name
-  - Check that 11 events are generated
-    - Start Process Operation
-      - PROCESS_CREATED
-      - PROCESS_STARTED,
-      - ACTIVITY_STARTED,
-      - ACTIVITY_COMPLETED,
-      - SEQUENCE_FLOW_TAKEN,
-      - ACTIVITY_STARTED,
-      - ACTIVITY_COMPLETED,
-      - SEQUENCE_FLOW_TAKEN,
-      - ACTIVITY_STARTED,
-      - ACTIVITY_COMPLETED,
-      - PROCESS_COMPLETED
+  - **Start Process Operation**
+    - PROCESS_CREATED
+    - PROCESS_STARTED,
+    - ACTIVITY_STARTED,
+    - ACTIVITY_COMPLETED,
+    - SEQUENCE_FLOW_TAKEN,
+    - ACTIVITY_STARTED,
+    - ACTIVITY_COMPLETED,
+    - SEQUENCE_FLOW_TAKEN,
+    - ACTIVITY_STARTED,
+    - ACTIVITY_COMPLETED,
+    - PROCESS_COMPLETED
 
 ![](../.gitbook/assets/set-0-wait-state.png)
 - [Process Instance Delete](https://github.com/salaboy/bpmn-scenarios/blob/master/processes/UserTask%20with%20no%20User%20or%20Group%20Assignment.bpmn20.xml)
   - The [source code of this test can be found here](https://github.com/Activiti/Activiti/blob/develop/activiti-spring-conformance-tests/activiti-spring-conformance-set0/src/test/java/org/activiti/spring/conformance/set0/ProcessInstanceOperationsTest.java)
   - Start a process instance with a wait/safe state such as a UserTask
   - We will need to check for process events only, Task Events should be validated in Set 2
-    - Start Process Operation
+    - **Start Process Operation**
       - PROCESS_CREATED
       - PROCESS_STARTED
       - ACTIVITY_STARTED,
       - ACTIVITY_COMPLETED,
       - SEQUENCE_FLOW_TAKEN,
       - ACTIVITY_STARTED
-    - Delete Process Operator
+    - **Delete Process Operator**
       - ACTIVITY_CANCELLED,
       - PROCESS_CANCELLED
   - After delete, we shouldn’t be able to find the process instance
@@ -80,14 +74,14 @@ You can find the source code for these [comformance tests here](https://github.c
 - [Process Instance Suspend / Resume](https://github.com/salaboy/bpmn-scenarios/blob/master/processes/UserTask%20with%20no%20User%20or%20Group%20Assignment.bpmn20.xml) 
   - The [source code of this test can be found here](https://github.com/Activiti/Activiti/blob/develop/activiti-spring-conformance-tests/activiti-spring-conformance-set0/src/test/java/org/activiti/spring/conformance/set0/ProcessInstanceOperationsTest.java)
   - Start a process instance with a wait/safe state such as a UserTask
-  - Start Process Operation
+  - **Start Process Operation**
     - PROCESS_CREATED,
     - PROCESS_STARTED,
     - ACTIVITY_STARTED,
     - ACTIVITY_COMPLETED,
     - SEQUENCE_FLOW_TAKEN,
     - ACTIVITY_STARTED
-  - Suspend Process Operation    
+  - **Suspend Process Operation**    
     - PROCESS_SUSPENDED
-  - Resume Process Operation
+  - **Resume Process Operation**
     - PROCESS_RESUMED
