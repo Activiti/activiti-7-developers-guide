@@ -6,12 +6,13 @@ Activiti Cloud is a set of Cloud Native components designed from the ground up t
 
 We have gone through a very valuable journey, meeting very passionate developers, communities and existing and potential customers who are looking to leverage these technologies \(and business automation solutions\) to reduce time to market and improve business agility in the Cloud. We have also contributed with these communities, making sure that the Open Source projects that we consume get back our valuable feedback and contributions.
 
-Activiti Cloud includes 4 foundational building blocks:
+Activiti Cloud includes 5 foundational building blocks:
 
 * Activiti Cloud Runtime Bundle
 * Activiti Cloud Query
 * Activiti Cloud Audit
 * Activiti Cloud Connectors
+* Activiti Cloud Notifications Service (GraphQL)
 
 These building blocks are Spring Boot Starters that can be attached to any Spring Boot \(2.x\) application. These building blocks are enhanced with Spring Cloud functionalities which provide the Cloud Native capabilities.
 
