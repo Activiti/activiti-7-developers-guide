@@ -10,9 +10,10 @@ The list of supported BPMN elements in the 7.1.x Release Train is:
 * SequenceFlows \(conditional, default\)
 * Service Task
 * User Task \(assignee, candidateUsers, candidateGroups\)
-* Gateways: Parallel, Exclusive
+* Gateways: Parallel, Exclusive, Inclusive
 * Call Activity
 * Signal Intermediate Catch Event, Signal Intermediate Throw Event, Signal Boundary Event
+* Embedded Subprocess
 
 These BPMN elements are currently available in the Activiti Modeler application, and we will enable more as we add more support, tests and comformance for each of the remaining elements.
 
