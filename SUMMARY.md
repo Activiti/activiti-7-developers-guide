@@ -37,6 +37,7 @@
     * [Activiti Cloud Audit Service](components/activiti-cloud-application/audit-service.md)
     * [Activiti Cloud Notification Service](components/activiti-cloud-application/notification-service.md)
   * [Activiti Cloud Modeling](components/activiti-cloud-modeling.md)
+* [FAQs](faq/README.md)
 * [BluePrints](blueprints/README.md)
   * [Trending Topic Campaigns](blueprints/trending-topic-campaigns.md)
 * [Community](community/README.md)
