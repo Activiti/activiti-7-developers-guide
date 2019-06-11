@@ -38,6 +38,8 @@
     * [Activiti Cloud Notification Service](components/activiti-cloud-application/notification-service.md)
   * [Activiti Cloud Modeling](components/activiti-cloud-modeling.md)
 * [FAQs](faq/README.md)
+  * [Activiti Core FAQs](faq/faq-activiti-core.md)
+  * [Activiti Cloud FAQs](faq/faq-activiti-cloud.md)
 * [BluePrints](blueprints/README.md)
   * [Trending Topic Campaigns](blueprints/trending-topic-campaigns.md)
 * [Community](community/README.md)
