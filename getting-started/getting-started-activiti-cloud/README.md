@@ -12,7 +12,7 @@ Activiti Cloud includes 5 foundational building blocks:
 * Activiti Cloud Query
 * Activiti Cloud Audit
 * Activiti Cloud Connectors
-* Activiti Cloud Notifications Service (GraphQL)
+* Activiti Cloud Notifications Service \(GraphQL\)
 
 These building blocks are Spring Boot Starters that can be attached to any Spring Boot \(2.x\) application. These building blocks are enhanced with Spring Cloud functionalities which provide the Cloud Native capabilities.
 
