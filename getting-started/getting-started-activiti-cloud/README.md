@@ -61,7 +61,7 @@ In the next section, we show you how to create a Kubernetes cluster using Amazon
 The first step is to register the Activiti Cloud HELM charts into HELM running the following commands:
 
 ```bash
-helm repo add activiti-cloud-charts https://activiti.github.io/activiti-cloud-charts/
+helm repo add activiti-cloud--helm charts https://activiti.github.io/activiti-cloud-helm-charts/
 ```
 
 ```bash
@@ -91,7 +91,7 @@ With GCP, use "**&lt;EXTERNAL-IP&gt;.nip.io**" to deploy Activiti Helm chart. In
 Once you have resolved you domain name, install Helm chart by running the Helm install command using your public domain name to set the `global.gateway.domain` key. In our case replace the string “**REPLACEME**” with the domain from previous step.
 
 ```bash
-helm install --name example activiti-cloud-charts/activiti-cloud-full-example --set global.gateway.domain=REPLACEME
+helm install --name example activiti-cloud-charts/activiti-cloud-full-example --version 7.1.0-M2 --set global.gateway.domain=REPLACEME
 ```
 
 In our case for AWS, we use:
