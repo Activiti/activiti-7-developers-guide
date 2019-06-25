@@ -33,7 +33,7 @@ The quickest and easiest way to deploy things to Kubernetes is by using HELM cha
 
 As part of Activiti Cloud, we have created a set of hierarchical HELM charts that can be used to deploy several components, some related to infrastructure \(such as SSO and Gateway\) and some Application specific components like Runtime Bundle, Audit Service, Query Service and a Cloud Connector.
 
-These HELM charts can be found here: [https://github.com/Activiti/activiti-cloud-charts](https://github.com/Activiti/activiti-cloud-charts).
+For example Runtime Bundle charts is located at: [https://github.com/Activiti/example-runtime-bundle/tree/master/charts/runtime-bundle](https://github.com/Activiti/example-runtime-bundle/tree/master/charts/runtime-bundle)
 
 In this quick-start, we will be looking more specifically at: [https://github.com/Activiti/activiti-cloud-full-chart/tree/master/charts/activiti-cloud-full-example](https://github.com/Activiti/activiti-cloud-full-chart/tree/master/charts/activiti-cloud-full-example)
 
