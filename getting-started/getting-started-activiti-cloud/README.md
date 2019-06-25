@@ -35,7 +35,7 @@ As part of Activiti Cloud, we have created a set of hierarchical HELM charts tha
 
 These HELM charts can be found here: [https://github.com/Activiti/activiti-cloud-charts](https://github.com/Activiti/activiti-cloud-charts).
 
-In this quick-start, we will be looking more specifically at: [https://github.com/Activiti/activiti-cloud-charts/tree/master/activiti-cloud-full-example](https://github.com/Activiti/activiti-cloud-charts/tree/master/activiti-cloud-full-example)
+In this quick-start, we will be looking more specifically at: [https://github.com/Activiti/activiti-cloud-full-chart/tree/master/charts/activiti-cloud-full-example](https://github.com/Activiti/activiti-cloud-full-chart/tree/master/charts/activiti-cloud-full-example)
 
 This “Activiti Cloud Full Example” deploys the following components:
 
@@ -61,7 +61,7 @@ In the next section, we show you how to create a Kubernetes cluster using Amazon
 The first step is to register the Activiti Cloud HELM charts into HELM running the following commands:
 
 ```bash
-helm repo add activiti-cloud--helm charts https://activiti.github.io/activiti-cloud-helm-charts/
+helm repo add activiti-cloud-helm-charts https://activiti.github.io/activiti-cloud-helm-charts/
 ```
 
 ```bash
@@ -91,7 +91,7 @@ With GCP, use "**&lt;EXTERNAL-IP&gt;.nip.io**" to deploy Activiti Helm chart. In
 Once you have resolved you domain name, install Helm chart by running the Helm install command using your public domain name to set the `global.gateway.domain` key. In our case replace the string “**REPLACEME**” with the domain from previous step.
 
 ```bash
-helm install --name example activiti-cloud-charts/activiti-cloud-full-example --version 7.1.0-M2 --set global.gateway.domain=REPLACEME
+helm install --name example activiti-cloud-helm-charts/activiti-cloud-full-example --version 7.1.0-M2 --set global.gateway.domain=REPLACEME
 ```
 
 In our case for AWS, we use:
