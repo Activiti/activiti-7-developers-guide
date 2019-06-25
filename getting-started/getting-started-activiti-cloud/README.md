@@ -106,19 +106,19 @@ In our case for GCP, we use:
 global.gateway.domain=35.194.42.164.nip.io
 ```
 
-Here is the example result for GCP:
+Here is the example result for AWS:
 
 ```text
 NOTES:
-               _   _       _ _   _    _____ _                 _
+               _   _       _ _   _    _____ _                 _ 
      /\       | | (_)     (_) | (_)  / ____| |               | |
     /  \   ___| |_ ___   ___| |_ _  | |    | | ___  _   _  __| |
    / /\ \ / __| __| \ \ / / | __| | | |    | |/ _ \| | | |/ _` |
   / ____ \ (__| |_| |\ V /| | |_| | | |____| | (_) | |_| | (_| |
  /_/    \_\___|\__|_| \_/ |_|\__|_|  \_____|_|\___/ \__,_|\__,_|
- Version: 7.0.0.GA
+ Version: 7.1.0-SNAPSHOT
 
-Thank you for installing activiti-cloud-full-example-1.1.1
+Thank you for installing activiti-cloud-full-example-7.1.0-M2
 
 Your release is named example.
 
@@ -129,14 +129,21 @@ To learn more about the release, try:
 
 Get the application URLs:
 
-Activiti Keycloak : http://activiti-cloud-gateway.default.35.194.42.164.nip.io/auth
-Activiti Gateway  : http://activiti-cloud-gateway.default.35.194.42.164.nip.io/
-Activiti Modeler  : http://activiti-cloud-gateway.default.35.194.42.164.nip.io/activiti-cloud-modeling
-Activiti GraphiQL : http://activiti-cloud-gateway.default.35.194.42.164.nip.io/graphiql
+Activiti Gateway         : http://gateway.default.alfrescodemo.co.uk/
+Activiti Identity        : http://identity.default.alfrescodemo.co.uk/auth
+Activiti Modeler         : http://gateway.default.alfrescodemo.co.uk/modeling
+Activiti Runtime Bundle  : http://gateway.default.alfrescodemo.co.uk/rb
+Activiti Cloud Connector : http://gateway.default.alfrescodemo.co.uk/example-cloud-connector
+Activiti Query           : http://gateway.default.alfrescodemo.co.uk/query
+Activiti Audit           : http://gateway.default.alfrescodemo.co.uk/audit
+Notifications GraphiQL   : http://gateway.default.alfrescodemo.co.uk/notifications/graphiql
+Notifications WebSockets : http://gateway.default.alfrescodemo.co.uk/notifications/ws/graphql
+Notifications Graphql    : http://gateway.default.alfrescodemo.co.uk/notifications/graphql
 
 To see deployment status, try:
 
   $ kubectl get pods -n default
+raphaels-mbp-1:development raphaelallegre$ 
 ```
 
 Below is the BPMN 2 modelling application. Default user: modeler/password.
