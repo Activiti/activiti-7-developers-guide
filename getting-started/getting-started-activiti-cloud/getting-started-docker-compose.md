@@ -45,7 +45,7 @@ After starting Modeler, wait for the containers to start. You can check the stat
 To access modeler please open the url in your browser:
 
 ```bash
-http://$DOCKER_IP/activiti-cloud-modeling
+http://$DOCKER_IP/modeling
 ```
 
 You will be redirected to keycloak where you have to use credentials _modeler/password_
