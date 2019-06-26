@@ -2,9 +2,7 @@
 
 ## Setup Overview
 
-The diagram below shows a GKE cluster deployed in GCP and exposed to the outside world using Network Load Balancer and Cloud DNS domain mapping.
-
-![](../../../.gitbook/assets/eks-cluster.png)
+We will create a GKE cluster deployed in GCP and exposed to the outside world using Network Load Balancer and Cloud DNS domain mapping.
 
 Jenkins-X platform is then deployed and configured with Git provider to trigger Kubernetes-based pipelines which produce Docker images pushed into private Google Container Registry \(GCR\). Jenkins-X will also deploy our Activiti Cloud Helm chart into Namespace of a GKE cluster and expose it via Ingress to the outside world.
 
@@ -27,7 +25,7 @@ After successful installation of jx client you should now be able to display the
 ```text
 $ jx version
 NAME               VERSION
-Jx                 1.3.879
+Jx                 2.0.323
 ```
 
 #### Required Dependencies
@@ -85,7 +83,7 @@ Upgrade the jx if needed:
 ```text
 $ jx version
 NAME               VERSION
-jx                 1.3.927
+jx                 2.0.323
 jenkins x platform 0.0.3368
 Kubernetes cluster v1.11.6-gke.2
 kubectl            v1.13.3
@@ -112,18 +110,19 @@ _Note_: Jx cli simply wraps glcoud cli to create cluster using Google SDK api. I
 
 If you have the cluster already with these scopes enabled, connect to it in Cloud Shell or Bash console and proceed to **Install Jenkins-X Platform** section in this document.
 
-```text
-$ jx create cluster gke \
---project-id=$PROJECT_ID \
---cluster-name=$CLUSTER_NAME \
---machine-type='n1-standard-4' \
---min-num-nodes='2' \
---skip-installation \
---enhanced-apis \
---enhanced-scopes \
---kaniko=false \
---zone=$ZONE \
-$SKIP_LOGIN
+```bash
+jx create cluster gke \
+  --project-id=$PROJECT_ID \
+  --cluster-name=$CLUSTER_NAME \
+  --machine-type='n1-standard-4' \
+  --min-num-nodes='2' \
+  --skip-installation \
+  --enhanced-apis \
+  --enhanced-scopes \
+  --kaniko=false \
+  --zone=$ZONE \
+  --advanced-mode \
+  $SKIP_LOGIN
 ```
 
 JX will then prompt you for the basic configuration options for your cluster, such as:
@@ -145,10 +144,13 @@ We are now ready to install Jenkins-X platform into the cluster with Github prov
 
 _Note_: To setup and use other than Github Git provider see: [https://jenkins-x.io/developing/git/](https://jenkins-x.io/developing/git/)
 
-```text
-$ jx install --provider=gke \
+```bash
+jx install --provider=gke \
     --docker-registry=gcr.io/$PROJECT_ID \
-    --no-default-environments
+    --no-default-environments \
+    --static-jenkins \
+    --no-tiller=false \
+    --advanced-mode
 ```
 
 JX will then prompt you for the basic configuration options for your installation, such as:
@@ -211,13 +213,13 @@ The URL to access Jenkins will be printed in the output of the console together 
 _Note_: after you have installed Jenkins-X, you may want to configure Jenkins-X to make all new repositories private by default with the following command:
 
 ```text
-$ jx edit gitprivate
+jx edit gitprivate
 ```
 
 To open Jenkins UI in the browser, run the following command to get Jenkins UI link. You may want to save it for future use:
 
 ```text
-$ jx console
+jx console
 ```
 
 ![](../../../.gitbook/assets/jenkins-console-login.png)
@@ -236,43 +238,49 @@ We will now proceed to provision two environments for deploying Activiti Cloud P
 
 Set the following environment variables:
 
-```text
-$ export CLUSTER_DOMAIN=$(kubectl get cm ingress-config -o=go-template --template='{{.data.domain}}' -n jx) && echo $CLUSTER_DOMAIN
-
-$ export ENV_PREFIX=$CLUSTER_NAME && echo $ENV_PREFIX
+```bash
+export CLUSTER_DOMAIN=$(kubectl get cm ingress-config -o=go-template --template='{{.data.domain}}' -n jx) && echo $CLUSTER_DOMAIN
+export ENV_PREFIX=$CLUSTER_NAME && echo $ENV_PREFIX
 ```
 
 #### Create Activiti Cloud DevOps Environment
 
 Run this command to configure environments using domain name of the cluster with the Activti Cloud Environment Git repository used as the fork when creating new GitOps environment Git repo and custom environment repo prefix. Your Environment Git repo will be of the form 'environment-$prefix-$envName'
 
-```text
-$ export ENV_REPO=https://github.com/activiti/activiti-cloud-environments.git
+```bash
+export ENV_REPO=https://github.com/activiti/activiti-cloud-environments.git
 ```
 
 Select default options when running following commands to create Activiti Cloud Platform GitOps environments;
 
-```text
-$ jx create env --domain $CLUSTER_DOMAIN \
+```bash
+jx create env --domain $CLUSTER_DOMAIN \
     --fork-git-repo=$ENV_REPO \
     --prefix=$ENV_PREFIX \
     --name=staging \
     --namespace=staging \
     --git-private=true \
-    --promotion=Auto
-$ jx create env --domain $CLUSTER_DOMAIN \
+    --label=Staging \
+    --promotion=Auto \
+    --batch-mode
+```
+
+```bash
+jx create env --domain $CLUSTER_DOMAIN \
     --fork-git-repo=$ENV_REPO \
     --prefix=$ENV_PREFIX \
     --name=production \
     --namespace=production \
     --git-private=true \
-    --promotion=Manual
+    --label=Production \
+    --promotion=Manual \
+    --batch-mode    
 ```
 
 After Jx created new environments, run `jx console` command to open Jenkins UI, where you can confirm that Jenkins X has successfully provisioned two environments for us: a staging environment and a production environment:
 
-```text
-$ jx console
+```bash
+jx console
 ```
 
 ![](../../../.gitbook/assets/jenkins-ui-env-pipelines.png)
@@ -310,13 +318,13 @@ We will need to create Activiti Jx Quickstart Location to use Activiti Quickstar
 
 Run this command to add Activiti Quickstart location for your team:
 
-```text
-$ jx create quickstartlocation --owner activiti
+```bash
+jx create quickstartlocation --owner activiti
 ```
 
 To get the list of registered quickstart locations run command:
 
-```text
+```bash
 $ jx get quickstartlocations
 GIT SERVER         KIND   OWNER                 INCLUDES EXCLUDES
 https://github.com github jenkins-x-quickstarts *        WIP-*
@@ -327,10 +335,10 @@ https://github.com github activiti              *        WIP-*
 
 Run the following command to create your first Activiti Cloud Platform Git repository:
 
-```text
-$ jx create quickstart --owner activiti \
+```bash
+jx create quickstart --owner activiti \
     --filter=activiti-cloud-platform-quickstart \
-    --project-name=activiti-cloud-platform \
+    --project-name=activiti-cloud-application \
     --batch-mode
 ```
 
@@ -338,15 +346,14 @@ Note that there will be some warning type messages which is normal jx logging so
 
 After that run the following command in another terminal to monitor pipeline activities:
 
-```text
-$ jx get activity -w
-$ kubectl get pods -w -n staging
+```bash
+jx get activity -w
 ```
 
 Then, after ~4-5 minutes you should see your Activiti Cloud Platform deployed into staging namespace in K8s cluster:
 
-```text
-$ kubectl get pods -w -n staging
+```bash
+watch kubectl get pods -n staging
 ```
 
 You can now find out ingress hosts exposing Activiti Cloud Platform Services:
@@ -354,23 +361,29 @@ You can now find out ingress hosts exposing Activiti Cloud Platform Services:
 ```text
 $ kubectl get ing -n staging
 
+NAME                                      HOSTS                                 ADDRESS       PORTS   AGE
+jx-activiti-cloud-gateway                 gateway.staging.X.X.X.X.nip.io    35.230.12.0   80      18m
+jx-activiti-cloud-notifications-graphql   gateway.staging.X.X.X.X.nip.io    35.230.12.0   80      18m
+jx-keycloak                               identity.staging.X.X.X.X.nip.io   35.230.12.0   80      18m
+
 Keycloak (admin/admin): 
-http://activiti-cloud-gateway.staging.X.X.X.X.nip.io/auth
+http://identity.staging.X.X.X.X.nip.io/auth
 
-Modeler (modeler/password): http://activiti-cloud-gateway.staging.X.X.X.X.nip.io/activiti-cloud-modeling 
+Modeler (modeler/password): 
+http://gateway.staging.X.X.X.X.nip.io/modeling 
 
-
-Notifications GraphiQL (testadmin/password): http://activiti-cloud-gateway.staging.X.X.X.X.nip.io/graphiql
+Notifications GraphiQL (testadmin/password): 
+http://gateway.staging.X.X.X.X.nip.io/notifications/graphiql
 ```
 
 #### Setup Activiti Cloud Connector in your Git Repository
 
 Run the following command to create your first connector project Git repository:
 
-```text
-$ jx create quickstart --owner activiti \
+```bash
+jx create quickstart --owner activiti \
     --filter activiti-cloud-connector-quickstart \
-    --project-name=activiti-rb-connector \
+    --project-name=activiti-my-connector \
     --batch-mode
 ```
 
@@ -378,17 +391,17 @@ $ jx create quickstart --owner activiti \
 
 Run the following command to create your first runtime bundle project Git repository:
 
-```text
-$ jx create quickstart --owner activiti \
+```bash
+jx create quickstart --owner activiti \
     --filter activiti-cloud-runtime-bundle-quickstart \
-    --project-name=activiti-rb-app \
+    --project-name=activiti-my-rb \
     --batch-mode
 ```
 
 Then, after ~4-5 minutes you should see your Connector and Runtime Bundle deployed into staging environment:
 
-```text
-$ kubectl get pods -w -n staging
+```bash
+watch kubectl get pods -n staging
 ```
 
 ![](../../../.gitbook/assets/kubectl-get-pods-staging-runtime.png)
@@ -397,9 +410,13 @@ $ kubectl get pods -w -n staging
 
 #### Open Activiti Cloud Modeler
 
-[http://activiti-cloud-gateway.jx-staging.1,2,3,4.nip.io/activiti-cloud-modeling](http://activiti-cloud-gateway.jx-staging.1,2,3,4.nip.io/activiti-cloud-modeling).
+[http://gateway.staging.X.X.X.X.nip.io/modeling](http://activiti-cloud-gateway.jx-staging.1,2,3,4.nip.io/activiti-cloud-modeling)
 
-Here instead of 1,2,3,4.nip.io use the earlier CLUSTER\_DOMAIN=$\(kubectl get cm ingress-config -o=go-template --template=''
+Here instead of X.X.X.X.nip.io use the earlier $CLUSTER\_DOMAIN environment variable, i.e. 
+
+```bash
+echo gateway.$CLUSTER_DOMAIN/modeling
+```
 
 Login into using credentials: modeler/password
 

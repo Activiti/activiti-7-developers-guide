@@ -18,22 +18,30 @@ All of the persistence volume claims of Activiti Cloud infrastructure and applic
 
 In case, you know what you are doing, get Jx from [https://jenkins-x.io/getting-started/install/](https://jenkins-x.io/getting-started/install/) and then follow the short version:
 
-```text
+```bash
 export AWS_ACCESS_KEY_ID=1234567890
 export AWS_SECRET_ACCESS_KEY=123456789
 export CLUSTER_NAME=activiti-cloud
 
-$ jx upgrade cli
+jx upgrade cli
+```
 
-$ jx create cluster eks \
---cluster-name=$CLUSTER_NAME \
---skip-installation=true \
---node-type='m5.xlarge' \
---nodes=3 
+```bash
+jx create cluster eks \
+    --cluster-name=$CLUSTER_NAME \
+    --skip-installation=true \
+    --node-type='m5.xlarge' \
+    --nodes=2 \
+    --advanced-mode
+```
 
-$ jx install \
---provider=eks \
---no-default-environments
+```bash
+jx install \
+    --provider=eks \
+    --no-default-environments \
+    --static-jenkins \
+    --no-tiller=false \
+    --advanced-mode
 ```
 
 Then, skip to _Let’s Deploy Activiti Cloud in EKS_ section at the end of this document.
@@ -71,7 +79,7 @@ After successful installation of jx client you should now be able to display the
 ```text
 $ jx version
 NAME               VERSION
-Jx                 1.3.836
+Jx                 2.0.323
 ```
 
 #### Upgrade Warning for jx
@@ -80,18 +88,12 @@ jx version is aggressive about upgrading, so much so that the version command pr
 
 ```text
 ~ $ jx version
-Failed to find helm installs: failed to run 'helm list' command in directory '', output: 'Error: Get https://localhost:6443/api/v1/namespaces/kube-system/pods?labelSelector=app%3Dhelm%2Cname%3Dtiller: dial tcp [::1]:6443: connect: connection refused': exit status 1
-Failed to get kubernetes server version: Get https://localhost:6443/version?timeout=32s: dial tcp [::1]:6443: connect: connection refused
-Failed to get kubectl version: Command failed 'kubectl version --short': Client Version: v1.13.2
-The connection to the server localhost:6443 was refused - did you specify the right host or port? exit status 1
 
-Failed to get helm version: failed to run 'helm version --short' command in directory '', output: 'Client: v2.12.2+g7d2b0c7
-Error: Get https://localhost:6443/api/v1/namespaces/kube-system/pods?labelSelector=app%3Dhelm%2Cname%3Dtiller: dial tcp [::1]:6443: connect: connection refused': exit status 1
 NAME VERSION
-jx   1.3.126
+jx   2.0.232
 git  git version 2.17.2 (Apple Git-113)
 
-A new jx version is available: 1.3.769
+A new jx version is available: 2.0.333
 ? Would you like to upgrade to the new jx version? No
 ```
 
@@ -127,15 +129,16 @@ Let’s create the new Kubernetes cluster with EKS using the following command:
 
 Note: Jx cli simply wraps eksctl cli to create cluster using Aws api. You may choose to create cluster manually based on your requirements using eksctl command, if you know what you are doing.
 
-```text
-$ jx create cluster eks \
---cluster-name=$CLUSTER_NAME \
---skip-installation=true \
---node-type='m5.xlarge' \
---nodes=3
+```bash
+jx create cluster eks \
+    --cluster-name=$CLUSTER_NAME \
+    --skip-installation=true \
+    --node-type='m5.xlarge' \
+    --nodes=2 \
+    --advanced-mode
 ```
 
-This will provision activiti-cloud EKS cluster with 3 nodes of type m5.xlarge \(4CPU’s, 16GB RAM\)
+This will provision activiti-cloud EKS cluster with 2 nodes of type m5.xlarge \(4CPU’s, 16GB RAM\)
 
 ![](../../../.gitbook/assets/jx-create-cluster-eks.png)
 
@@ -160,10 +163,13 @@ Now that we have the EKS cluster up and running, we can install the Jenkins X pl
 
 The Jenkins X platform can be installed using the following command without installing default environments repos. We will create Activiti Cloud Environments GitOps repos later.
 
-```text
-$ jx install \
---provider=eks \
---no-default-environments
+```bash
+jx install \
+    --provider=eks \
+    --no-default-environments \
+    --static-jenkins \
+    --no-tiller=false \
+    --advanced-mode
 ```
 
 Notes: To setup and use other than Github Git provider see: [https://jenkins-x.io/developing/git/](https://jenkins-x.io/developing/git/)
@@ -200,14 +206,14 @@ The URL to access Jenkins will printed in the output of the console together wit
 
 Note: after you have installed Jenkins-X, you may want to configure Jenkins-X to make all new repositories private by default with the following command:
 
-```text
-$ jx edit gitprivate
+```bash
+jx edit gitprivate
 ```
 
 To open Jenkins UI in the browser, run the following command::
 
-```text
-$ jx console
+```bash
+jx console
 ```
 
 ![](../../../.gitbook/assets/jenkins-console-login.png)
@@ -228,37 +234,49 @@ We will now proceed to provision two GitOps environments for deploying Activiti 
 
 Set the following environment variables:
 
-```text
-$ export CLUSTER_DOMAIN=$(kubectl get cm ingress-config -o=go-template --template='{{.data.domain}}' -n jx) && echo $CLUSTER_DOMAIN
-
-$ export ENV_PREFIX=$CLUSTER_NAME && echo $ENV_PREFIX
+```bash
+export CLUSTER_DOMAIN=$(kubectl get cm ingress-config -o=go-template --template='{{.data.domain}}' -n jx) && echo $CLUSTER_DOMAIN
+export ENV_PREFIX=$CLUSTER_NAME && echo $ENV_PREFIX
 ```
 
 ### Create Activiti Cloud DevOps Environments
 
 Run this command to configure environments using domain name of the cluster with the Activiti Cloud Environment Git repository used as the fork when creating new GitOps environment Git repo and custom environment repo prefix. Your Environment Git repo will be of the form 'environment-$prefix-$envName'
 
-```text
-$ jx create env --domain $CLUSTER_DOMAIN \
-    --fork-git-repo='https://github.com/activiti/activiti-cloud-environments.git' \
+```bash
+export ENV_REPO=https://github.com/activiti/activiti-cloud-environments.git
+```
+
+Select default options when running following commands to create Activiti Cloud Platform GitOps environments;
+
+```bash
+jx create env --domain $CLUSTER_DOMAIN \
+    --fork-git-repo=$ENV_REPO \
     --prefix=$ENV_PREFIX \
     --name=staging \
     --namespace=staging \
     --git-private=true \
-    --promotion=Auto
-$ jx create env --domain $CLUSTER_DOMAIN \
-    --fork-git-repo='https://github.com/activiti/activiti-cloud-environments.git' \
+    --label=Staging \
+    --promotion=Auto \
+    --batch-mode
+```
+
+```bash
+jx create env --domain $CLUSTER_DOMAIN \
+    --fork-git-repo=$ENV_REPO \
     --prefix=$ENV_PREFIX \
     --name=production \
     --namespace=production \
     --git-private=true \
-    --promotion=Manual
+    --label=Production \
+    --promotion=Manual \
+    --batch-mode    
 ```
 
 After Jx created new environments, run `jx console` command to open Jenkins UI, you can confirm that Jenkins X has successfully provisioned two environments for us: a staging environment and a production environment:
 
-```text
-$ jx console
+```bash
+jx console
 ```
 
 ![](../../../.gitbook/assets/jenkins-ui-env-pipelines.png)
@@ -294,42 +312,45 @@ We will need to create Activiti Jx Quickstart Location to use Activiti Quickstar
 
 Run this command to add Activiti Quickstart location for your team:
 
-```text
-$ jx create quickstartlocation --owner activiti
+```bash
+jx create quickstartlocation --owner activiti
 ```
 
 To get the list of registered quickstart locations run command:
 
-```text
-$ jx get quickstartlocations
+```bash
+jx get quickstartlocations
+```
+
+```bash
 GIT SERVER         KIND   OWNER                 INCLUDES EXCLUDES
 https://github.com github jenkins-x-quickstarts *        WIP-*
-https://github.com github activiti              *        WIP-*
+https://github.com github activiti 
 ```
 
 #### Setup Activiti Cloud Platform in your Git repository
 
 Simply run the following command to create your first Activiti Cloud platform Git repository:
 
-```text
-$ jx create quickstart --owner activiti \
+```bash
+jx create quickstart --owner activiti \
     --filter activiti-cloud-platform-quickstart \
-    --project-name=activiti-cloud-platform \
+    --project-name=activiti-cloud-application \
     --batch-mode
 ```
 
 In terminal run Jx commands to monitor the deployment progress:
 
 ```text
-$ jx get activity -w
-$ jx get pipelines
-$ jx console
+jx get activity -w
+jx get pipelines
+jx console
 ```
 
 Then, after ~4-5 minutes you should see your Activiti Cloud Platform deployed into staging environment:
 
-```text
-$ kubectl get pods -w -n staging
+```bash
+watch kubectl get pods -n staging
 ```
 
 ![](../../../.gitbook/assets/kubectl-get-pods-staging-platform.png)
@@ -340,10 +361,10 @@ $ kubectl get pods -w -n staging
 
 Run the following command to create your first connector project Git repository:
 
-```text
-$ jx create quickstart --owner activiti \
+```bash
+jx create quickstart --owner activiti \
     --filter activiti-cloud-connector-quickstart \
-    --project-name=activiti-rb-connector \
+    --project-name=activiti-my-connector \
     --batch-mode
 ```
 
@@ -351,17 +372,17 @@ $ jx create quickstart --owner activiti \
 
 Run the following command to create your first runtime bundle project Git repository:
 
-```text
-$ jx create quickstart --owner activiti \
+```bash
+jx create quickstart --owner activiti \
     --filter activiti-cloud-runtime-bundle-quickstart \
-    --project-name=activiti-rb-app \
+    --project-name=activiti-my-rb \
     --batch-mode
 ```
 
 Then, after ~4-5 minutes you should see your Connector and Runtime Bundle deployed into staging environment:
 
-```text
-$ kubectl get pods -w -n staging
+```bash
+watch kubectl get pods -n staging
 ```
 
 ![](../../../.gitbook/assets/kubectl-get-pods-staging-runtime.png)
@@ -372,9 +393,13 @@ $ kubectl get pods -w -n staging
 
 #### Open Activiti Cloud Modeler
 
-[http://activiti-cloud-gateway.jx-staging.1,2,3,4.nip.io/activiti-cloud-modeling](http://activiti-cloud-gateway.jx-staging.1,2,3,4.nip.io/activiti-cloud-modeling).
+[http://gateway.staging.1.2.3.4.nip.io/modeling](http://activiti-cloud-gateway.jx-staging.1,2,3,4.nip.io/activiti-cloud-modeling)
 
-Here instead of 1,2,3,4.nip.io use the earlier CLUSTER\_DOMAIN=$\(kubectl get cm ingress-config -o=go-template --template=''
+Here instead of 1.2.3.4.nip.io use the earlier $CLUSTER\_DOMAIN environment variable, i.e. 
+
+```bash
+echo gateway.$CLUSTER_DOMAIN/modeling
+```
 
 Login into using credentials: modeler/password
 
