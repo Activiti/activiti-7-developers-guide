@@ -35,6 +35,10 @@ As part of Activiti Cloud, we have created a set of hierarchical HELM charts tha
 
 For example Runtime Bundle charts is located at: [https://github.com/Activiti/example-runtime-bundle/tree/master/charts/runtime-bundle](https://github.com/Activiti/example-runtime-bundle/tree/master/charts/runtime-bundle)
 
+and Activiti Cloud Query [https://github.com/Activiti/activiti-cloud-query/tree/master/charts/activiti-cloud-query](https://github.com/Activiti/activiti-cloud-query/tree/master/charts/activiti-cloud-query)
+
+Parent chart  with common parts located at [https://github.com/Activiti/activiti-cloud-common-chart/tree/master/charts/common](https://github.com/Activiti/activiti-cloud-common-chart/tree/master/charts/common)
+
 In this quick-start, we will be looking more specifically at: [https://github.com/Activiti/activiti-cloud-full-chart/tree/master/charts/activiti-cloud-full-example](https://github.com/Activiti/activiti-cloud-full-chart/tree/master/charts/activiti-cloud-full-example)
 
 This “Activiti Cloud Full Example” deploys the following components:
