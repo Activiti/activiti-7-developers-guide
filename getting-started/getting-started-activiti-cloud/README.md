@@ -33,13 +33,20 @@ The quickest and easiest way to deploy things to Kubernetes is by using HELM cha
 
 As part of Activiti Cloud, we have created a set of hierarchical HELM charts that can be used to deploy several components, some related to infrastructure \(such as SSO and Gateway\) and some Application specific components like Runtime Bundle, Audit Service, Query Service and a Cloud Connector.
 
-For example Runtime Bundle charts is located at: [https://github.com/Activiti/example-runtime-bundle/tree/master/charts/runtime-bundle](https://github.com/Activiti/example-runtime-bundle/tree/master/charts/runtime-bundle)
+In this quick-start, we will be looking more specifically at: [https://github.com/Activiti/activiti-cloud-full-chart/tree/master/charts/activiti-cloud-full-example](https://github.com/Activiti/activiti-cloud-full-chart/tree/master/charts/activiti-cloud-full-example)
 
 and Activiti Cloud Query [https://github.com/Activiti/activiti-cloud-query/tree/master/charts/activiti-cloud-query](https://github.com/Activiti/activiti-cloud-query/tree/master/charts/activiti-cloud-query)
 
 Parent chart  with common parts located at [https://github.com/Activiti/activiti-cloud-common-chart/tree/master/charts/common](https://github.com/Activiti/activiti-cloud-common-chart/tree/master/charts/common)
 
-In this quick-start, we will be looking more specifically at: [https://github.com/Activiti/activiti-cloud-full-chart/tree/master/charts/activiti-cloud-full-example](https://github.com/Activiti/activiti-cloud-full-chart/tree/master/charts/activiti-cloud-full-example)
+All chart archives are moved to [https://github.com/Activiti/activiti-cloud-helm-charts](https://github.com/Activiti/activiti-cloud-helm-charts)   
+Common chart is a base chart for all charts now located at [https://github.com/Activiti/activiti-cloud-common-chart](https://github.com/Activiti/activiti-cloud-common-chart). Charts for components located at component folders like:  
+
+Runtime - [https://github.com/Activiti/example-runtime-bundle/tree/master/charts/runtime-bundle](https://github.com/Activiti/example-runtime-bundle/tree/master/charts/runtime-bundle)  Example cloud connector -[https://github.com/Activiti/example-cloud-connector/tree/master/charts/activiti-cloud-connector](https://github.com/Activiti/example-cloud-connector/tree/master/charts/activiti-cloud-connector)
+
+Audit - [https://github.com/Activiti/activiti-cloud-audit/tree/master/charts/activiti-cloud-audit](https://github.com/Activiti/activiti-cloud-audit/tree/master/charts/activiti-cloud-audit)
+
+Query - [https://github.com/Activiti/activiti-cloud-query/tree/master/charts/activiti-cloud-query](https://github.com/Activiti/activiti-cloud-query/tree/master/charts/activiti-cloud-query)
 
 This “Activiti Cloud Full Example” deploys the following components:
 
