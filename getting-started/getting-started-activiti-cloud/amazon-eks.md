@@ -132,7 +132,7 @@ helm init --service-account helm --upgrade
 In order to be able to expose our services to be accessed from outside the cluster, we need to set up an Ingress Controller, which will automatically create routes to the internal services that we want to expose. To install the NGINX Ingress controller, run the following command:
 
 ```bash
-helm install stable/nginx-ingress --version 1.1.2
+helm install stable/nginx-ingress --version 1.5.0
 ```
 
 Now that NGINX Ingress Controller is being deployed, we need to wait for it to expose itself using a Public IP. We need this Public IP to interact with our services from outside the cluster. You can find this IP by running the following command:
