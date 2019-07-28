@@ -3,7 +3,7 @@
 ## Step 1: Create a Kubernetes cluster
 
 
-### **1/ Kubernetes cluster**
+### **1/) Kubernetes cluster**
 
 Go to your azure portal and select the option Kubernetes Service
 {% file src="../../.gitbook/assets/azure-aks-create.png" caption="Azure portal" %}
@@ -19,7 +19,7 @@ Click the "Review + create"
 _Note: the defaults option have not been changed.
 {% endhint %}
 
-### **2/ Install Azure CLI**
+### **2/) Install Azure CLI**
 
 To install the azure cli, check the site:
 https://docs.microsoft.com/pt-br/cli/azure/install-azure-cli?view=azure-cli-latest

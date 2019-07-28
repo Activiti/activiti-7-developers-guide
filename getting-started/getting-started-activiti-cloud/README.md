@@ -101,7 +101,7 @@ With GCP, use "**&lt;EXTERNAL-IP&gt;.nip.io**" to deploy Activiti Helm chart. In
 
 ### 1-c\) Configure your deployment for **Azure**
 
-With GCP, use "**&lt;EXTERNAL-IP&gt;.nip.io**" to deploy Activiti Helm chart. In our case: **52.237.70.174.nip.io**
+With Azure, use "**&lt;EXTERNAL-IP&gt;.nip.io**" to deploy Activiti Helm chart. In our case: **52.237.70.174.nip.io**
 
 ### 2\) Deploy the Helm chart
 
