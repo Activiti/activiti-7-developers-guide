@@ -3,7 +3,7 @@
 ## Step 1: Create a Kubernetes cluster
 
 
-### **1/) Kubernetes cluster**
+### **1) Kubernetes cluster**
 
 Go to your azure portal and select the option Kubernetes Service
 {% file src="../../.gitbook/assets/azure-aks-create.png" caption="Azure portal" %}
@@ -19,7 +19,7 @@ Click the "Review + create"
 _Note: the defaults option have not been changed.
 {% endhint %}
 
-### **2/) Install Azure CLI**
+### **2) Install Azure CLI**
 
 To install the azure cli, check the site:
 https://docs.microsoft.com/pt-br/cli/azure/install-azure-cli?view=azure-cli-latest
@@ -28,9 +28,9 @@ Log in and follow the installation until the end. (Next > next and next)
 
 {% hint style="info" %}
 _Note: At the end, configure your Environment Variables:
-1. Run "set PATH=%PATH%;C:\Users\coelhom\.azure-kubectl" or "$env:path += 'C:\Users\coelhom\.azure-kubectl'" for PowerShell. This is good for the current command session.
+_1. Run "set PATH=%PATH%;C:\Users\Username\.azure-kubectl" or "$env:path += 'C:\Users\Username\.azure-kubectl'" for PowerShell. This is good for the current command session.
 OR
-2. Update system PATH environment variable by following "Control Panel->System->Advanced->Environment Variables", and re-open the command window. You only need to do it once
+_2. Update system PATH environment variable by following "Control Panel->System->Advanced->Environment Variables", and re-open the command window. You only need to do it once
 {% endhint %}
 
 Once installed, check your Azure CLI version with the following command:
