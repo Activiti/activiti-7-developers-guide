@@ -102,7 +102,7 @@ With GCP, use "**&lt;EXTERNAL-IP&gt;.nip.io**" to deploy Activiti Helm chart. In
 Once you have resolved you domain name, install Helm chart by running the Helm install command using your public domain name to set the `global.gateway.domain` key. In our case replace the string “**REPLACEME**” with the domain from previous step.
 
 ```bash
-helm install --name example activiti-cloud-helm-charts/activiti-cloud-full-example --version 7.1.0-M2 --set global.gateway.domain=REPLACEME --set activiti-cloud-identity.alfresco-identity-service.keycloak.postgresql.persistence.existingClaim=""
+helm install --name example activiti-cloud-helm-charts/activiti-cloud-full-example --version 7.1.0-M4 --set global.gateway.domain=REPLACEME --set activiti-cloud-identity.alfresco-identity-service.keycloak.postgresql.persistence.existingClaim=""
 ```
 
 In our case for AWS, we use:
@@ -129,7 +129,7 @@ NOTES:
  /_/    \_\___|\__|_| \_/ |_|\__|_|  \_____|_|\___/ \__,_|\__,_|
  Version: 7.1.0-SNAPSHOT
 
-Thank you for installing activiti-cloud-full-example-7.1.0-M2
+Thank you for installing activiti-cloud-full-example-7.1.0-M4
 
 Your release is named example.
 
