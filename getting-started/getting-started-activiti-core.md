@@ -52,7 +52,7 @@ We recommend using our BOM \(bill of materials\)
 <dependencyManagement>
     <dependencies>
         <dependency>
-            <groupId>org.activiti</groupId>
+            <groupId>org.activiti.dependencies</groupId>
             <artifactId>activiti-dependencies</artifactId>
             <version>7.1.0.M4</version>
             <scope>import</scope>
