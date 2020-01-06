@@ -29,7 +29,6 @@
   * [Activiti Cloud Infrastructure](components/activiti-cloud-infrastructure/README.md)
     * [Gateway](components/activiti-cloud-infrastructure/gateway.md)
     * [Identity Management / Single Sign On](components/activiti-cloud-infrastructure/sso.md)
-    * [Activiti Cloud Applications Service](components/activiti-cloud-infrastructure/applications-service.md)
   * [Activiti Cloud Application](components/activiti-cloud-application/README.md)
     * [Activiti Cloud Runtime Bundle](components/activiti-cloud-application/runtime-bundle.md)
     * [Activiti Cloud Connectors](components/activiti-cloud-application/cloud-connectors.md)
