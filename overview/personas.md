@@ -20,8 +20,8 @@ For both Developers and DevOps personas, the Activiti Cloud team is always looki
 
 * [Jenkins X](http://jenkinsx.io): CI/CD done right for Kubernetes
 * [JHipster](http://jhipster.tech): Spring Cloud and Angular/React generators
-* [HELM](http://): Kubernetes Package Manager, we use it for doing deployments of Activiti Cloud applications in K8s.
+* [HELM](http://helm.sh/): Kubernetes Package Manager, we use it for doing deployments of Activiti Cloud applications in K8s.
 * [Spring Cloud Kubernetes](http://github.com/spring-cloud/spring-cloud-kubernetes/): we use it to avoid duplication/overlap with the infrastructure
 * [Istio](http://istio.io): Service Mesh on top of K8s
-* [KNative](http://): Function as a Service layer on top of K8s
+* [KNative](http://knative.dev/): Function as a Service layer on top of K8s
 
