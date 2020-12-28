@@ -102,7 +102,7 @@ With GCP, use "**&lt;EXTERNAL-IP&gt;.nip.io**" to deploy Activiti Helm chart. In
 Once you have resolved you domain name, install Helm chart by running the Helm install command using your public domain name to set the `global.gateway.domain` key. In our case replace the string “**REPLACEME**” with the domain from previous step.
 
 ```bash
-helm install --name example activiti-cloud-helm-charts/activiti-cloud-full-example --version 7.1.0-M10 --set global.gateway.domain=REPLACEME
+helm install --name example activiti-cloud-helm-charts/activiti-cloud-full-example --version 7.1.0-M11 --set global.gateway.domain=REPLACEME
 ```
 
 In our case for AWS, we use:
