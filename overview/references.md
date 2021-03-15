@@ -2,7 +2,7 @@
 
 The following list of books & PDFs are recommended reads if you want to understand the project future direction. We use these books as baseline shared language to discuss our architectural decisions and plans.
 
-* [OMG BPMN 2.x Spec](http://)
+* [OMG BPMN 2.x Spec](https://www.omg.org/spec/BPMN/)
 * [Cloud Native Java](https://www.amazon.co.uk/Cloud-Native-Java-Designing-Resilient/dp/1449374646/ref=sr_1_1?ie=UTF8&qid=1531487284&sr=8-1&keywords=cloud+native+java)
 * [Building Microservices](https://www.amazon.co.uk/Building-Microservices-Designing-Fine-Grained-Systems/dp/1492034029/ref=sr_1_3?s=books&ie=UTF8&qid=1531487341&sr=1-3&keywords=building+microservices)
 * [Implementing Domain Driven Designs](https://www.amazon.co.uk/Implementing-Domain-Driven-Design-Vaughn-Vernon/dp/0321834577/ref=sr_1_2?s=books&ie=UTF8&qid=1531487429&sr=1-2&keywords=domain+driven+design)
