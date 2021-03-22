@@ -16,7 +16,7 @@ To create a new Kubernetes cluster, go to your GCP Console Home Page \([https://
 
 ![](../../.gitbook/assets/gcp-console.png)
 
-Then select the CREATE CLUSTER button ![](../../.gitbook/assets/create-gke-cluster-button.png) from the top menu.
+Then select the CREATE CLUSTER button ![](../../.gitbook/assets/screenshot-2018-12-13-at-10.04.37%20%281%29.png) from the top menu.
 
 Enter the Cluster Name, select the Zone based on your location and I’ve selected 2 vCPUs and left the Size to the default value \(3\).
 

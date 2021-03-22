@@ -10,5 +10,5 @@ The User Interface built with Angular can be [found here](https://github.com/act
 
 This application uses [BPMN.io](http://bpmn.io) for the BPMN process standard xml generation.
 
-![New process modeling experience](../.gitbook/assets/screenshot-2018-12-21-at-15.13.44.png)
+![New process modeling experience](../.gitbook/assets/screenshot-2018-12-21-at-15.13.44%20%281%29.png)
 

@@ -128,7 +128,7 @@ First of all we need to tap into the Twitter Stream to consume tweets. For doing
 
 Our Twitter Activiti Cloud Connector will be in charge of tapping into the Twitter Stream, route tweets based on their language and Tweet the rewards for the winners of each campaign.
 
-![](../.gitbook/assets/twittercloudconnector.png)
+![](../.gitbook/assets/TwitterCloudConnector.png)
 
 In order to create this project we just need to create a simple Spring Boot 2 application and add our Activiti Cloud Connector Starter dependency to it. We also need the [Twitter4J](http://twitter4j.org/en/configuration.html) dependency and we are ready to go.
 

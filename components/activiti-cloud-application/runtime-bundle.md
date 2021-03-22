@@ -10,7 +10,7 @@ But there are some extra things that you need to know about Runtime Bundles:
 * Runtime Bundles emit events \(in a fire & forget fashion\) using a set of implementations of the internal [ActivitiEventListener](https://github.com/Activiti/Activiti/tree/39e0d2bde9ef79ba3c38d04e3c5c2e8cc8a3a983/activiti-api-impl/activiti-api-process-runtime-impl/src/main/java/org/activiti/runtime/api/event/internal) interface. \(Listen to the internal Process Engine events and transform them into messages containing [all the events generated inside a transaction](https://github.com/Activiti/activiti-cloud-runtime-bundle-service/blob/develop/activiti-cloud-services-runtime-bundle/activiti-cloud-services-events/src/main/java/org/activiti/cloud/services/events/listeners/BaseCommandContextEventsAggregator.java) \)
 * Runtime Bundles, by default when executing Service Tasks \(BPMN\), will emit Integration Events to perform System to System integration. These Integration Events will be picked up by Activiti Cloud Connectors to perform system to system integrations.
 
-![](../../.gitbook/assets/runtimebundle.png)
+![](../../.gitbook/assets/RuntimeBundle.png)
 
 ## REST APIs \(HAL\)
 
