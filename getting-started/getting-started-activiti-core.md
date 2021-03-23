@@ -54,7 +54,7 @@ We recommend using our BOM \(bill of materials\)
         <dependency>
             <groupId>org.activiti.dependencies</groupId>
             <artifactId>activiti-dependencies</artifactId>
-            <version>7.1.0.M4</version>
+            <version>7.1.0.M5</version>
             <scope>import</scope>
             <type>pom</type>
         </dependency>

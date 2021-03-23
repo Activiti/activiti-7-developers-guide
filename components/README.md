@@ -16,5 +16,5 @@ Activiti Cloud Applications are dynamic and they can be provisioned on runtime o
 
 Finally the Activiti Cloud Modeler provides an environment where you can generate your Business Assets. These will include all the Business Models definitions, such as Business Processes, Decision Tables, Connectors Definitions \(interfaces for system to system interactions\), etc.
 
-![](../.gitbook/assets/activiti-modeler.png)
+![](../.gitbook/assets/activiti-modeler%20%281%29.png)
 

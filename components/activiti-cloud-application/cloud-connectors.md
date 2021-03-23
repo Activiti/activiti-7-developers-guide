@@ -79,8 +79,8 @@ public class SendRewardConnector {
 
         // build and send result back
         Map<String, Object> results = new HashMap<>();
-        Message<IntegrationResult> message = IntegrationResultBuilder.resultFor(event)
-                .withVariables(results)
+        Message<IntegrationResult> message = IntegrationResultBuilder.resultFor(event, connectorProperties)
+                .withOutboundVariables(results)
                 .buildMessage();
 
         integrationResultSender.send(message);
@@ -100,4 +100,46 @@ spring.cloud.stream.bindings.rewardConsumer.group=integration
 ```
 
 **Important:** note that Cloud Connectors and the Runtime Bundle can \(and probably will\) run into different Spring Boot Applications / containers.
+
+#### Error handling
+
+From version `7.1.0-M7`, cloud connectors are able to notify the Runtime Bundle that something went wrong during their execution. This can be done in two ways:
+
+* **Implicitly** by letting the connector throw an exception. This will trigger the Message Broker retry mechanism before notifying the error to the Runtime Bundle.
+* **Explicitly** using `IntegrationErrorBuilder` and `IntegrationErrorSender` . This will not trigger the Message Broker retry mechanism: the error notification will be sent straight away to the Runtime bundle:
+
+```markup
+@StreamListener(value = RewardMessageChannels.REWARD_CONSUMER)
+public void tweet(IntegrationRequest integrationRequest) {
+    try {
+        // business logic goes here
+    } catch (Throwable error) {
+        integrationErrorSender.send(
+            IntegrationErrorBuilder.errorFor(integrationRequest, connectorProperties, error)
+                .buildMessage());
+    }
+}
+```
+
+When the Runtime bundle receives a notification of an error occurred in the connector, it will send an `INTEGRATION_ERROR_RECEIVED` event to query and audit. Audit will store this event in its event logs and query will update the status of the related `service task` to the error status.
+
+#### Throwing BPMN Error Event
+
+Using the same mechanism above it's possible to throw a BPMN Error Event from a cloud connector by  using a `CloudBpmnError`. This BPMN Error can be caught by any BPMN Catch Error Event in the process that is in the scope of the service task calling the connector. 
+
+**Important:** the error code used in the `CloudBpmnError` should match with the one used by the BPMN Catch Error Event.
+
+```markup
+@StreamListener(value = RewardMessageChannels.REWARD_CONSUMER)
+public void tweet(IntegrationRequest integrationRequest) {
+    
+    // business logic leading to a case that should throw a BPMN Error event
+    
+    CloudBpmnError error = new CloudBpmnError("BPMN_ERROR_CODE");
+    integrationErrorSender.send(
+        IntegrationErrorBuilder.errorFor(integrationRequest, connectorProperties, error)
+            .buildMessage());
+}
+
+```
 

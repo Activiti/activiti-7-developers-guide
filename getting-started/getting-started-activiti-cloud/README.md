@@ -57,7 +57,7 @@ One important thing to notice is that each of the Activiti Cloud components can 
 ### Install Kubectl and HELM
 
 * Kubectl : [https://kubernetes.io/docs/tasks/tools/install-kubectl/](https://kubernetes.io/docs/tasks/tools/install-kubectl/) 
-* HELM: [https://docs.helm.sh/using\_helm/\#installing-helm](https://docs.helm.sh/using_helm/#installing-helm)
+* HELM: [https://github.com/helm/helm/releases/tag/v2.16.1](https://github.com/helm/helm/releases/tag/v2.16.1) Please use helm version 2.
 
 In the next section, we show you how to create a Kubernetes cluster using Amazon Web Services EKS or Google Cloud Platform GKE. We let you decide which cloud platform best suits you. You can also deploy the Activiti Cloud full example on you local machine using for example Docker Desktop. We recommend using a cloud infrastructure for a faster and smoother experience but if you need a local install you can check [our blog post series here](https://community.alfresco.com/community/bpm/blog/2018/12/10/getting-started-with-activiti-7-beta#jive_content_id_Deploying_and_Running_a_Business_Process).
 
@@ -102,7 +102,7 @@ With GCP, use "**&lt;EXTERNAL-IP&gt;.nip.io**" to deploy Activiti Helm chart. In
 Once you have resolved you domain name, install Helm chart by running the Helm install command using your public domain name to set the `global.gateway.domain` key. In our case replace the string “**REPLACEME**” with the domain from previous step.
 
 ```bash
-helm install --name example activiti-cloud-helm-charts/activiti-cloud-full-example --version 7.1.0-M4 --set global.gateway.domain=REPLACEME --set activiti-cloud-identity.alfresco-identity-service.keycloak.postgresql.persistence.existingClaim=""
+helm install --name example activiti-cloud-helm-charts/activiti-cloud-full-example --version 7.1.0-M12 --set global.gateway.domain=REPLACEME
 ```
 
 In our case for AWS, we use:
@@ -159,7 +159,7 @@ raphaels-mbp-1:development raphaelallegre$
 
 Below is the BPMN 2 modelling application. Default user: modeler/password.
 
-![Activiti BPMN 2 process modelling application.](../../.gitbook/assets/activiti-modeler%20%281%29.png)
+![Activiti BPMN 2 process modelling application.](../../.gitbook/assets/activiti-modeler%20%281%29%20%281%29.png)
 
 For more information about the BPMN modelling application, please check the [following blog post](https://community.alfresco.com/community/bpm/blog/2018/12/10/activiti-7-beta-using-the-modeler-to-design-business-processes).
 
@@ -183,7 +183,7 @@ Then “Add” a new environment and add a name to it. Now you need to configure
 
 For gateway you need to copy the url associated with your Ingress, the same for idm which is SSO and IDM using Keycloak. For the realm enter “activiti”:
 
-![](../../.gitbook/assets/postman-env-variables.png)
+![](../../.gitbook/assets/postman-env-variables%20%281%29.png)
 
 Click Save or Update and then you are ready to start using that Environment. Make sure that you select the environment in the dropdown on the right:
 

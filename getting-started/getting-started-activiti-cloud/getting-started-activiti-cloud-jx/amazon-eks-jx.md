@@ -196,7 +196,7 @@ Then click the green Generate Token button, copy the value of the token, and pas
 
 During the installation process you might notice that jx automatically opens the Jenkins server running on “[http://jenkins.jx.35.164.211.214.nip.io/me/configure”](http://jenkins.jx.35.164.211.214.nip.io/me/configure”) address logs into it, and saves some settings. Jx uses headless browser automation to generate Jenkins API token on your behalf. This token will be later used internally by Jenkins X to automatically create Jenkins jobs on your behalf.
 
-![](../../../.gitbook/assets/jenkins-api-token.png)
+![](../../../.gitbook/assets/jenkins-api-token%20%281%29.png)
 
 After a few minutes, the jx install command should finish creating the Jenkins X platform. It should also tell you the URL that you can use to access your Jenkins server, and a random admin password for this server.
 
