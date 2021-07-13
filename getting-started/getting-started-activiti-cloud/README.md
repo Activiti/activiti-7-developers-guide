@@ -57,7 +57,7 @@ One important thing to notice is that each of the Activiti Cloud components can 
 ### Install Kubectl and HELM
 
 * Kubectl : [https://kubernetes.io/docs/tasks/tools/install-kubectl/](https://kubernetes.io/docs/tasks/tools/install-kubectl/) 
-* HELM: [https://github.com/helm/helm/releases/tag/v2.16.1](https://github.com/helm/helm/releases/tag/v2.16.1) Please use helm version 2.
+* HELM: [https://github.com/helm/helm/\#install](https://github.com/helm/helm/#install) . Please use helm version 3.
 
 In the next section, we show you how to create a Kubernetes cluster using Amazon Web Services EKS or Google Cloud Platform GKE. We let you decide which cloud platform best suits you. You can also deploy the Activiti Cloud full example on you local machine using for example Docker Desktop. We recommend using a cloud infrastructure for a faster and smoother experience but if you need a local install you can check [our blog post series here](https://community.alfresco.com/community/bpm/blog/2018/12/10/getting-started-with-activiti-7-beta#jive_content_id_Deploying_and_Running_a_Business_Process).
 
