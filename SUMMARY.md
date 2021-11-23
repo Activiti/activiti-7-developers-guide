@@ -4,7 +4,7 @@
 * [Overview](overview/README.md)
   * [12 Factor Apps](overview/12factor.md)
   * [Personas](overview/personas.md)
-  * [Previous Versions \(5.x & 6.x\)](overview/previous.md)
+  * [Previous Versions (5.x & 6.x)](overview/previous.md)
   * [References](overview/references.md)
   * [Cloud Native BPMN support](overview/bpmn.md)
   * [BPMN Comformance](overview/comformance/README.md)
@@ -46,6 +46,7 @@
   * [Repositories](community/repositories.md)
   * [Contributing](community/contributing.md)
 * [Releases](releases/README.md)
+  * [7.1.0-M16](releases/7.1.0-m16.md)
   * [7.1.0-M15](releases/7.1.0-m15.md)
   * [7.1.0-M14](releases/7.1.0-m14.md)
   * [7.1.0-M13](releases/7.1.0-m13.md)
@@ -75,4 +76,3 @@
   * [7.0.0 Early Access 201711](releases/7-ea201711.md)
   * [7.0.0 Early Access 201710](releases/7-ea201710.md)
   * [7.0.0 Early Access 201709](releases/7-ea201709.md)
-

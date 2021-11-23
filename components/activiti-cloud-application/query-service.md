@@ -29,7 +29,7 @@ Our reference implementation uses JPA entities to store this state and we define
 
 Here you can find all the [Events Listeners](https://github.com/Activiti/activiti-cloud-query-service/tree/develop/activiti-cloud-services-query/activiti-cloud-services-query-rest/src/main/java/org/activiti/cloud/services/query/events/handlers) that are used to recreate state from the events emitted by the Runtime Bundle.
 
-These event listeners have the responsability of understanding each specific event and apply a transformation to the existing entities or creating new entity instances. The following section explains the current flow for each of the listeners. You can provide your own implementation of the Query Service \(in any other language\), by following the described behaviour:
+These event listeners have the responsability of understanding each specific event and apply a transformation to the existing entities or creating new entity instances. The following section explains the current flow for each of the listeners. You can provide your own implementation of the Query Service (in any other language), by following the described behaviour:
 
 ### [ProcessDeployedEvent Handler](https://github.com/Activiti/activiti-cloud-query-service/blob/develop/activiti-cloud-services-query/activiti-cloud-services-query-rest/src/main/java/org/activiti/cloud/services/query/events/handlers/ProcessDeployedEventHandler.java)
 
@@ -80,7 +80,7 @@ This handler will:
 This handler will:
 
 * **Update** an existing ProcessInstanceEntity
-* Check if there is a Process Instance with status CREATED and: 
+* Check if there is a Process Instance with status CREATED and:&#x20;
   * Update the Status to RUNNING
   * Set the name of the process instance
   * Update LastModified
@@ -93,7 +93,7 @@ This handler will:
 * **Update** an existing ProcessInstanceEntity and
   * Update BusinessKey
   * Update Name
-  * Update LastModified 
+  * Update LastModified&#x20;
 * This event will be discarded if no Process Instance is not found and QueryException will be thrown
 
 ### [ProcessSuspendedEvent Handler](https://github.com/Activiti/activiti-cloud-query-service/blob/develop/activiti-cloud-services-query/activiti-cloud-services-query-rest/src/main/java/org/activiti/cloud/services/query/events/handlers/ProcessSuspendedEventHandler.java)
@@ -103,7 +103,7 @@ This handler will:
 * **Update** an existing ProcessInstanceEntity and
   * Update Status to SUSPENDED
   * Update LastModified
-* This event will be discarded if no Process Instance is not found and QueryException will be thrown  
+* This event will be discarded if no Process Instance is not found and QueryException will be thrown &#x20;
 
 ### [ProcessResumedEvent Handler](https://github.com/Activiti/activiti-cloud-query-service/blob/develop/activiti-cloud-services-query/activiti-cloud-services-query-rest/src/main/java/org/activiti/cloud/services/query/events/handlers/ProcessResumedEventHandler.java)
 
@@ -112,7 +112,7 @@ This handler will:
 * **Update** an existing ProcessInstanceEntity and
   * Update Status to RUNNING
   * Update LastModified
-* This event will be discarded if no Process Instance is not found and QueryException will be thrown  
+* This event will be discarded if no Process Instance is not found and QueryException will be thrown &#x20;
 
 ### [ProcessCancelledEvent Handler](https://github.com/Activiti/activiti-cloud-query-service/blob/develop/activiti-cloud-services-query/activiti-cloud-services-query-rest/src/main/java/org/activiti/cloud/services/query/events/handlers/ProcessCancelledEventHandler.java)
 
@@ -121,7 +121,7 @@ This handler will:
 * **Update** an existing ProcessInstanceEntity and
   * Update Status to CANCELLED
   * Update LastModified
-* This event will be discarded if no Process Instance is not found and QueryException will be thrown  
+* This event will be discarded if no Process Instance is not found and QueryException will be thrown &#x20;
 
 ### [ProcessCompletedEvent Handler](https://github.com/Activiti/activiti-cloud-query-service/blob/develop/activiti-cloud-services-query/activiti-cloud-services-query-rest/src/main/java/org/activiti/cloud/services/query/events/handlers/ProcessCompletedEventHandler.java)
 
@@ -130,13 +130,13 @@ This handler will:
 * **Update** an existing ProcessInstanceEntity and
   * Update Status to COMPLETED
   * Update LastModified
-* This event will be discarded if no Process Instance is not found and QueryException will be thrown  
+* This event will be discarded if no Process Instance is not found and QueryException will be thrown &#x20;
 
 ### [Process & Task VariableCreatedEvent Handler](https://github.com/Activiti/activiti-cloud-query-service/blob/develop/activiti-cloud-services-query/activiti-cloud-services-query-rest/src/main/java/org/activiti/cloud/services/query/events/handlers/VariableCreatedEventHandler.java)
 
 This handler will:
 
-* Will check if it is a Task Var    
+* Will check if it is a Task Var   &#x20;
 
 ## Security and Permissions
 
@@ -144,7 +144,7 @@ By default only admin users can access everything. The endpoints that under /adm
 
 Process instance, task and variable data can be restricted to particular users or groups. This can be done by adding properties such as:
 
-```text
+```
 activiti.cloud.security.user.testuser.rb-app-name.policy.read=defKey1 activiti.cloud.security.user.hruser.rb-app-name.policy.read=defKey2
 ```
 
@@ -154,10 +154,9 @@ Here rb-app-name is the name of a runtime bundle application. Or environment var
 
 ## Implementations
 
-* [Activiti Cloud Query Service - JPA \(Reference \)using Spring Data JPA](https://github.com/Activiti/activiti-cloud-query/)
-* [Activiti Cloud Query Service - ElasticSearch](https://) PR Under Review
+* [Activiti Cloud Query Service - JPA (Reference )using Spring Data JPA](https://github.com/Activiti/activiti-cloud-query/)
+* [Activiti Cloud Query Service - ElasticSearch](https://app.gitbook.com/s/-LHE-A0W4uh4yR1u7ql8/components/activiti-cloud-application/query-service) PR Under Review
 
 ## Docker Images
 
-* [Activiti Cloud Query Service -&gt; JPA \(Reference\) Docker Image](https://hub.docker.com/r/activiti/activiti-cloud-query/)
-
+* [Activiti Cloud Query Service -> JPA (Reference) Docker Image](https://hub.docker.com/r/activiti/activiti-cloud-query/)
