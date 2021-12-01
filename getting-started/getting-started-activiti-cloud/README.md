@@ -67,6 +67,8 @@ In the next section, we show you how to create a Kubernetes cluster using Amazon
 
 ### [Option B: Using Google Cloud - GKE](google-cloud-gke.md)
 
+### [Option C: Using Azure AKS](azure-aks.md)
+
 ## Step 3: Deploy Activiti Cloud Full Example
 
 The first step is to register the Activiti Cloud HELM charts into HELM running the following commands:
@@ -97,6 +99,10 @@ Use "**your-public-domain**" to deploy Activiti Helm chart in the next section. 
 
 With GCP, use "**&lt;EXTERNAL-IP&gt;.nip.io**" to deploy Activiti Helm chart. In our case: **35.194.42.164.nip.io**
 
+### 1-c\) Configure your deployment for **Azure**
+
+With Azure, use "**&lt;EXTERNAL-IP&gt;.nip.io**" to deploy Activiti Helm chart. In our case: **52.237.70.174.nip.io**
+
 ### 2\) Deploy the Helm chart
 
 Once you have resolved you domain name, install Helm chart by running the Helm install command using your public domain name to set the `global.gateway.domain` key. In our case replace the string “**REPLACEME**” with the domain from previous step.
@@ -115,6 +121,12 @@ In our case for GCP, we use:
 
 ```bash
 global.gateway.domain=35.194.42.164.nip.io
+```
+
+In our case for Azure, we use:
+
+```bash
+global.gateway.domain=52.237.70.174.nip.io
 ```
 
 Here is the example result for AWS:

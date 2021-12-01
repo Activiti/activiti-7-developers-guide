@@ -11,6 +11,7 @@ _**Getting started with Activiti Cloud**_ : here are 3 options.
 * [Using Helm](getting-started-activiti-cloud/)
   * on AWS EKS
   * on GCP GKE
+  * on Azure AKS
 
 [_**Getting started with Activiti Core**_](getting-started-activiti-core.md)_**: **_to learn how to use the new Java Runtime API inside a Spring Boot application. This spring boot approach is using Activiti Core as a library inside your java application.
 
