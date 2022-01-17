@@ -25,7 +25,7 @@ By using these components you can create Activiti Cloud applications that:
 
 On this tutorial, we wanted to show how to get started by deploying an example set of these building blocks in Kubernetes. We strongly recommend having a real Kubernetes Cluster such as GKE, PKS or EKS. We have tested the content of this blog post in AWS (Using Kops, PKS, GKE and also with Jenkins X)
 
-Let’s get started with Kubernetes, HELM and Activiti Cloud.
+Let’s get started with Kubernetes, HELM, and Activiti Cloud.
 
 ## Prerequisites
 
