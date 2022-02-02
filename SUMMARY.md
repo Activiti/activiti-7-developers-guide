@@ -46,6 +46,7 @@
   * [Repositories](community/repositories.md)
   * [Contributing](community/contributing.md)
 * [Releases](releases/README.md)
+  * [7.1.0-M17](releases/7.1.0-m17.md)
   * [7.1.0-M16](releases/7.1.0-m16.md)
   * [7.1.0-M15](releases/7.1.0-m15.md)
   * [7.1.0-M14](releases/7.1.0-m14.md)
