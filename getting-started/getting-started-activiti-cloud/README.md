@@ -37,12 +37,12 @@ In this quick-start, we will be looking more specifically at: [https://github.co
 
 and Activiti Cloud Query [https://github.com/Activiti/activiti-cloud-query/tree/master/charts/activiti-cloud-query](https://github.com/Activiti/activiti-cloud-query/tree/master/charts/activiti-cloud-query)
 
-Parent chart  with common parts located at [https://github.com/Activiti/activiti-cloud-common-chart/tree/master/charts/common](https://github.com/Activiti/activiti-cloud-common-chart/tree/master/charts/common)
+Parent chart with common parts located at [https://github.com/Activiti/activiti-cloud-common-chart/tree/master/charts/common](https://github.com/Activiti/activiti-cloud-common-chart/tree/master/charts/common)
 
-All chart archives are moved to [https://github.com/Activiti/activiti-cloud-helm-charts](https://github.com/Activiti/activiti-cloud-helm-charts) \
-Common chart is a base chart for all charts now located at [https://github.com/Activiti/activiti-cloud-common-chart](https://github.com/Activiti/activiti-cloud-common-chart). Charts for components located at component folders like: &#x20;
+All chart archives are moved to [https://github.com/Activiti/activiti-cloud-helm-charts](https://github.com/Activiti/activiti-cloud-helm-charts)\
+Common chart is a base chart for all charts now located at [https://github.com/Activiti/activiti-cloud-common-chart](https://github.com/Activiti/activiti-cloud-common-chart). Charts for components located at component folders like:
 
-Runtime - [https://github.com/Activiti/example-runtime-bundle/tree/master/charts/runtime-bundle](https://github.com/Activiti/example-runtime-bundle/tree/master/charts/runtime-bundle)  Example cloud connector -[https://github.com/Activiti/example-cloud-connector/tree/master/charts/activiti-cloud-connector](https://github.com/Activiti/example-cloud-connector/tree/master/charts/activiti-cloud-connector)
+Runtime - [https://github.com/Activiti/example-runtime-bundle/tree/master/charts/runtime-bundle](https://github.com/Activiti/example-runtime-bundle/tree/master/charts/runtime-bundle) Example cloud connector -[https://github.com/Activiti/example-cloud-connector/tree/master/charts/activiti-cloud-connector](https://github.com/Activiti/example-cloud-connector/tree/master/charts/activiti-cloud-connector)
 
 Audit - [https://github.com/Activiti/activiti-cloud-audit/tree/master/charts/activiti-cloud-audit](https://github.com/Activiti/activiti-cloud-audit/tree/master/charts/activiti-cloud-audit)
 
@@ -56,14 +56,14 @@ One important thing to notice is that each of the Activiti Cloud components can 
 
 ### Install Kubectl and HELM
 
-* Kubectl : [https://kubernetes.io/docs/tasks/tools/install-kubectl/](https://kubernetes.io/docs/tasks/tools/install-kubectl/)&#x20;
+* Kubectl : [https://kubernetes.io/docs/tasks/tools/install-kubectl/](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 * HELM: [https://github.com/helm/helm/#install](https://github.com/helm/helm/#install) . Please use helm version 3.
 
 In the next section, we show you how to create a Kubernetes cluster using Amazon Web Services EKS or Google Cloud Platform GKE. We let you decide which cloud platform best suits you. You can also deploy the Activiti Cloud full example on you local machine using for example Docker Desktop. We recommend using a cloud infrastructure for a faster and smoother experience but if you need a local install you can check [our blog post series here](https://community.alfresco.com/community/bpm/blog/2018/12/10/getting-started-with-activiti-7-beta#jive\_content\_id\_Deploying\_and\_Running\_a\_Business\_Process).
 
 ## Steps 1 and 2: Create a K8 cluster and configure it
 
-### [Option A: Using Amazon EKS ](amazon-eks.md)
+### [Option A: Using Amazon EKS](amazon-eks.md)
 
 ### [Option B: Using Google Cloud - GKE](google-cloud-gke.md)
 
@@ -102,7 +102,7 @@ With GCP, use "**\<EXTERNAL-IP>.nip.io**" to deploy Activiti Helm chart. In our 
 Once you have resolved you domain name, install Helm chart by running the Helm install command using your public domain name to set the `global.gateway.domain` key. In our case replace the string “**REPLACEME**” with the domain from previous step.
 
 ```bash
-helm install --name example activiti-cloud-helm-charts/activiti-cloud-full-example --version 7.1.0-M16 --set global.gateway.domain=REPLACEME
+helm install --name example activiti-cloud-helm-charts/activiti-cloud-full-example --version 7.1.0-M17 --set global.gateway.domain=REPLACEME
 ```
 
 In our case for AWS, we use:
@@ -223,8 +223,8 @@ You are now ready to start consuming these services to automate your own busines
 
 Finally, you can access to all services Swagger documentation by pointing your browser to:
 
-* [http://activiti-cloud-gateway.EXTERNAL-IP.nip.io/rb-my-app/swagger-ui.html](http://activiti-cloud-gateway.external-ip.nip.io/rb-my-app/swagger-ui.html)&#x20;
-* [http://activiti-cloud-gateway.EXTERNAL-IP.nip.io/audit/swagger-ui.html](http://activiti-cloud-gateway.external-ip.nip.io/audit/swagger-ui.html)&#x20;
+* [http://activiti-cloud-gateway.EXTERNAL-IP.nip.io/rb-my-app/swagger-ui.html](http://activiti-cloud-gateway.external-ip.nip.io/rb-my-app/swagger-ui.html)
+* [http://activiti-cloud-gateway.EXTERNAL-IP.nip.io/audit/swagger-ui.html](http://activiti-cloud-gateway.external-ip.nip.io/audit/swagger-ui.html)
 * [http://activiti-cloud-gateway.EXTERNAL-IP.nip.io/query/swagger-ui.html](http://activiti-cloud-gateway.external-ip.nip.io/query/swagger-ui.html)
 
 ![](../../.gitbook/assets/screenshot-2018-12-13-at-11.21.47.png)
