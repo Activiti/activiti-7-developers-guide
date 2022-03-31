@@ -80,7 +80,7 @@ This handler will:
 This handler will:
 
 * **Update** an existing ProcessInstanceEntity
-* Check if there is a Process Instance with status CREATED and:&#x20;
+* Check if there is a Process Instance with status CREATED and:
   * Update the Status to RUNNING
   * Set the name of the process instance
   * Update LastModified
@@ -93,7 +93,7 @@ This handler will:
 * **Update** an existing ProcessInstanceEntity and
   * Update BusinessKey
   * Update Name
-  * Update LastModified&#x20;
+  * Update LastModified
 * This event will be discarded if no Process Instance is not found and QueryException will be thrown
 
 ### [ProcessSuspendedEvent Handler](https://github.com/Activiti/activiti-cloud-query-service/blob/develop/activiti-cloud-services-query/activiti-cloud-services-query-rest/src/main/java/org/activiti/cloud/services/query/events/handlers/ProcessSuspendedEventHandler.java)
@@ -103,7 +103,7 @@ This handler will:
 * **Update** an existing ProcessInstanceEntity and
   * Update Status to SUSPENDED
   * Update LastModified
-* This event will be discarded if no Process Instance is not found and QueryException will be thrown &#x20;
+* This event will be discarded if no Process Instance is not found and QueryException will be thrown
 
 ### [ProcessResumedEvent Handler](https://github.com/Activiti/activiti-cloud-query-service/blob/develop/activiti-cloud-services-query/activiti-cloud-services-query-rest/src/main/java/org/activiti/cloud/services/query/events/handlers/ProcessResumedEventHandler.java)
 
@@ -112,7 +112,7 @@ This handler will:
 * **Update** an existing ProcessInstanceEntity and
   * Update Status to RUNNING
   * Update LastModified
-* This event will be discarded if no Process Instance is not found and QueryException will be thrown &#x20;
+* This event will be discarded if no Process Instance is not found and QueryException will be thrown
 
 ### [ProcessCancelledEvent Handler](https://github.com/Activiti/activiti-cloud-query-service/blob/develop/activiti-cloud-services-query/activiti-cloud-services-query-rest/src/main/java/org/activiti/cloud/services/query/events/handlers/ProcessCancelledEventHandler.java)
 
@@ -121,7 +121,7 @@ This handler will:
 * **Update** an existing ProcessInstanceEntity and
   * Update Status to CANCELLED
   * Update LastModified
-* This event will be discarded if no Process Instance is not found and QueryException will be thrown &#x20;
+* This event will be discarded if no Process Instance is not found and QueryException will be thrown
 
 ### [ProcessCompletedEvent Handler](https://github.com/Activiti/activiti-cloud-query-service/blob/develop/activiti-cloud-services-query/activiti-cloud-services-query-rest/src/main/java/org/activiti/cloud/services/query/events/handlers/ProcessCompletedEventHandler.java)
 
@@ -130,13 +130,13 @@ This handler will:
 * **Update** an existing ProcessInstanceEntity and
   * Update Status to COMPLETED
   * Update LastModified
-* This event will be discarded if no Process Instance is not found and QueryException will be thrown &#x20;
+* This event will be discarded if no Process Instance is not found and QueryException will be thrown
 
 ### [Process & Task VariableCreatedEvent Handler](https://github.com/Activiti/activiti-cloud-query-service/blob/develop/activiti-cloud-services-query/activiti-cloud-services-query-rest/src/main/java/org/activiti/cloud/services/query/events/handlers/VariableCreatedEventHandler.java)
 
 This handler will:
 
-* Will check if it is a Task Var   &#x20;
+* Will check if it is a Task Var
 
 ## Security and Permissions
 
@@ -155,7 +155,7 @@ Here rb-app-name is the name of a runtime bundle application. Or environment var
 ## Implementations
 
 * [Activiti Cloud Query Service - JPA (Reference )using Spring Data JPA](https://github.com/Activiti/activiti-cloud-query/)
-* [Activiti Cloud Query Service - ElasticSearch](https://app.gitbook.com/s/-LHE-A0W4uh4yR1u7ql8/components/activiti-cloud-application/query-service) PR Under Review
+* [Activiti Cloud Query Service - ElasticSearch](query-service.md) PR Under Review
 
 ## Docker Images
 
