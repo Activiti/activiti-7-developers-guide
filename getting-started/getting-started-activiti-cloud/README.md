@@ -223,7 +223,7 @@ You are now ready to start consuming these services to automate your own busines
 
 Finally, you can access to all services Swagger documentation by pointing your browser to:
 
-* [http://activiti-cloud-gateway.EXTERNAL-IP.nip.io/rb-my-app/swagger-ui/index.html](http://activiti-cloud-gateway.external-ip.nip.io/rb-my-app/swagger-ui/index.html)
+* [http://activiti-cloud-gateway.EXTERNAL-IP.nip.io/rb/swagger-ui/index.html](http://activiti-cloud-gateway.external-ip.nip.io/rb/swagger-ui/index.html)
 * [http://activiti-cloud-gateway.EXTERNAL-IP.nip.io/audit/swagger-ui/index.html](http://activiti-cloud-gateway.external-ip.nip.io/audit/swagger-ui/index.html)
 * [http://activiti-cloud-gateway.EXTERNAL-IP.nip.io/query/swagger-ui/index.html](http://activiti-cloud-gateway.external-ip.nip.io/query/swagger-ui/index.html)
 
