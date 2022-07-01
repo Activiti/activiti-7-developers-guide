@@ -6,13 +6,13 @@ The diagram below shows an EKS cluster deployed in AWS and exposed to the outsid
 
 ![](../../../.gitbook/assets/eks-cluster.png)
 
-Jenkins-X platform is then deployed and configured with Git provider to trigger Kubernetes-based pipelines which produce Docker images pushed into private Elastic Container Registry \(ECR\). Jenkins-X will also deploy our Activiti Cloud Helm chart into an EKS cluster and expose it via ingress to the outside world.
+Jenkins-X platform is then deployed and configured with Git provider to trigger Kubernetes-based pipelines which produce Docker images pushed into private Elastic Container Registry (ECR). Jenkins-X will also deploy our Activiti Cloud Helm chart into an EKS cluster and expose it via ingress to the outside world.
 
 ![](../../../.gitbook/assets/activiti-kdl.png)
 
 The diagram above uses Kubernetes Deployment Language: [https://github.com/raffaelespazzoli/kdl](https://github.com/raffaelespazzoli/kdl)
 
-All of the persistence volume claims of Activiti Cloud infrastructure and applications will be handled by Amazon services using Amazon Elastic Block Store \(Amazon EBS\), which will be used to provision Kubernetes persistent volumes for Audit, Query, and Runtime Bundle using PostgreSQL database service.
+All of the persistence volume claims of Activiti Cloud infrastructure and applications will be handled by Amazon services using Amazon Elastic Block Store (Amazon EBS), which will be used to provision Kubernetes persistent volumes for Audit, Query, and Runtime Bundle using PostgreSQL database service.
 
 ## The Short Version
 
@@ -52,9 +52,9 @@ Then, skip to _Let’s Deploy Activiti Cloud in EKS_ section at the end of this 
 
 In case, we don’t need the real domain name, Jenkins-X provides support to use wildcard DNS nip.io service. The nip.io allows to resolve any IP Address in the following DNS wildcard entries:
 
-10.0.0.1.nip.io --&gt; 10.0.0.1 app.10.0.0.1.nip.io --&gt; 10.0.0.1 customer1.app.10.0.0.1.nip.io --&gt; 10.0.0.1 customer2.app.10.0.0.1.nip.io --&gt; 10.0.0.1 otherapp.10.0.0.1.nip.io --&gt; 10.0.0.1
+10.0.0.1.nip.io --> 10.0.0.1 app.10.0.0.1.nip.io --> 10.0.0.1 customer1.app.10.0.0.1.nip.io --> 10.0.0.1 customer2.app.10.0.0.1.nip.io --> 10.0.0.1 otherapp.10.0.0.1.nip.io --> 10.0.0.1
 
-Simply put NIP.IO maps ..nip.io to the corresponding , simply by resolving 127.0.0.1.nip.io -&gt; 127.0.0.1
+Simply put NIP.IO maps ..nip.io to the corresponding , simply by resolving 127.0.0.1.nip.io -> 127.0.0.1
 
 To use nip.io DNS name, Jenkins-X will install and resolve the IP address of the Network Load Balancer during setup. Then the jenkins.1.2.3.4.nip,io DNS name would resolve to IP address, 1.2.3.4 giving wildcard DNS without need to configure DNS in Route 53.
 
@@ -72,11 +72,11 @@ After creating the hosted zone, you should see it in your Route 53 console below
 
 ### Installing the Jenkins-X Cli
 
-The Jenkins X provides Cli client called ‘jx’ \([https://github.com/jenkins-x/jx](https://github.com/jenkins-x/jx)\). It is used to manage the Jenkins X infrastructure and Continuous Delivery pipelines. Detailed instructions on how to install jx, can be found [https://jenkins-x.io/getting-started/install/](https://jenkins-x.io/getting-started/install/)
+The Jenkins X provides Cli client called ‘jx’ ([https://github.com/jenkins-x/jx](https://github.com/jenkins-x/jx)). It is used to manage the Jenkins X infrastructure and Continuous Delivery pipelines. Detailed instructions on how to install jx, can be found [https://jenkins-x.io/getting-started/install/](https://jenkins-x.io/getting-started/install/)
 
 After successful installation of jx client you should now be able to display the jx client version by executing the following command:
 
-```text
+```
 $ jx version
 NAME               VERSION
 Jx                 2.0.323
@@ -84,9 +84,9 @@ Jx                 2.0.323
 
 #### Upgrade Warning for jx
 
-jx version is aggressive about upgrading, so much so that the version command prompts to upgrade to the latest \(if a newer is available\). The default is Y , yes. To remove variables when using this GitOps approach, this author recommends saying n , no. Leave the upgrading of Jenkin-x to a purposeful plan both on the client and deployed infrastructure, ensuring both are always a match.
+jx version is aggressive about upgrading, so much so that the version command prompts to upgrade to the latest (if a newer is available). The default is Y , yes. To remove variables when using this GitOps approach, this author recommends saying n , no. Leave the upgrading of Jenkin-x to a purposeful plan both on the client and deployed infrastructure, ensuring both are always a match.
 
-```text
+```
 ~ $ jx version
 
 NAME VERSION
@@ -103,21 +103,21 @@ In order to setup Jenkins-X in Kubernetes with Git provider for CI/CD GitOps, we
 
 ### Creating the EKS Kubernetes Cluster
 
-JX will attempt to locate any required dependencies. If JX discovers that some dependencies are missing it will prompt to install them for you in the ~/.jx/bin folder. It is recommended that you allow jx to install any missing dependencies. You may also choose to install required dependencies for your OS manually:
+JX will attempt to locate any required dependencies. If JX discovers that some dependencies are missing it will prompt to install them for you in the \~/.jx/bin folder. It is recommended that you allow jx to install any missing dependencies. You may also choose to install required dependencies for your OS manually:
 
-* Aws Cli \([https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)\)
-* eksctl \([https://github.com/weaveworks/eksctl/releases](https://github.com/weaveworks/eksctl/releases)\)
-* kubectl \([https://kubernetes.io/docs/tasks/tools/install-kubectl/](https://kubernetes.io/docs/tasks/tools/install-kubectl/)\)
-* Helm \([https://helm.sh/](https://helm.sh/)\),
-* Heptio Authenticator for AWS \([https://github.com/kubernetes-sigs/aws-iam-authenticator](https://github.com/kubernetes-sigs/aws-iam-authenticator)\)
+* Aws Cli ([https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html))
+* eksctl ([https://github.com/weaveworks/eksctl/releases](https://github.com/weaveworks/eksctl/releases))
+* kubectl ([https://kubernetes.io/docs/tasks/tools/install-kubectl/](https://kubernetes.io/docs/tasks/tools/install-kubectl/))
+* Helm ([https://helm.sh/](https://helm.sh/)),
+* Heptio Authenticator for AWS ([https://github.com/kubernetes-sigs/aws-iam-authenticator](https://github.com/kubernetes-sigs/aws-iam-authenticator))
 
 You can also pre-install any dependencies manually before we create the cluster.
 
 #### Setting Up AWS Credentials
 
-Ensure that you have your AWS credentials set up. The Jenkins X client is able to retrieve AWS credentials from standard AWS cli locations, including environment variables or ~/.aws config files. For the purposes of this example, we can just use environment variables:
+Ensure that you have your AWS credentials set up. The Jenkins X client is able to retrieve AWS credentials from standard AWS cli locations, including environment variables or \~/.aws config files. For the purposes of this example, we can just use environment variables:
 
-```text
+```
 $ export AWS_ACCESS_KEY_ID=1234567890
 $ export AWS_SECRET_ACCESS_KEY=123456789
 $ export CLUSTER_NAME=activiti-cloud
@@ -138,7 +138,7 @@ jx create cluster eks \
     --advanced-mode
 ```
 
-This will provision activiti-cloud EKS cluster with 2 nodes of type m5.xlarge \(4CPU’s, 16GB RAM\)
+This will provision activiti-cloud EKS cluster with 2 nodes of type m5.xlarge (4CPU’s, 16GB RAM)
 
 ![](../../../.gitbook/assets/jx-create-cluster-eks.png)
 
@@ -146,9 +146,9 @@ You can watch progress in the CloudFormation console: [https://console.aws.amazo
 
 ![](../../../.gitbook/assets/cloudformation-console.png)
 
-Execution of “jx create cluster” can take a while \(~-20-25 min\) while eksctl waits until the EKS cluster is fully initialized. As soon as the command finishes, you can verify installation using the following command:
+Execution of “jx create cluster” can take a while (\~-20-25 min) while eksctl waits until the EKS cluster is fully initialized. As soon as the command finishes, you can verify installation using the following command:
 
-```text
+```
 $ jx get eks
 
 NAME
@@ -180,7 +180,7 @@ If you don’t have domain name configured in Route 53, choose not to register w
 
 ![](../../../.gitbook/assets/route53-wildcard-dns.png)
 
-Jx requires to create a Git API token, which it will use to create and access Git repositories on your behalf. Follow the instructions from jx console to generate the API token \(by clicking the link generated for you by jx\).
+Jx requires to create a Git API token, which it will use to create and access Git repositories on your behalf. Follow the instructions from jx console to generate the API token (by clicking the link generated for you by jx).
 
 ![](../../../.gitbook/assets/create-api-token.png)
 
@@ -194,9 +194,9 @@ Then click the green Generate Token button, copy the value of the token, and pas
 
 ![](../../../.gitbook/assets/github-copy-token.png)
 
-During the installation process you might notice that jx automatically opens the Jenkins server running on “[http://jenkins.jx.35.164.211.214.nip.io/me/configure”](http://jenkins.jx.35.164.211.214.nip.io/me/configure”) address logs into it, and saves some settings. Jx uses headless browser automation to generate Jenkins API token on your behalf. This token will be later used internally by Jenkins X to automatically create Jenkins jobs on your behalf.
+During the installation process you might notice that jx automatically opens the Jenkins server running on “[http://jenkins.jx.35.164.211.214.nip.io/me/configure”](http://jenkins.jx.35.164.211.214.nip.io/me/configure%E2%80%9D) address logs into it, and saves some settings. Jx uses headless browser automation to generate Jenkins API token on your behalf. This token will be later used internally by Jenkins X to automatically create Jenkins jobs on your behalf.
 
-![](../../../.gitbook/assets/jenkins-api-token%20%281%29.png)
+![](<../../../.gitbook/assets/jenkins-api-token (1) (1).png>)
 
 After a few minutes, the jx install command should finish creating the Jenkins X platform. It should also tell you the URL that you can use to access your Jenkins server, and a random admin password for this server.
 
@@ -289,7 +289,7 @@ You can also navigate to GitHub and see that Jenkins X provisioned the projects 
 
 After Jx creates the environment Helm chart in your Git repository, open staging and production repos, then edit env/values.yaml file to set the value of global.gateway.domain key using expose.config.domain value.
 
-```text
+```
 expose:
   config:
     domain: X.X.X.X.nip.io # <==== Use this value to set global.gateway.domain
@@ -341,13 +341,13 @@ jx create quickstart --owner activiti \
 
 In terminal run Jx commands to monitor the deployment progress:
 
-```text
+```
 jx get activity -w
 jx get pipelines
 jx console
 ```
 
-Then, after ~4-5 minutes you should see your Activiti Cloud Platform deployed into staging environment:
+Then, after \~4-5 minutes you should see your Activiti Cloud Platform deployed into staging environment:
 
 ```bash
 watch kubectl get pods -n staging
@@ -355,7 +355,7 @@ watch kubectl get pods -n staging
 
 ![](../../../.gitbook/assets/kubectl-get-pods-staging-platform.png)
 
-#### 
+####
 
 #### Setup Activiti Cloud Connector in your Git repository
 
@@ -379,7 +379,7 @@ jx create quickstart --owner activiti \
     --batch-mode
 ```
 
-Then, after ~4-5 minutes you should see your Connector and Runtime Bundle deployed into staging environment:
+Then, after \~4-5 minutes you should see your Connector and Runtime Bundle deployed into staging environment:
 
 ```bash
 watch kubectl get pods -n staging
@@ -389,13 +389,11 @@ watch kubectl get pods -n staging
 
 ![](../../../.gitbook/assets/jx-congratulations.png)
 
-
-
 #### Open Activiti Cloud Modeler
 
 [http://gateway.staging.1.2.3.4.nip.io/modeling](http://activiti-cloud-gateway.jx-staging.1,2,3,4.nip.io/activiti-cloud-modeling)
 
-Here instead of 1.2.3.4.nip.io use the earlier $CLUSTER\_DOMAIN environment variable, i.e. 
+Here instead of 1.2.3.4.nip.io use the earlier $CLUSTER\_DOMAIN environment variable, i.e.
 
 ```bash
 echo gateway.$CLUSTER_DOMAIN/modeling
@@ -404,4 +402,3 @@ echo gateway.$CLUSTER_DOMAIN/modeling
 Login into using credentials: modeler/password
 
 ![](../../../.gitbook/assets/modeler-ui-landing.png)
-

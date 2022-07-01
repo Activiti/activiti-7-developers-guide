@@ -2,23 +2,23 @@
 
 ## Step 1: Create a Kubernetes cluster
 
-### 1\) Create a Google Cloud Platform \(GCP\) account
+### 1) Create a Google Cloud Platform (GCP) account
 
 As a free option, GCP offers a $300 free credit: [https://console.cloud.google.com/freetrial](https://console.cloud.google.com/freetrial)
 
-### 2\) Install CLI
+### 2) Install CLI
 
 Install the SDK CLI tool: [https://cloud.google.com/sdk/install](https://cloud.google.com/sdk/install)
 
-### 3\) Create a Kubernetes cluster \(GKE\)
+### 3) Create a Kubernetes cluster (GKE)
 
-To create a new Kubernetes cluster, go to your GCP Console Home Page \([https://console.cloud.google.com](https://console.cloud.google.com/)\) and select _**Kubernetes Engine / Clusters.**_
+To create a new Kubernetes cluster, go to your GCP Console Home Page ([https://console.cloud.google.com](https://console.cloud.google.com/)) and select _**Kubernetes Engine / Clusters.**_
 
 ![](../../.gitbook/assets/gcp-console.png)
 
-Then select the CREATE CLUSTER button ![](../../.gitbook/assets/screenshot-2018-12-13-at-10.04.37%20%281%29.png) from the top menu.
+Then select the CREATE CLUSTER button ![](<../../assets/create-GKE-cluster-button (1).png>) from the top menu.
 
-Enter the Cluster Name, select the Zone based on your location and I’ve selected 2 vCPUs and left the Size to the default value \(3\).
+Enter the Cluster Name, select the Zone based on your location and I’ve selected 2 vCPUs and left the Size to the default value (3).
 
 ![GKE cluster creation settings](../../.gitbook/assets/create-cluster-parameters.png)
 
@@ -29,14 +29,16 @@ Once the cluster is created click on the Connect Button on the right hand side o
 This will open a popup with a command to connect to the cluster. Copy it to your clipboard, open a terminal and paste the command into your terminal.
 
 {% hint style="info" %}
-_Note: if you are working with an existing cluster, you will need to check if you have an Ingress Controller already installed, you can skip the NGINX Ingress installation \(step 2\) if that is the case._
+_Note: if you are working with an existing cluster, you will need to check if you have an Ingress Controller already installed, you can skip the NGINX Ingress installation (step 2) if that is the case._
 {% endhint %}
 
 ## **Step 2: Configure HELM and install NGINX Ingress**
 
 Let's now configure HELM to work in the Cluster. We first need to give HELM permissions to deploy things into the cluster. Download the file below:
 
-{% file src="../../.gitbook/assets/helm-service-account-role.yaml" caption="helm-service-account-role.yaml" %}
+{% file src="../../.gitbook/assets/helm-service-account-role.yaml" %}
+helm-service-account-role.yaml
+{% endfile %}
 
 Run the following commands in your terminal:
 
@@ -65,4 +67,3 @@ Example output with GCP deployment:
 ![External IP for NGINX Ingress controller.](../../.gitbook/assets/kubectl-get-services-external-ip.png)
 
 ## [Step 3: Deploy Activiti Cloud Full Example](./#step-3-deploy-activiti-cloud-full-example)
-

@@ -2,7 +2,7 @@
 
 The Audit Service module provides Audit capabilities. This module is in charge of consuming one or more Runtime Bundle Events and storing them into the Event Store. Our default implementation consists of a simple JPA implementation which consumes messages emitted by Runtime Bundles and store them as they arrive. The audit service doesn't do any data manipulation. There is also a MongoDB implementation, which makes your life easier if you want to query events that are stored in JSON format.
 
-![](../../.gitbook/assets/AuditService.png)
+![](../../assets/AuditService.png)
 
 ## Specification
 
@@ -34,11 +34,10 @@ You can find the Spring Boot 2.x starters used to create our Docker Images and S
 
 ## Implementations
 
-* [Activiti Cloud Audit Service - JPA \(Reference \)using Spring Data JPA](https://github.com/Activiti/activiti-cloud-audit/)
+* [Activiti Cloud Audit Service - JPA (Reference )using Spring Data JPA](https://github.com/Activiti/activiti-cloud-audit/)
 * [Activiti Cloud Audit Service - Mongo DB](https://github.com/Activiti/activiti-cloud-audit-mongodb/)
 
 ## Docker Images
 
-* [Activiti Cloud Audit Service -&gt; JPA \(Reference\) Docker Image](https://hub.docker.com/r/activiti/activiti-cloud-audit/)
-* [Activiti Cloud Audit Service -&gt; MongoDB Docker Image](https://hub.docker.com/r/activiti/activiti-cloud-audit-mongodb/)
-
+* [Activiti Cloud Audit Service -> JPA (Reference) Docker Image](https://hub.docker.com/r/activiti/activiti-cloud-audit/)
+* [Activiti Cloud Audit Service -> MongoDB Docker Image](https://hub.docker.com/r/activiti/activiti-cloud-audit-mongodb/)

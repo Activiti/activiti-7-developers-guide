@@ -4,9 +4,9 @@ These scenarios tests basic processes constructs such as BPMN Start/End events a
 
 ![](../../.gitbook/assets/set-0-start-end-events.png)
 
-* [Process Information](https://github.com/salaboy/bpmn-scenarios/blob/master/processes/Process%20Information.bpmn20.xml) 
+* [Process Information](https://github.com/salaboy/bpmn-scenarios/blob/master/processes/Process%20Information.bpmn20.xml)
   * The [source code for this test can be found here](https://github.com/Activiti/Activiti/blob/develop/activiti-spring-conformance-tests/activiti-spring-conformance-set0/src/test/java/org/activiti/spring/conformance/set0/ConformanceBasicProcessInformationTest.java).
-  * Check that the process instance is COMPLETED \(status\) after start
+  * Check that the process instance is COMPLETED (status) after start
   * Check that the process instance information is correctly propagated
     * businessKey
     * name
@@ -33,9 +33,9 @@ These scenarios tests basic processes constructs such as BPMN Start/End events a
 
 ![](../../.gitbook/assets/set-0-base-task.png)
 
-* [Process with Generic Task](https://github.com/salaboy/bpmn-scenarios/blob/master/processes/Process%20with%20Generic%20%20BPMN%20Task.bpmn20.xml) 
+* [Process with Generic Task](https://github.com/salaboy/bpmn-scenarios/blob/master/processes/Process%20with%20Generic%20%20BPMN%20Task.bpmn20.xml)
   * The [source code of this test can be found here](https://github.com/Activiti/Activiti/blob/develop/activiti-spring-conformance-tests/activiti-spring-conformance-set0/src/test/java/org/activiti/spring/conformance/set0/ConformanceBasicGenericTaskTest.java)
-  * Check that the process instance is COMPLETED \(status\) after start, BPMN Generic task doesn’t have any associated behaviour so the task is automatically completed by the engine
+  * Check that the process instance is COMPLETED (status) after start, BPMN Generic task doesn’t have any associated behaviour so the task is automatically completed by the engine
   * Check that the process instance information is correctly propagated
     * businessKey
     * Name
@@ -52,7 +52,7 @@ These scenarios tests basic processes constructs such as BPMN Start/End events a
     * ACTIVITY\_COMPLETED,
     * PROCESS\_COMPLETED
 
-![](../../.gitbook/assets/set-0-wait-state.png)
+![](<../../.gitbook/assets/set-0-wait-state (1).png>)
 
 * [Process Instance Delete](https://github.com/salaboy/bpmn-scenarios/blob/master/processes/UserTask%20with%20no%20User%20or%20Group%20Assignment.bpmn20.xml)
   * The [source code of this test can be found here](https://github.com/Activiti/Activiti/blob/develop/activiti-spring-conformance-tests/activiti-spring-conformance-set0/src/test/java/org/activiti/spring/conformance/set0/ProcessInstanceOperationsTest.java)
@@ -70,9 +70,9 @@ These scenarios tests basic processes constructs such as BPMN Start/End events a
       * PROCESS\_CANCELLED
   * After delete, we shouldn’t be able to find the process instance
 
-![](../../.gitbook/assets/set-0-wait-state.png)
+![](<../../.gitbook/assets/set-0-wait-state (1).png>)
 
-* [Process Instance Suspend / Resume](https://github.com/salaboy/bpmn-scenarios/blob/master/processes/UserTask%20with%20no%20User%20or%20Group%20Assignment.bpmn20.xml) 
+* [Process Instance Suspend / Resume](https://github.com/salaboy/bpmn-scenarios/blob/master/processes/UserTask%20with%20no%20User%20or%20Group%20Assignment.bpmn20.xml)
   * The [source code of this test can be found here](https://github.com/Activiti/Activiti/blob/develop/activiti-spring-conformance-tests/activiti-spring-conformance-set0/src/test/java/org/activiti/spring/conformance/set0/ProcessInstanceOperationsTest.java)
   * Start a process instance with a wait/safe state such as a UserTask
   * **Start Process Operation**
@@ -82,8 +82,7 @@ These scenarios tests basic processes constructs such as BPMN Start/End events a
     * ACTIVITY\_COMPLETED,
     * SEQUENCE\_FLOW\_TAKEN,
     * ACTIVITY\_STARTED
-  * **Suspend Process Operation**    
+  * **Suspend Process Operation**
     * PROCESS\_SUSPENDED
   * **Resume Process Operation**
     * PROCESS\_RESUMED
-

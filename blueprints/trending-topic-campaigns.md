@@ -8,15 +8,15 @@ Activiti Cloud BluePrints are designed to show users how different business scen
 
 ### For all the instructions visit: [TTC Docs Workshop](https://github.com/Activiti/ttc-docs/blob/master/workshop.md)
 
-### Scenario \(The WHAT\)
+### Scenario (The WHAT)
 
 Let's use the following Scenario to demonstrate all these concepts in action.
 
-**Imagine that we are marketing company that looks into the Twitter stream to give rewards to the most active users on different trending topics. The company cannot predict which topics will be trending, they need to react quickly when they see a topic that can be used for marketing purposes. These marketing campaigns \(based on trending topics\) needs to be developed and deployed in minutes not hours. Each campaign will have a different set of rules on how to process Tweets and how the most active users will be rewarded for their participation. Because this is a global Marketing firm, we can assume that campaigns will be associated with just one language.**
+**Imagine that we are marketing company that looks into the Twitter stream to give rewards to the most active users on different trending topics. The company cannot predict which topics will be trending, they need to react quickly when they see a topic that can be used for marketing purposes. These marketing campaigns (based on trending topics) needs to be developed and deployed in minutes not hours. Each campaign will have a different set of rules on how to process Tweets and how the most active users will be rewarded for their participation. Because this is a global Marketing firm, we can assume that campaigns will be associated with just one language.**
 
 In order to implement this scenario we can divide the requirements into two different big conceptual areas:
 
-* **What** needs to be done: Filter tweets -&gt; Process tweets to extract information -&gt; Rank Users that created the tweets regarding a certain topic -&gt; Reward top X users after a period of time.
+* **What** needs to be done: Filter tweets -> Process tweets to extract information -> Rank Users that created the tweets regarding a certain topic -> Reward top X users after a period of time.
 * **How** it needs to be done: all the technical aspects of how to get the data moved to different services to perform the **What**
 
 The **What** is usually referred as Business Logic or Domain Specific Logic. This is why our Marketing company is the best, because our Domain Experts master the **What**.
@@ -27,29 +27,29 @@ As part of the **How**, it is important to understand that all campaigns will sh
 
 Our Scenario will look like this:
 
-![](../.gitbook/assets/scenario.png)
+![](../assets/examples/scenario.png)
 
-The twitter stream will be consumed by our Activiti Cloud Twitter Connector. The connector here will be in charge of picking up each tweet and dispatch it as a message \(throughout a message broker\) to the Campaigns Pool. Campaigns interested in the tweet will be able to pick it up and process it accordingly. As mentioned before, campaigns are associated with just one language, but we can easily change this to be based on location or any other value provided by twitter API.
+The twitter stream will be consumed by our Activiti Cloud Twitter Connector. The connector here will be in charge of picking up each tweet and dispatch it as a message (throughout a message broker) to the Campaigns Pool. Campaigns interested in the tweet will be able to pick it up and process it accordingly. As mentioned before, campaigns are associated with just one language, but we can easily change this to be based on location or any other value provided by twitter API.
 
 The Campaign Pool is dynamic by nature, new Campaigns can be added or removed at any time based on the needs of the company. Campaigns define how to deal with each trending topic that the company want to track and give rewards to their users.
 
-![](../.gitbook/assets/campaign.png)
+![](../assets/examples/campaign.png)
 
 Each campaign will define 2 main things:
 
 * What is the campaign about, and how to process, analyze and rank each user involved in the trending topic at hand.
 * How and when rewards should be delivered. This includes defining the number of top X users entitled to receive rewards.
 
-### Implementation \(The HOW\)
+### Implementation (The HOW)
 
-**Note Before starting: it is important to understand that this example is complex because real life is complex. We tried to avoid too many hacks and shortcuts to make sure that we leverage the infrastructure as real applications \(your implementations\) will do. If you get overwhelmed with the amount of services and moving pieces you are probably not ready for uServices & Kubernetes just yet :\). As part of the infrastructure we provide monitoring and tracing tools which will enable you to understand what is going on and how all these services are interacting.**
+**Note Before starting: it is important to understand that this example is complex because real life is complex. We tried to avoid too many hacks and shortcuts to make sure that we leverage the infrastructure as real applications (your implementations) will do. If you get overwhelmed with the amount of services and moving pieces you are probably not ready for uServices & Kubernetes just yet :). As part of the infrastructure we provide monitoring and tracing tools which will enable you to understand what is going on and how all these services are interacting.**
 
 This section explains in detail the components required to create and run a new marketing campaign for a trending topic. The example is composed by 6 Maven projects that can be found here:
 
-[https://github.com/activiti/ttc-\*](https://github.com/activiti/ttc-*)
+[https://github.com/activiti/ttc-\*](https://github.com/activiti/ttc-\*)
 
 * **english-campaign-rb**: this is an example Campaign to deal with English Tweets and rewards, we encourage you to create new campaigns with your own business processes and domain models.
-* **activiti-cloud-connectors-processing**: this Activiti Cloud Connector deals with Tweets processing. E.g clean up unnecessary characters, analyse the sentiment of the content \(possitive / negative\).
+* **activiti-cloud-connectors-processing**: this Activiti Cloud Connector deals with Tweets processing. E.g clean up unnecessary characters, analyse the sentiment of the content (possitive / negative).
 * **activiti-cloud-connectors-ranking**: this Activiti Cloud connector is in charge of interacting with the Ranking Service to keep user ranks for different campaigns.
 * **activiti-cloud-connectors-reward**: this Activiti Cloud Connector is in charge of rewarding top ranked users for each different campaign. This service should be used when we want to reward users that are engaged with a marketing campaign.
 * **activiti-cloud-connectors-twitter**: this Activiti Cloud Connector deals with all the tasks related to Twitter which includes: listening the twitter stream & enabling our application to tweet to users that receive rewards.
@@ -64,9 +64,9 @@ Besides that there are two more directories in this repository related with Kube
 Campaigns are domain specific uServices. Different marketing departments might need to create completely different campaigns based on their requirements. As stated before in the scenario section, campaigns are responsible for:
 
 * Defining how to process each tweet for a given trending topic
-* Defining how to reward users which participated the most in the campaign
+*   Defining how to reward users which participated the most in the campaign
 
-  ![](../.gitbook/assets/campaigns.png)
+    <img src="../assets/examples/campaigns.png" alt="" data-size="original">
 
 ### Campaign Definition
 
@@ -81,7 +81,7 @@ We create a simple campaign composed by 4 main steps:
 
 This is represented by the following business process:
 
-![](../.gitbook/assets/english-campaign-process-def.png)
+![](../assets/examples/english-campaign-process-def.png)
 
 Each campaign can include a variation of the process definition to deal with tweets in different ways. For the sake of simplicity we will use this process definition to deal with multiple campaigns. But you are free to change this definition and experiment with different requirements.
 
@@ -93,13 +93,13 @@ We defined a simple rewarding process as well. It is composed of 3 main steps:
 * Generate a reward per user.
 * Tweet the reward to each user.
 
-![](../.gitbook/assets/english-campaign-reward-process-def.png)
+![](../assets/examples/english-campaign-reward-process-def.png)
 
 ### Campaign Runtime Bundle
 
 In order to be able to execute these Business Process Definitions we create a new Activiti Cloud Runtime Bundle by creating a Spring Boot 2 application and adding our Activiti Cloud Runtime Bundle Starter as a dependency:
 
-```text
+```
 <dependency>
   <groupId>org.activiti.cloud</groupId>
   <artifactId>activiti-cloud-starter-runtime-bundle</artifactId>
@@ -112,7 +112,7 @@ The campaign runtime bundle project can be found here: [ttc-rb-english-campaign]
 
 Both the Campaign and Reward processes will interact with external services to perform their tasks. This interaction will be handled by our Activiti Cloud Connectors. Which serves as an intermediate layer between the Process Runtime and the external service.
 
-![](../.gitbook/assets/campaign-cloud-connectors-services.png)
+![](../assets/examples/campaign-cloud-connectors-services.png)
 
 This intermediate layer of Cloud Connectors enable us to scale the process runtime independently from how they interact with other service. It also serves as a great place to add some technical and business details about each of these interactions. We need to consider that in real life interactions we might have SLAs and policies to limit or control these external services interactions. Activiti Cloud Connectors helps you to add these complex controls in a way that they are completely decoupled from your processes executions.
 
@@ -128,11 +128,11 @@ First of all we need to tap into the Twitter Stream to consume tweets. For doing
 
 Our Twitter Activiti Cloud Connector will be in charge of tapping into the Twitter Stream, route tweets based on their language and Tweet the rewards for the winners of each campaign.
 
-![](../.gitbook/assets/TwitterCloudConnector.png)
+![](../assets/examples/TwitterCloudConnector.png)
 
 In order to create this project we just need to create a simple Spring Boot 2 application and add our Activiti Cloud Connector Starter dependency to it. We also need the [Twitter4J](http://twitter4j.org/en/configuration.html) dependency and we are ready to go.
 
-```text
+```
 <dependency>
   <groupId>org.activiti.cloud</groupId>
   <artifactId>activiti-cloud-starter-connector</artifactId>
@@ -149,7 +149,7 @@ If you look at the Twitter Activiti Cloud Connector you will notice the followin
 
 ### Dummy Twitter Activiti Cloud Connector
 
-Alternatively you can use the Dummy Twitter component \(which is started by default in our deployment descriptors\) to simulate a controlled social media feed. We created this dummy component to control the rate in which tweets are fed in and also the content of those tweets so we can test and assert the behaviour of all the services.
+Alternatively you can use the Dummy Twitter component (which is started by default in our deployment descriptors) to simulate a controlled social media feed. We created this dummy component to control the rate in which tweets are fed in and also the content of those tweets so we can test and assert the behaviour of all the services.
 
 You can find the source code of this connector [here](https://github.com/Activiti/ttc-connectors-dummytwitter)
 
@@ -159,7 +159,7 @@ This connector doesn't use Twitter4J because it simulates the feed with static d
 
 As all connectors it uses the **activiti-cloud-starter-connectors** to understand and work with IntegrationRequestEvents and IntegrationResultsEvents:
 
-```text
+```
 <dependency>
   <groupId>org.activiti.cloud</groupId>
   <artifactId>activiti-cloud-starter-connector</artifactId>
@@ -170,7 +170,7 @@ As all connectors it uses the **activiti-cloud-starter-connectors** to understan
 
 This connector simulates a service that clean up and execute a sentiment analysis for the content of the tweet. This allow marketing campaigns to see if there is positive or negative engagement to their campaigns. For perfoming the sentiment analysis it uses the **standford-corenlp** library
 
-```text
+```
 <dependency>
     <groupId>edu.stanford.nlp</groupId>
     <artifactId>stanford-corenlp</artifactId>
@@ -178,11 +178,11 @@ This connector simulates a service that clean up and execute a sentiment analysi
 </dependency>
 ```
 
-You can find the connector that does the Tweet Sentiment analysis here [TweetAnalyzerConnector](https://github.com/Activiti/activiti-7-developers-guide/tree/a169b3bebbeded9639076359738cd68397c81d30/blueprints/trendingtopiccampaigns.md) [https://github.com/Activiti/blueprint-trending-topic-campaigns/blob/develop/activiti-cloud-connectors-processing/src/main/java/org/activiti/cloud/connectors/processing/analyzer/TweetAnalyzerConnector.java\#L35](https://github.com/Activiti/blueprint-trending-topic-campaigns/blob/develop/activiti-cloud-connectors-processing/src/main/java/org/activiti/cloud/connectors/processing/analyzer/TweetAnalyzerConnector.java#L35)\)
+You can find the connector that does the Tweet Sentiment analysis here [TweetAnalyzerConnector](https://github.com/Activiti/activiti-7-developers-guide/tree/a169b3bebbeded9639076359738cd68397c81d30/blueprints/trendingtopiccampaigns.md) [https://github.com/Activiti/blueprint-trending-topic-campaigns/blob/develop/activiti-cloud-connectors-processing/src/main/java/org/activiti/cloud/connectors/processing/analyzer/TweetAnalyzerConnector.java#L35](https://github.com/Activiti/blueprint-trending-topic-campaigns/blob/develop/activiti-cloud-connectors-processing/src/main/java/org/activiti/cloud/connectors/processing/analyzer/TweetAnalyzerConnector.java#L35))
 
 As all connectors it uses the **activiti-cloud-starter-connectors** to understand and work with IntegrationRequestEvents and IntegrationResultsEvents:
 
-```text
+```
 <dependency>
   <groupId>org.activiti.cloud</groupId>
   <artifactId>activiti-cloud-starter-connector</artifactId>
@@ -194,12 +194,11 @@ As all connectors it uses the **activiti-cloud-starter-connectors** to understan
 There are 3 ways of running this example depending on how familiar you are with containers and orchestrators:
 
 * The Spring Boot way: so you will need to manually start each service plus some infrastructural components
-* The Docker Compose way: we provide 3 docker compose files to bootstrap different uServices \(Infrastructure, Campaigns, Connectors\)
-* The Kubernetes way: we provide 3 deployments descriptors to enable different aspects of the infrastructure \(Infrastructure, Campaigns, Connectors\)
+* The Docker Compose way: we provide 3 docker compose files to bootstrap different uServices (Infrastructure, Campaigns, Connectors)
+* The Kubernetes way: we provide 3 deployments descriptors to enable different aspects of the infrastructure (Infrastructure, Campaigns, Connectors)
 
 We obviously recommend the Kubernetes way, the other two approaches might be used for development purposes but they lack of real life management features. Kubernetes is not the ultimate tool but it does quite good in abstracting us from the specifics of the IaaS.
 
 You can of course run the application using thhe Spring Boot and Docker way, but the team is only working actively on the Kubernetes way. We also recommend to run these examples in a real Kubernetes Cluster, you can always get some free credit in the major Cloud Providers.
 
 Look at [TTC-Docs](https://github.com/Activiti/ttc-docs/blob/develop/workshop.md) for further instructions.
-

@@ -4,7 +4,7 @@ The Query Service enable client applications to get Process & Task data without 
 
 This component was designed to aggregate data from a set of related Runtime Bundles, allowing consumers to filter using the runtime bundle.
 
-![](../../.gitbook/assets/queryservice.png)
+![](../../assets/QueryService.png)
 
 ## Specification
 
