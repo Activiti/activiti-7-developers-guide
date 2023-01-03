@@ -48,35 +48,11 @@ In order to implement a Cloud Connector acting as a Service Task we will need:
 </dependency>
 ```
 
-* Define a consumer channel, to receive the Integration Requests coming from the Runtime Bundle. E.g:
-
-```text
-public interface RewardMessageChannels {
-    String REWARD_CONSUMER = "rewardConsumer";
-
-    SubscribableChannel rewardConsumer();
-}
-```
-
-* Inside your Configuration class implement the channels interface and instantiate the message channel using Spring Integration `MessageChannels`.
-
-```text
-@Configuration
-public class RewardConfiguration implements RewardMessageChannels {
-
-    @Bean(RewardMessageChannels.REWARD_CONSUMER)
-    @Override
-    public SubscribableChannel rewardConsumer() {
-        return MessageChannels.publishSubscribe(RewardMessageChannels.REWARD_CONSUMER).get();
-    }
-}
-```
-
 * Implement `Connector` interface by the connector class and annotate it with `@ConnectorBinding` with `input` parameter. Implement the connector business logic and send the result back to the Runtime Bundle
 
 ```text
-@ConnectorBinding(input = RewardMessageChannels.REWARD_CONSUMER, condition = "")
-@Component(RewardMessageChannels.REWARD_CONSUMER + "Connector")
+@ConnectorBinding(input = "rewardConsumer", condition = "")
+@Component("rewardConsumerConnector")
 public class RewardConnector implements Connector<IntegrationRequest, Void> {
 
     @Override
@@ -104,7 +80,7 @@ _Note:_ `IntegrationResultBuilder` and `IntegrationResultSender` \(autowired\) a
 
 #### Configuration
 
-Eventually we'll need to configure the input channel declared above to receive integration requests only for the connector it's intended to. Remember that integration requests are sent to the destination defined by the attribute `implementation` of the related service task. In our example, `SendRewardToWinners`.
+Configure the input channel declared above to receive integration requests only for the connector it's intended to. Remember that integration requests are sent to the destination defined by the attribute `implementation` of the related service task. In our example, `SendRewardToWinners`.
 
 ```text
 spring.cloud.stream.bindings.rewardConsumer.destination=SendRewardToWinners
