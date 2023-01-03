@@ -1,6 +1,6 @@
 # Activiti Cloud Connectors
 
-Activiti Cloud Connectors provide an scalable way to perform bi-directional system to system interactions. It enable business processes to interact with external systems in a safe way without compromising the process runtime.
+Activiti Cloud Connectors provide a scalable way to perform bi-directional system to system interactions. It enables business processes to interact with external systems in a safe way without compromising the process runtime.
 
 **No new frameworks, protocols, or any other crazy stuff was developed to bring Activiti Cloud Connectors to life**
 
@@ -10,7 +10,7 @@ Activiti Cloud Connectors provide:
 * A flexible configuration to support high demand scenarios using well known technology stacks
 * A way to version and maintain multiple connectors up and running in the same infrastructure
 * A default way to handle your BPMN Service Tasks
-* An unified way to trigger actions in our Process Runtimes
+* A unified way to trigger actions in our Process Runtimes
 * \(Future\) Inter Process Communications: signal/catch/send & receive messages
 
 ## Cloud Connector as BPMN Service Task
@@ -48,31 +48,43 @@ In order to implement a Cloud Connector acting as a Service Task we will need:
 </dependency>
 ```
 
-* Define an input channel, using Spring Cloud Stream `@Input` annotation, to receive the Integration Requests coming from the Runtime Bundle. E.g:
+* Define a consumer channel, to receive the Integration Requests coming from the Runtime Bundle. E.g:
 
 ```text
 public interface RewardMessageChannels {
     String REWARD_CONSUMER = "rewardConsumer";
 
-    @Input(REWARD_CONSUMER)
     SubscribableChannel rewardConsumer();
 }
 ```
 
-* Enable binds for the channel defined in the previous step
+* Inside your Configuration class implement the channels interface and instantiate the message channel using Spring Integration `MessageChannels`.
 
 ```text
-@Component
-@EnableBinding(RewardMessageChannels.class)
-public class SendRewardConnector {
-...
+@Configuration
+public class RewardConfiguration implements RewardMessageChannels {
+
+    @Bean(RewardMessageChannels.REWARD_CONSUMER)
+    @Override
+    public SubscribableChannel rewardConsumer() {
+        return MessageChannels.publishSubscribe(RewardMessageChannels.REWARD_CONSUMER).get();
+    }
 }
 ```
 
-* Implement the connector business logic and send the result back to the Runtime Bundle
+* Implement `Connector` interface by the connector class and annotate it with `@ConnectorBinding` with `input` parameter. Implement the connector business logic and send the result back to the Runtime Bundle
 
 ```text
-    @StreamListener(value = RewardMessageChannels.REWARD_CONSUMER)
+@ConnectorBinding(input = RewardMessageChannels.REWARD_CONSUMER, condition = "")
+@Component(RewardMessageChannels.REWARD_CONSUMER + "Connector")
+public class RewardConnector implements Connector<IntegrationRequest, Void> {
+
+    @Override
+    public Void apply(IntegrationRequest event) {
+        tweet(event);
+        return null;
+    }
+
     public void tweet(IntegrationRequest event) {
 
         // business logic goes here
@@ -85,6 +97,7 @@ public class SendRewardConnector {
 
         integrationResultSender.send(message);
     }
+}
 ```
 
 _Note:_ `IntegrationResultBuilder` and `IntegrationResultSender` \(autowired\) are provided by `activiti-cloud-starter-connector`. `IntegrationResultSender` will use dynamically bound destination again to make sure that the integration result message will be sent to the right destination: `integrationResult:<TARGET_APPLICATION_NAME>`, where `TARGET_APPLICATION_NAME` is the name of the runtime bundle which has sent the initial Integration Request.
@@ -109,7 +122,6 @@ From version `7.1.0-M7`, cloud connectors are able to notify the Runtime Bundle 
 * **Explicitly** using `IntegrationErrorBuilder` and `IntegrationErrorSender` . This will not trigger the Message Broker retry mechanism: the error notification will be sent straight away to the Runtime bundle:
 
 ```markup
-@StreamListener(value = RewardMessageChannels.REWARD_CONSUMER)
 public void tweet(IntegrationRequest integrationRequest) {
     try {
         // business logic goes here
@@ -130,7 +142,6 @@ Using the same mechanism above it's possible to throw a BPMN Error Event from a 
 **Important:** the error code used in the `CloudBpmnError` should match with the one used by the BPMN Catch Error Event.
 
 ```markup
-@StreamListener(value = RewardMessageChannels.REWARD_CONSUMER)
 public void tweet(IntegrationRequest integrationRequest) {
     
     // business logic leading to a case that should throw a BPMN Error event
