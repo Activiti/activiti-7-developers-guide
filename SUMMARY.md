@@ -35,7 +35,6 @@
     * [Activiti Cloud Query Service](components/activiti-cloud-application/query-service.md)
     * [Activiti Cloud Audit Service](components/activiti-cloud-application/audit-service.md)
     * [Activiti Cloud Notification Service](components/activiti-cloud-application/notification-service.md)
-  * [Activiti Cloud Modeling](components/activiti-cloud-modeling.md)
 * [FAQs](faq/README.md)
   * [Activiti Core FAQs](faq/faq-activiti-core.md)
   * [Activiti Cloud FAQs](faq/faq-activiti-cloud.md)
